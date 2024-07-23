@@ -1,0 +1,18 @@
+{
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+
+    "label_receipe_parameters" : "沖煮參數",
+    "label_coffee_bean" : "咖啡豆:",
+    "label_coffee_to_water_ratio" : "粉水比:",
+    "label_water" : "水:",
+    "label_steps" : "部驟",
+    "label_get_recipe" : "計算沖煮步驟",
+    "label_references" : "參考",
+
+    "label_hario_switch_tetsu_kasuya_step_01" : "0:00 - 0:29: (打開閥門) 第一次注水 {firstPourInGrams}(g), 水溫 {firstPourTemp}°C",
+    "label_hario_switch_tetsu_kasuya_step_02" : "0:30 - 1:14: (打開閥門) 第二次注水 {secondPourInGrams}(g) (總量: {secondPourTotal}g), 水溫 {secondPourTemp}°C",
+    "label_hario_switch_tetsu_kasuya_step_03" : "1:15 - 1:44: (關上閥門) 第三次注水 {thirdPourInGrams}(g) (總量: {thirdPourTotal}g), 水溫 {thirdPourTemp}°C",
+    "label_hario_switch_tetsu_kasuya_step_04" : "1:45 - 3:00: (打開閥門) 讓水流直到 3:00, 沒流完可關閥結束",
+
+    "label_harioSwitch_TetsuKasuya" : "Hario Switch (粕谷哲)"
+}
