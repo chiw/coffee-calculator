@@ -1,58 +1,64 @@
 <script lang="ts">
     import * as m from '$lib/paraglide/messages.js';
-    import { createPourover } from "$lib/runes/pourover.svelte";
-    import { CofeeRecipesChoices } from '$lib/recipes/CoffeeRecipeConstants';
     
+    import { createPourover } from "$lib/runes/pourover.svelte";
+    
+    import { CofeeRecipesChoices } from '$lib/recipes/CoffeeRecipeConstants';
+	import CoffeeRecipeStepsDisplay from '$lib/ui/components/CoffeeRecipeStepsDisplay.svelte';
+	    
     const pourover = createPourover();
-
 </script>
 
-<h3>{m.label_receipe_parameters()}</h3>
+<div class="m-3">
+    <h3 class="text-xl font-bold italic">{m.label_receipe_parameters()}</h3>
 
-<div>
-    <span>{m.label_coffee_bean()}</span>
-    <button onclick={() => pourover.beanInGrams--}>-</button>
-    <input bind:value={pourover.beanInGrams} />
-    <button onclick={() => pourover.beanInGrams++}>+</button>
-    <span>(g)</span>    
-</div>
-<div>
-    <span>{m.label_coffee_to_water_ratio()}</span>
-    <button onclick={() => pourover.coffeeToWaterRatio--}>-</button>
-    <span>1:</span>
-    <input bind:value={pourover.coffeeToWaterRatio} />
-    <button onclick={() => pourover.coffeeToWaterRatio++}>+</button>
-</div>
-<div>
-    <span>{m.label_water()}</span>
-    <span>{pourover.waterInGrams}</span>
-    <span>(g)</span>
-</div>
+    <div class="flex flex-row">
+        <div class="w-52 font-semibold">{m.label_coffee_bean()}</div>
+        <button class="w-7 h-7 rounded-full border bg-slate-200 hover:bg-slate-300 font-bold" onclick={() => pourover.beanInGrams--}>-</button>
+        <input class="ml-2 mr-1 border border-slate-200 max-w-10" bind:value={pourover.beanInGrams} />
+        <div>(g)</div>
+        <button class="w-7 h-7 rounded-full border bg-slate-200 hover:bg-slate-300 font-bold" onclick={() => pourover.beanInGrams++}>+</button>
+        
+    </div>
+    <div class="flex flex-row">
+        <div class="w-52 font-semibold">{m.label_coffee_to_water_ratio()}</div>
+        <button class="w-7 h-7 rounded-full border bg-slate-200 hover:bg-slate-300 font-bold" onclick={() => pourover.coffeeToWaterRatio--}>-</button>
+        <div class="mx-2 border-none border-slate-200">1:</div>
+        <input class="mx-2 border border-slate-200 max-w-10" bind:value={pourover.coffeeToWaterRatio} />
+        <button class="w-7 h-7 rounded-full border bg-slate-200 hover:bg-slate-300 font-bold" onclick={() => pourover.coffeeToWaterRatio++}>+</button>
+    </div>
 
-<div>
-    <select bind:value={pourover.recipe}>
-        {#each CofeeRecipesChoices as option}
-            <option value={option.id}>{option.displayLabelId}</option>
-        {/each}
-    </select>
-</div>
+    <div class="flex flex-row">
+        <div class="w-52 font-semibold">{m.label_water()}</div>
+        <div>{pourover.waterInGrams}</div>
+        <div>(g)</div>
+    </div>
 
-<br/>
+    <br/>
 
-<h3>{m.label_steps()}</h3>
-<div>
-    {#if pourover.coffeeRecipe}
-        {#each pourover.coffeeRecipe.steps as step, i }
-            <li>{@html step}</li>
-        {/each}
-    {/if}
-</div>
+    <div class="flex flex-row">
+        <div class="w-52 font-semibold">{m.label_recipe()}</div>
+        <select class="border border-slate-200" bind:value={pourover.recipe}>
+            {#each CofeeRecipesChoices as option}
+                <option value={option.id}>{option.displayLabelId}</option>
+            {/each}
+        </select>
+    </div>
 
-<h3>{m.label_references()}</h3>
-<div>
-    {#if pourover.coffeeRecipe}
-        {#each pourover.coffeeRecipe.references as reference, i}
-            <li> <a href={reference.url}>{reference.description}</a></li>
-        {/each}
-    {/if}
+
+    <br/>
+
+    <h3 class="text-xl font-bold italic">{m.label_steps()}</h3>    
+    <CoffeeRecipeStepsDisplay steps={pourover.coffeeRecipe.steps} />
+
+    <br/>
+
+    <h3 class="text-xl font-bold italic">{m.label_references()}</h3>
+    <div class="flex flex-col">
+        {#if pourover.coffeeRecipe}
+            {#each pourover.coffeeRecipe.references as reference, i}
+                <div> <a href={reference.url}>{reference.description}</a></div>
+            {/each}
+        {/if}
+    </div>
 </div>
