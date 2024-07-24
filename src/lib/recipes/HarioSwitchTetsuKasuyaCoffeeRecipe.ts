@@ -23,7 +23,7 @@ export class HarioSwitchTetsuKasuyaCoffeeRecipe extends CoffeeRecipe {
         return [
             m.label_hario_switch_tetsu_kasuya_step_01( {firstPourInGrams: this.firstPourInGrams, firstPourTemp: this.firstPourTemp }),
             m.label_hario_switch_tetsu_kasuya_step_02( {secondPourInGrams: this.secondPourInGrams, secondPourTotal: this.secondPourTotal, secondPourTemp: this.firstPourTemp }),
-            m.label_hario_switch_tetsu_kasuya_step_03( {thirdPourInGrams: this.thirdPourInGrams, thirdPourTotal: this.waterInGrams, thirdPourTemp: this.firstPourTemp }),
+            m.label_hario_switch_tetsu_kasuya_step_03( {thirdPourInGrams: this.thirdPourInGrams, thirdPourTotal: this.waterInGrams, thirdPourTemp: this.thirdPourTemp }),
             m.label_hario_switch_tetsu_kasuya_step_04(),            
         ]
     }
