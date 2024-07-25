@@ -5,7 +5,7 @@
     "label_coffee_bean" : "Coffee Bean:",
     "label_coffee_to_water_ratio" : "Coffee to Water Ratio:",
     "label_water" : "Water:",
-    "label_recipe": "Recipe:",
+    "label_recipe": "Recipe",
     "label_steps" : "Steps",
     "label_get_recipe" : "Get Recipe",
     "label_references" : "References",

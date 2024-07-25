@@ -12,7 +12,17 @@
 </script>
 
 <div class="m-3">
-    <div class="text-xl font-bold italic">{m.label_receipe_parameters()}</div>
+    
+    <div class="flex flex-row ">
+        <div class="text-xl font-bold italic mr-3">{m.label_recipe()}</div>
+        <select class="border border-slate-200" bind:value={pourover.recipe}>
+            {#each CofeeRecipesChoices as option}
+                <option value={option.id}>{option.displayLabelId}</option>
+            {/each}
+        </select>
+    </div>
+
+    <div class="text-xl font-bold italic mt-3">{m.label_receipe_parameters()}</div>
 
     <div class="flex flex-row mt-1">
         <div class="w-52 font-semibold">{m.label_coffee_bean()}</div>
@@ -36,14 +46,7 @@
         <div class="ml-1">(g)</div>
     </div>
 
-    <div class="flex flex-row mt-3">
-        <div class="w-24 font-semibold">{m.label_recipe()}</div>
-        <select class="border border-slate-200" bind:value={pourover.recipe}>
-            {#each CofeeRecipesChoices as option}
-                <option value={option.id}>{option.displayLabelId}</option>
-            {/each}
-        </select>
-    </div>
+    
 
     <div class="mt-5">
         {#if pourover.coffeeRecipe.isTimerRecipe}

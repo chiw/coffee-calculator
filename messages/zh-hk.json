@@ -5,7 +5,7 @@
     "label_coffee_bean" : "咖啡豆:",
     "label_coffee_to_water_ratio" : "粉水比:",
     "label_water" : "水:",
-    "label_recipe": "沖煮方式:",
+    "label_recipe": "沖煮方式",
     "label_steps" : "部驟",
     "label_get_recipe" : "計算沖煮步驟",
     "label_references" : "參考",
