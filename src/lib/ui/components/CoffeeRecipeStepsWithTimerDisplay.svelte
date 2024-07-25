@@ -3,7 +3,7 @@
     import { createStopwatch } from '$lib/runes/stopwatch.svelte';
     import { StopWatchState } from '$lib/runes/StopwatchState.type';
 
-    let { steps, stepsInterval, timerInSeconds } = $props();
+    let { steps, stepsTimeframe, timerInSeconds } = $props();
 
     let startBtnClicked = $state(false);
 
@@ -40,8 +40,8 @@
         {/if}
 
         {#each steps as step, index }
-            {#if (StopWatchState.RUNNING === stopwatch.stopwatchState && (stopwatch.elaspedTimeInSeconds >= stepsInterval[index][0]) && (stopwatch.elaspedTimeInSeconds <= stepsInterval[index][1]) ) }
-                {#if (stopwatch.elaspedTimeInSeconds <= (stepsInterval[index][1] - 7) )}
+            {#if (StopWatchState.RUNNING === stopwatch.stopwatchState && (stopwatch.elaspedTimeInSeconds >= stepsTimeframe[index][0]) && (stopwatch.elaspedTimeInSeconds <= stepsTimeframe[index][1]) ) }
+                {#if (stopwatch.elaspedTimeInSeconds <= (stepsTimeframe[index][1] - 7) )}
                     <div class="bg-amber-300 border border-solid rounded-md my-1 p-1">{@html step}</div>
                 {:else}
                     <div class="animate-pulse bg-amber-300 border border-solid rounded-md my-1 p-1">{@html step}</div>
