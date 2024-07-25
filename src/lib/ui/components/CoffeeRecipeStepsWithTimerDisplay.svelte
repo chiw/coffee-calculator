@@ -31,7 +31,7 @@
                     <button class="w-24 bg-black hover:bg-slate-600 text-white rounded font-bold" onclick={resetTimer}>{m.label_reset()}</button>
                 </div>
             {:else}
-                <div class="font-semibold text-xl">{stopwatch.formattedElaspedTime}</div>
+                <div class="font-semibold text-3xl">{stopwatch.formattedElaspedTime}</div>
             {/if}
         {:else}
             <div>
@@ -42,12 +42,12 @@
         {#each steps as step, index }
             {#if (StopWatchState.RUNNING === stopwatch.stopwatchState && (stopwatch.elaspedTimeInSeconds >= stepsTimeframe[index][0]) && (stopwatch.elaspedTimeInSeconds <= stepsTimeframe[index][1]) ) }
                 {#if (stopwatch.elaspedTimeInSeconds <= (stepsTimeframe[index][1] - 7) )}
-                    <div class="bg-amber-300 border border-solid rounded-md my-1 p-1">{@html step}</div>
+                    <div class="bg-amber-300 border border-solid  my-1 p-1">{@html step}</div>
                 {:else}
-                    <div class="animate-pulse bg-amber-300 border border-solid rounded-md my-1 p-1">{@html step}</div>
+                    <div class="animate-pulse bg-amber-300 border border-solid  my-1 p-1">{@html step}</div>
                 {/if}
             {:else}
-                <div class="border border-solid rounded-md my-1 p-1">{@html step}</div>
+                <div class="border border-solid my-1 p-1">{@html step}</div>
             {/if}
         {/each}
     {/if}
