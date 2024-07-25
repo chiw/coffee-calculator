@@ -5,6 +5,8 @@
     
     import { CofeeRecipesChoices } from '$lib/recipes/CoffeeRecipeConstants';
 	import CoffeeRecipeStepsDisplay from '$lib/ui/components/CoffeeRecipeStepsDisplay.svelte';
+    import CoffeeRecipeStepsWithTimerDisplay from '$lib/ui/components/CoffeeRecipeStepsWithTimerDisplay.svelte';
+	import { CoffeeRecipe } from '$lib/recipes/CoffeeRecipe';
 	    
     const pourover = createPourover();
 </script>
@@ -43,8 +45,17 @@
         </select>
     </div>
 
-    <div class="text-xl font-bold italic mt-5">{m.label_steps()}</div>    
-    <CoffeeRecipeStepsDisplay steps={pourover.coffeeRecipe.steps} />
+    <div class="mt-5">
+        {#if pourover.coffeeRecipe.isTimerRecipe}
+            <CoffeeRecipeStepsWithTimerDisplay steps={pourover.coffeeRecipe.steps} 
+                stepsTimeframe={pourover.coffeeRecipe.stepsTimeframe} 
+                timerInSeconds={pourover.coffeeRecipe.timerInSeconds} />
+        {:else}
+            <div class="text-xl font-bold italic">{m.label_steps()}</div>
+            <CoffeeRecipeStepsDisplay steps={pourover.coffeeRecipe.steps} />
+        {/if}
+    </div>
+    
 
     <div class="text-xl font-bold italic mt-5">{m.label_references()}</div>
     <div class="flex flex-col">

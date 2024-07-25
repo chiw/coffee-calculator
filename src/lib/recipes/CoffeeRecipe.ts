@@ -17,7 +17,19 @@ export abstract class CoffeeRecipe {
         return [];
     }
 
+    get stepsTimeframe(): number[][] {
+        return [];
+    }
+
     get references(): Reference[] {
         return [];
+    }
+
+    get isTimerRecipe(): boolean {
+        return false;
+    }
+
+    get timerInSeconds() : number {
+        return 0;
     }
 }

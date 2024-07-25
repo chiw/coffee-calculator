@@ -15,5 +15,8 @@
     "label_hario_switch_tetsu_kasuya_step_03" : "1:15 - 1:44: 3rd pour  <br/> (Switch Closed) pour <b>{thirdPourInGrams}g</b> of water (Total: <b>{thirdPourTotal}g</b>), at {thirdPourTemp}°C.",
     "label_hario_switch_tetsu_kasuya_step_04" : "1:45 - 3:00:  <br/> (Switch Open) let the water flow until 3:00. Close the switch.",
 
-    "label_harioSwitch_TetsuKasuya" : "Hario Switch (Tetsu Kasuya)"
+    "label_harioSwitch_TetsuKasuya" : "Hario Switch (Tetsu Kasuya)",
+
+    "label_start_recipe" : "Start",
+    "label_reset" : "Reset"
 }

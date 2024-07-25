@@ -28,9 +28,26 @@ export class HarioSwitchTetsuKasuyaCoffeeRecipe extends CoffeeRecipe {
         ]
     }
 
+    get stepsTimeframe(): number[][] {
+        return [
+            [0, 30], 
+            [30, 75], 
+            [75, 105], 
+            [105, 180]
+        ];
+    }
+
     get references(): Reference[] {
         return [
             { description : 'Is it the God Recipe, or the Devil Recipe? ｜ The Ultimate Switch Recipe Ever!! - Tetsu Kasuya', url: 'https://www.youtube.com/watch?v=gC8K40kZ_6E' }
         ];
+    }
+
+    get isTimerRecipe(): boolean {
+        return true;
+    }
+
+    get timerInSeconds() : number {
+        return 180;
     }
 }
