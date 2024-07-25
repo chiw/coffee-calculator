@@ -15,5 +15,8 @@
     "label_hario_switch_tetsu_kasuya_step_03" : "1:15 - 1:44: 第三次注水 <br/> (關上閥門) 注水 <b>{thirdPourInGrams}g</b> (總量: <b>{thirdPourTotal}g</b>), 水溫 {thirdPourTemp}°C",
     "label_hario_switch_tetsu_kasuya_step_04" : "1:45 - 3:00: <br/> (打開閥門) 讓水流直到 3:00, 沒流完可關閥結束",
 
-    "label_harioSwitch_TetsuKasuya" : "Hario Switch (粕谷哲)"
+    "label_harioSwitch_TetsuKasuya" : "Hario Switch (粕谷哲)",
+
+    "label_start_recipe" : "開始沖煮",
+    "label_reset" : "重設計時"
 }
