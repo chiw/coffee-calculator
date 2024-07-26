@@ -1,11 +1,19 @@
+import { CoffeeRecipeId } from "./CoffeeRecipeConstants";
+import { CoffeeRecipe } from "./CoffeeRecipe";
+import { HarioSwitchEmiFukahoriCoffeeRecipe } from "./HarioSwitchEmiFukahoriCoffeeRecipe";
 import { HarioSwitchTetsuKasuyaCoffeeRecipe } from "./HarioSwitchTetsuKasuyaCoffeeRecipe";
 
-export const createCoffeeRecipe = (recipeName: string, beanInGrams: number, coffeeToWaterRatio: number, waterInGrams: number): CoffeeRecipe => {
-    console.log('recipeName: ', recipeName, 'beanInGrams:', beanInGrams, 'coffeeToWaterRatio', coffeeToWaterRatio, 'waterInGrams', waterInGrams)
+export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
+    console.log('createCoffeeRecipe recipeId: ', recipeId);
 
-    switch(recipeName) {
-        case 'harioSwitch_TetsuKasuya' : return new HarioSwitchTetsuKasuyaCoffeeRecipe(beanInGrams, coffeeToWaterRatio, waterInGrams);
+    switch(recipeId) {
+        case CoffeeRecipeId.HarioSwitch_TetsuKasuya : {            
+            return new HarioSwitchTetsuKasuyaCoffeeRecipe();
+        };
+        case CoffeeRecipeId.HarioSwitch_EmiFukahori : {            
+            return new HarioSwitchEmiFukahoriCoffeeRecipe(); 
+        };
         default:
-            return new HarioSwitchTetsuKasuyaCoffeeRecipe(beanInGrams, coffeeToWaterRatio, waterInGrams);
+            return new HarioSwitchTetsuKasuyaCoffeeRecipe();
     }
 }

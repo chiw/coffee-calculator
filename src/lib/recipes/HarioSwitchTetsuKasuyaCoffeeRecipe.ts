@@ -1,6 +1,7 @@
 import { CoffeeRecipe } from "./CoffeeRecipe";
-import type { Reference } from "./reference.type";
+import type { Reference } from "./Reference.type";
 import * as m from '$lib/paraglide/messages.js';
+import { CoffeeRecipeId } from "./CoffeeRecipeConstants";
 
 export class HarioSwitchTetsuKasuyaCoffeeRecipe extends CoffeeRecipe {
     firstPourTemp = 90;
@@ -15,8 +16,16 @@ export class HarioSwitchTetsuKasuyaCoffeeRecipe extends CoffeeRecipe {
     thirdPourTemp = 70;
     thirdPourInGrams: number = this.waterInGrams - this.firstPourInGrams - this.secondPourInGrams;    
 
-    constructor(beanInGrams: number, coffeeToWaterRatio: number, waterInGrams: number) {
-        super('harioSwitch_TetsuKasuya', beanInGrams, coffeeToWaterRatio, waterInGrams);
+    constructor() {
+        super(CoffeeRecipeId.HarioSwitch_TetsuKasuya);
+    }
+
+    get defaultParameters() {
+        return {
+            defaultBeanInGrams : 20,
+            defaultWaterInGrams: 280,
+            defaultCoffeeToWaterRatio: -1
+        }
     }
 
     get steps(): string[] {

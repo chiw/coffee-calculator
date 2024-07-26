@@ -1,16 +1,37 @@
-import type { Reference } from "./reference.type";
+import type { CoffeeRecipeId } from "./CoffeeRecipeConstants";
+import type { Reference } from "./Reference.type";
 
 export abstract class CoffeeRecipe {
-    recipeName: string;
-    beanInGrams: number;
-    coffeeToWaterRatio: number;
-    waterInGrams: number;
+    recipeId: CoffeeRecipeId;
+    public beanInGrams: number = -1;
+    public waterInGrams: number = -1;
+    public coffeeToWaterRatio: number = -1;
+    
+    constructor(recipeId: CoffeeRecipeId) {
+        this.recipeId = recipeId;
+        this.initParameters();
+    }
 
-    constructor(recipeName: string, beanInGrams: number, coffeeToWaterRatio: number, waterInGrams: number) {
-        this.recipeName = recipeName;
-        this.beanInGrams = beanInGrams;
-        this.coffeeToWaterRatio = coffeeToWaterRatio;
-        this.waterInGrams = waterInGrams;
+    initParameters() {
+        this.beanInGrams = this.defaultParameters.defaultBeanInGrams;
+        this.waterInGrams = this.defaultParameters.defaultWaterInGrams;
+        this.coffeeToWaterRatio = this.defaultParameters.defaultCoffeeToWaterRatio;
+
+        if(this.waterInGrams < 0) {
+            this.waterInGrams = this.beanInGrams * this.coffeeToWaterRatio;
+        }
+
+        if(this.coffeeToWaterRatio < 0) {
+            this.coffeeToWaterRatio = this.waterInGrams / this.beanInGrams;
+        }
+    }
+
+    get defaultParameters() {
+        return {
+            defaultBeanInGrams : 20,
+            defaultWaterInGrams: 280,
+            defaultCoffeeToWaterRatio: -1
+        }
     }
 
     get steps(): string[] {

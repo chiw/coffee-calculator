@@ -22,37 +22,35 @@ export function createStopwatch() {
     // let formattedElaspedTime = $derived(hours + ":" + minutes + ":" + seconds + ":" + millis);
     let formattedElaspedTime = $derived(_minutes + ":" + _seconds);
 
-    return {
-        set start(stopUntil) {
-            console.log('started stopwatch, set stopUntil to ', stopUntil);
-            _stopUntil = stopUntil;
-            _startTime = Date.now();
-            _stopwatchState = StopWatchState.RUNNING;
-            interval = setInterval(() => {
-                if(_stopwatchState === StopWatchState.RUNNING) {
-                    const currTime = Date.now();
-                    _elaspedTime = currTime - _startTime;                    
+    function start(stopUntil) {
+        console.log('started stopwatch, set stopUntil to ', stopUntil);
+        _stopUntil = stopUntil;
+        _startTime = Date.now();
+        _stopwatchState = StopWatchState.RUNNING;
+        interval = setInterval(() => {
+            if(_stopwatchState === StopWatchState.RUNNING) {
+                const currTime = Date.now();
+                _elaspedTime = currTime - _startTime;                    
 
-                    if(_elaspedTime >= (_stopUntil * 1000)) {
-                        console.log('count finished, clear interval');
-                        _stopwatchState = StopWatchState.STOP;
-                        clearInterval(interval);
-                    }
+                if(_elaspedTime >= (_stopUntil * 1000)) {
+                    console.log('count finished, clear interval');
+                    _stopwatchState = StopWatchState.STOP;
+                    clearInterval(interval);
                 }
-            }, 10);
-        },
+            }
+        }, 10);
+    }
 
-        set reset(stopUntil) {
-            console.log('reset stopwatch, set stopUntil to ', stopUntil);
-            _stopUntil = stopUntil;
-            _elaspedTime = 0;
-            _stopwatchState = StopWatchState.NEW;
-            clearInterval(interval);
-        },
-        
-        set stopUntil(value) {
-            _stopUntil = value;
-        },
+    function reset() {
+        console.log('reset stopwatch');
+        _elaspedTime = 0;
+        _stopwatchState = StopWatchState.NEW;
+        clearInterval(interval);
+    }
+
+    return {
+        start,
+        reset,
 
         get stopwatchState() {
             return _stopwatchState;
