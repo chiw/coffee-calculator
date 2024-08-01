@@ -1,15 +1,18 @@
 <script lang="ts">
     import * as m from '$lib/paraglide/messages.js';
 
-    import { getContext } from "svelte";
-    
     import { StopWatchState } from '$lib/runes/StopwatchState.type';
+	import { getStopWatchStore } from '$lib/runes/StopWatchStore.svelte';
 
     let { steps, stepsTimeframe, timerInSeconds } = $props();
 
+    console.log('steps: ', steps);
+    console.log('stepsTimeframe: ', stepsTimeframe);
+    console.log('timerInSeconds: ', timerInSeconds);
+
     let startBtnClicked = $state(false);
 
-    const stopwatch = getContext("stopwatch");
+    const stopwatch = getStopWatchStore();
 
     function startTimer() {
         console.log('clicked start button');
@@ -22,6 +25,7 @@
         startBtnClicked = false;
         stopwatch.reset();
     }
+    
 
 </script>
 
@@ -49,7 +53,11 @@
                     <div class="animate-pulse bg-amber-300 border border-solid  my-1 p-1">{@html step}</div>
                 {/if}
             {:else}
-                <div class="border border-solid my-1 p-1">{@html step}</div>
+                {#if (StopWatchState.RUNNING === stopwatch.stopwatchState) }
+                    <div class="border border-solid my-1 p-1 text-slate-300">{@html step}</div>
+                {:else}
+                    <div class="border border-solid my-1 p-1">{@html step}</div>
+                {/if}
             {/if}
         {/each}
     {/if}

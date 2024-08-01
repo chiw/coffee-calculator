@@ -7,9 +7,8 @@
 
 	import { setContext } from "svelte";
 
-	import { createStopwatch } from '$lib/runes/Stopwatch.svelte';
-	const stopwatch = createStopwatch();
-	setContext("stopwatch", stopwatch);
+	import { setStopWatchStore } from "$lib/runes/StopWatchStore.svelte";
+	setStopWatchStore();
 
 	import { createCoffeeRecipeStore } from '$lib/runes/CoffeeRecipeStore.svelte';    
     const coffeeRecipeStore = createCoffeeRecipeStore();

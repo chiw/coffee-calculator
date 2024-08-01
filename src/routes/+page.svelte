@@ -9,7 +9,9 @@
     
 	import CoffeeRecipeDisplay from '$lib/ui/components/CoffeeRecipeDisplay.svelte';
 
-    const stopwatch = getContext("stopwatch");
+    import { getStopWatchStore } from '$lib/runes/StopWatchStore.svelte';
+    const stopwatch = getStopWatchStore();
+
     const coffeeRecipeStore = getContext("coffeeRecipeStore");
 </script>
 
@@ -28,6 +30,9 @@
         {/if}
     </div>
 
-    <CoffeeRecipeDisplay coffeeRecipe={coffeeRecipeStore.coffeeRecipe} />
+    <CoffeeRecipeDisplay coffeeRecipe={coffeeRecipeStore.coffeeRecipe}
+        beanInGrams={coffeeRecipeStore.beanInGrams} coffeeToWaterRatio={coffeeRecipeStore.coffeeToWaterRatio} waterInGrams={coffeeRecipeStore.waterInGrams} 
+        coffeeRecipeSteps={coffeeRecipeStore.coffeeRecipeSteps}
+        />
 
 </div>
