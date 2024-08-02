@@ -3,12 +3,12 @@ import type { Reference } from "./Reference.type";
 import type { CoffeeParams } from "./CoffeeParams";
 
 export abstract class CoffeeRecipe {
-    recipeId: CoffeeRecipeId;    
-    coffeeParams: CoffeeParams;    
+    recipeId: CoffeeRecipeId;
+    defaultCoffeeParams: CoffeeParams;
     public references: Reference[] = [];
-    
-    constructor(recipeId: CoffeeRecipeId, coffeeParams: CoffeeParams) {
+
+    constructor(recipeId: CoffeeRecipeId, defaultCoffeeParams: CoffeeParams) {
         this.recipeId = recipeId;
-        this.coffeeParams = coffeeParams;
+        this.defaultCoffeeParams = defaultCoffeeParams;
     }
 }

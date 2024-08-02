@@ -10,18 +10,18 @@ export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
 
     let _coffeeRecipe: CoffeeRecipe = $state(createCoffeeRecipe(defaultCoffeeRecipeId));
 
-    let _beanInGrams = $state(_coffeeRecipe.coffeeParams.beanInGrams);
-    let _coffeeToWaterRatio = $state(_coffeeRecipe.coffeeParams.coffeeToWaterRatio);
-    let _waterInGrams = $state(_coffeeRecipe.coffeeParams.waterInGrams);
+    let _beanInGrams = $state(_coffeeRecipe.defaultCoffeeParams.beanInGrams);
+    let _coffeeToWaterRatio = $state(_coffeeRecipe.defaultCoffeeParams.coffeeToWaterRatio);
+    let _waterInGrams = $state(_coffeeRecipe.defaultCoffeeParams.waterInGrams);
 
     $effect(() => {
         _coffeeRecipe = createCoffeeRecipe(_recipeId);
     });
 
     $effect(() => {
-        _beanInGrams = _coffeeRecipe.coffeeParams.beanInGrams;
-        _coffeeToWaterRatio = _coffeeRecipe.coffeeParams.coffeeToWaterRatio;
-        _waterInGrams = _coffeeRecipe.coffeeParams.waterInGrams;
+        _beanInGrams = _coffeeRecipe.defaultCoffeeParams.beanInGrams;
+        _coffeeToWaterRatio = _coffeeRecipe.defaultCoffeeParams.coffeeToWaterRatio;
+        _waterInGrams = _coffeeRecipe.defaultCoffeeParams.waterInGrams;
     });
     
     let _coffeeParams = $derived(deriveCoffeeParams(_coffeeRecipe.recipeId, _beanInGrams, _coffeeToWaterRatio, _waterInGrams));
