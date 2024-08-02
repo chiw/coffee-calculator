@@ -8,6 +8,7 @@ export abstract class CoffeeParams {
     public coffeeToWaterRatio: number = -1;
 
     constructor(recipeId: CoffeeRecipeId, beanInGrams: number, coffeeToWaterRatio: number, waterInGrams: number) {
+        console.log('CoffeeParams constructor recipeId: ', recipeId,', beanInGrams: ', beanInGrams, ' coffeeToWaterRatio: ', coffeeToWaterRatio, ' waterInGrams: ', waterInGrams);
         this.recipeId = recipeId;
 
         /* beanInGrams x coffeeToWaterRatio = waterInGrams */
@@ -26,15 +27,26 @@ export abstract class CoffeeParams {
 
         // update case
         if(this.waterInGrams > 0 && this.coffeeToWaterRatio > 0) {
-            console.log('update case, coffeeToWaterRatio should have locked, calculate new waterInGrams');
+            console.log('update case, coffeeToWaterRatio should have been fixed, calculate new waterInGrams');
             this.waterInGrams = calculateRecipeWaterInGrams(this.beanInGrams, this.coffeeToWaterRatio);
         }
     }
 
-    abstract updateBeanInGrams(beanInGrams: number): CoffeeParams;
+    updateBeanInGrams(beanInGrams: number): CoffeeParams {
+        console.log('updateBeanInGrams beanInGrams: ', beanInGrams, ' will new a CoffeeParams object');
+        return this.getNewInstance(beanInGrams, this.coffeeToWaterRatio, this.waterInGrams);
+    }
 
-    abstract updateWaterInGrams(waterInGrams: number): CoffeeParams;
+    updateWaterInGrams(waterInGrams: number): CoffeeParams {
+        console.log('waterInGrams waterInGrams: ', waterInGrams, ' will new a CoffeeParams object');
+        return this.getNewInstance(this.beanInGrams, this.coffeeToWaterRatio, waterInGrams);
+    }
 
-    abstract updateCoffeeToWaterRatio(coffeeToWaterRatio: number): CoffeeParams;
+    updateCoffeeToWaterRatio(coffeeToWaterRatio: number): CoffeeParams {
+        console.log('updateCoffeeToWaterRatio coffeeToWaterRatio: ', coffeeToWaterRatio, ' will new a CoffeeParams object');
+        return this.getNewInstance(this.beanInGrams, coffeeToWaterRatio, this.waterInGrams);
+    }
+
+    abstract getNewInstance(beanInGrams: number, coffeeToWaterRatio: number, waterInGrams: number): CoffeeParams;
 
 }
