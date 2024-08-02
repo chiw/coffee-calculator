@@ -46,11 +46,11 @@ export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
         set beanInGrams(value) { _beanInGrams = value; },
 
         get coffeeToWaterRatio() { return _coffeeToWaterRatio; },
-        set coffeeToWaterRatio(value) { _coffeeToWaterRatio = value; },
 
         get waterInGrams() { return _waterInGrams; },
-        set waterInGrams(value) { _waterInGrams = value; },
 
-        get coffeeRecipeSteps() { return _coffeeRecipeSteps; }
+        get coffeeRecipeSteps() { return _coffeeRecipeSteps; },
+
+        get coffeeParams() { return _coffeeParams; }
     }
 }

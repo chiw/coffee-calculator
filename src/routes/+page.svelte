@@ -30,9 +30,6 @@
         {/if}
     </div>
 
-    <CoffeeRecipeDisplay coffeeRecipe={coffeeRecipeStore.coffeeRecipe}
-        beanInGrams={coffeeRecipeStore.beanInGrams} coffeeToWaterRatio={coffeeRecipeStore.coffeeToWaterRatio} waterInGrams={coffeeRecipeStore.waterInGrams} 
-        coffeeRecipeSteps={coffeeRecipeStore.coffeeRecipeSteps}
-        />
+    <CoffeeRecipeDisplay />
 
 </div>

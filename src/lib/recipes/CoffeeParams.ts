@@ -15,12 +15,19 @@ export abstract class CoffeeParams {
         this.coffeeToWaterRatio = coffeeToWaterRatio;
         this.waterInGrams = waterInGrams;
 
+        // init coffee param case
         if(this.waterInGrams < 0) {
             this.waterInGrams = calculateRecipeWaterInGrams(this.beanInGrams, this.coffeeToWaterRatio);
         }
 
         if(this.coffeeToWaterRatio < 0) {
             this.coffeeToWaterRatio = calculateRecipeCoffeeToWaterRatio(this.waterInGrams, this.beanInGrams);
+        }
+
+        // update case
+        if(this.waterInGrams > 0 && this.coffeeToWaterRatio > 0) {
+            console.log('update case, coffeeToWaterRatio should have locked, calculate new waterInGrams');
+            this.waterInGrams = calculateRecipeWaterInGrams(this.beanInGrams, this.coffeeToWaterRatio);
         }
     }
 
