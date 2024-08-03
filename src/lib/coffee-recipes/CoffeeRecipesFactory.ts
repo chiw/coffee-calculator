@@ -3,6 +3,7 @@ import { CoffeeRecipe } from "./CoffeeRecipe";
 import type { CoffeeParams } from "./CoffeeParams";
 import { HarioSwitchEmiFukahoriCoffeeParams, HarioSwitchEmiFukahoriCoffeeRecipe, HarioSwitchEmiFukahoriCoffeeRecipeSteps } from "./hario-switch/emi-fukahori";
 import { HarioSwitchTetsuKasuyaCoffeeParams, HarioSwitchTetsuKasuyaCoffeeRecipe, HarioSwitchTetsuKasuyaCoffeeRecipeSteps } from "./hario-switch/tetsu-kasuya";
+import { HarioSwitchOleKristianBoenCoffeeParams, HarioSwitchOleKristianBoenCoffeeRecipe, HarioSwitchOleKristianBoenCoffeeRecipeSteps } from "./hario-switch/ole-kristian-boen";
 
 
 export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
@@ -15,6 +16,9 @@ export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
         case CoffeeRecipeId.HarioSwitch_EmiFukahori : {            
             return new HarioSwitchEmiFukahoriCoffeeRecipe(); 
         };
+        case CoffeeRecipeId.HarioSwitch_OleKristianBoen : {
+            return new HarioSwitchOleKristianBoenCoffeeRecipe();
+        }
         default:
             return new HarioSwitchTetsuKasuyaCoffeeRecipe();
     }
@@ -30,6 +34,9 @@ export const createCoffeeParams = (recipeId: CoffeeRecipeId, beanInGrams: number
         case CoffeeRecipeId.HarioSwitch_EmiFukahori : {            
             return new HarioSwitchEmiFukahoriCoffeeParams(beanInGrams, coffeeToWaterRatio, waterInGrams); 
         };
+        case CoffeeRecipeId.HarioSwitch_OleKristianBoen : {
+            return new HarioSwitchOleKristianBoenCoffeeParams(beanInGrams, coffeeToWaterRatio, waterInGrams);
+        }
         default:
             return new HarioSwitchTetsuKasuyaCoffeeParams(beanInGrams, coffeeToWaterRatio, waterInGrams);
     }
@@ -45,6 +52,9 @@ export const createCoffeeRecipeSteps = (coffeeParams: CoffeeParams) => {
         case CoffeeRecipeId.HarioSwitch_EmiFukahori : {            
             return new HarioSwitchEmiFukahoriCoffeeRecipeSteps(coffeeParams); 
         };
+        case CoffeeRecipeId.HarioSwitch_OleKristianBoen : {
+            return new HarioSwitchOleKristianBoenCoffeeRecipeSteps(coffeeParams);
+        }
         default:
             return new HarioSwitchTetsuKasuyaCoffeeRecipeSteps(coffeeParams);
     }

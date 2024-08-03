@@ -22,5 +22,11 @@
     "label_harioSwitch_EmiFukahori" : "Hario Switch (Emi Fukahori)",
     "label_hario_switch_emi_fukahori_step_01" : "0:00 - 0:30: (<b>關上閥門</b>) 悶蒸階段 <br/>  水量 <b>{firstPourWaterInGrams}g</b>",
     "label_hario_switch_emi_fukahori_step_02" : "0:30 - 1:10: (<b>打開閥門</b>) 注水階段 <br/>  水量 <b>{secondPourWaterInGrams}g</b> (總量: <b>{secondPourTotal}g</b>) single continuous pour to 粉床中心",
-    "label_hario_switch_emi_fukahori_step_03" : "1:10 - 2:20: (<b>打開閥門</b>) <br/> 讓水流直到 2:20"
+    "label_hario_switch_emi_fukahori_step_03" : "1:10 - 2:20: (<b>打開閥門</b>) <br/> 讓水流直到 2:20",
+
+    "label_harioSwitch_OleKristianBoen": "Hario Switch (Ole Kristian Boen)",
+    "label_hario_switch_ole_kristian_boen_step_01" : "0:00 - 0:40: (<b>關上閥門</b>) 悶蒸階段 <br/>  水量 <b>{firstPourWaterInGrams}g</b>, 水溫 {firstPourTemp}°C",
+    "label_hario_switch_ole_kristian_boen_step_02" : "0:40 - 1:30: (<b>打開閥門</b>) 第一次注水 (往中心注水)<br/>  水量 <b>{secondPourWaterInGrams}g</b> (總量: <b>{secondPourTotal}g</b>) 到中心",
+    "label_hario_switch_ole_kristian_boen_step_03" : "1:30 - 2:10: (<b>關上閥門</b>) 第二次注水 (繞圈注水)<br/> 水量 <b>{thirdPourWaterInGrams}g</b> (總量: <b>{thirdPourTotal}g</b>)",
+    "label_hario_switch_ole_kristian_boen_step_04" : "2:10 - 3:15: (<b>打開閥門</b>) <br/> 讓水流直到 3:00 - 3:15."
 }
