@@ -1,18 +1,15 @@
 <script lang="ts">
     import * as m from '$lib/paraglide/messages.js';
 
-    import { getContext } from "svelte";
-
-    import { StopWatchState } from '$lib/runes/StopwatchState.type';
+    import { CoffeeRecipesChoices } from '$lib/coffee-recipes';
     
-    import { CofeeRecipesChoices } from '$lib/recipes/CoffeeRecipeConstants';
-    
-	import CoffeeRecipeDisplay from '$lib/ui/components/CoffeeRecipeDisplay.svelte';
+	import CoffeeRecipeDisplay from '$lib/ui/components/coffee-recipe/CoffeeRecipeDisplay.svelte';    
 
-    import { getStopWatchStore } from '$lib/runes/StopWatchStore.svelte';
-    const stopwatch = getStopWatchStore();
+    import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch/';
+    import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';
 
-    const coffeeRecipeStore = getContext("coffeeRecipeStore");
+    const stopwatch: StopWatchStore = getStopWatchStore();
+    const coffeeRecipeStore = getCoffeeRecipeStore();
 </script>
 
 <div class="m-3">
@@ -20,10 +17,10 @@
     <div class="flex flex-row ">
         <div class="text-xl font-bold italic mr-3">{m.label_recipe()}</div>
         {#if StopWatchState.RUNNING === stopwatch.stopwatchState}
-            <div>{ CofeeRecipesChoices.find((c) => c.id == coffeeRecipeStore.recipeId)?.displayLabelId }</div>
+            <div>{ CoffeeRecipesChoices.find((c) => c.id == coffeeRecipeStore.recipeId)?.displayLabelId }</div>
         {:else}
             <select class="border border-slate-200" bind:value={coffeeRecipeStore.recipeId}>
-                {#each CofeeRecipesChoices as option}
+                {#each CoffeeRecipesChoices as option}
                     <option value={option.id}>{option.displayLabelId}</option>
                 {/each}
             </select>

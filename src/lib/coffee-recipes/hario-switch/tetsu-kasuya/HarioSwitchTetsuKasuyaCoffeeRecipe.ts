@@ -1,7 +1,7 @@
-import { CoffeeRecipe } from "./CoffeeRecipe";
-import { CoffeeRecipeId } from "./CoffeeRecipeConstants";
-import { createCoffeeParams } from "./CoffeeRecipesFactory";
-import type { Reference } from "./Reference.type";
+import { CoffeeRecipe } from "../../CoffeeRecipe";
+import { CoffeeRecipeId } from "../../CoffeeRecipeConstants";
+import { createCoffeeParams } from "../../CoffeeRecipesFactory";
+import type { Reference } from "../../Reference.type";
 
 export class HarioSwitchTetsuKasuyaCoffeeRecipe extends CoffeeRecipe {
     

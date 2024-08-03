@@ -1,8 +1,7 @@
 <script lang="ts">
     import * as m from '$lib/paraglide/messages.js';
 
-    import { StopWatchState } from '$lib/runes/StopwatchState.type';
-	import { getStopWatchStore } from '$lib/runes/StopWatchStore.svelte';
+    import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch';
 
     let { steps, stepsTimeframe, timerInSeconds } = $props();
 
@@ -12,7 +11,7 @@
 
     let startBtnClicked = $state(false);
 
-    const stopwatch = getStopWatchStore();
+    const stopwatch: StopWatchStore = getStopWatchStore();
 
     function startTimer() {
         console.log('clicked start button');

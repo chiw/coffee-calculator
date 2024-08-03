@@ -1,5 +1,5 @@
-import { CoffeeParams } from "./CoffeeParams"
-import { CoffeeRecipeId } from "./CoffeeRecipeConstants";
+import { CoffeeParams } from "../../CoffeeParams"
+import { CoffeeRecipeId } from "../../CoffeeRecipeConstants";
 
 export class HarioSwitchTetsuKasuyaCoffeeParams extends CoffeeParams {
     

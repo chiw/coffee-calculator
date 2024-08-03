@@ -1,9 +1,9 @@
 import * as m from '$lib/paraglide/messages.js';
-import { CoffeeRecipeId } from './CoffeeRecipeConstants';
-import { CoffeeParams } from './CoffeeParams';
-import { CoffeeReipeSteps } from './CoffeeRecipeSteps';
-import { calculatePourWaterInGrams } from './CoffeeRecipeUtils';
-import type { PourParam } from './PourParam.type';
+import { CoffeeRecipeId } from '../../CoffeeRecipeConstants';
+import { CoffeeParams } from '../../CoffeeParams';
+import { CoffeeReipeSteps } from '../../CoffeeRecipeSteps';
+import { calculatePourWaterInGrams } from '../../CoffeeRecipeUtils';
+import type { PourParam } from '../../PourParam.type';
 
 export class HarioSwitchTetsuKasuyaCoffeeRecipeSteps extends CoffeeReipeSteps {
 

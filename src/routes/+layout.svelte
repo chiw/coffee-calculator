@@ -3,16 +3,13 @@
     import { ParaglideJS } from '@inlang/paraglide-sveltekit'
 	import { i18n } from '$lib/i18n.js'
 
+	import { setStopWatchStore } from "$lib/runes/stopwatch";
+	import { setCoffeeRecipeStore } from "$lib/runes/coffee-recipe";
+
 	const { children } = $props()
-
-	import { setContext } from "svelte";
-
-	import { setStopWatchStore } from "$lib/runes/StopWatchStore.svelte";
+	
 	setStopWatchStore();
-
-	import { createCoffeeRecipeStore } from '$lib/runes/CoffeeRecipeStore.svelte';    
-    const coffeeRecipeStore = createCoffeeRecipeStore();
-	setContext("coffeeRecipeStore", coffeeRecipeStore);
+	setCoffeeRecipeStore();
 	
 </script>
 

@@ -1,8 +1,9 @@
-import { CoffeeParams } from "$lib/recipes/CoffeeParams";
-import type { CoffeeRecipe } from "$lib/recipes/CoffeeRecipe";
-import { CoffeeRecipeId } from "$lib/recipes/CoffeeRecipeConstants";
-import { createCoffeeParams, createCoffeeRecipe, createCoffeeRecipeSteps } from "$lib/recipes/CoffeeRecipesFactory";
-import { setContext } from "svelte";
+import { CoffeeParams } from "$lib/coffee-recipes/CoffeeParams";
+import type { CoffeeRecipe } from "$lib/coffee-recipes/CoffeeRecipe";
+import { CoffeeRecipeId } from "$lib/coffee-recipes/CoffeeRecipeConstants";
+import { createCoffeeParams, createCoffeeRecipe, createCoffeeRecipeSteps } from "$lib/coffee-recipes/CoffeeRecipesFactory";
+
+import { getContext, setContext } from "svelte";
 
 export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
 
@@ -19,10 +20,14 @@ export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
     });
 
     $effect(() => {
+        setToRecipeDefault();
+    });
+
+    function setToRecipeDefault() {
         _beanInGrams = _coffeeRecipe.defaultCoffeeParams.beanInGrams;
         _coffeeToWaterRatio = _coffeeRecipe.defaultCoffeeParams.coffeeToWaterRatio;
         _waterInGrams = _coffeeRecipe.defaultCoffeeParams.waterInGrams;
-    });
+    }
     
     let _coffeeParams = $derived(deriveCoffeeParams(_coffeeRecipe.recipeId, _beanInGrams, _coffeeToWaterRatio, _waterInGrams));
 
@@ -53,4 +58,14 @@ export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
 
         get coffeeParams() { return _coffeeParams; }
     }
+}
+
+const COFFEE_RECIPE_STORE_CONTEXT_KEY = Symbol('COFFEE_RECIPE_STORE_CONTEXT_KEY');
+
+export function setCoffeeRecipeStore() {    
+    return setContext(COFFEE_RECIPE_STORE_CONTEXT_KEY, createCoffeeRecipeStore(CoffeeRecipeId.HarioSwitch_TetsuKasuya));
+}
+
+export function getCoffeeRecipeStore() {
+    return getContext<ReturnType<typeof setCoffeeRecipeStore>>(COFFEE_RECIPE_STORE_CONTEXT_KEY);
 }

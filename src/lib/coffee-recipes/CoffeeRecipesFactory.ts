@@ -1,12 +1,9 @@
 import { CoffeeRecipeId } from "./CoffeeRecipeConstants";
 import { CoffeeRecipe } from "./CoffeeRecipe";
-import { HarioSwitchEmiFukahoriCoffeeRecipe } from "./HarioSwitchEmiFukahoriCoffeeRecipe";
-import { HarioSwitchTetsuKasuyaCoffeeRecipe } from "./HarioSwitchTetsuKasuyaCoffeeRecipe";
 import type { CoffeeParams } from "./CoffeeParams";
-import { HarioSwitchTetsuKasuyaCoffeeParams } from "./HarioSwitchTetsuKasuyaCoffeeParams";
-import { HarioSwitchEmiFukahoriCoffeeParams } from "./HarioSwitchEmiFukahoriCoffeeParams";
-import { HarioSwitchTetsuKasuyaCoffeeRecipeSteps } from "./HarioSwitchTetsuKasuyaCoffeeRecipeSteps";
-import { HarioSwitchEmiFukahoriCoffeeRecipeSteps } from "./HarioSwitchEmiFukahoriCoffeeRecipeSteps";
+import { HarioSwitchEmiFukahoriCoffeeParams, HarioSwitchEmiFukahoriCoffeeRecipe, HarioSwitchEmiFukahoriCoffeeRecipeSteps } from "./hario-switch/emi-fukahori";
+import { HarioSwitchTetsuKasuyaCoffeeParams, HarioSwitchTetsuKasuyaCoffeeRecipe, HarioSwitchTetsuKasuyaCoffeeRecipeSteps } from "./hario-switch/tetsu-kasuya";
+
 
 export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
     console.log('createCoffeeRecipe recipeId: ', recipeId);

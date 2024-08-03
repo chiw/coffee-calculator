@@ -56,6 +56,6 @@ export function setStopWatchStore() {
     return setContext(STOPWATCH_STORE_CONTEXT_KEY, new StopWatchStore());
 }
 
-export function getStopWatchStore() {
+export function getStopWatchStore(): StopWatchStore {
     return getContext<ReturnType<typeof setStopWatchStore>>(STOPWATCH_STORE_CONTEXT_KEY);
 }

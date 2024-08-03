@@ -1,12 +1,11 @@
 <script lang="ts">
     import * as m from '$lib/paraglide/messages.js';
 
-    import { getContext } from "svelte";
-    
     import CoffeeRecipeStepsDisplay from './CoffeeRecipeStepsDisplay.svelte';
     import CoffeeRecipeStepsWithTimerDisplay from './CoffeeRecipeStepsWithTimerDisplay.svelte';
 
-    const coffeeRecipeStore = getContext("coffeeRecipeStore");
+    import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';
+    const coffeeRecipeStore = getCoffeeRecipeStore();
 </script>
 
 {#if coffeeRecipeStore.coffeeRecipe}
