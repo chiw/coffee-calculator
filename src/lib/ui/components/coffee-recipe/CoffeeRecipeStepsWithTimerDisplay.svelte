@@ -44,21 +44,23 @@
             </div>
         {/if}
 
+        <ul role="list" class="divide-y divide-slate-300 py-1 ">
         {#each steps as step, index }
             {#if (StopWatchState.RUNNING === stopwatch.stopwatchState && (stopwatch.elaspedTimeInSeconds >= stepsTimeframe[index][0]) && (stopwatch.elaspedTimeInSeconds <= stepsTimeframe[index][1]) ) }
                 {#if (stopwatch.elaspedTimeInSeconds <= (stepsTimeframe[index][1] - 7) )}
-                    <div class="bg-amber-300 border border-solid  my-1 p-1">{@html step}</div>
+                    <li class="bg-gray-900 text-white  pl-2 py-2 ">{@html step}</li>
                 {:else}
-                    <div class="animate-pulse bg-amber-300 border border-solid  my-1 p-1">{@html step}</div>
+                    <li class="animate-pulse bg-gray-900 text-white  pl-2 py-2 ">{@html step}</li>
                 {/if}
             {:else}
                 {#if (StopWatchState.RUNNING === stopwatch.stopwatchState) }
-                    <div class="border border-solid my-1 p-1 text-slate-300">{@html step}</div>
+                    <li class=" pl-2 py-2  text-slate-300">{@html step}</li>
                 {:else}
-                    <div class="border border-solid my-1 p-1">{@html step}</div>
+                    <li class=" pl-2 py-2 ">{@html step}</li>
                 {/if}
             {/if}
         {/each}
+        </ul>
     {/if}
 </div>
 
