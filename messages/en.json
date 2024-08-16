@@ -14,20 +14,20 @@
     "label_reset" : "Reset",
 
     "label_harioSwitch_TetsuKasuya" : "Hario Switch (Tetsu Kasuya)",
-    "label_hario_switch_tetsu_kasuya_step_01" : "0:00 - 0:30: (<b>Valve Open</b>) Blooming stage  <br/>  pour <b>{firstPourInGrams}g</b> of water, at {firstPourTemp}°C.",
-    "label_hario_switch_tetsu_kasuya_step_02" : "0:30 - 1:15: (<b>Valve Open</b>) 1st pour <br/>  pour <b>{secondPourInGrams}g</b> of water (Total: <b>{secondPourTotal}g</b>), at {secondPourTemp}°C.",
-    "label_hario_switch_tetsu_kasuya_step_03" : "1:15 - 1:45: (<b>Valve Closed</b>) 2nd pour <br/>  pour <b>{thirdPourInGrams}g</b> of water (Total: <b>{thirdPourTotal}g</b>), at {thirdPourTemp}°C.",
-    "label_hario_switch_tetsu_kasuya_step_04" : "1:45 - 3:00: (<b>Valve Open</b>) <br/>  let the water flow until 3:00. Close the switch.",
+    "label_hario_switch_tetsu_kasuya_step_01" : "(<b>Valve Open</b>) Blooming stage  <br/>  Pour <b>{firstPourInGrams}g</b> of water, at {firstPourTemp}°C.",
+    "label_hario_switch_tetsu_kasuya_step_02" : "(<b>Valve Open</b>) 1st pour <br/>  Pour <b>{secondPourInGrams}g</b> of water (Total: <b>{secondPourTotal}g</b>), at {secondPourTemp}°C.",
+    "label_hario_switch_tetsu_kasuya_step_03" : "(<b>Valve Closed</b>) 2nd pour <br/>  Pour <b>{thirdPourInGrams}g</b> of water (Total: <b>{thirdPourTotal}g</b>), at {thirdPourTemp}°C.",
+    "label_hario_switch_tetsu_kasuya_step_04" : "(<b>Valve Open</b>) <br/>  Let the water flow until 3:00. Close the switch.",
 
     "label_harioSwitch_EmiFukahori" : "Hario Switch (Emi Fukahori)",
-    "label_hario_switch_emi_fukahori_step_01" : "0:00 - 0:30: (<b>Valve Closed</b>) Blooming stage <br/>  pour <b>{firstPourWaterInGrams}g</b> of water",
-    "label_hario_switch_emi_fukahori_step_02" : "0:30 - 1:10: (<b>Valve Open</b>) Pouring stage <br/>  pour <b>{secondPourWaterInGrams}g</b> of water (Total: <b>{secondPourTotal}g</b>) single continuous pour to the centre of the coffee bed",
-    "label_hario_switch_emi_fukahori_step_03" : "1:10 - 2:20: (<b>Valve Open</b>) <br/> let water flow until 2:20.",
+    "label_hario_switch_emi_fukahori_step_01" : "(<b>Valve Closed</b>) Blooming stage <br/>  Pour <b>{firstPourWaterInGrams}g</b> of water",
+    "label_hario_switch_emi_fukahori_step_02" : "(<b>Valve Open</b>) Pouring stage <br/>  Pour <b>{secondPourWaterInGrams}g</b> of water (Total: <b>{secondPourTotal}g</b>)<br/> Single continuous pour to the centre of the coffee bed",
+    "label_hario_switch_emi_fukahori_step_03" : "(<b>Valve Open</b>) <br/> Let water flow until 2:20.",
 
     "label_harioSwitch_OleKristianBoen": "Hario Switch (Ole Kristian Bøen)",
-    "label_hario_switch_ole_kristian_boen_step_01" : "0:00 - 0:40: (<b>Valve Closed</b>) Blooming stage <br/>  pour <b>{firstPourWaterInGrams}g</b> of water, at {firstPourTemp}°C",
-    "label_hario_switch_ole_kristian_boen_step_02" : "0:40 - 1:30: (<b>Valve Open</b>) Pouring stage <br/>  pour <b>{secondPourWaterInGrams}g</b> of water (Total: <b>{secondPourTotal}g</b>) in the centre",
-    "label_hario_switch_ole_kristian_boen_step_03" : "1:30 - 2:10: (<b>Valve Closed</b>) <br/> Pour <b>{thirdPourWaterInGrams}g</b> of water (Total: <b>{thirdPourTotal}g</b>) in a circular pattern.",
-    "label_hario_switch_ole_kristian_boen_step_04" : "2:10 - 3:15: (<b>Valve Open</b>) <br/> Let water drain through until 3:00 - 3:15."
+    "label_hario_switch_ole_kristian_boen_step_01" : "(<b>Valve Closed</b>) Blooming stage <br/>  Pour <b>{firstPourWaterInGrams}g</b> of water, at {firstPourTemp}°C",
+    "label_hario_switch_ole_kristian_boen_step_02" : "(<b>Valve Open</b>) Pouring stage <br/>  Pour <b>{secondPourWaterInGrams}g</b> of water (Total: <b>{secondPourTotal}g</b>) in the centre",
+    "label_hario_switch_ole_kristian_boen_step_03" : "(<b>Valve Closed</b>) <br/> Pour <b>{thirdPourWaterInGrams}g</b> of water (Total: <b>{thirdPourTotal}g</b>) in a circular pattern.",
+    "label_hario_switch_ole_kristian_boen_step_04" : "(<b>Valve Open</b>) <br/> Let water drain through until 3:00 - 3:15."
 
 }

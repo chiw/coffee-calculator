@@ -40,4 +40,11 @@ export class HarioSwitchOleKristianBoenCoffeeRecipeSteps extends CoffeeReipeStep
         [90, 130],
         [130, 195]
     ];
+
+    public stepsTimeframeDisplay: string[][] = [
+        ['0:00', '0:40'],
+        ['0:40', '1:30'],
+        ['1:30', '2:10'],
+        ['2:10', '3:15']
+    ];
 }

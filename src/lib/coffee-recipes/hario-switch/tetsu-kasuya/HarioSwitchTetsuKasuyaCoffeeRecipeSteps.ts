@@ -38,5 +38,12 @@ export class HarioSwitchTetsuKasuyaCoffeeRecipeSteps extends CoffeeReipeSteps {
         [30, 75], 
         [75, 105], 
         [105, 180]
-    ];   
+    ];
+
+    public stepsTimeframeDisplay: string[][] = [
+        ['0:00', '0:30'],
+        ['0:30', '1:15'],
+        ['1:15', '1:45'],
+        ['1:45', '3:00']
+    ]
 }

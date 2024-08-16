@@ -35,4 +35,10 @@ export class HarioSwitchEmiFukahoriCoffeeRecipeSteps extends CoffeeReipeSteps {
         [30, 70], 
         [70, 140]
     ];
+
+    public stepsTimeframeDisplay: string[][] = [
+        ['0:00', '0:30'],
+        ['0:30', '1:10'],
+        ['1:10', '2:20']
+    ];
 }

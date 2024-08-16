@@ -6,6 +6,9 @@
 
     import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';
     const coffeeRecipeStore = getCoffeeRecipeStore();
+
+    import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch';
+    const stopwatch: StopWatchStore = getStopWatchStore();
 </script>
 
 {#if coffeeRecipeStore.coffeeRecipe}
@@ -13,20 +16,25 @@
     <div class="text-xl font-bold italic mt-3">{m.label_receipe_parameters()}</div>
 
     <div class="flex flex-row mt-1">
-        <div class="w-52 font-semibold">{m.label_coffee_bean()}</div>        
-        <button class="w-7 h-7 rounded-full border bg-slate-200 hover:bg-slate-300 font-bold" onclick={() => coffeeRecipeStore.beanInGrams-=1}>-</button>
-        <input class="ml-2 mr-1 border border-slate-200 max-w-10" bind:value={coffeeRecipeStore.beanInGrams} />         
-        <div class="mr-2">(g)</div>
-        <button class="w-7 h-7 rounded-full border bg-slate-200 hover:bg-slate-300 font-bold" onclick={() => coffeeRecipeStore.beanInGrams+=1}>+</button>
+        <div class="w-52 font-semibold">{m.label_coffee_bean()}</div>
+        {#if StopWatchState.RUNNING != stopwatch.stopwatchState}
+            <button class="w-7 h-7 rounded-full border bg-slate-200 hover:bg-slate-300 font-bold" onclick={() => coffeeRecipeStore.beanInGrams-=1}>-</button>
+            <input class="ml-2 mr-1 border border-slate-200 max-w-10" bind:value={coffeeRecipeStore.beanInGrams} /> 
+            <div class="mr-2">(g)</div>
+            <button class="w-7 h-7 rounded-full border bg-slate-200 hover:bg-slate-300 font-bold" onclick={() => coffeeRecipeStore.beanInGrams+=1}>+</button>
+        {:else}
+            <div class="ml-2 mr-1 border-none border-slate-200 max-w-10">{coffeeRecipeStore.beanInGrams}(g)</div>
+        {/if}
+        
     </div>
     <div class="flex flex-row mt-1">
-        <div class="w-52 font-semibold">{m.label_coffee_to_water_ratio()}</div>        
+        <div class="w-52 font-semibold">{m.label_coffee_to_water_ratio()}</div>
         <div class="mx-2 border-none border-slate-200 w-1">1:</div>
          <div>{coffeeRecipeStore.coffeeParams.coffeeToWaterRatio}</div>
     </div>
 
     <div class="flex flex-row mt-1">
-        <div class="w-52 font-semibold">{m.label_water()}</div>        
+        <div class="w-52 font-semibold">{m.label_water()}</div>
          <div>{coffeeRecipeStore.coffeeParams.waterInGrams}</div>
         <div class="ml-1">(g)</div>
     </div>
@@ -34,7 +42,9 @@
     <div class="mt-5">
         {#if coffeeRecipeStore.coffeeRecipeSteps.isTimerRecipe}
             <CoffeeRecipeStepsWithTimerDisplay steps={coffeeRecipeStore.coffeeRecipeSteps.steps} 
-                stepsTimeframe={coffeeRecipeStore.coffeeRecipeSteps.stepsTimeframe} timerInSeconds={coffeeRecipeStore.coffeeRecipeSteps.timerInSeconds} />
+                stepsTimeframe={coffeeRecipeStore.coffeeRecipeSteps.stepsTimeframe}
+                stepsTimeframeDisplay={coffeeRecipeStore.coffeeRecipeSteps.stepsTimeframeDisplay} 
+                timerInSeconds={coffeeRecipeStore.coffeeRecipeSteps.timerInSeconds} />
         {:else}
             <div class="text-xl font-bold italic">{m.label_steps()}</div>
             <CoffeeRecipeStepsDisplay steps={coffeeRecipeStore.coffeeRecipeSteps.steps} />

@@ -13,6 +13,7 @@ export abstract class CoffeeReipeSteps {
 
     public _steps: string[] = [];
     public stepsTimeframe: number[][] = [];
+    public stepsTimeframeDisplay: string[][] = [];
     public isTimerRecipe: boolean = false;
     public timerInSeconds = 0;
 

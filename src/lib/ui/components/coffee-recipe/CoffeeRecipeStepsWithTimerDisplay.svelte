@@ -3,10 +3,13 @@
 
     import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch';
 
-    let { steps, stepsTimeframe, timerInSeconds } = $props();
+    import StepTimeFrameDisplay from './StepTimeFrameDisplay.svelte';
+
+    let { steps, stepsTimeframe, stepsTimeframeDisplay, timerInSeconds } = $props();
 
     console.log('steps: ', steps);
     console.log('stepsTimeframe: ', stepsTimeframe);
+    console.log('stepsTimeframeDisplay: ', stepsTimeframeDisplay);
     console.log('timerInSeconds: ', timerInSeconds);
 
     let startBtnClicked = $state(false);
@@ -44,23 +47,35 @@
             </div>
         {/if}
 
-        <ul role="list" class="divide-y divide-slate-300 py-1 ">
+        <div class="flex flex-col divide-y divide-slate-300 py-1 ">
         {#each steps as step, index }
             {#if (StopWatchState.RUNNING === stopwatch.stopwatchState && (stopwatch.elaspedTimeInSeconds >= stepsTimeframe[index][0]) && (stopwatch.elaspedTimeInSeconds <= stepsTimeframe[index][1]) ) }
                 {#if (stopwatch.elaspedTimeInSeconds <= (stepsTimeframe[index][1] - 7) )}
-                    <li class="bg-gray-900 text-white  pl-2 py-2 ">{@html step}</li>
+                    <div class="bg-gray-900 text-white  pl-2 py-2 flex">
+                        <div><StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} /></div>
+                        <div>{@html step}</div>
+                    </div>
                 {:else}
-                    <li class="animate-pulse bg-gray-900 text-white  pl-2 py-2 ">{@html step}</li>
+                    <div class="animate-pulse bg-gray-900 text-white  pl-2 py-2 flex">
+                        <div><StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} /></div>
+                        <div>{@html step}</div>
+                    </div>
                 {/if}
             {:else}
                 {#if (StopWatchState.RUNNING === stopwatch.stopwatchState) }
-                    <li class=" pl-2 py-2  text-slate-300">{@html step}</li>
+                    <div class=" pl-2 py-2  text-slate-300 flex">
+                        <div><StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} /></div>
+                        <div>{@html step}</div>
+                    </div>
                 {:else}
-                    <li class=" pl-2 py-2 ">{@html step}</li>
+                    <div class=" pl-2 py-2 flex">
+                        <div><StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} /></div>
+                        <div>{@html step}</div>
+                    </div>
                 {/if}
             {/if}
         {/each}
-        </ul>
+        </div>
     {/if}
 </div>
 
