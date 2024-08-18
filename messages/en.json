@@ -28,6 +28,10 @@
     "label_hario_switch_ole_kristian_boen_step_01" : "(<b>Valve Closed</b>) Blooming stage <br/>  Pour <b>{firstPourWaterInGrams}g</b> of water, at {firstPourTemp}°C",
     "label_hario_switch_ole_kristian_boen_step_02" : "(<b>Valve Open</b>) Pouring stage <br/>  Pour <b>{secondPourWaterInGrams}g</b> of water (Total: <b>{secondPourTotal}g</b>) in the centre",
     "label_hario_switch_ole_kristian_boen_step_03" : "(<b>Valve Closed</b>) <br/> Pour <b>{thirdPourWaterInGrams}g</b> of water (Total: <b>{thirdPourTotal}g</b>) in a circular pattern.",
-    "label_hario_switch_ole_kristian_boen_step_04" : "(<b>Valve Open</b>) <br/> Let water drain through until 3:00 - 3:15."
+    "label_hario_switch_ole_kristian_boen_step_04" : "(<b>Valve Open</b>) <br/> Let water drain through until 3:00 - 3:15.",
 
+    "label_harioSwitch_CoffeeChronicler" : "Hario Switch (Coffee Chronicler) Sweet Version",
+    "label_hario_switch_coffee_chronicler_step_01" : "(<b>Valve Open</b>) <br/>  First pour 50% (<b>{firstPourWaterInGrams}g</b>) of water",
+    "label_hario_switch_coffee_chronicler_step_02" : "(<b>Valve Closed</b>) <br/>  First pour 50% (<b>{secondPourWaterInGrams}g</b>, Total: <b>{secondPourTotal}g</b>) of water",
+    "label_hario_switch_coffee_chronicler_step_03" : "(<b>Valve Open</b>) <br/>  Let it drain"
 }
