@@ -18,10 +18,10 @@
     <div class="flex flex-row mt-1">
         <div class="w-52 font-semibold">{m.label_coffee_bean()}</div>
         {#if StopWatchState.RUNNING != stopwatch.stopwatchState}
-            <button class="w-7 h-7 rounded-full border bg-slate-200 hover:bg-slate-300 font-bold" onclick={() => coffeeRecipeStore.beanInGrams-=1}>-</button>
+            <button class="w-7 h-7 rounded-full border border-slate-400 text-black hover:bg-black hover:text-white font-bold" onclick={() => coffeeRecipeStore.beanInGrams-=1}>&minus;</button>
             <input class="ml-2 mr-1 border border-slate-200 max-w-10" bind:value={coffeeRecipeStore.beanInGrams} /> 
             <div class="mr-2">(g)</div>
-            <button class="w-7 h-7 rounded-full border bg-slate-200 hover:bg-slate-300 font-bold" onclick={() => coffeeRecipeStore.beanInGrams+=1}>+</button>
+            <button class="w-7 h-7 rounded-full border border-slate-400 text-black hover:bg-black hover:text-white font-bold" onclick={() => coffeeRecipeStore.beanInGrams+=1}>&plus;</button>
         {:else}
             <div class="ml-2 mr-1 border-none border-slate-200 max-w-10">{coffeeRecipeStore.beanInGrams}(g)</div>
         {/if}
@@ -35,7 +35,7 @@
 
     <div class="flex flex-row mt-1">
         <div class="w-52 font-semibold">{m.label_water()}</div>
-         <div>{coffeeRecipeStore.coffeeParams.waterInGrams}</div>
+         <div class="ml-2 mr-1 border-none border-slate-200 max-w-10">{coffeeRecipeStore.coffeeParams.waterInGrams}</div>
         <div class="ml-1">(g)</div>
     </div>
 
