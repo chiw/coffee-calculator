@@ -1,7 +1,5 @@
 <script lang="ts">
-
     let { stepsTimeframeDisplay } = $props();
-
 </script>
 
 <div class="flex flex-col flex-wrap w-12">

@@ -8,7 +8,7 @@ import type { PourParam } from '../../PourParam.type';
 export class HarioSwitchOleKristianBoenCoffeeRecipeSteps extends CoffeeReipeSteps {
     
     constructor(coffeeParams: CoffeeParams) {
-        super(CoffeeRecipeId.HarioSwitch_OleKristianBoen, coffeeParams);
+        super(CoffeeRecipeId.HarioSwitch_OleKristianBoen, coffeeParams, [40, 50, 40, 65]);
         console.log('HarioSwitchOleKristianBoenCoffeeRecipeSteps constructor coffeeRecipeId: ', this.coffeeRecipeId, ' coffeeParams: ', this.coffeeParams);
     }
 
@@ -32,19 +32,5 @@ export class HarioSwitchOleKristianBoenCoffeeRecipeSteps extends CoffeeReipeStep
         m.label_hario_switch_ole_kristian_boen_step_02( {secondPourWaterInGrams: this.numDisplay(this.secondPourWaterInGrams), secondPourTotal: this.numDisplay(this.secondPourTotal) }),
         m.label_hario_switch_ole_kristian_boen_step_03( {thirdPourWaterInGrams: this.numDisplay(this.thirdPourWaterInGrams), thirdPourTotal: this.numDisplay(this.thirdPourTotal)}),
         m.label_hario_switch_ole_kristian_boen_step_04()
-    ];
-
-    stepsTimeframe: number[][] = [
-        [0, 40], 
-        [40, 90], 
-        [90, 130],
-        [130, 195]
-    ];
-
-    public stepsTimeframeDisplay: string[][] = [
-        ['0:00', '0:40'],
-        ['0:40', '1:30'],
-        ['1:30', '2:10'],
-        ['2:10', '3:15']
     ];
 }

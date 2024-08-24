@@ -2,6 +2,7 @@ import type { CoffeeRecipeId } from "./CoffeeRecipeConstants";
 import type { PourParam } from "./PourParam.type";
 import type { CoffeeParams } from "./CoffeeParams";
 import { displayNumber } from "$lib/utils/NumberDisplayUtils";
+import { toHHMMSS } from "$lib/utils/TimeUtils";
 export abstract class CoffeeReipeSteps {
 
     public coffeeRecipeId: CoffeeRecipeId;
@@ -11,15 +12,34 @@ export abstract class CoffeeReipeSteps {
     public pourParams: PourParam[] = [];
 
     public _steps: string[] = [];
+    public stepsDurationInSeconds: number[] = [];
     public stepsTimeframe: number[][] = [];
     public stepsTimeframeDisplay: string[][] = [];
     public isTimerRecipe: boolean = false;
     public timerInSeconds = 0;
 
-    constructor(coffeeRecipeId: CoffeeRecipeId, coffeeParams: CoffeeParams) {        
+    constructor(coffeeRecipeId: CoffeeRecipeId, coffeeParams: CoffeeParams, stepsDurationInSeconds: number[]) {
+        this.stepsDurationInSeconds = stepsDurationInSeconds;
         this.coffeeRecipeId = coffeeRecipeId;
         this.coffeeParams = coffeeParams;
+        this.initStepsTimeframe();
     }
 
     numDisplay = (number: number) => displayNumber(number);
+
+    initStepsTimeframe = () => {
+        let from: number = 0;
+        this.stepsDurationInSeconds.map(duration => {
+            let timeframe = this.calculateTimeframes(from, duration);
+            this.stepsTimeframe.push(timeframe);
+            from = timeframe[1];
+
+            let stepsTimeframeDisplay = [toHHMMSS(timeframe[0]), toHHMMSS(timeframe[1])];
+            this.stepsTimeframeDisplay.push(stepsTimeframeDisplay);
+        })
+    }
+
+    calculateTimeframes = (from: number, duration: number) : number[] => {
+        return [from, from + duration];
+    }
 }
