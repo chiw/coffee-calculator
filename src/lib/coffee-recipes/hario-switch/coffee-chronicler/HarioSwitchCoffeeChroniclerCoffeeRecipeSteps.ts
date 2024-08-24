@@ -20,13 +20,13 @@ export class HarioSwitchCoffeeChroniclerCoffeeRecipeSteps extends CoffeeReipeSte
         { waterPercentage: 50, waterTemp: 93}
     ];
 
-    firstPourWaterInGrams: number = calculatePourWaterInGrams(this.coffeeParams.waterInGrams, this.pourParams[0]);
-    secondPourWaterInGrams: number = calculatePourWaterInGrams(this.coffeeParams.waterInGrams, this.pourParams[1]);
-    secondPourTotal: number = this.coffeeParams.waterInGrams;
+    firstPourWaterInGrams = calculatePourWaterInGrams(this.coffeeParams.waterInGrams, this.pourParams[0]);
+    secondPourWaterInGrams = calculatePourWaterInGrams(this.coffeeParams.waterInGrams, this.pourParams[1]);
+    secondPourTotal = this.coffeeParams.waterInGrams;
 
     steps: string[] = [
-        m.label_hario_switch_coffee_chronicler_step_01( {firstPourWaterInGrams:  this.firstPourWaterInGrams }),
-        m.label_hario_switch_coffee_chronicler_step_02( {secondPourWaterInGrams: this.secondPourWaterInGrams, secondPourTotal: this.secondPourTotal }),
+        m.label_hario_switch_coffee_chronicler_step_01( {firstPourWaterInGrams:  this.numDisplay(this.firstPourWaterInGrams) }),
+        m.label_hario_switch_coffee_chronicler_step_02( {secondPourWaterInGrams: this.numDisplay(this.secondPourWaterInGrams), secondPourTotal: this.numDisplay(this.secondPourTotal) }),
         m.label_hario_switch_coffee_chronicler_step_03()
     ];
 

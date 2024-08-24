@@ -11,7 +11,6 @@
 </script>
 
 <div class="flex flex-row ">
-    <div class="text-xl font-bold italic mr-3">{m.label_recipe()}</div>
     {#if StopWatchState.RUNNING === stopwatch.stopwatchState}
         <div>{ CoffeeRecipesChoices.find((c) => c.id == coffeeRecipeStore.recipeId)?.displayLabelId }</div>
     {:else}

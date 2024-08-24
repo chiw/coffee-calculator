@@ -3,6 +3,8 @@
 
     import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch';
 
+    import RecipeParametersCardDisplay from './RecipeParametersCardDisplay.svelte';
+
     import StepTimeFrameDisplay from './StepTimeFrameDisplay.svelte';
 
     let { steps, stepsTimeframe, stepsTimeframeDisplay, timerInSeconds } = $props();
@@ -31,22 +33,30 @@
 
 </script>
 
-<div class="flex flex-col mt-2 mb-1">
-    {#if steps}
+<div class="flex flex-row">
+    <div class="m-1 p-2 w-[6rem]">
         {#if startBtnClicked}
             {#if StopWatchState.STOP === stopwatch.stopwatchState}
                 <div>
-                    <button class="w-32 h-9 bg-black hover:bg-slate-600 text-white rounded font-bold" onclick={resetTimer}>{m.label_reset()}</button>
+                    <button class="w-20 h-9 bg-black hover:bg-slate-600 text-white rounded font-bold" onclick={resetTimer}>{m.label_reset()}</button>
                 </div>
             {:else}
-                <div class="font-semibold text-3xl">{stopwatch.formattedElaspedTime}</div>
+                <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
             {/if}
         {:else}
             <div>
-                <button class="w-32 h-9 bg-black hover:bg-slate-600 text-white rounded font-bold" onclick={startTimer}>{m.label_start_recipe()}</button>
+                <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
+                <button class="w-20 h-9 mt-3 bg-black hover:bg-slate-600 text-white rounded font-bold" onclick={startTimer}>{m.label_start_recipe()}</button>
             </div>
         {/if}
+    </div>
+    <div>    
+        <RecipeParametersCardDisplay />
+    </div>
+</div>
 
+<div class="flex flex-col mt-2 mb-1">
+    {#if steps}
         <div class="flex flex-col divide-y divide-slate-300 py-1 ">
         {#each steps as step, index }
             {#if (StopWatchState.RUNNING === stopwatch.stopwatchState && (stopwatch.elaspedTimeInSeconds >= stepsTimeframe[index][0]) && (stopwatch.elaspedTimeInSeconds <= stepsTimeframe[index][1]) ) }

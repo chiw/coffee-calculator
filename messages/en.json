@@ -2,9 +2,9 @@
     "$schema": "https://inlang.com/schema/inlang-message-format",
 
     "label_receipe_parameters" : "Parameters",
-    "label_coffee_bean" : "Coffee Bean:",
-    "label_coffee_to_water_ratio" : "Coffee to Water Ratio:",
-    "label_water" : "Water:",
+    "label_coffee_bean" : "Beans",
+    "label_coffee_to_water_ratio" : "Ratio",
+    "label_water" : "Water",
     "label_recipe": "Recipe",
     "label_steps" : "Steps",
     "label_get_recipe" : "Get Recipe",

@@ -1,8 +1,7 @@
 import type { CoffeeRecipeId } from "./CoffeeRecipeConstants";
 import type { PourParam } from "./PourParam.type";
 import type { CoffeeParams } from "./CoffeeParams";
-
-
+import { displayNumber } from "$lib/utils/NumberDisplayUtils";
 export abstract class CoffeeReipeSteps {
 
     public coffeeRecipeId: CoffeeRecipeId;
@@ -21,4 +20,6 @@ export abstract class CoffeeReipeSteps {
         this.coffeeRecipeId = coffeeRecipeId;
         this.coffeeParams = coffeeParams;
     }
+
+    numDisplay = (number: number) => displayNumber(number);
 }

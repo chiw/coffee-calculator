@@ -1,5 +1,9 @@
-import CoffeeRecipeDisplay from "./CoffeeRecipeDisplay.svelte";
-import CoffeeRecipeSelect from "./CoffeeRecipeSelect.svelte";
+import RecipeSelect from "./RecipeSelect.svelte";
+import StepsDisplay from "./StepsDisplay.svelte";
+import StepsWithTimerDisplay from "./StepsWithTimerDisplay.svelte";
+import RecipeReferencesDisplay from "./RecipeReferencesDisplay.svelte";
 
-export { CoffeeRecipeDisplay };
-export { CoffeeRecipeSelect };
+export { RecipeSelect };
+export { StepsDisplay };
+export { StepsWithTimerDisplay };
+export { RecipeReferencesDisplay };
