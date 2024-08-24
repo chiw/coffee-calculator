@@ -14,7 +14,7 @@
     {#if StopWatchState.RUNNING === stopwatch.stopwatchState}
         <div>{ CoffeeRecipesChoices.find((c) => c.id == coffeeRecipeStore.recipeId)?.displayLabelId }</div>
     {:else}
-        <select class="border border-slate-200" bind:value={coffeeRecipeStore.recipeId}>
+        <select class="border border-slate-200 w-full" bind:value={coffeeRecipeStore.recipeId}>
             {#each CoffeeRecipesChoices as option}
                 <option value={option.id}>{option.displayLabelId}</option>
             {/each}
