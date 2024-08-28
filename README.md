@@ -1,7 +1,8 @@
 # coffee-calculator
 
 Github page:
-- https://chiw.github.io/coffee-calculator/
+- https://chiw.github.io/coffee-calculator/recipes
+- https://chiw.github.io/coffee-calculator/zh-hk/recipes
 
 # create-svelte
 
