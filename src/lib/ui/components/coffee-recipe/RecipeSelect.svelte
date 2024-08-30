@@ -12,7 +12,7 @@
 
 <div class="flex flex-row ">
     {#if StopWatchState.RUNNING === stopwatch.stopwatchState}
-        <div>{ CoffeeRecipesChoices.find((c) => c.id == coffeeRecipeStore.recipeId)?.displayLabelId }</div>
+        <div>{ CoffeeRecipesChoices.find((c) => c.id == coffeeRecipeStore.recipeId)?.displayLabelId() }</div>
     {:else}
         <select class="border border-slate-200 w-full h-[2rem]" bind:value={coffeeRecipeStore.recipeId}>
             {#each CoffeeRecipesChoices as option}
