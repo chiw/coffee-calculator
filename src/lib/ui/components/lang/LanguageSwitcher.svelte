@@ -9,8 +9,6 @@
 
     import { Globe } from 'lucide-svelte';
 
-    import { clickOutside } from '$lib/utils/ClickOutside';
-
     /**
      * @param { import("$lib/paraglide/runtime").AvailableLanguageTag } newLanguage
      */
@@ -20,6 +18,7 @@
         goto( localisedPath)
     }
 
+    let container;
     let showDropdown: boolean = false;
 
     const toggleDropdown = () => {
@@ -36,20 +35,35 @@
         "en": m.label_locale_en,
         "zh-hk": m.label_locale_zh_hk
     }
+
+    function onWindowClick(e) {
+		if (container.contains(e.target) == false) {
+            showDropdown = false;
+        }
+	}
 </script>
 
+<svelte:window on:click={onWindowClick} />
 
-<div id="dropdown-button" onclick="{toggleDropdown}"  class="w-[2rem] h-[2rem] border border-gray-400 rounded mx-1 px-1 py-1 cursor-pointer flex justify-between">
-    <Globe/>
-</div>
+<div bind:this={container}>
+    <div id="dropdown-button" onclick="{toggleDropdown}"  class="w-[2rem] h-[2rem] border border-gray-400 rounded mx-1 px-1 py-1 cursor-pointer flex justify-between">
+        <Globe/>
+    </div>
 
-{#if showDropdown}
-<div id="dropdown-menu" class="absolute top-50 w-400 border border-gray-300 bg-white shadow-md mt-2">
-    {#each availableLanguageTags as lang}
-        <div class="z-10 py-2 px-2 cursor-pointer hover:bg-gray-100" use:clickOutside onoutclick={closeDropdown} onclick={switchToLanguage(lang)}>{locale_labels[lang]()}</div>
-    {/each}
+    {#if showDropdown}
+    <div id="dropdown-menu" class="absolute right-0 top-50 w-48  border border-gray-300 bg-white shadow-md mt-2" >
+        {#each availableLanguageTags as lang}
+            <!-- <div class="z-10 py-2 px-2 cursor-pointer hover:bg-gray-100" use:clickOutside onoutclick={closeDropdown} onclick={switchToLanguage(lang)}>{locale_labels[lang]()}</div> -->
+            <a class="block px-4 py-2 text-gray-800 hover:bg-gray-300 "
+                href={i18n.route($page.url.pathname)}
+                hreflang={lang}
+                aria-current={lang === languageTag() ? "page" : undefined}>
+                {locale_labels[lang]()}
+            </a>
+        {/each}
+    </div>
+    {/if}
 </div>
-{/if}
 
 <!-- <select on:change={e => switchToLanguage(/** @type {any} */ (e).target.value)}>
     {#each availableLanguageTags as langTag}

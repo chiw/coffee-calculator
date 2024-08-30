@@ -1,8 +1,8 @@
 {
     "$schema": "https://inlang.com/schema/inlang-message-format",
 
-    "label_locale_en" : "En",
-    "label_locale_zh_hk" : "ZH",
+    "label_locale_en" : "English",
+    "label_locale_zh_hk" : "Chinese",
 
     "label_receipe_parameters" : "Parameters",
     "label_coffee_bean" : "Beans",

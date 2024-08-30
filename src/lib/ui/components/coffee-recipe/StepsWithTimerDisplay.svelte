@@ -35,7 +35,16 @@
 
 <div class="flex flex-row">
     <div class="m-1 p-2 w-[6rem]">
-        {#if startBtnClicked}
+        {#if StopWatchState.NEW === stopwatch.stopwatchState}
+            <div>
+                <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
+                <button class="w-20 h-9 mt-3 bg-black hover:bg-slate-600 text-white rounded font-bold" onclick={startTimer}>{m.label_start_recipe()}</button>
+            </div>
+       {:else}
+            <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
+        {/if}
+
+        <!-- {#if startBtnClicked}
             {#if StopWatchState.STOP === stopwatch.stopwatchState}
                 <div>
                     <button class="w-20 h-9 bg-black hover:bg-slate-600 text-white rounded font-bold" onclick={resetTimer}>{m.label_reset()}</button>
@@ -48,7 +57,7 @@
                 <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
                 <button class="w-20 h-9 mt-3 bg-black hover:bg-slate-600 text-white rounded font-bold" onclick={startTimer}>{m.label_start_recipe()}</button>
             </div>
-        {/if}
+        {/if} -->
     </div>
     <div>    
         <RecipeParametersCardDisplay />
