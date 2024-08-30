@@ -26,10 +26,22 @@ export class HarioSwitchTetsuKasuyaCoffeeRecipeSteps extends CoffeeReipeSteps {
     secondPourTotal = this.firstPourInGrams + this.secondPourInGrams;
     thirdPourInGrams: number = this.coffeeParams.waterInGrams - this.firstPourInGrams - this.secondPourInGrams;
 
-    steps: string[] = [
-        m.label_hario_switch_tetsu_kasuya_step_01( {firstPourInGrams: this.numDisplay(this.firstPourInGrams), firstPourTemp: this.pourParams[0].waterTemp }),
-        m.label_hario_switch_tetsu_kasuya_step_02( {secondPourInGrams: this.numDisplay(this.secondPourInGrams), secondPourTotal: this.numDisplay(this.secondPourTotal), secondPourTemp: this.pourParams[1].waterTemp }),
-        m.label_hario_switch_tetsu_kasuya_step_03( {thirdPourInGrams: this.thirdPourInGrams, thirdPourTotal: this.numDisplay(this.coffeeParams.waterInGrams), thirdPourTemp: this.pourParams[2].waterTemp }),
-        m.label_hario_switch_tetsu_kasuya_step_04()
-    ];
+    steps = [
+        { 
+            msgKey: m.label_hario_switch_tetsu_kasuya_step_01, 
+            params: {firstPourInGrams: this.numDisplay(this.firstPourInGrams), firstPourTemp: this.pourParams[0].waterTemp }
+        },
+        {
+            msgKey: m.label_hario_switch_tetsu_kasuya_step_02,
+            params: {secondPourInGrams: this.numDisplay(this.secondPourInGrams), secondPourTotal: this.numDisplay(this.secondPourTotal), secondPourTemp: this.pourParams[1].waterTemp }
+        },
+        {
+            msgKey: m.label_hario_switch_tetsu_kasuya_step_03,
+            params: {thirdPourInGrams: this.thirdPourInGrams, thirdPourTotal: this.numDisplay(this.coffeeParams.waterInGrams), thirdPourTemp: this.pourParams[2].waterTemp }
+        },
+        {
+            msgKey: m.label_hario_switch_tetsu_kasuya_step_04,
+            params: {}
+        }
+    ]
 }

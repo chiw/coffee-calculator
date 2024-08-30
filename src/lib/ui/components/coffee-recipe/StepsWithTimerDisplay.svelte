@@ -63,24 +63,24 @@
                 {#if (stopwatch.elaspedTimeInSeconds <= (stepsTimeframe[index][1] - 7) )}
                     <div class="bg-gray-900 text-white  pl-2 py-2 flex">
                         <div><StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} /></div>
-                        <div>{@html step}</div>
+                        <div>{@html step.msgKey(step.params)}</div>
                     </div>
                 {:else}
                     <div class="animate-pulse bg-gray-900 text-white  pl-2 py-2 flex">
                         <div><StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} /></div>
-                        <div>{@html step}</div>
+                        <div>{@html step.msgKey(step.params)}</div>
                     </div>
                 {/if}
             {:else}
                 {#if (StopWatchState.RUNNING === stopwatch.stopwatchState) }
                     <div class=" pl-2 py-2  text-slate-300 flex">
                         <div><StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} /></div>
-                        <div>{@html step}</div>
+                        <div>{@html step.msgKey(step.params)}</div>
                     </div>
                 {:else}
                     <div class=" pl-2 py-2 flex">
                         <div><StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} /></div>
-                        <div>{@html step}</div>
+                        <div>{@html step.msgKey(step.params)}</div>
                     </div>
                 {/if}
             {/if}

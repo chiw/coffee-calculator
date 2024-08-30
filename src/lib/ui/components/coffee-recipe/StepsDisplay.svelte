@@ -9,7 +9,7 @@
 <div class="flex flex-col divide-y divide-slate-300 py-1">
     {#if steps}    
         {#each steps as step, i }
-            <div class="my-1 p-1">{@html step}</div>
+            <div class="my-1 p-1">{@html step.msgKey(step.params)}</div>
         {/each}
     {/if}
 </div>

@@ -27,10 +27,22 @@ export class HarioSwitchOleKristianBoenCoffeeRecipeSteps extends CoffeeReipeStep
     thirdPourWaterInGrams: number = calculatePourWaterInGrams(this.coffeeParams.waterInGrams, this.pourParams[2]);
     thirdPourTotal: number = this.coffeeParams.waterInGrams;
 
-    steps: string[] = [
-        m.label_hario_switch_ole_kristian_boen_step_01( {firstPourWaterInGrams:  this.numDisplay(this.firstPourWaterInGrams), firstPourTemp: this.pourParams[0].waterTemp }),
-        m.label_hario_switch_ole_kristian_boen_step_02( {secondPourWaterInGrams: this.numDisplay(this.secondPourWaterInGrams), secondPourTotal: this.numDisplay(this.secondPourTotal) }),
-        m.label_hario_switch_ole_kristian_boen_step_03( {thirdPourWaterInGrams: this.numDisplay(this.thirdPourWaterInGrams), thirdPourTotal: this.numDisplay(this.thirdPourTotal)}),
-        m.label_hario_switch_ole_kristian_boen_step_04()
-    ];
+    steps = [
+        { 
+            msgKey: m.label_hario_switch_ole_kristian_boen_step_01, 
+            params: {firstPourWaterInGrams:  this.numDisplay(this.firstPourWaterInGrams), firstPourTemp: this.pourParams[0].waterTemp }
+        },
+        {
+            msgKey: m.label_hario_switch_ole_kristian_boen_step_02,
+            params: {secondPourWaterInGrams: this.numDisplay(this.secondPourWaterInGrams), secondPourTotal: this.numDisplay(this.secondPourTotal) }
+        },
+        {
+            msgKey: m.label_hario_switch_ole_kristian_boen_step_03,
+            params: {thirdPourWaterInGrams: this.numDisplay(this.thirdPourWaterInGrams), thirdPourTotal: this.numDisplay(this.thirdPourTotal)}
+        },
+        {
+            msgKey: m.label_hario_switch_ole_kristian_boen_step_04,
+            params: {}
+        }
+    ]
 }

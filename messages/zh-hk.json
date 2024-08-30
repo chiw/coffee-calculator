@@ -1,6 +1,9 @@
 {
     "$schema": "https://inlang.com/schema/inlang-message-format",
 
+    "label_locale_en" : "英",
+    "label_locale_zh_hk" : "中",
+
     "label_receipe_parameters" : "沖煮參數",
     "label_coffee_bean" : "咖啡豆",
     "label_coffee_to_water_ratio" : "粉水比",
