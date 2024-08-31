@@ -1,13 +1,15 @@
 <script lang="ts">
     import * as m from '$lib/paraglide/messages.js';
 
+    import 'iconify-icon';
+
     import { availableLanguageTags, languageTag } from "$lib/paraglide/runtime";
     import { i18n } from "$lib/i18n";
 	import { goto } from "$app/navigation"
     import { page } from "$app/stores";
 	import { get } from "svelte/store"
 
-    import { Globe } from 'lucide-svelte';
+    // import { Globe } from 'lucide-svelte';
 
     /**
      * @param { import("$lib/paraglide/runtime").AvailableLanguageTag } newLanguage
@@ -47,7 +49,10 @@
 
 <div bind:this={container}>
     <div id="dropdown-button" onclick="{toggleDropdown}"  class="w-[2rem] h-[2rem] border border-gray-400 rounded mx-1 px-1 py-1 cursor-pointer flex justify-between">
-        <Globe/>
+        <!-- <Globe/> -->
+        <iconify-icon icon="material-symbols-light:language"
+            class="text-[25px] hover:text-slate-600">
+        </iconify-icon>
     </div>
 
     {#if showDropdown}

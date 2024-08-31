@@ -15,6 +15,7 @@
 
     "label_start_recipe" : "開始沖煮",
     "label_reset" : "重設計時",
+    "label_stop" : "停止計時",
 
     "label_harioSwitch_TetsuKasuya" : "Hario Switch (粕谷哲)",
     "label_hario_switch_tetsu_kasuya_step_01" : "(<b>打開閥門</b>) 悶蒸階段 <br/>  水量 <b>{firstPourInGrams}g</b>, 水溫 {firstPourTemp}°C",

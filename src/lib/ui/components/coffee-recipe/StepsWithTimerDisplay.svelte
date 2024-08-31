@@ -1,6 +1,8 @@
 <script lang="ts">
     import * as m from '$lib/paraglide/messages.js';
 
+    import 'iconify-icon';
+
     import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch';
 
     import RecipeParametersCardDisplay from './RecipeParametersCardDisplay.svelte';
@@ -36,12 +38,27 @@
 <div class="flex flex-row">
     <div class="m-1 p-2 w-[6rem]">
         {#if StopWatchState.NEW === stopwatch.stopwatchState}
-            <div>
+            <div class="flex flex-col items-center">
                 <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
-                <button class="w-20 h-9 mt-3 bg-black hover:bg-slate-600 text-white rounded font-bold" onclick={startTimer}>{m.label_start_recipe()}</button>
+                <!-- <button class="w-20 h-9 mt-3 bg-black hover:bg-slate-600 text-white rounded font-bold" onclick={startTimer}>
+                    <span>{m.label_start_recipe()}</span>
+                </button> -->
+                <iconify-icon icon="material-symbols-light:play-circle-outline-rounded"
+                    class="text-[40px] hover:text-slate-600"
+                    onclick={startTimer}>
+                </iconify-icon>
             </div>
        {:else}
-            <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
+            <div class="flex flex-col items-center">
+                <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
+                <!-- <button class="w-20 h-9 mt-3 bg-black hover:bg-slate-600 text-white rounded font-bold" onclick={resetTimer}>
+                    <span>{m.label_stop()}</span>
+                </button> -->
+                <iconify-icon icon="material-symbols-light:stop-circle-outline-rounded"
+                    class="text-[40px] hover:text-slate-600" 
+                    onclick={resetTimer}>
+                </iconify-icon>
+            </div>
         {/if}
 
         <!-- {#if startBtnClicked}
@@ -98,3 +115,21 @@
     {/if}
 </div>
 
+<style>
+    /* iconify-icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+    } */
+
+     /* .play_stop_btn {
+        display: inline-block;
+        color: black;
+        font-size: 35px;
+     }
+
+     .play_stop_btn:hover {
+        display: inline-block;
+        color: gray;
+     } */
+</style>

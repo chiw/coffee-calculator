@@ -15,6 +15,7 @@
 
     "label_start_recipe" : "Start",
     "label_reset" : "Reset",
+    "label_stop" : "Stop",
 
     "label_harioSwitch_TetsuKasuya" : "Hario Switch (Tetsu Kasuya)",
     "label_hario_switch_tetsu_kasuya_step_01" : "(<b>Valve Open</b>) Blooming stage  <br/>  Pour <b>{firstPourInGrams}g</b> of water, at {firstPourTemp}°C",
