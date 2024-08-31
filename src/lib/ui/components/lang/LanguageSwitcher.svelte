@@ -51,7 +51,7 @@
     <div id="dropdown-button" onclick="{toggleDropdown}"  class="w-[2rem] h-[2rem] border border-gray-400 rounded mx-1 px-1 py-1 cursor-pointer flex justify-between">
         <!-- <Globe/> -->
         <iconify-icon icon="material-symbols-light:language"
-            class="text-[25px] hover:text-slate-600">
+            class="text-[32px] hover:text-slate-600 m-0 p-0">
         </iconify-icon>
     </div>
 
