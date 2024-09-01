@@ -13,29 +13,32 @@
     "label_get_recipe" : "計算沖煮步驟",
     "label_references" : "參照",
 
+    "label_switchState_open" : "打開",
+    "label_switchState_closed" : "關上",
+
     "label_start_recipe" : "開始沖煮",
     "label_reset" : "重設計時",
     "label_stop" : "停止計時",
 
     "label_harioSwitch_TetsuKasuya" : "Hario Switch (粕谷哲)",
-    "label_hario_switch_tetsu_kasuya_step_01" : "(<b>打開閥門</b>) 悶蒸階段 <br/>  水量 <b>{firstPourInGrams}g</b>, 水溫 {firstPourTemp}°C",
-    "label_hario_switch_tetsu_kasuya_step_02" : "(<b>打開閥門</b>) 第一次注水 <br/>  水量 <b>{secondPourInGrams}g</b> (總量: <b>{secondPourTotal}g</b>), 水溫 {secondPourTemp}°C",
-    "label_hario_switch_tetsu_kasuya_step_03" : "(<b>關上閥門</b>) 第二次注水 <br/>  水量 <b>{thirdPourInGrams}g</b> (總量: <b>{thirdPourTotal}g</b>), 水溫 {thirdPourTemp}°C",
-    "label_hario_switch_tetsu_kasuya_step_04" : "(<b>打開閥門</b>) <br/>  讓水流直到 3:00, 沒流完可關閥結束",
+    "label_hario_switch_tetsu_kasuya_step_01" : "悶蒸階段 <br/>  水量 <b>{firstPourInGrams}g</b>, 水溫 {firstPourTemp}°C",
+    "label_hario_switch_tetsu_kasuya_step_02" : "第一次注水 <br/>  水量 <b>{secondPourInGrams}g</b> (總量: <b>{secondPourTotal}g</b>), 水溫 {secondPourTemp}°C",
+    "label_hario_switch_tetsu_kasuya_step_03" : "第二次注水 <br/>  水量 <b>{thirdPourInGrams}g</b> (總量: <b>{thirdPourTotal}g</b>), 水溫 {thirdPourTemp}°C",
+    "label_hario_switch_tetsu_kasuya_step_04" : "<br/>  讓水流直到 3:00, 沒流完可關閥結束",
 
     "label_harioSwitch_EmiFukahori" : "Hario Switch (Emi Fukahori)",
-    "label_hario_switch_emi_fukahori_step_01" : "(<b>關上閥門</b>) 悶蒸階段 <br/>  水量 <b>{firstPourWaterInGrams}g</b>",
-    "label_hario_switch_emi_fukahori_step_02" : "(<b>打開閥門</b>) 注水階段 (往中心注水) <br/>  水量 <b>{secondPourWaterInGrams}g</b> (總量: <b>{secondPourTotal}g</b>)",
-    "label_hario_switch_emi_fukahori_step_03" : "(<b>打開閥門</b>) <br/> 讓水流直到 2:20",
+    "label_hario_switch_emi_fukahori_step_01" : "悶蒸階段 <br/>  水量 <b>{firstPourWaterInGrams}g</b>",
+    "label_hario_switch_emi_fukahori_step_02" : "注水階段 (往中心注水) <br/>  水量 <b>{secondPourWaterInGrams}g</b> (總量: <b>{secondPourTotal}g</b>)",
+    "label_hario_switch_emi_fukahori_step_03" : "<br/> 讓水流直到 2:20",
 
     "label_harioSwitch_OleKristianBoen": "Hario Switch (Ole Kristian Boen)",
-    "label_hario_switch_ole_kristian_boen_step_01" : "(<b>關上閥門</b>) 悶蒸階段 <br/>  水量 <b>{firstPourWaterInGrams}g</b>, 水溫 {firstPourTemp}°C",
-    "label_hario_switch_ole_kristian_boen_step_02" : "(<b>打開閥門</b>) 第一次注水 (往中心注水)<br/>  水量 <b>{secondPourWaterInGrams}g</b> (總量: <b>{secondPourTotal}g</b>)",
-    "label_hario_switch_ole_kristian_boen_step_03" : "(<b>關上閥門</b>) 第二次注水 (繞圈注水)<br/> 水量 <b>{thirdPourWaterInGrams}g</b> (總量: <b>{thirdPourTotal}g</b>)",
-    "label_hario_switch_ole_kristian_boen_step_04" : "(<b>打開閥門</b>) <br/> 讓水流直到 3:00 - 3:15",
+    "label_hario_switch_ole_kristian_boen_step_01" : "悶蒸階段 <br/>  水量 <b>{firstPourWaterInGrams}g</b>, 水溫 {firstPourTemp}°C",
+    "label_hario_switch_ole_kristian_boen_step_02" : "第一次注水 (往中心注水)<br/>  水量 <b>{secondPourWaterInGrams}g</b> (總量: <b>{secondPourTotal}g</b>)",
+    "label_hario_switch_ole_kristian_boen_step_03" : "第二次注水 (繞圈注水)<br/> 水量 <b>{thirdPourWaterInGrams}g</b> (總量: <b>{thirdPourTotal}g</b>)",
+    "label_hario_switch_ole_kristian_boen_step_04" : "<br/> 讓水流直到 3:00 - 3:15",
 
     "label_harioSwitch_CoffeeChronicler" : "Hario Switch (Coffee Chronicler)",
-    "label_hario_switch_coffee_chronicler_step_01" : "(<b>打開閥門</b>) 第一次注水 <br/>  50% 水量 (<b>{firstPourWaterInGrams}g</b>)",
-    "label_hario_switch_coffee_chronicler_step_02" : "(<b>關上閥門</b>) 第二次注水 <br/>  50% 水量 (<b>{secondPourWaterInGrams}g</b>, 總量: <b>{secondPourTotal}g</b>)",
-    "label_hario_switch_coffee_chronicler_step_03" : "(<b>打開閥門</b>) <br/>  讓水流畢"
+    "label_hario_switch_coffee_chronicler_step_01" : "第一次注水 <br/>  50% 水量 (<b>{firstPourWaterInGrams}g</b>)",
+    "label_hario_switch_coffee_chronicler_step_02" : "第二次注水 <br/>  50% 水量 (<b>{secondPourWaterInGrams}g</b>, 總量: <b>{secondPourTotal}g</b>)",
+    "label_hario_switch_coffee_chronicler_step_03" : "<br/>  讓水流畢"
 }

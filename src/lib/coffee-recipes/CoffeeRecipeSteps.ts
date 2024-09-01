@@ -23,12 +23,12 @@ export abstract class CoffeeReipeSteps {
         this.coffeeRecipeId = coffeeRecipeId;
         this.coffeeParams = coffeeParams;
         this.timerInSeconds = this.sumOfDurations(stepsDurationInSeconds);
-        this.initStepsTimeframe();
+        this.calculateStepsTimeframe();
     }
 
     numDisplay = (number: number) => displayNumber(number);
 
-    initStepsTimeframe = () => {
+    calculateStepsTimeframe = () => {
         let from: number = 0;
         this.stepsDurationInSeconds.map(duration => {
             let timeframe = this.calculateTimeframes(from, duration);

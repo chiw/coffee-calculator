@@ -1,3 +1,4 @@
+import { SwitchState } from '$lib/coffee-recipes/SwitchState';
 import * as m from '$lib/paraglide/messages.js';
 import type { CoffeeParams } from '../../CoffeeParams';
 import { CoffeeRecipeId } from '../../CoffeeRecipeConstants';
@@ -27,19 +28,23 @@ export class HarioSwitchOleKristianBoenCoffeeRecipeSteps extends CoffeeReipeStep
     thirdPourTotal: number = this.coffeeParams.waterInGrams;
 
     steps = [
-        { 
+        {
+            switchState: SwitchState.CLOSED,
             msgKey: m.label_hario_switch_ole_kristian_boen_step_01, 
             params: {firstPourWaterInGrams:  this.numDisplay(this.firstPourWaterInGrams), firstPourTemp: this.pourParams[0].waterTemp }
         },
         {
+            switchState: SwitchState.OPEN,
             msgKey: m.label_hario_switch_ole_kristian_boen_step_02,
             params: {secondPourWaterInGrams: this.numDisplay(this.secondPourWaterInGrams), secondPourTotal: this.numDisplay(this.secondPourTotal) }
         },
         {
+            switchState: SwitchState.CLOSED,
             msgKey: m.label_hario_switch_ole_kristian_boen_step_03,
             params: {thirdPourWaterInGrams: this.numDisplay(this.thirdPourWaterInGrams), thirdPourTotal: this.numDisplay(this.thirdPourTotal)}
         },
         {
+            switchState: SwitchState.OPEN,
             msgKey: m.label_hario_switch_ole_kristian_boen_step_04,
             params: {}
         }

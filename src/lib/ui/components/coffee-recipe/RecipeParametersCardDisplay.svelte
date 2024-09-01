@@ -58,17 +58,3 @@
         </div>
     </div>
 </div>
-
-<style>
-    add_minus_btn {
-        font-size: 25px;
-        background-color:white;
-        color:white;
-    }
-
-    add_minus_btn :hover {
-        background-color:black;
-        color:white;
-        font-size:25px;
-    }
-</style>

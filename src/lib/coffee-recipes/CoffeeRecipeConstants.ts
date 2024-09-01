@@ -1,5 +1,9 @@
 import * as m from '$lib/paraglide/messages.js';
 
+export enum CoffeeDripper {
+    HarioSwitch = "HarioSwitch"
+}
+
 export enum CoffeeRecipeId {
     HarioSwitch_TetsuKasuya = 'HarioSwitch_TetsuKasuya',
     HarioSwitch_EmiFukahori = 'HarioSwitch_EmiFukahori',

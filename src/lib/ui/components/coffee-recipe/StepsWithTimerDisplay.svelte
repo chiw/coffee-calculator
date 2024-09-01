@@ -8,6 +8,7 @@
     import RecipeParametersCardDisplay from './RecipeParametersCardDisplay.svelte';
 
     import StepTimeFrameDisplay from './StepTimeFrameDisplay.svelte';
+	import SwitchStateDisplay from './SwitchStateDisplay.svelte';
 
     let { steps, stepsTimeframe, stepsTimeframeDisplay, timerInSeconds } = $props();
 
@@ -31,8 +32,23 @@
         startBtnClicked = false;
         stopwatch.reset();
     }
-    
 
+    const isRunningActiveStep = (elaspedTimeInSeconds:number, stepsTimeframe:number[]): boolean => {
+        return stopwatch.isRunning() && isActiveStep(elaspedTimeInSeconds, stepsTimeframe);
+    }
+
+    const isRunningNonActiveStep = (elaspedTimeInSeconds:number, stepsTimeframe:number[]): boolean => {
+        return stopwatch.isRunning() && !isActiveStep(elaspedTimeInSeconds, stepsTimeframe);
+    }
+    
+    const isActiveStep = (elaspedTimeInSeconds:number, stepsTimeframe:number[]) : boolean => {
+        return (elaspedTimeInSeconds >= stepsTimeframe[0]) 
+                && (elaspedTimeInSeconds <= stepsTimeframe[1]);
+    }
+
+    const isStepCloseToFinish = (elaspedTimeInSeconds:number, stepsTimeframe:number[], offset:number) => {
+        return elaspedTimeInSeconds > (stepsTimeframe[1] - offset);
+    }
 </script>
 
 <div class="flex flex-row">
@@ -40,9 +56,6 @@
         {#if StopWatchState.NEW === stopwatch.stopwatchState}
             <div class="flex flex-col items-center">
                 <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
-                <!-- <button class="w-20 h-9 mt-3 bg-black hover:bg-slate-600 text-white rounded font-bold" onclick={startTimer}>
-                    <span>{m.label_start_recipe()}</span>
-                </button> -->
                 <iconify-icon icon="material-symbols-light:play-circle-outline-rounded"
                     class="text-[40px] hover:text-slate-600"
                     onclick={startTimer}>
@@ -51,85 +64,53 @@
        {:else}
             <div class="flex flex-col items-center">
                 <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
-                <!-- <button class="w-20 h-9 mt-3 bg-black hover:bg-slate-600 text-white rounded font-bold" onclick={resetTimer}>
-                    <span>{m.label_stop()}</span>
-                </button> -->
                 <iconify-icon icon="material-symbols-light:stop-circle-outline-rounded"
                     class="text-[40px] hover:text-slate-600" 
                     onclick={resetTimer}>
                 </iconify-icon>
             </div>
         {/if}
-
-        <!-- {#if startBtnClicked}
-            {#if StopWatchState.STOP === stopwatch.stopwatchState}
-                <div>
-                    <button class="w-20 h-9 bg-black hover:bg-slate-600 text-white rounded font-bold" onclick={resetTimer}>{m.label_reset()}</button>
-                </div>
-            {:else}
-                <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
-            {/if}
-        {:else}
-            <div>
-                <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
-                <button class="w-20 h-9 mt-3 bg-black hover:bg-slate-600 text-white rounded font-bold" onclick={startTimer}>{m.label_start_recipe()}</button>
-            </div>
-        {/if} -->
     </div>
     <div>    
         <RecipeParametersCardDisplay />
     </div>
 </div>
 
+{#snippet stepRowDisplay(step, stepsTimeframeDisplay, highlightStep)}
+    <div class="border border-solid border-slate-600">
+        {#if step.switchState}
+            <SwitchStateDisplay switchState={step.switchState} highlightState={highlightStep}/>
+        {/if}
+        <StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay} highlightStep={highlightStep}/>
+    </div>                        
+    <div class="ml-2">{@html step.msgKey(step.params)}</div>
+{/snippet}
+
 <div class="flex flex-col mt-2 mb-1">
     {#if steps}
         <div class="flex flex-col divide-y divide-slate-300 py-1 ">
         {#each steps as step, index }
-            {#if (StopWatchState.RUNNING === stopwatch.stopwatchState && (stopwatch.elaspedTimeInSeconds >= stepsTimeframe[index][0]) && (stopwatch.elaspedTimeInSeconds <= stepsTimeframe[index][1]) ) }
-                {#if (stopwatch.elaspedTimeInSeconds <= (stepsTimeframe[index][1] - 7) )}
-                    <div class="bg-gray-900 text-white  pl-2 py-2 flex">
-                        <div><StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} /></div>
-                        <div>{@html step.msgKey(step.params)}</div>
+            {#if (isRunningActiveStep(stopwatch.elaspedTimeInSeconds, stepsTimeframe[index]) )}
+                {#if (!isStepCloseToFinish(stopwatch.elaspedTimeInSeconds, stepsTimeframe[index], 7)) }
+                    <div class="pl-2 py-2 flex items-center bg-gray-900 text-white">
+                        {@render stepRowDisplay(step, stepsTimeframeDisplay[index], true)}
                     </div>
+                    
                 {:else}
-                    <div class="animate-pulse bg-gray-900 text-white  pl-2 py-2 flex">
-                        <div><StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} /></div>
-                        <div>{@html step.msgKey(step.params)}</div>
+                    <div class="pl-2 py-2 flex items-center bg-gray-900 text-white animate-pulse ">
+                        {@render stepRowDisplay(step, stepsTimeframeDisplay[index], true)}
                     </div>
                 {/if}
+            {:else if (isRunningNonActiveStep(stopwatch.elaspedTimeInSeconds, stepsTimeframe[index]))}
+                <div class=" pl-2 py-2 flex items-center text-slate-300">
+                    {@render stepRowDisplay(step, stepsTimeframeDisplay[index], false)}
+                </div>
             {:else}
-                {#if (StopWatchState.RUNNING === stopwatch.stopwatchState) }
-                    <div class=" pl-2 py-2  text-slate-300 flex">
-                        <div><StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} /></div>
-                        <div>{@html step.msgKey(step.params)}</div>
-                    </div>
-                {:else}
-                    <div class=" pl-2 py-2 flex">
-                        <div><StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} /></div>
-                        <div>{@html step.msgKey(step.params)}</div>
-                    </div>
-                {/if}
+                <div class=" pl-2 py-2 flex items-center">
+                    {@render stepRowDisplay(step, stepsTimeframeDisplay[index], true)}
+                </div>
             {/if}
         {/each}
         </div>
     {/if}
 </div>
-
-<style>
-    /* iconify-icon {
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-    } */
-
-     /* .play_stop_btn {
-        display: inline-block;
-        color: black;
-        font-size: 35px;
-     }
-
-     .play_stop_btn:hover {
-        display: inline-block;
-        color: gray;
-     } */
-</style>

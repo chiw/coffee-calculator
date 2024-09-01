@@ -47,6 +47,10 @@ export class StopWatchStore {
         this.stopwatchState = StopWatchState.NEW;
         clearInterval(this.interval);
     }
+
+    isRunning() {
+        return StopWatchState.RUNNING === this.stopwatchState;
+    }
 }
 
 const STOPWATCH_STORE_CONTEXT_KEY = Symbol('STOPWATCH_STORE_CONTEXT_KEY');

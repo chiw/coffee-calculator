@@ -48,7 +48,7 @@
 <svelte:window on:click={onWindowClick} />
 
 <div bind:this={container}>
-    <div id="dropdown-button" onclick="{toggleDropdown}"  class="w-[2rem] h-[2rem] border border-gray-400 rounded mx-1  cursor-pointer flex justify-between">
+    <div id="dropdown-button" onclick="{toggleDropdown}"  class="w-[2rem] h-[2rem]  mx-1  cursor-pointer flex justify-between">
         <!-- <Globe/> -->
         <iconify-icon icon="material-symbols-light:language"
             class="text-[32px] hover:text-slate-600 m-0 p-0">

@@ -1,3 +1,4 @@
+import { SwitchState } from '$lib/coffee-recipes/SwitchState';
 import * as m from '$lib/paraglide/messages.js';
 import type { CoffeeParams } from '../../CoffeeParams';
 import { CoffeeRecipeId } from '../../CoffeeRecipeConstants';
@@ -24,15 +25,18 @@ export class HarioSwitchEmiFukahoriCoffeeRecipeSteps extends CoffeeReipeSteps {
     secondPourTotal = this.coffeeParams.waterInGrams;
 
     steps = [
-        { 
+        {
+            switchState: SwitchState.CLOSED, 
             msgKey: m.label_hario_switch_emi_fukahori_step_01, 
             params: {firstPourWaterInGrams:  this.numDisplay((this.firstPourWaterInGrams)) }
         },
         {
+            switchState: SwitchState.OPEN,
             msgKey: m.label_hario_switch_emi_fukahori_step_02,
             params: {secondPourWaterInGrams: this.numDisplay(this.secondPourWaterInGrams), secondPourTotal: this.numDisplay(this.secondPourTotal) }
         },
         {
+            switchState: SwitchState.OPEN,
             msgKey: m.label_hario_switch_emi_fukahori_step_03,
             params: {}
         }
