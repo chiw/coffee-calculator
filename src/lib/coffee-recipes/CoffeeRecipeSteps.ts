@@ -22,6 +22,7 @@ export abstract class CoffeeReipeSteps {
         this.stepsDurationInSeconds = stepsDurationInSeconds;
         this.coffeeRecipeId = coffeeRecipeId;
         this.coffeeParams = coffeeParams;
+        this.timerInSeconds = this.sumOfDurations(stepsDurationInSeconds);
         this.initStepsTimeframe();
     }
 
@@ -42,4 +43,6 @@ export abstract class CoffeeReipeSteps {
     calculateTimeframes = (from: number, duration: number) : number[] => {
         return [from, from + duration];
     }
+
+    sumOfDurations = (durations: number[]) => durations.reduce((a, b) => a + b, 0);
 }

@@ -13,7 +13,6 @@ export class HarioSwitchEmiFukahoriCoffeeRecipeSteps extends CoffeeReipeSteps {
     }
 
     isTimerRecipe: boolean = true;
-    timerInSeconds: number = 140;
 
     pourParams: PourParam[] = [
         { waterPercentage: 25, waterTemp: 93},
