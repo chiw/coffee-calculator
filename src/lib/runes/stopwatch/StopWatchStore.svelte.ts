@@ -35,9 +35,7 @@ export class StopWatchStore {
 
                 if(this.elaspedTime >= (this.stopUntil * 1000)) {
                     console.log('count finished, clear interval');
-                    // this.stopwatchState = StopWatchState.STOP;
-                    this.stopwatchState = StopWatchState.NEW;
-                    clearInterval(this.interval);
+                    this.reset();
                 }
             }
         }, 10);
