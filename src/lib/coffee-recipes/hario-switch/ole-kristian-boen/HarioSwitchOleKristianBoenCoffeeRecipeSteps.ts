@@ -8,9 +8,9 @@ import type { PourParam } from '../../PourParam.type';
 
 export class HarioSwitchOleKristianBoenCoffeeRecipeSteps extends CoffeeReipeSteps {
     
-    constructor(coffeeParams: CoffeeParams) {
-        super(CoffeeRecipeId.HarioSwitch_OleKristianBoen, coffeeParams, [40, 50, 40, 65]);
-        console.log('HarioSwitchOleKristianBoenCoffeeRecipeSteps constructor coffeeRecipeId: ', this.coffeeRecipeId, ' coffeeParams: ', this.coffeeParams);
+    constructor(coffeeParams: CoffeeParams, stepsDurationInSeconds: number[]) {
+        super(CoffeeRecipeId.HarioSwitch_OleKristianBoen, coffeeParams, stepsDurationInSeconds ? stepsDurationInSeconds : [40, 50, 40, 65]);
+        console.log('HarioSwitchOleKristianBoenCoffeeRecipeSteps constructor coffeeRecipeId: ', this.coffeeRecipeId, ' coffeeParams: ', this.coffeeParams, 'stepsDurationInSeconds', this.stepsDurationInSeconds);
     }
 
     isTimerRecipe: boolean = true;

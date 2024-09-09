@@ -49,23 +49,23 @@ export const createCoffeeParams = (recipeId: CoffeeRecipeId, beanInGrams: number
     }
 }
 
-export const createCoffeeRecipeSteps = (coffeeParams: CoffeeParams) => {
+export const createCoffeeRecipeSteps = (coffeeParams: CoffeeParams, stepsDurationInSeconds: number[]) => {
     console.log('createCoffeeParams coffeeParams: ', coffeeParams);
 
     switch(coffeeParams.recipeId) {
         case CoffeeRecipeId.HarioSwitch_TetsuKasuya : {            
-            return new HarioSwitchTetsuKasuyaCoffeeRecipeSteps(coffeeParams);
+            return new HarioSwitchTetsuKasuyaCoffeeRecipeSteps(coffeeParams, stepsDurationInSeconds);
         };
         case CoffeeRecipeId.HarioSwitch_EmiFukahori : {            
-            return new HarioSwitchEmiFukahoriCoffeeRecipeSteps(coffeeParams); 
+            return new HarioSwitchEmiFukahoriCoffeeRecipeSteps(coffeeParams, stepsDurationInSeconds); 
         };
         case CoffeeRecipeId.HarioSwitch_OleKristianBoen : {
-            return new HarioSwitchOleKristianBoenCoffeeRecipeSteps(coffeeParams);
+            return new HarioSwitchOleKristianBoenCoffeeRecipeSteps(coffeeParams, stepsDurationInSeconds);
         };
         case CoffeeRecipeId.HarioSwitch_CoffeeChronicler : {
-            return new HarioSwitchCoffeeChroniclerCoffeeRecipeSteps(coffeeParams);
+            return new HarioSwitchCoffeeChroniclerCoffeeRecipeSteps(coffeeParams, stepsDurationInSeconds);
         }
         default:
-            return new HarioSwitchTetsuKasuyaCoffeeRecipeSteps(coffeeParams);
+            return new HarioSwitchTetsuKasuyaCoffeeRecipeSteps(coffeeParams, stepsDurationInSeconds);
     }
 }

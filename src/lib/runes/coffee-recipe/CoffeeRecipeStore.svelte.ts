@@ -15,6 +15,8 @@ export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
     let _coffeeToWaterRatio = $state(_coffeeRecipe.defaultCoffeeParams.coffeeToWaterRatio);
     let _waterInGrams = $state(_coffeeRecipe.defaultCoffeeParams.waterInGrams);
 
+    let _stepsDurationInSeconds = $state(null);
+
     $effect(() => {
         _coffeeRecipe = createCoffeeRecipe(_recipeId);
     });
@@ -27,11 +29,12 @@ export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
         _beanInGrams = _coffeeRecipe.defaultCoffeeParams.beanInGrams;
         _coffeeToWaterRatio = _coffeeRecipe.defaultCoffeeParams.coffeeToWaterRatio;
         _waterInGrams = _coffeeRecipe.defaultCoffeeParams.waterInGrams;
+        _stepsDurationInSeconds = null;
     }
     
     let _coffeeParams = $derived(deriveCoffeeParams(_coffeeRecipe.recipeId, _beanInGrams, _coffeeToWaterRatio, _waterInGrams));
 
-    let _coffeeRecipeSteps = $derived(createCoffeeRecipeSteps(_coffeeParams));
+    let _coffeeRecipeSteps = $derived(createCoffeeRecipeSteps(_coffeeParams, _stepsDurationInSeconds));
 
     $inspect(_recipeId, _coffeeRecipe, _coffeeParams, _coffeeRecipeSteps);
 
@@ -56,7 +59,10 @@ export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
 
         get coffeeRecipeSteps() { return _coffeeRecipeSteps; },
 
-        get coffeeParams() { return _coffeeParams; }
+        get coffeeParams() { return _coffeeParams; },
+
+        get stepsDurationInSeconds() { return _stepsDurationInSeconds; },
+        set stepsDurationInSeconds(value) { _stepsDurationInSeconds = value; }
     }
 }
 

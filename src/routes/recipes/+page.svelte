@@ -21,6 +21,7 @@
             {#if coffeeRecipeStore.coffeeRecipeSteps.isTimerRecipe}
                 <StepsWithTimerDisplay
                     steps={coffeeRecipeStore.coffeeRecipeSteps.steps}
+                    stepsDurationInSeconds={coffeeRecipeStore.coffeeRecipeSteps.stepsDurationInSeconds}
                     stepsTimeframe={coffeeRecipeStore.coffeeRecipeSteps.stepsTimeframe}
                     stepsTimeframeDisplay={coffeeRecipeStore.coffeeRecipeSteps.stepsTimeframeDisplay} 
                     timerInSeconds={coffeeRecipeStore.coffeeRecipeSteps.timerInSeconds} />

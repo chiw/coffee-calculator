@@ -5,16 +5,23 @@
 
     import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch';
 
+    import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';
+    const coffeeRecipeStore = getCoffeeRecipeStore();
+
     import RecipeParametersCardDisplay from './RecipeParametersCardDisplay.svelte';
 
     import StepTimeFrameDisplay from './StepTimeFrameDisplay.svelte';
 	import SwitchStateDisplay from './SwitchStateDisplay.svelte';
+	import Modal from '../modal/Modal.svelte';
 
-    let { steps, stepsTimeframe, stepsTimeframeDisplay, timerInSeconds } = $props();
+    import StepsTimeframeEditor from './StepsTimeframeEditor.svelte';
+
+    let { steps, stepsTimeframe, stepsTimeframeDisplay, stepsDurationInSeconds, timerInSeconds } = $props();
 
     console.log('steps: ', steps);
     console.log('stepsTimeframe: ', stepsTimeframe);
     console.log('stepsTimeframeDisplay: ', stepsTimeframeDisplay);
+    console.log('stepsDurationInSeconds: ', stepsDurationInSeconds);
     console.log('timerInSeconds: ', timerInSeconds);
 
     let startBtnClicked = $state(false);
@@ -49,6 +56,43 @@
     const isStepCloseToFinish = (elaspedTimeInSeconds:number, stepsTimeframe:number[], offset:number) => {
         return elaspedTimeInSeconds > (stepsTimeframe[1] - offset);
     }
+
+    let showModal = $state(false);
+    let dialog = $state();
+    
+    const showModalDialog = () => {
+        if(!stopwatch.isRunning()) {
+            console.log('showModealDialog, stopwatch is not running, set showModal to true');
+            showModal = true;
+        } 
+    }
+
+    const closeDialog = () => {
+        showModal = false;
+        if(dialog) {
+            dialog.closeDialog();
+        }
+    }
+
+    const recalculateStepsDurationAndTimeframe = (e, index) => {
+        console.log(
+            'e.currentTarget.value:', e.currentTarget.value, 
+            'index:', index, 
+            'stepsDurationInSeconds:', stepsDurationInSeconds);
+
+        let newVal = parseInt(e.currentTarget.value);
+        
+        stepsDurationInSeconds[index] = newVal;
+
+        coffeeRecipeStore.stepsDurationInSeconds = stepsDurationInSeconds;
+        
+        // localStepsTimeframeDisplay = calculateStepsTimeframe(localStepsDurationInSeconds);
+        // console.log(
+        //     'recalculateStepsDurationAndTimeframe()  localStepsDurationInSeconds:', 
+        //     localStepsDurationInSeconds, 'localStepsTimeframeDisplay:', localStepsTimeframeDisplay);
+    }
+
+    
 </script>
 
 <div class="flex flex-row">
@@ -76,15 +120,49 @@
     </div>
 </div>
 
-{#snippet stepRowDisplay(step, stepsTimeframeDisplay, highlightStep)}
+{#snippet stepRowDisplay(index, step, stepsTimeframeDisplay, highlightStep)}
+    <!-- <button class="border border-solid border-slate-600" onclick="{showModalDialog}"> -->
     <div class="border border-solid border-slate-600">
         {#if step.switchState}
             <SwitchStateDisplay switchState={step.switchState} highlightState={highlightStep}/>
         {/if}
-        <StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay} highlightStep={highlightStep}/>
-    </div>                        
-    <div class="ml-2">{@html step.msgKey(step.params)}</div>
+        {#if stepsTimeframeDisplay && stepsTimeframeDisplay[index]}
+            <StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} highlightStep={highlightStep}/>
+        {/if}
+    </div>
+    <!-- </button> -->
+    <div class="grow ml-2">{@html step.msgKey(step.params)}</div>
 {/snippet}
+
+{#snippet stepRowDisplayWithEdit(index, step, stepsTimeframeDisplay, stepsDurationInSeconds, highlightStep)}
+    <!-- <button class="border border-solid border-slate-600" onclick="{showModalDialog}"> -->
+    <div class="border border-solid border-slate-600">
+        {#if step.switchState}
+            <SwitchStateDisplay switchState={step.switchState} highlightState={highlightStep}/>
+        {/if}
+        {#if stepsTimeframeDisplay && stepsTimeframeDisplay[index]}
+            <StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} highlightStep={highlightStep}/>
+        {/if}
+    </div>
+    <!-- </button> -->
+    <div class="grow ml-2">{@html step.msgKey(step.params)}</div>
+
+    <iconify-icon icon="mdi-light:minus-circle"
+                        class="text-[26px] hover:text-slate-600"
+                        onclick={() => {stepsDurationInSeconds[index] -= 1; coffeeRecipeStore.stepsDurationInSeconds = stepsDurationInSeconds;} }>
+                    </iconify-icon>
+
+    <input type="number" class="border border-solid text-center w-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" 
+        bind:value={stepsDurationInSeconds[index]} 
+        oninput={(e) => recalculateStepsDurationAndTimeframe(e, index)} />
+    <span class="font-normal text-s">s</span>
+
+    <iconify-icon icon="mdi-light:plus-circle"
+        class="text-[26px] hover:text-slate-600"
+        onclick={() => {stepsDurationInSeconds[index] += 1; coffeeRecipeStore.stepsDurationInSeconds = stepsDurationInSeconds;} }>
+    </iconify-icon>
+{/snippet}
+
 
 <div class="flex flex-col mt-2 mb-1">
     {#if steps}
@@ -93,24 +171,29 @@
             {#if (isRunningActiveStep(stopwatch.elaspedTimeInSeconds, stepsTimeframe[index]) )}
                 {#if (!isStepCloseToFinish(stopwatch.elaspedTimeInSeconds, stepsTimeframe[index], 7)) }
                     <div class="pl-2 py-2 flex items-center bg-gray-900 text-white">
-                        {@render stepRowDisplay(step, stepsTimeframeDisplay[index], true)}
+                        {@render stepRowDisplay(index, step, stepsTimeframeDisplay, true)}
                     </div>
                     
                 {:else}
                     <div class="pl-2 py-2 flex items-center bg-gray-900 text-white animate-pulse ">
-                        {@render stepRowDisplay(step, stepsTimeframeDisplay[index], true)}
+                        {@render stepRowDisplay(index, step, stepsTimeframeDisplay, true)}
                     </div>
                 {/if}
             {:else if (isRunningNonActiveStep(stopwatch.elaspedTimeInSeconds, stepsTimeframe[index]))}
                 <div class=" pl-2 py-2 flex items-center text-slate-300">
-                    {@render stepRowDisplay(step, stepsTimeframeDisplay[index], false)}
+                    {@render stepRowDisplay(index, step, stepsTimeframeDisplay, false)}
                 </div>
             {:else}
                 <div class=" pl-2 py-2 flex items-center">
-                    {@render stepRowDisplay(step, stepsTimeframeDisplay[index], true)}
+                    {@render stepRowDisplayWithEdit(index, step, stepsTimeframeDisplay, stepsDurationInSeconds, true)}
                 </div>
             {/if}
         {/each}
         </div>
     {/if}
 </div>
+
+
+<Modal bind:this={dialog} bind:showModal={showModal} dialogTitleId={m.label_edit}>
+    <StepsTimeframeEditor steps={steps} stepsDurationInSeconds={stepsDurationInSeconds} highlightStep={false} closeDialog={closeDialog} />
+</Modal>

@@ -35,8 +35,8 @@ export abstract class CoffeeReipeSteps {
             this.stepsTimeframe.push(timeframe);
             from = timeframe[1];
 
-            let stepsTimeframeDisplay = [toHHMMSS(timeframe[0]), toHHMMSS(timeframe[1])];
-            this.stepsTimeframeDisplay.push(stepsTimeframeDisplay);
+            let stepTimeDisplay = [toHHMMSS(timeframe[0]), toHHMMSS(timeframe[1])];
+            this.stepsTimeframeDisplay.push(stepTimeDisplay);
         })
     }
 

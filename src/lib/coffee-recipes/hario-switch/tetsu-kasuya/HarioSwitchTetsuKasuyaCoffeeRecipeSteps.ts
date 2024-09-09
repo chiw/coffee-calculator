@@ -8,9 +8,9 @@ import { SwitchState } from '$lib/coffee-recipes/SwitchState';
 
 export class HarioSwitchTetsuKasuyaCoffeeRecipeSteps extends CoffeeReipeSteps {
 
-    constructor(coffeeParams: CoffeeParams) {
-        super(CoffeeRecipeId.HarioSwitch_TetsuKasuya, coffeeParams, [30, 45, 30, 75]);
-        console.log('HarioSwitchTetsuKasuyaCoffeeRecipeSteps constructor coffeeRecipeId: ', this.coffeeRecipeId, ' coffeeParams: ', this.coffeeParams);
+    constructor(coffeeParams: CoffeeParams, stepsDurationInSeconds: number[]) {
+        super(CoffeeRecipeId.HarioSwitch_TetsuKasuya, coffeeParams, stepsDurationInSeconds ? stepsDurationInSeconds : [30, 45, 30, 75]);
+        console.log('HarioSwitchTetsuKasuyaCoffeeRecipeSteps constructor coffeeRecipeId: ', this.coffeeRecipeId, ' coffeeParams: ', this.coffeeParams, 'stepsDurationInSeconds', this.stepsDurationInSeconds);
     }
 
     isTimerRecipe: boolean = true;

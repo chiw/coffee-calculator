@@ -23,7 +23,7 @@
                         class="text-[30px] hover:text-slate-600"
                         onclick={() => coffeeRecipeStore.beanInGrams-=1}>
                     </iconify-icon>
-                    <input class="ml-2 mr-1 border border-slate-200  text-xl font-bold italic max-w-16" bind:value={coffeeRecipeStore.beanInGrams} /> 
+                    <input class="ml-2 mr-1 border border-slate-200 text-center text-xl font-bold italic max-w-16" bind:value={coffeeRecipeStore.beanInGrams} /> 
                     <div class="mr-2">(g)</div>
                     <!--<button class="w-7 h-7 rounded-full border border-slate-400 text-black hover:bg-black hover:text-white font-bold" onclick={() => coffeeRecipeStore.beanInGrams+=1}>&plus;</button>-->
                     <iconify-icon icon="mdi-light:plus-circle"
@@ -31,7 +31,7 @@
                         onclick={() => coffeeRecipeStore.beanInGrams+=1}>
                     </iconify-icon>
                 {:else}
-                    <input class="ml-2 mr-1 border border-slate-200  text-xl font-bold italic max-w-16 disabled:opacity-100 disabled:bg-transparent" 
+                    <input class="ml-2 mr-1 border border-slate-200 text-center text-xl font-bold italic max-w-16 disabled:opacity-100 disabled:bg-transparent" 
                         bind:value={coffeeRecipeStore.beanInGrams}
                         disabled=true 
                         /> 
