@@ -15,6 +15,7 @@
 	import Modal from '../modal/Modal.svelte';
 
     import StepsTimeframeEditor from './StepsTimeframeEditor.svelte';
+	import StopwatchDisplay from '../stopwatch/StopwatchDisplay.svelte';
 
     let { steps, stepsTimeframe, stepsTimeframeDisplay, stepsDurationInSeconds, timerInSeconds } = $props();
 
@@ -24,21 +25,7 @@
     console.log('stepsDurationInSeconds: ', stepsDurationInSeconds);
     console.log('timerInSeconds: ', timerInSeconds);
 
-    let startBtnClicked = $state(false);
-
     const stopwatch: StopWatchStore = getStopWatchStore();
-
-    function startTimer() {
-        console.log('clicked start button');
-        startBtnClicked = true;
-        stopwatch.start(timerInSeconds);
-    }
-
-    function resetTimer() {
-        console.log('reset button clicked');
-        startBtnClicked = false;
-        stopwatch.reset();
-    }
 
     const isRunningActiveStep = (elaspedTimeInSeconds:number, stepsTimeframe:number[]): boolean => {
         return stopwatch.isRunning() && isActiveStep(elaspedTimeInSeconds, stepsTimeframe);
@@ -56,6 +43,8 @@
     const isStepCloseToFinish = (elaspedTimeInSeconds:number, stepsTimeframe:number[], offset:number) => {
         return elaspedTimeInSeconds > (stepsTimeframe[1] - offset);
     }
+
+    let inEditMode = $state(false);
 
     let showModal = $state(false);
     let dialog = $state();
@@ -97,27 +86,27 @@
 
 <div class="flex flex-row">
     <div class="m-1 p-2 w-[6rem]">
-        {#if StopWatchState.NEW === stopwatch.stopwatchState}
-            <div class="flex flex-col items-center">
-                <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
-                <iconify-icon icon="material-symbols-light:play-circle-outline-rounded"
-                    class="text-[40px] hover:text-slate-600"
-                    onclick={startTimer}>
-                </iconify-icon>
-            </div>
-       {:else}
-            <div class="flex flex-col items-center">
-                <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
-                <iconify-icon icon="material-symbols-light:stop-circle-outline-rounded"
-                    class="text-[40px] hover:text-slate-600" 
-                    onclick={resetTimer}>
-                </iconify-icon>
-            </div>
-        {/if}
+        <StopwatchDisplay timerInSeconds={timerInSeconds} />
     </div>
     <div>    
         <RecipeParametersCardDisplay />
     </div>
+</div>
+
+<div class="flex flex-row-reverse">
+    {#if inEditMode}
+        <button onclick={() => { inEditMode = !inEditMode }}>
+            <iconify-icon icon="material-symbols-light:check-circle"
+                class="text-[30px] hover:text-slate-600">
+            </iconify-icon>
+        </button>
+    {:else}
+        <button onclick={() => { inEditMode = !inEditMode }}>
+            <iconify-icon icon="material-symbols-light:ink-pen-outline-rounded"
+                class="text-[30px] hover:text-slate-600">
+            </iconify-icon>
+        </button>
+    {/if}
 </div>
 
 {#snippet stepRowDisplay(index, step, stepsTimeframeDisplay, highlightStep)}
@@ -147,24 +136,28 @@
     <!-- </button> -->
     <div class="grow ml-2">{@html step.msgKey(step.params)}</div>
 
-    <iconify-icon icon="mdi-light:minus-circle"
-                        class="text-[26px] hover:text-slate-600"
-                        onclick={() => {stepsDurationInSeconds[index] -= 1; coffeeRecipeStore.stepsDurationInSeconds = stepsDurationInSeconds;} }>
-                    </iconify-icon>
+    {#if inEditMode}
+        <button onclick={() => {stepsDurationInSeconds[index] -= 1; coffeeRecipeStore.stepsDurationInSeconds = stepsDurationInSeconds;} }>
+            <iconify-icon icon="mdi-light:minus-circle"
+                class="text-[26px] hover:text-slate-600">
+            </iconify-icon>
+        </button>
 
-    <input type="number" class="border border-solid text-center w-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" 
-        bind:value={stepsDurationInSeconds[index]} 
-        oninput={(e) => recalculateStepsDurationAndTimeframe(e, index)} />
-    <span class="font-normal text-s">s</span>
+        <input type="number" class="border border-solid text-center w-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" 
+            bind:value={stepsDurationInSeconds[index]} 
+            oninput={(e) => recalculateStepsDurationAndTimeframe(e, index)} />
+        <span class="font-normal text-s">s</span>
 
-    <iconify-icon icon="mdi-light:plus-circle"
-        class="text-[26px] hover:text-slate-600"
-        onclick={() => {stepsDurationInSeconds[index] += 1; coffeeRecipeStore.stepsDurationInSeconds = stepsDurationInSeconds;} }>
-    </iconify-icon>
+        <button onclick={() => {stepsDurationInSeconds[index] += 1; coffeeRecipeStore.stepsDurationInSeconds = stepsDurationInSeconds;} }>
+            <iconify-icon icon="mdi-light:plus-circle"
+                class="text-[26px] hover:text-slate-600">
+            </iconify-icon>
+        </button>
+    {/if}
 {/snippet}
 
 
-<div class="flex flex-col mt-2 mb-1">
+<div class="flex flex-col mb-1">
     {#if steps}
         <div class="flex flex-col divide-y divide-slate-300 py-1 ">
         {#each steps as step, index }
