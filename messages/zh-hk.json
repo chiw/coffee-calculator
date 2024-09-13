@@ -21,6 +21,7 @@
     "label_stop" : "停止計時",
 
     "label_edit": "調整時間",
+    "label_finish_edit": "完成",
 
     "label_harioSwitch_TetsuKasuya" : "Hario Switch (粕谷哲)",
     "label_hario_switch_tetsu_kasuya_step_01" : "悶蒸階段 <br/>  水量 <b>{firstPourInGrams}g</b>, 水溫 {firstPourTemp}°C",

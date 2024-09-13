@@ -93,18 +93,22 @@
     </div>
 </div>
 
-<div class="flex flex-row-reverse">
+<div class="flex flex-row-reverse items-center">
     {#if inEditMode}
-        <button onclick={() => { inEditMode = !inEditMode }}>
-            <iconify-icon icon="material-symbols-light:check-circle"
-                class="text-[30px] hover:text-slate-600">
+        <button class="flex flex-row border border-solid border-black rounded border-1 items-center bg-black w-18 px-1 ba" onclick={() => { inEditMode = !inEditMode }}>
+            
+            <iconify-icon icon="material-symbols-light:check-circle-outline-rounded"
+                class="text-[22px] hover:text-white text-white">
             </iconify-icon>
+            <span class="font-bold text-xs text-white">{m.label_finish_edit()}</span>
         </button>
     {:else}
-        <button onclick={() => { inEditMode = !inEditMode }}>
-            <iconify-icon icon="material-symbols-light:ink-pen-outline-rounded"
-                class="text-[30px] hover:text-slate-600">
+        <button class="flex flex-row border border-solid border-black rounded border-1 items-center w-18 px-1" onclick={() => { inEditMode = !inEditMode }}>
+            
+            <iconify-icon icon="material-symbols-light:timer-outline"
+                class="text-[22px] hover:text-slate-600">
             </iconify-icon>
+            <span class="font-bold text-xs">{m.label_edit()}</span>
         </button>
     {/if}
 </div>

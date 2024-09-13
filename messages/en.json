@@ -20,7 +20,8 @@
     "label_reset" : "Reset",
     "label_stop" : "Stop",
 
-    "label_edit": "Duration adjustments",
+    "label_edit": "Adjust",
+    "label_finish_edit": "Done",
 
     "label_harioSwitch_TetsuKasuya" : "Hario Switch (Tetsu Kasuya)",
     "label_hario_switch_tetsu_kasuya_step_01" : "Blooming stage  <br/>  Pour <b>{firstPourInGrams}g</b> of water, at {firstPourTemp}°C",
