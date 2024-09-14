@@ -97,7 +97,7 @@
     </div>
 </div>
 
-<div class="flex flex-row-reverse items-center">
+<div class="flex flex-row-reverse items-center mt-2">
     {#if !stopwatch.isRunning()}
         {#if inEditMode}
             <button class="flex flex-row border border-solid border-black rounded border-1 items-center bg-black w-18 px-1 ba" onclick={() => { inEditMode = !inEditMode }}>
@@ -155,7 +155,7 @@
     {#if inEditMode}
         <button onclick={() => {stepsDurationInSeconds[index] -= 1; coffeeRecipeStore.stepsDurationInSeconds = stepsDurationInSeconds;} }>
             <iconify-icon icon="mdi-light:minus-circle"
-                class="text-[26px] hover:text-slate-600">
+                class="text-[30px] hover:text-slate-600">
             </iconify-icon>
         </button>
 
@@ -166,7 +166,7 @@
 
         <button onclick={() => {stepsDurationInSeconds[index] += 1; coffeeRecipeStore.stepsDurationInSeconds = stepsDurationInSeconds;} }>
             <iconify-icon icon="mdi-light:plus-circle"
-                class="text-[26px] hover:text-slate-600">
+                class="text-[30px] hover:text-slate-600">
             </iconify-icon>
         </button>
     {/if}
