@@ -10,6 +10,8 @@
 
     import RecipeParametersCardDisplay from './RecipeParametersCardDisplay.svelte';
 
+    import StepMessageDisplay from './StepMessageDisplay.svelte';
+
     import StepTimeFrameDisplay from './StepTimeFrameDisplay.svelte';
 	import SwitchStateDisplay from './SwitchStateDisplay.svelte';
 	import Modal from '../modal/Modal.svelte';
@@ -136,7 +138,8 @@
         {/if}
     </div>
     <!-- </button> -->
-    <div class="grow ml-2">{@html step.msgKey(step.params)}</div>
+    <!-- <div class="grow ml-2">{@html step.msgKey(step.params)}</div> -->
+     <StepMessageDisplay step={step} />
 {/snippet}
 
 {#snippet stepRowDisplayWithEdit(index, step, stepsTimeframeDisplay, stepsDurationInSeconds, highlightStep)}
@@ -150,7 +153,8 @@
         {/if}
     </div>
     <!-- </button> -->
-    <div class="grow ml-2">{@html step.msgKey(step.params)}</div>
+    <!-- <div class="grow ml-2">{@html step.msgKey(step.params)}</div> -->
+    <StepMessageDisplay step={step} />
 
     {#if inEditMode}
         <button onclick={() => {stepsDurationInSeconds[index] -= 1; coffeeRecipeStore.stepsDurationInSeconds = stepsDurationInSeconds;} }>

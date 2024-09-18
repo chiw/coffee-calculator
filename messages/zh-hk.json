@@ -24,25 +24,28 @@
     "label_finish_edit": "完成",
     "label_default": "預設值",
 
+    "label_stages_blooming" : "悶蒸階段",
+    "label_stages_pouring" : "注水階段",
+    "label_stages_first_pour" : "第一次注水",
+    "label_stages_second_pour" : "第二次注水",
+    "label_stages_third_pour" : "第三次注水",
+    "label_stages_fourth_pour" : "第四次注水",
+    "label_stages_fifth_pour" : "第五次注水",
+    "label_stages_sixth_pour" : "第六次注水",
+    "label_stages_final" : "",
+    "label_stages_unknown" : "",
+
+    "label_pouring_technique_center" : "<b>往中心注水</b>",
+    "label_pouring_technique_circular" : "<b>繞圈注水</b>",
+
+    "label_step_msg_water_volume" : "水量 <b>{waterInGrams}g</b>",
+    "label_step_msg_water_volume_with_total" : "水量 <b>{waterInGrams}g</b> (總量: <b>{totalWaterInGrams}g</b>)",
+    "label_step_msg_water_temperature" : ", 水溫 {waterTemperature}°C",
+    "label_step_msg_let_water_flow" : "讓水流畢",
+    "label_step_msg_let_water_flow_until" : "讓水流直到 {time}",
+
     "label_harioSwitch_TetsuKasuya" : "Hario Switch (粕谷哲)",
-    "label_hario_switch_tetsu_kasuya_step_01" : "悶蒸階段 <br/>  水量 <b>{firstPourInGrams}g</b>, 水溫 {firstPourTemp}°C",
-    "label_hario_switch_tetsu_kasuya_step_02" : "第一次注水 <br/>  水量 <b>{secondPourInGrams}g</b> (總量: <b>{secondPourTotal}g</b>), 水溫 {secondPourTemp}°C",
-    "label_hario_switch_tetsu_kasuya_step_03" : "第二次注水 <br/>  水量 <b>{thirdPourInGrams}g</b> (總量: <b>{thirdPourTotal}g</b>), 水溫 {thirdPourTemp}°C",
-    "label_hario_switch_tetsu_kasuya_step_04" : "<br/>  讓水流直到 3:00, 沒流完可關閥結束",
-
     "label_harioSwitch_EmiFukahori" : "Hario Switch (Emi Fukahori)",
-    "label_hario_switch_emi_fukahori_step_01" : "悶蒸階段 <br/>  水量 <b>{firstPourWaterInGrams}g</b>",
-    "label_hario_switch_emi_fukahori_step_02" : "注水階段 (往中心注水) <br/>  水量 <b>{secondPourWaterInGrams}g</b> (總量: <b>{secondPourTotal}g</b>)",
-    "label_hario_switch_emi_fukahori_step_03" : "<br/> 讓水流直到 2:20",
-
     "label_harioSwitch_OleKristianBoen": "Hario Switch (Ole Kristian Boen)",
-    "label_hario_switch_ole_kristian_boen_step_01" : "悶蒸階段 <br/>  水量 <b>{firstPourWaterInGrams}g</b>, 水溫 {firstPourTemp}°C",
-    "label_hario_switch_ole_kristian_boen_step_02" : "第一次注水 (往中心注水)<br/>  水量 <b>{secondPourWaterInGrams}g</b> (總量: <b>{secondPourTotal}g</b>)",
-    "label_hario_switch_ole_kristian_boen_step_03" : "第二次注水 (繞圈注水)<br/> 水量 <b>{thirdPourWaterInGrams}g</b> (總量: <b>{thirdPourTotal}g</b>)",
-    "label_hario_switch_ole_kristian_boen_step_04" : "<br/> 讓水流直到 3:00 - 3:15",
-
-    "label_harioSwitch_CoffeeChronicler" : "Hario Switch (Coffee Chronicler)",
-    "label_hario_switch_coffee_chronicler_step_01" : "第一次注水 <br/>  50% 水量 (<b>{firstPourWaterInGrams}g</b>)",
-    "label_hario_switch_coffee_chronicler_step_02" : "第二次注水 <br/>  50% 水量 (<b>{secondPourWaterInGrams}g</b>, 總量: <b>{secondPourTotal}g</b>)",
-    "label_hario_switch_coffee_chronicler_step_03" : "<br/>  讓水流畢"
+    "label_harioSwitch_CoffeeChronicler" : "Hario Switch (Coffee Chronicler)"
 }

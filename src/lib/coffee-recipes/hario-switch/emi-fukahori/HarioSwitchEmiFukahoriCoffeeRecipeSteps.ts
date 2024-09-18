@@ -1,3 +1,5 @@
+import { PouringTechnique } from '$lib/coffee-recipes/PouringTechnique';
+import { PourOverStage } from '$lib/coffee-recipes/PourOverStage';
 import { SwitchState } from '$lib/coffee-recipes/SwitchState';
 import * as m from '$lib/paraglide/messages.js';
 import type { CoffeeParams } from '../../CoffeeParams';
@@ -14,6 +16,7 @@ export class HarioSwitchEmiFukahoriCoffeeRecipeSteps extends CoffeeReipeSteps {
     }
 
     isTimerRecipe: boolean = true;
+    isImmersionDripperRecipe: boolean = true;
 
     pourParams: PourParam[] = [
         { waterPercentage: 25, waterTemp: 93},
@@ -26,19 +29,23 @@ export class HarioSwitchEmiFukahoriCoffeeRecipeSteps extends CoffeeReipeSteps {
 
     steps = [
         {
-            switchState: SwitchState.CLOSED, 
-            msgKey: m.label_hario_switch_emi_fukahori_step_01, 
-            params: {firstPourWaterInGrams:  this.numDisplay((this.firstPourWaterInGrams)) }
+            switchState: SwitchState.CLOSED,
+            stage: PourOverStage.BLOOMING,
+            msgKey: m.label_step_msg_water_volume, 
+            params: {waterInGrams:  this.numDisplay((this.firstPourWaterInGrams)) }
         },
         {
             switchState: SwitchState.OPEN,
-            msgKey: m.label_hario_switch_emi_fukahori_step_02,
-            params: {secondPourWaterInGrams: this.numDisplay(this.secondPourWaterInGrams), secondPourTotal: this.numDisplay(this.secondPourTotal) }
+            stage: PourOverStage.POURING,
+            pouringTechnique: PouringTechnique.CENTER,
+            msgKey: m.label_step_msg_water_volume_with_total,
+            params: {waterInGrams: this.numDisplay(this.secondPourWaterInGrams), totalWaterInGrams: this.numDisplay(this.secondPourTotal) }
         },
         {
             switchState: SwitchState.OPEN,
-            msgKey: m.label_hario_switch_emi_fukahori_step_03,
-            params: {}
+            stage: PourOverStage.FINAL,
+            msgKey: m.label_step_msg_let_water_flow_until,
+            params: {time: this.stepsTimeframeDisplay[2][1]}
         }
     ];
 }

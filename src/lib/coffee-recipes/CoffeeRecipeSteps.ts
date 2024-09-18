@@ -16,6 +16,7 @@ export abstract class CoffeeReipeSteps {
     public stepsTimeframe: number[][] = [];
     public stepsTimeframeDisplay: string[][] = [];
     public isTimerRecipe: boolean = false;
+    public isImmersionDripperRecipe: boolean = false;
     public timerInSeconds = 0;
 
     constructor(coffeeRecipeId: CoffeeRecipeId, coffeeParams: CoffeeParams, stepsDurationInSeconds: number[]) {

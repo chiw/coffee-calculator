@@ -20,29 +20,34 @@
     "label_reset" : "Reset",
     "label_stop" : "Stop",
 
-    "label_edit": "Adjust",
-    "label_finish_edit": "Done",
-    "label_default": "Defaults",
+    "label_edit" : "Adjust",
+    "label_finish_edit" : "Done",
+    "label_default" : "Defaults",
+
+    "label_stages_blooming" : "Blooming stage",
+    "label_stages_pouring" : "Pouring stage",
+    "label_stages_first_pour" : "1st pour",
+    "label_stages_second_pour" : "2nd pour",
+    "label_stages_third_pour" : "3rd pour",
+    "label_stages_fourth_pour" : "4th pour",
+    "label_stages_fifth_pour" : "5th pour",
+    "label_stages_sixth_pour" : "6th pour",
+    "label_stages_final" : "",
+    "label_stages_unknown" : "",
+
+    "label_pouring_technique_center": "<b>Center pour</b>",
+    "label_pouring_technique_circular": "<b>Circle pour</b>",
+    "label_pouring_technique_unknown" : "",
+
+    "label_step_msg_water_volume" : "Add <b>{waterInGrams}g</b> of water",
+    "label_step_msg_water_volume_with_total" : "Add <b>{waterInGrams}g</b> of water (Total: <b>{totalWaterInGrams}g</b>)",
+    "label_step_msg_water_temperature" : " at {waterTemperature}°C",
+    "label_step_msg_let_water_flow": "Let water flow",
+    "label_step_msg_let_water_flow_until": "Let water flow until {time}",
 
     "label_harioSwitch_TetsuKasuya" : "Hario Switch (Tetsu Kasuya)",
-    "label_hario_switch_tetsu_kasuya_step_01" : "Blooming stage  <br/>  Pour <b>{firstPourInGrams}g</b> of water, at {firstPourTemp}°C",
-    "label_hario_switch_tetsu_kasuya_step_02" : "1st pour <br/>  Pour <b>{secondPourInGrams}g</b> of water (Total: <b>{secondPourTotal}g</b>), at {secondPourTemp}°C",
-    "label_hario_switch_tetsu_kasuya_step_03" : "2nd pour <br/>  Pour <b>{thirdPourInGrams}g</b> of water (Total: <b>{thirdPourTotal}g</b>), at {thirdPourTemp}°C",
-    "label_hario_switch_tetsu_kasuya_step_04" : "<br/>  Let the water flow",
-
     "label_harioSwitch_EmiFukahori" : "Hario Switch (Emi Fukahori)",
-    "label_hario_switch_emi_fukahori_step_01" : "Blooming stage <br/>  Pour <b>{firstPourWaterInGrams}g</b> of water",
-    "label_hario_switch_emi_fukahori_step_02" : "Pouring stage <br/>  Pour <b>{secondPourWaterInGrams}g</b> of water (Total: <b>{secondPourTotal}g</b>)<br/> Single continuous pour to the centre of the coffee bed",
-    "label_hario_switch_emi_fukahori_step_03" : "<br/> Let water flow",
-
     "label_harioSwitch_OleKristianBoen": "Hario Switch (Ole Kristian Bøen)",
-    "label_hario_switch_ole_kristian_boen_step_01" : "Blooming stage <br/>  Pour <b>{firstPourWaterInGrams}g</b> of water, at {firstPourTemp}°C",
-    "label_hario_switch_ole_kristian_boen_step_02" : "1st pour <br/>  Pour <b>{secondPourWaterInGrams}g</b> of water (Total: <b>{secondPourTotal}g</b>)<br/> To the centre",
-    "label_hario_switch_ole_kristian_boen_step_03" : "2nd pour <br/> Pour <b>{thirdPourWaterInGrams}g</b> of water (Total: <b>{thirdPourTotal}g</b>)<br/> In a circular pattern",
-    "label_hario_switch_ole_kristian_boen_step_04" : "<br/> Let water flow",
-
-    "label_harioSwitch_CoffeeChronicler" : "Hario Switch (Coffee Chronicler)",
-    "label_hario_switch_coffee_chronicler_step_01" : "1st pour <br/>  Pour 50% (<b>{firstPourWaterInGrams}g</b>) of water",
-    "label_hario_switch_coffee_chronicler_step_02" : "2nd pour <br/>  Pour 50% (<b>{secondPourWaterInGrams}g</b>, Total: <b>{secondPourTotal}g</b>) of water",
-    "label_hario_switch_coffee_chronicler_step_03" : "<br/>  Let water flow"
+    "label_harioSwitch_CoffeeChronicler" : "Hario Switch (Coffee Chronicler)"
+    
 }

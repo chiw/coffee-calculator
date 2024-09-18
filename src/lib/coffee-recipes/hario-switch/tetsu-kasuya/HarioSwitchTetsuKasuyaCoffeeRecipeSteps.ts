@@ -5,6 +5,7 @@ import { CoffeeReipeSteps } from '../../CoffeeRecipeSteps';
 import { calculatePourWaterInGrams } from '../../CoffeeRecipeUtils';
 import type { PourParam } from '../../PourParam.type';
 import { SwitchState } from '$lib/coffee-recipes/SwitchState';
+import { PourOverStage } from '$lib/coffee-recipes/PourOverStage';
 
 export class HarioSwitchTetsuKasuyaCoffeeRecipeSteps extends CoffeeReipeSteps {
 
@@ -14,6 +15,7 @@ export class HarioSwitchTetsuKasuyaCoffeeRecipeSteps extends CoffeeReipeSteps {
     }
 
     isTimerRecipe: boolean = true;
+    isImmersionDripperRecipe: boolean = true;
 
     pourParams: PourParam[] = [
         { waterPercentage: 21.4285, waterTemp: 93},
@@ -28,24 +30,31 @@ export class HarioSwitchTetsuKasuyaCoffeeRecipeSteps extends CoffeeReipeSteps {
 
     steps = [
         {
-            switchState: SwitchState.OPEN, 
-            msgKey: m.label_hario_switch_tetsu_kasuya_step_01, 
-            params: {firstPourInGrams: this.numDisplay(this.firstPourInGrams), firstPourTemp: this.pourParams[0].waterTemp }
+            switchState: SwitchState.OPEN,
+            stage: PourOverStage.BLOOMING,
+            waterTemperature: this.pourParams[0].waterTemp,
+            msgKey: m.label_step_msg_water_volume, 
+            params: {waterInGrams: this.numDisplay(this.firstPourInGrams) }
         },
         {
             switchState: SwitchState.OPEN,
-            msgKey: m.label_hario_switch_tetsu_kasuya_step_02,
-            params: {secondPourInGrams: this.numDisplay(this.secondPourInGrams), secondPourTotal: this.numDisplay(this.secondPourTotal), secondPourTemp: this.pourParams[1].waterTemp }
+            stage: PourOverStage.FIRST_POUR,
+            waterTemperature: this.pourParams[1].waterTemp,
+            msgKey: m.label_step_msg_water_volume_with_total,
+            params: {waterInGrams: this.numDisplay(this.secondPourInGrams), totalWaterInGrams: this.numDisplay(this.secondPourTotal) }
         },
         {
             switchState: SwitchState.CLOSED,
-            msgKey: m.label_hario_switch_tetsu_kasuya_step_03,
-            params: {thirdPourInGrams: this.thirdPourInGrams, thirdPourTotal: this.numDisplay(this.coffeeParams.waterInGrams), thirdPourTemp: this.pourParams[2].waterTemp }
+            stage: PourOverStage.SECOND_POUR,
+            waterTemperature: this.pourParams[2].waterTemp,
+            msgKey: m.label_step_msg_water_volume_with_total,
+            params: {waterInGrams: this.thirdPourInGrams, totalWaterInGrams: this.numDisplay(this.coffeeParams.waterInGrams) }
         },
         {
             switchState: SwitchState.OPEN,
-            msgKey: m.label_hario_switch_tetsu_kasuya_step_04,
-            params: {}
+            stage: PourOverStage.FINAL,
+            msgKey: m.label_step_msg_let_water_flow_until,
+            params: {time: this.stepsTimeframeDisplay[3][1]}
         }
     ]
 }
