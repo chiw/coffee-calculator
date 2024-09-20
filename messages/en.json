@@ -44,10 +44,14 @@
     "label_step_msg_water_temperature" : " at {waterTemperature}°C",
     "label_step_msg_let_water_flow": "Let water flow",
     "label_step_msg_let_water_flow_until": "Let water flow until {time}",
+    "label_step_pause": "Pause",
+    "label_step_swirl": " swirl gently",
 
     "label_harioSwitch_TetsuKasuya" : "Hario Switch (Tetsu Kasuya)",
     "label_harioSwitch_EmiFukahori" : "Hario Switch (Emi Fukahori)",
     "label_harioSwitch_OleKristianBoen": "Hario Switch (Ole Kristian Bøen)",
-    "label_harioSwitch_CoffeeChronicler" : "Hario Switch (Coffee Chronicler)"
+    "label_harioSwitch_CoffeeChronicler" : "Hario Switch (Coffee Chronicler)",
+    "label_harioV60_JamesHoffmann" : "Hario V60 (James Hoffmann)",
+    "label_unknown_recipe" : "Unknown Recipe"
     
 }

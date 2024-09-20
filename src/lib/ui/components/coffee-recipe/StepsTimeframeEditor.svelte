@@ -9,9 +9,12 @@
     import { calculateStepsTimeframe } from "$lib/utils/TimeUtils";
 
     import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';
+	import StepMessageDisplay from './StepMessageDisplay.svelte';
+	import { shouldDisplayTimeframe } from '$lib/utils/TimeframeDisplayUtils';
+	import TimeframeDurationDisplay from './TimeframeDurationDisplay.svelte';
     const coffeeRecipeStore = getCoffeeRecipeStore();
 
-    let { steps, stepsDurationInSeconds, highlightStep, closeDialog } = $props();
+    let { steps, stepWaterInfos, stepsTimeframeDisplay, stepsDurationInSeconds, highlightStep, closeDialog, isImmersionDripperRecipe } = $props();
 
     let localStepsDurationInSeconds:number[] = $state.snapshot(stepsDurationInSeconds);
     let localStepsTimeframeDisplay:string[][] = $state(calculateStepsTimeframe(localStepsDurationInSeconds));
@@ -52,14 +55,22 @@
         {#each steps as step, index }
             <div class=" pl-2 py-2 flex items-center">
                 <div class="border border-solid border-slate-600">
-                    {#if step.switchState}
-                        <SwitchStateDisplay switchState={step.switchState} highlightState={highlightStep}/>
+                    
+                   {#if isImmersionDripperRecipe}
+                        <SwitchStateDisplay 
+                            switchState={step.switchState} isImmersionDripperRecipe={isImmersionDripperRecipe} 
+                            highlightState={highlightStep} durationInSeconds={stepsDurationInSeconds[index]}/>
+                    {:else}
+                        <TimeframeDurationDisplay durationInSeconds={stepsDurationInSeconds[index]} pouringStage={step.stage} />
                     {/if}
-                    {#if localStepsTimeframeDisplay && localStepsTimeframeDisplay[index]}
+                    
+                    
+                    {#if localStepsTimeframeDisplay && localStepsTimeframeDisplay[index] && shouldDisplayTimeframe(step)}
                         <StepTimeFrameDisplay stepsTimeframeDisplay={localStepsTimeframeDisplay[index]} highlightStep={highlightStep}/>
                     {/if}
                 </div>                        
-                <div class="grow ml-2">{@html step.msgKey(step.params)}</div>
+                <!-- <div class="grow ml-2">{@html step.msgKey(step.params)}</div> -->
+                 <StepMessageDisplay step={step} stepWaterInfo={stepWaterInfos[index]} stepsTimeframeDisplay={localStepsTimeframeDisplay[index]} />
 
                 <input type="number" class="ml-2 border border-solid w-14 mr-2" 
                     bind:value={localStepsDurationInSeconds[index]} 

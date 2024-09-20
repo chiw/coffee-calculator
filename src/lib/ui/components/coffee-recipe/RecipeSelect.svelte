@@ -1,10 +1,9 @@
 <script lang="ts">
-    import * as m from '$lib/paraglide/messages.js';
-
     import { CoffeeRecipesChoices } from '$lib/coffee-recipes';
 
     import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch/';
     import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';
+	import { coffeeRecipeIdSelectMessageKey } from './CoffeeReceipeMessageKeys';
 
     const stopwatch: StopWatchStore = getStopWatchStore();
     const coffeeRecipeStore = getCoffeeRecipeStore();
@@ -12,11 +11,11 @@
 
 <div class="flex flex-row ">
     {#if StopWatchState.RUNNING === stopwatch.stopwatchState}
-        <div>{ CoffeeRecipesChoices.find((c) => c.id == coffeeRecipeStore.recipeId)?.displayLabelId() }</div>
+        <div>{ coffeeRecipeIdSelectMessageKey(coffeeRecipeStore.recipeId)() }</div>
     {:else}
         <select class="border border-slate-200 w-full h-[2rem]" bind:value={coffeeRecipeStore.recipeId}>
             {#each CoffeeRecipesChoices as option}
-                <option value={option.id}>{option.displayLabelId()}</option>
+                <option value={option.id}>{coffeeRecipeIdSelectMessageKey(option.id)()}</option>
             {/each}
         </select>
     {/if}

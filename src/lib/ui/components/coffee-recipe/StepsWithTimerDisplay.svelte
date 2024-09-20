@@ -3,7 +3,7 @@
 
     import 'iconify-icon';
 
-    import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch';
+    import { StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch';
 
     import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';
     const coffeeRecipeStore = getCoffeeRecipeStore();
@@ -18,10 +18,13 @@
 
     import StepsTimeframeEditor from './StepsTimeframeEditor.svelte';
 	import StopwatchDisplay from '../stopwatch/StopwatchDisplay.svelte';
+	import { shouldDisplayTimeframe } from '$lib/utils/TimeframeDisplayUtils';
+	import TimeframeDurationDisplay from './TimeframeDurationDisplay.svelte';
 
-    let { steps, stepsTimeframe, stepsTimeframeDisplay, stepsDurationInSeconds, timerInSeconds } = $props();
+    let { steps, stepWaterInfos, stepsTimeframe, stepsTimeframeDisplay, stepsDurationInSeconds, timerInSeconds, isImmersionDripperRecipe} = $props();
 
     console.log('steps: ', steps);
+    console.log('stepWaterInfos', stepWaterInfos);
     console.log('stepsTimeframe: ', stepsTimeframe);
     console.log('stepsTimeframeDisplay: ', stepsTimeframeDisplay);
     console.log('stepsDurationInSeconds: ', stepsDurationInSeconds);
@@ -127,34 +130,50 @@
     {/if}
 </div>
 
-{#snippet stepRowDisplay(index, step, stepsTimeframeDisplay, highlightStep)}
+{#snippet stepRowDisplay(index, step, stepWaterInfos, stepsTimeframeDisplay, highlightStep)}
     <!-- <button class="border border-solid border-slate-600" onclick="{showModalDialog}"> -->
     <div class="border border-solid border-slate-600">
-        {#if step.switchState}
-            <SwitchStateDisplay switchState={step.switchState} highlightState={highlightStep}/>
+        
+        {#if isImmersionDripperRecipe}
+            <SwitchStateDisplay 
+                switchState={step.switchState} isImmersionDripperRecipe={isImmersionDripperRecipe} 
+                highlightState={highlightStep} durationInSeconds={stepsDurationInSeconds[index]}/>
+        {:else}
+            <TimeframeDurationDisplay durationInSeconds={stepsDurationInSeconds[index]} pouringStage={step.stage} />
         {/if}
-        {#if stepsTimeframeDisplay && stepsTimeframeDisplay[index]}
+        
+        {#if stepsTimeframeDisplay && stepsTimeframeDisplay[index] && shouldDisplayTimeframe(step)}
             <StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} highlightStep={highlightStep}/>
         {/if}
     </div>
     <!-- </button> -->
     <!-- <div class="grow ml-2">{@html step.msgKey(step.params)}</div> -->
-     <StepMessageDisplay step={step} />
+    {#if stepsTimeframeDisplay && stepsTimeframeDisplay[index]} 
+        <StepMessageDisplay stepWaterInfo={stepWaterInfos[index]} step={step} stepsTimeframeDisplay={stepsTimeframeDisplay[index]}/>
+    {/if}
 {/snippet}
 
-{#snippet stepRowDisplayWithEdit(index, step, stepsTimeframeDisplay, stepsDurationInSeconds, highlightStep)}
+{#snippet stepRowDisplayWithEdit(index, step, stepWaterInfos, stepsTimeframeDisplay, stepsDurationInSeconds, highlightStep)}
     <!-- <button class="border border-solid border-slate-600" onclick="{showModalDialog}"> -->
     <div class="border border-solid border-slate-600">
-        {#if step.switchState}
-            <SwitchStateDisplay switchState={step.switchState} highlightState={highlightStep}/>
+        
+        {#if isImmersionDripperRecipe}
+            <SwitchStateDisplay 
+                switchState={step.switchState} isImmersionDripperRecipe={isImmersionDripperRecipe} 
+                highlightState={highlightStep} durationInSeconds={stepsDurationInSeconds[index]}/>
+        {:else}
+            <TimeframeDurationDisplay durationInSeconds={stepsDurationInSeconds[index]} pouringStage={step.stage} />
         {/if}
-        {#if stepsTimeframeDisplay && stepsTimeframeDisplay[index]}
+        
+        {#if stepsTimeframeDisplay && stepsTimeframeDisplay[index] && shouldDisplayTimeframe(step)}
             <StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} highlightStep={highlightStep}/>
         {/if}
     </div>
     <!-- </button> -->
     <!-- <div class="grow ml-2">{@html step.msgKey(step.params)}</div> -->
-    <StepMessageDisplay step={step} />
+    {#if stepsTimeframeDisplay && stepsTimeframeDisplay[index]}
+        <StepMessageDisplay stepWaterInfo={stepWaterInfos[index]} step={step} stepsTimeframeDisplay={stepsTimeframeDisplay[index]}/>
+    {/if}
 
     {#if inEditMode}
         <button onclick={() => {stepsDurationInSeconds[index] -= 1; coffeeRecipeStore.stepsDurationInSeconds = stepsDurationInSeconds;} }>
@@ -184,21 +203,21 @@
             {#if (isRunningActiveStep(stopwatch.elaspedTimeInSeconds, stepsTimeframe[index]) )}
                 {#if (!isStepCloseToFinish(stopwatch.elaspedTimeInSeconds, stepsTimeframe[index], 7)) }
                     <div class="pl-2 py-2 flex items-center bg-gray-900 text-white">
-                        {@render stepRowDisplay(index, step, stepsTimeframeDisplay, true)}
+                        {@render stepRowDisplay(index, step, stepWaterInfos, stepsTimeframeDisplay, true)}
                     </div>
                     
                 {:else}
                     <div class="pl-2 py-2 flex items-center bg-gray-900 text-white animate-pulse ">
-                        {@render stepRowDisplay(index, step, stepsTimeframeDisplay, true)}
+                        {@render stepRowDisplay(index, step, stepWaterInfos, stepsTimeframeDisplay, true)}
                     </div>
                 {/if}
             {:else if (isRunningNonActiveStep(stopwatch.elaspedTimeInSeconds, stepsTimeframe[index]))}
                 <div class=" pl-2 py-2 flex items-center text-slate-300">
-                    {@render stepRowDisplay(index, step, stepsTimeframeDisplay, false)}
+                    {@render stepRowDisplay(index, step, stepWaterInfos, stepsTimeframeDisplay, false)}
                 </div>
             {:else}
                 <div class=" pl-2 py-2 flex items-center">
-                    {@render stepRowDisplayWithEdit(index, step, stepsTimeframeDisplay, stepsDurationInSeconds, true)}
+                    {@render stepRowDisplayWithEdit(index, step, stepWaterInfos, stepsTimeframeDisplay, stepsDurationInSeconds, true)}
                 </div>
             {/if}
         {/each}
@@ -208,5 +227,5 @@
 
 
 <Modal bind:this={dialog} bind:showModal={showModal} dialogTitleId={m.label_edit}>
-    <StepsTimeframeEditor steps={steps} stepsDurationInSeconds={stepsDurationInSeconds} highlightStep={false} closeDialog={closeDialog} />
+    <StepsTimeframeEditor steps={steps} stepWaterInfos={steps} stepsTimeframeDisplay={stepsTimeframeDisplay} stepsDurationInSeconds={stepsDurationInSeconds} highlightStep={false} closeDialog={closeDialog} isImmersionDripperRecipe={isImmersionDripperRecipe} />
 </Modal>

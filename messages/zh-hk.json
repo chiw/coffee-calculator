@@ -43,9 +43,13 @@
     "label_step_msg_water_temperature" : ", 水溫 {waterTemperature}°C",
     "label_step_msg_let_water_flow" : "讓水流畢",
     "label_step_msg_let_water_flow_until" : "讓水流直到 {time}",
+    "label_step_pause": "等待",
+    "label_step_swirl": " 輕輕搖杯",
 
     "label_harioSwitch_TetsuKasuya" : "Hario Switch (粕谷哲)",
     "label_harioSwitch_EmiFukahori" : "Hario Switch (Emi Fukahori)",
     "label_harioSwitch_OleKristianBoen": "Hario Switch (Ole Kristian Boen)",
-    "label_harioSwitch_CoffeeChronicler" : "Hario Switch (Coffee Chronicler)"
+    "label_harioSwitch_CoffeeChronicler" : "Hario Switch (Coffee Chronicler)",
+    "label_harioV60_JamesHoffmann" : "Hario V60 (James Hoffmann)",
+    "label_unknown_recipe" : "Unknown Recipe"
 }

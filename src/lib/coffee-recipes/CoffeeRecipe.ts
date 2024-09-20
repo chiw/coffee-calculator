@@ -7,8 +7,9 @@ export abstract class CoffeeRecipe {
     defaultCoffeeParams: CoffeeParams;
     public references: Reference[] = [];
 
-    constructor(recipeId: CoffeeRecipeId, defaultCoffeeParams: CoffeeParams) {
+    constructor(recipeId: CoffeeRecipeId, defaultCoffeeParams: CoffeeParams, references: Reference[]) {
         this.recipeId = recipeId;
         this.defaultCoffeeParams = defaultCoffeeParams;
+        this.references = references;
     }
 }

@@ -1,4 +1,6 @@
-import * as m from '$lib/paraglide/messages.js';
+import { PouringTechnique } from './PouringTechnique';
+import { PourOverStage } from './PourOverStage';
+import { SwitchState } from './SwitchState';
 
 export enum CoffeeDripper {
     HarioSwitch = "HarioSwitch"
@@ -8,12 +10,275 @@ export enum CoffeeRecipeId {
     HarioSwitch_TetsuKasuya = 'HarioSwitch_TetsuKasuya',
     HarioSwitch_EmiFukahori = 'HarioSwitch_EmiFukahori',
     HarioSwitch_OleKristianBoen = 'HarioSwitch_OleKristianBoen',
-    HarioSwitch_CoffeeChronicler = 'HarioSwitch_CoffeeChronicler'
+    HarioSwitch_CoffeeChronicler = 'HarioSwitch_CoffeeChronicler',
+    HarioV60_JamesHoffmann = 'HarioV60_JamesHoffmann'
 }
 
 export const CoffeeRecipesChoices = [
-    { id: CoffeeRecipeId.HarioSwitch_TetsuKasuya, displayLabelId: m.label_harioSwitch_TetsuKasuya, display: "Hario Switch (Tetsu Kasuya)" },
-    { id: CoffeeRecipeId.HarioSwitch_EmiFukahori, displayLabelId: m.label_harioSwitch_EmiFukahori, display: "Hario Switch (Emi Fukahori)" },
-    { id: CoffeeRecipeId.HarioSwitch_OleKristianBoen, displayLabelId: m.label_harioSwitch_OleKristianBoen, display: "Hario Switch (Ole Kristian Bøen)" },
-    { id: CoffeeRecipeId.HarioSwitch_CoffeeChronicler, displayLabelId: m.label_harioSwitch_CoffeeChronicler, display: "Hario Switch (The Coffee Chronicler)"}
+    { id: CoffeeRecipeId.HarioSwitch_TetsuKasuya },
+    { id: CoffeeRecipeId.HarioSwitch_EmiFukahori },
+    { id: CoffeeRecipeId.HarioSwitch_OleKristianBoen },
+    { id: CoffeeRecipeId.HarioSwitch_CoffeeChronicler },
+    { id: CoffeeRecipeId.HarioV60_JamesHoffmann }
 ]
+
+export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) => {
+    switch(coffeeRecipId) {
+        case CoffeeRecipeId.HarioSwitch_TetsuKasuya : {
+            return {
+                isTimerRecipe: true,
+                isImmersionDripperRecipe: true,
+                coffeeParams: {
+                    beanInGrams: 20,
+                    coffeeToWaterRatio: -1,
+                    waterInGrams: 280
+                },
+                stepsDurationInSeconds: [30, 45, 30, 75],
+                pourParams: [
+                    { waterPercentage: 21.4285, waterTemp: 93},
+                    { waterPercentage: 21.4285, waterTemp: 93},
+                    { waterPercentage: 100 - (21.4285 * 2), waterTemp: 70}
+                ],
+                steps: [
+                    {
+                        switchState: SwitchState.OPEN,
+                        stage: PourOverStage.BLOOMING,
+                        showWaterTemperature: true
+                    },
+                    {
+                        switchState: SwitchState.OPEN,
+                        stage: PourOverStage.FIRST_POUR,
+                        showWaterTemperature: true
+                    },
+                    {
+                        switchState: SwitchState.CLOSED,
+                        stage: PourOverStage.SECOND_POUR,
+                        showWaterTemperature: true
+                    },
+                    {
+                        switchState: SwitchState.OPEN,
+                        stage: PourOverStage.FINAL
+                    }
+                ],
+                references: [
+                    { 
+                        description : 'Is it the God Recipe, or the Devil Recipe? ｜ The Ultimate Switch Recipe Ever!! - Tetsu Kasuya', 
+                        url: 'https://www.youtube.com/watch?v=gC8K40kZ_6E' 
+                    }
+                ]
+            }
+        };
+        case CoffeeRecipeId.HarioSwitch_EmiFukahori : {
+            return  {
+                isTimerRecipe: true,
+                isImmersionDripperRecipe: true,
+                coffeeParams: {
+                    beanInGrams: 14,
+                    coffeeToWaterRatio: -1,
+                    waterInGrams: 200
+                },
+                stepsDurationInSeconds: [30, 40, 70],
+                pourParams: [
+                    { waterPercentage: 25, waterTemp: 93},
+                    { waterPercentage: 75, waterTemp: 93}
+                ],
+                steps: [
+                    {
+                        switchState: SwitchState.CLOSED,
+                        stage: PourOverStage.BLOOMING
+                    },
+                    {
+                        switchState: SwitchState.OPEN,
+                        stage: PourOverStage.POURING,
+                        pouringTechnique: PouringTechnique.CENTER
+                    },
+                    {
+                        switchState: SwitchState.OPEN,
+                        stage: PourOverStage.FINAL
+                    }
+                ],
+                references: [
+                    { 
+                        description : 'Easy Hario Switch Recipe from Emi Fukahori (World Brewers Cup Champion)', 
+                        url: 'https://europeancoffeetrip.com/easy-hario-switch-recipe-emi-fukahor/' 
+                    }
+                ]
+            }
+        };
+        case CoffeeRecipeId.HarioSwitch_OleKristianBoen : {
+            return  {
+                isTimerRecipe: true,
+                isImmersionDripperRecipe: true,
+                coffeeParams: {
+                    beanInGrams: 16.5,
+                    coffeeToWaterRatio: -1,
+                    waterInGrams: 240
+                },
+                stepsDurationInSeconds: [40, 50, 40, 65],
+                pourParams: [
+                    { waterPercentage: 20.8333, waterTemp: 96},
+                    { waterPercentage: 41.6667, waterTemp: 96},
+                    { waterPercentage: 37.5, waterTemp: 96},
+                ],
+                steps: [
+                    {
+                        switchState: SwitchState.CLOSED,
+                        stage: PourOverStage.BLOOMING,
+                        showWaterTemperature: true
+                    },
+                    {
+                        switchState: SwitchState.OPEN,
+                        stage: PourOverStage.FIRST_POUR,
+                        pouringTechnique: PouringTechnique.CENTER
+                    },
+                    {
+                        switchState: SwitchState.CLOSED,
+                        stage: PourOverStage.SECOND_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE
+                    },
+                    {
+                        switchState: SwitchState.OPEN,
+                        stage: PourOverStage.FINAL
+                    }
+                ],
+                references: [
+                    { 
+                        description : "Ole Kristian Bøen's Hario Switch Recipe", 
+                        url: 'https://www.hario-europe.com/blogs/hario-community/ole-kristian-boens-switch-recipe' 
+                    }
+                ]
+            }
+        };
+        case CoffeeRecipeId.HarioSwitch_CoffeeChronicler : {
+            return {
+                isTimerRecipe: true,
+                isImmersionDripperRecipe: true,
+                coffeeParams: {
+                    beanInGrams: 20,
+                    coffeeToWaterRatio: 16,
+                    waterInGrams: -1
+                },
+                stepsDurationInSeconds: [25, 95, 75],
+                pourParams: [
+                    { waterPercentage: 50, waterTemp: 93},
+                    { waterPercentage: 50, waterTemp: 93}
+                ],
+                steps: [
+                    {
+                        switchState: SwitchState.OPEN,
+                        stage: PourOverStage.FIRST_POUR
+                    },
+                    {
+                        switchState: SwitchState.CLOSED,
+                        stage: PourOverStage.SECOND_POUR
+                    },
+                    {
+                        switchState: SwitchState.OPEN,
+                        stage: PourOverStage.FINAL
+                    }
+                ],
+                references: [
+                    { 
+                        description : 'Hario Switch Review: The Hybrid Brewer You Need to Try', 
+                        url: 'https://coffeechronicler.com/hario-switch/' 
+                    },
+                    { 
+                        description : '(YouTube) The ultimate Hario Switch RECIPE: A consistent cup that will blow your mind', 
+                        url: 'https://www.youtube.com/watch?v=68ZOXrXbVHc' 
+                    }
+                ]
+            }
+        }
+        case CoffeeRecipeId.HarioV60_JamesHoffmann : {
+            return {
+                isTimerRecipe: true,
+                isImmersionDripperRecipe: false,
+                coffeeParams: {
+                    beanInGrams: 15,
+                    coffeeToWaterRatio: -1,
+                    waterInGrams: 250
+                },
+                stepsDurationInSeconds: [45, 15, 10, 10, 10, 10, 10, 10, 5, 55],
+                pourParams: [
+                    { waterPercentage: 20, waterTemp: 93},
+                    { waterPercentage: 20, waterTemp: 93},
+                    { waterPercentage: 0, waterTemp: 93},
+                    { waterPercentage: 20, waterTemp: 93},
+                    { waterPercentage: 0, waterTemp: 93},
+                    { waterPercentage: 20, waterTemp: 93},
+                    { waterPercentage: 0, waterTemp: 93},
+                    { waterPercentage: 20, waterTemp: 93},
+                    { waterPercentage: 0, waterTemp: 93},
+                ],
+                steps: [
+                    {
+                        stage: PourOverStage.BLOOMING,
+                        swirl: true
+                    },
+                    {
+                        
+                        stage: PourOverStage.FIRST_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE
+                    },
+                    {
+                        
+                        stage: PourOverStage.PAUSE
+                    },
+                    {
+                        
+                        stage: PourOverStage.SECOND_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE
+                    },
+                    {
+                        
+                        stage: PourOverStage.PAUSE
+                    },
+                    {
+                        
+                        stage: PourOverStage.THIRD_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE
+                    },
+                    {
+                        
+                        stage: PourOverStage.PAUSE
+                    },
+                    {
+                        
+                        stage: PourOverStage.FOURTH_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE
+                    },
+                    {
+                        
+                        stage: PourOverStage.PAUSE,
+                        swirl: true
+                    },
+                    {                        
+                        stage: PourOverStage.FINAL
+                    }
+                ],
+                references: [
+                    { 
+                        description : 'A Better 1 Cup V60 Technique - James Hoffmann', 
+                        url: 'https://www.youtube.com/watch?v=1oB1oDrDkHM' 
+                    }
+                ]
+            }
+        };
+        default: {
+            return {
+                isTimerRecipe: false,
+                isImmersionDripperRecipe: false,
+                coffeeParams: {
+                    beanInGrams: -1,
+                    coffeeToWaterRatio: -1,
+                    waterInGrams: -1
+                },
+                stepsDurationInSeconds: [],
+                pourParams: [],
+                steps: [],
+                references: []
+            }
+        }
+
+    }
+}

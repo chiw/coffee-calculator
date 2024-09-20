@@ -32,21 +32,4 @@ export abstract class CoffeeParams {
         }
     }
 
-    updateBeanInGrams(beanInGrams: number): CoffeeParams {
-        console.log('updateBeanInGrams beanInGrams: ', beanInGrams, ' will new a CoffeeParams object');
-        return this.getNewInstance(beanInGrams, this.coffeeToWaterRatio, this.waterInGrams);
-    }
-
-    updateWaterInGrams(waterInGrams: number): CoffeeParams {
-        console.log('waterInGrams waterInGrams: ', waterInGrams, ' will new a CoffeeParams object');
-        return this.getNewInstance(this.beanInGrams, this.coffeeToWaterRatio, waterInGrams);
-    }
-
-    updateCoffeeToWaterRatio(coffeeToWaterRatio: number): CoffeeParams {
-        console.log('updateCoffeeToWaterRatio coffeeToWaterRatio: ', coffeeToWaterRatio, ' will new a CoffeeParams object');
-        return this.getNewInstance(this.beanInGrams, coffeeToWaterRatio, this.waterInGrams);
-    }
-
-    abstract getNewInstance(beanInGrams: number, coffeeToWaterRatio: number, waterInGrams: number): CoffeeParams;
-
 }
