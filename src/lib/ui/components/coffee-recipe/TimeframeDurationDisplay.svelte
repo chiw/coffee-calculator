@@ -1,7 +1,15 @@
 <script lang="ts">
-	import { isPauseStage } from "$lib/coffee-recipes/PourOverStage";
+	import type { PourOverStage } from "$lib/coffee-recipes";
+	import { isPauseStage } from "$lib/utils/CoffeeRecipeUtils";
 
-    let { durationInSeconds, pouringStage} = $props();
+	// import { isPauseStage } from "$lib/coffee-recipes/PourOverStage";
+
+    interface TimeframeDurationDisplay {
+        durationInSeconds: number
+        pouringStage: PourOverStage
+    }
+
+    let { durationInSeconds, pouringStage} : TimeframeDurationDisplay = $props();
 </script>
 
 <div>

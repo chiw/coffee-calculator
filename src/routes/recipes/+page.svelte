@@ -17,24 +17,10 @@
     {#if coffeeRecipeStore.coffeeRecipe}    
         <div class="mt-5">
             {#if coffeeRecipeStore.coffeeRecipeSteps.isTimerRecipe}
-                <StepsWithTimerDisplay
-                    steps={coffeeRecipeStore.coffeeRecipeSteps.steps}
-                    stepWaterInfos={coffeeRecipeStore.coffeeRecipeSteps.stepWaterInfos}
-                    stepsDurationInSeconds={coffeeRecipeStore.coffeeRecipeSteps.stepsDurationInSeconds}
-                    stepsTimeframe={coffeeRecipeStore.coffeeRecipeSteps.stepsTimeframe}
-                    stepsTimeframeDisplay={coffeeRecipeStore.coffeeRecipeSteps.stepsTimeframeDisplay} 
-                    timerInSeconds={coffeeRecipeStore.coffeeRecipeSteps.timerInSeconds}
-                    isImmersionDripperRecipe={coffeeRecipeStore.coffeeRecipeSteps.isImmersionDripperRecipe}
-                />
+                <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeStore.coffeeRecipeSteps} />
             {:else}
                 <!-- <div class="text-xl font-bold italic">{m.label_steps()}</div> -->
-                <StepsDisplay 
-                    steps={coffeeRecipeStore.coffeeRecipeSteps.steps}
-                    stepWaterInfos={coffeeRecipeStore.coffeeRecipeSteps.stepWaterInfos}
-                    stepsDurationInSeconds={coffeeRecipeStore.coffeeRecipeSteps.stepsDurationInSeconds} 
-                    stepsTimeframeDisplay={coffeeRecipeStore.coffeeRecipeSteps.stepsTimeframeDisplay}
-                    isImmersionDripperRecipe={coffeeRecipeStore.coffeeRecipeSteps.isImmersionDripperRecipe}
-                />
+                <StepsDisplay coffeeRecipeSteps={coffeeRecipeStore.coffeeRecipeSteps}  />
             {/if}
         </div>
         

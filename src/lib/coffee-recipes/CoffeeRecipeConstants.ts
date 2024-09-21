@@ -1,18 +1,14 @@
-import { PouringTechnique } from './PouringTechnique';
-import { PourOverStage } from './PourOverStage';
-import { SwitchState } from './SwitchState';
+import type { CoffeeRecipeConfig } from "./CoffeeRecipeTypes.d"; 
+import { PouringTechnique, PourOverStage, SwitchState } from "./CoffeeRecipeTypes.d";
 
-export enum CoffeeDripper {
-    HarioSwitch = "HarioSwitch"
-}
-
-export enum CoffeeRecipeId {
-    HarioSwitch_TetsuKasuya = 'HarioSwitch_TetsuKasuya',
-    HarioSwitch_EmiFukahori = 'HarioSwitch_EmiFukahori',
-    HarioSwitch_OleKristianBoen = 'HarioSwitch_OleKristianBoen',
-    HarioSwitch_CoffeeChronicler = 'HarioSwitch_CoffeeChronicler',
-    HarioV60_JamesHoffmann = 'HarioV60_JamesHoffmann'
-}
+export const CoffeeRecipeId = {
+    HarioSwitch_TetsuKasuya: 'HarioSwitch_TetsuKasuya',
+    HarioSwitch_EmiFukahori: 'HarioSwitch_EmiFukahori',
+    HarioSwitch_OleKristianBoen: 'HarioSwitch_OleKristianBoen',
+    HarioSwitch_CoffeeChronicler: 'HarioSwitch_CoffeeChronicler',
+    HarioV60_JamesHoffmann: 'HarioV60_JamesHoffmann'
+} as const;
+export type CoffeeRecipeId = keyof typeof CoffeeRecipeId;
 
 export const CoffeeRecipesChoices = [
     { id: CoffeeRecipeId.HarioSwitch_TetsuKasuya },
@@ -20,21 +16,21 @@ export const CoffeeRecipesChoices = [
     { id: CoffeeRecipeId.HarioSwitch_OleKristianBoen },
     { id: CoffeeRecipeId.HarioSwitch_CoffeeChronicler },
     { id: CoffeeRecipeId.HarioV60_JamesHoffmann }
-]
+] as const;
 
-export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) => {
+export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) : CoffeeRecipeConfig => {
     switch(coffeeRecipId) {
         case CoffeeRecipeId.HarioSwitch_TetsuKasuya : {
-            return {
+            return <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
                 isImmersionDripperRecipe: true,
-                coffeeParams: {
+                coffeeParameters: {
                     beanInGrams: 20,
                     coffeeToWaterRatio: -1,
                     waterInGrams: 280
                 },
                 stepsDurationInSeconds: [30, 45, 30, 75],
-                pourParams: [
+                pourParameters: [
                     { waterPercentage: 21.4285, waterTemp: 93},
                     { waterPercentage: 21.4285, waterTemp: 93},
                     { waterPercentage: 100 - (21.4285 * 2), waterTemp: 70}
@@ -69,16 +65,16 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) => {
             }
         };
         case CoffeeRecipeId.HarioSwitch_EmiFukahori : {
-            return  {
+            return  <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
                 isImmersionDripperRecipe: true,
-                coffeeParams: {
+                coffeeParameters: {
                     beanInGrams: 14,
                     coffeeToWaterRatio: -1,
                     waterInGrams: 200
                 },
                 stepsDurationInSeconds: [30, 40, 70],
-                pourParams: [
+                pourParameters: [
                     { waterPercentage: 25, waterTemp: 93},
                     { waterPercentage: 75, waterTemp: 93}
                 ],
@@ -106,16 +102,16 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) => {
             }
         };
         case CoffeeRecipeId.HarioSwitch_OleKristianBoen : {
-            return  {
+            return  <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
                 isImmersionDripperRecipe: true,
-                coffeeParams: {
+                coffeeParameters: {
                     beanInGrams: 16.5,
                     coffeeToWaterRatio: -1,
                     waterInGrams: 240
                 },
                 stepsDurationInSeconds: [40, 50, 40, 65],
-                pourParams: [
+                pourParameters: [
                     { waterPercentage: 20.8333, waterTemp: 96},
                     { waterPercentage: 41.6667, waterTemp: 96},
                     { waterPercentage: 37.5, waterTemp: 96},
@@ -150,16 +146,16 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) => {
             }
         };
         case CoffeeRecipeId.HarioSwitch_CoffeeChronicler : {
-            return {
+            return <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
                 isImmersionDripperRecipe: true,
-                coffeeParams: {
+                coffeeParameters: {
                     beanInGrams: 20,
                     coffeeToWaterRatio: 16,
                     waterInGrams: -1
                 },
                 stepsDurationInSeconds: [25, 95, 75],
-                pourParams: [
+                pourParameters: [
                     { waterPercentage: 50, waterTemp: 93},
                     { waterPercentage: 50, waterTemp: 93}
                 ],
@@ -190,16 +186,16 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) => {
             }
         }
         case CoffeeRecipeId.HarioV60_JamesHoffmann : {
-            return {
+            return <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
                 isImmersionDripperRecipe: false,
-                coffeeParams: {
+                coffeeParameters: {
                     beanInGrams: 15,
                     coffeeToWaterRatio: -1,
                     waterInGrams: 250
                 },
                 stepsDurationInSeconds: [45, 15, 10, 10, 10, 10, 10, 10, 5, 55],
-                pourParams: [
+                pourParameters: [
                     { waterPercentage: 20, waterTemp: 93},
                     { waterPercentage: 20, waterTemp: 93},
                     { waterPercentage: 0, waterTemp: 93},
@@ -220,8 +216,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) => {
                         stage: PourOverStage.FIRST_POUR,
                         pouringTechnique: PouringTechnique.CIRCLE
                     },
-                    {
-                        
+                    {                        
                         stage: PourOverStage.PAUSE
                     },
                     {
@@ -265,16 +260,16 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) => {
             }
         };
         default: {
-            return {
+            return <CoffeeRecipeConfig>{
                 isTimerRecipe: false,
                 isImmersionDripperRecipe: false,
-                coffeeParams: {
+                coffeeParameters: {
                     beanInGrams: -1,
                     coffeeToWaterRatio: -1,
                     waterInGrams: -1
                 },
                 stepsDurationInSeconds: [],
-                pourParams: [],
+                pourParameters: [],
                 steps: [],
                 references: []
             }

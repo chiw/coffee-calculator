@@ -1,26 +1,26 @@
 import { CoffeeRecipeSteps } from "./CoffeeRecipeSteps";
 import { CoffeeRecipeId } from "./CoffeeRecipeConstants";
-import { CoffeeParams } from "./CoffeeParams";
-import type { PourParam } from "./PourParam.type";
+import { CoffeeParameters } from "./CoffeeParameters";
+import type { PourParametersConfig, StepConfig } from "./CoffeeRecipeTypes";
 
-export class DefaultCoffeeRecipeSteps extends CoffeeRecipeSteps {
+export class StandardCoffeeRecipeSteps extends CoffeeRecipeSteps {
 
-    constructor(coffeeRecipeId: CoffeeRecipeId, coffeeParams: CoffeeParams, stepsDurationInSeconds: number[], pourParams?: PourParam[], steps, isTimerRecipe: boolean = false, isImmersionDripperRecipe: boolean = false) {
+    constructor(coffeeRecipeId: CoffeeRecipeId, coffeeParams: CoffeeParameters, stepsDurationInSeconds: number[], pourParameters?: PourParametersConfig[], steps: StepConfig[], isTimerRecipe: boolean = false, isImmersionDripperRecipe: boolean = false) {
         super(
             coffeeRecipeId, 
             coffeeParams, 
             stepsDurationInSeconds ? stepsDurationInSeconds : [],
-            pourParams ? pourParams : [],
+            pourParameters ? pourParameters : [],
             steps ? steps : [],
             isTimerRecipe,
             isImmersionDripperRecipe
         );
         
-        console.log('DefaultCoffeeRecipeSteps constructor', 
+        console.log('StandardCoffeeRecipeSteps constructor', 
             'coffeeRecipeId: ', this.coffeeRecipeId, 
-            'coffeeParams: ', this.coffeeParams, 
+            'coffeeParams: ', this.coffeeParameters, 
             'stepsDurationInSeconds', this.stepsDurationInSeconds, 
-            'pourParams', this.pourParams, 
+            'pourParameters', this.pourParameters, 
             'stepWaterInfos', this.stepWaterInfos,
             'steps', this.steps,
             'isTimerRecipe', this.isTimerRecipe,

@@ -1,5 +1,7 @@
-import * as m from '$lib/paraglide/messages.js';
 import { CoffeeRecipeId, PouringTechnique, PourOverStage, SwitchState, type StepWaterInfo } from '$lib/coffee-recipes';
+import * as m from '$lib/paraglide/messages.js';
+
+
 
 export const coffeeRecipeIdSelectMessageKey = (coffeeRecipeId: CoffeeRecipeId) => {
     switch(coffeeRecipeId) {
@@ -43,18 +45,18 @@ export const stepWaterInfoMessageKey = (stepWaterInfo: StepWaterInfo) => {
         : m.label_step_msg_water_volume(stepWaterInfo);
 }
 
-export const waterTemperatureMessageKey = (waterTemperature) => {
+export const waterTemperatureMessageKey = (waterTemperature: number) => {
     return m.label_step_msg_water_temperature({waterTemperature: waterTemperature});
 }
 
-export const finalStepMessageKey = (time) => {
+export const finalStepMessageKey = (time: string) => {
     return m.label_step_msg_let_water_flow_until({time: time});
 }
 
-export const switchStateMessageKey = (switchState: SwitchState) => {
+export const switchStateMessage = (switchState: SwitchState) => {
     switch(switchState) {
-        case SwitchState.CLOSED : return m.label_switchState_closed;
-        case SwitchState.OPEN: return m.label_switchState_open;
+        case SwitchState.CLOSED : return m.label_switchState_closed();
+        case SwitchState.OPEN: return m.label_switchState_open();
     }
 }
 

@@ -6,33 +6,40 @@
     import StepTimeFrameDisplay from "./StepTimeFrameDisplay.svelte";
 	import { shouldDisplayTimeframe } from "$lib/utils/TimeframeDisplayUtils";
 	import TimeframeDurationDisplay from "./TimeframeDurationDisplay.svelte";
+	import type { CoffeeRecipeSteps } from "$lib/coffee-recipes/CoffeeRecipeSteps";
 
-    let { steps, stepWaterInfos, stepsTimeframeDisplay, stepsDurationInSeconds, isImmersionDripperRecipe } = $props();
+    interface StepDisplayProps {
+        coffeeRecipeSteps: CoffeeRecipeSteps
+    }
+    let { coffeeRecipeSteps } : StepDisplayProps = $props();
+
 </script>
 
 <RecipeParametersCardDisplay />
 
 <div class="flex flex-col mb-1">
-    {#if steps}    
+    {#if coffeeRecipeSteps.steps}    
         <div class="flex flex-col divide-y divide-slate-300 py-1 ">
-            {#each steps as step, index }           
+            {#each coffeeRecipeSteps.steps as step, index }           
                 <div class=" pl-2 py-2 flex items-center">
                     <div class="border border-solid border-slate-600">
-                            {#if isImmersionDripperRecipe}
+                            {#if coffeeRecipeSteps.isImmersionDripperRecipe}
                                 <SwitchStateDisplay 
-                                    switchState={step.switchState} isImmersionDripperRecipe={isImmersionDripperRecipe} 
-                                    highlightState={false} durationInSeconds={stepsDurationInSeconds[index]}/>
+                                    switchState={step.switchState} isImmersionDripperRecipe={coffeeRecipeSteps.isImmersionDripperRecipe} 
+                                    highlightState={false} durationInSeconds={coffeeRecipeSteps.stepsDurationInSeconds[index]}/>
                             {:else}
-                                <TimeframeDurationDisplay durationInSeconds={stepsDurationInSeconds[index]} pouringStage={step.stage} />
+                                <TimeframeDurationDisplay durationInSeconds={coffeeRecipeSteps.stepsDurationInSeconds[index]} pouringStage={step.stage} />
                             {/if}
                         
-                        {#if stepsTimeframeDisplay && stepsTimeframeDisplay[index] && shouldDisplayTimeframe(step)}
-                            <StepTimeFrameDisplay stepsTimeframeDisplay={stepsTimeframeDisplay[index]} highlightStep={false}/>
+                        {#if coffeeRecipeSteps.stepsTimeframe[index] && shouldDisplayTimeframe(step)}
+                            <StepTimeFrameDisplay timeframe={coffeeRecipeSteps.stepsTimeframe[index]} highlightStep={false}/>
                         {/if}
                     </div>
 
                     <!-- <div class="my-1 p-1">{@html step.msgKey(step.params)}</div> -->
-                    <StepMessageDisplay index={index} step={step} stepWaterInfo={stepWaterInfos[index]} stepsTimeframeDisplay={stepsTimeframeDisplay[index]} />
+                    <StepMessageDisplay index={index} step={step} 
+                        stepWaterInfo={coffeeRecipeSteps.stepWaterInfos[index]} 
+                        timeframe={coffeeRecipeSteps.stepsTimeframe[index]} />
                 </div>
             {/each}
         </div>

@@ -1,14 +1,14 @@
 import { calculateRecipeWaterInGrams, calculateRecipeCoffeeToWaterRatio } from "./CoffeeRecipeUtils";
 import { CoffeeRecipeId } from "./CoffeeRecipeConstants";
 
-export abstract class CoffeeParams {
+export abstract class CoffeeParameters {
     recipeId: CoffeeRecipeId;
     public beanInGrams: number = -1;
     public waterInGrams: number = -1;
     public coffeeToWaterRatio: number = -1;
 
     constructor(recipeId: CoffeeRecipeId, beanInGrams: number, coffeeToWaterRatio: number, waterInGrams: number) {
-        console.log('CoffeeParams constructor recipeId: ', recipeId,', beanInGrams: ', beanInGrams, ' coffeeToWaterRatio: ', coffeeToWaterRatio, ' waterInGrams: ', waterInGrams);
+        console.log('CoffeeParameters constructor recipeId: ', recipeId,', beanInGrams: ', beanInGrams, ' coffeeToWaterRatio: ', coffeeToWaterRatio, ' waterInGrams: ', waterInGrams);
         this.recipeId = recipeId;
 
         /* beanInGrams x coffeeToWaterRatio = waterInGrams */

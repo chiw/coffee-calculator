@@ -1,4 +1,7 @@
-import type { PourParam } from "./PourParam.type";
+// import type { PourParam } from "./PourParam.type";
+
+import type { PourParametersConfig } from "./CoffeeRecipeTypes";
+
 
 function calculateRecipeWaterInGrams(beanInGrams: number, coffeeToWaterRatio: number) {
     return beanInGrams * coffeeToWaterRatio;
@@ -8,8 +11,8 @@ function calculateRecipeCoffeeToWaterRatio(waterInGrams: number, beanInGrams: nu
     return waterInGrams / beanInGrams;
 }
 
-function calculatePourWaterInGrams(waterInGrams: number, pourParam: PourParam) {
-    return Math.round(waterInGrams * pourParam.waterPercentage / 100);
+function calculatePourWaterInGrams(waterInGrams: number, pourParametersConfig: PourParametersConfig) {
+    return Math.round(waterInGrams * pourParametersConfig.waterPercentage / 100);
 }
 
 export {

@@ -1,9 +1,9 @@
-import { CoffeeParams } from "./CoffeeParams";
+import { CoffeeParameters } from "./CoffeeParameters";
 import type { CoffeeRecipeId } from "./CoffeeRecipeConstants";
 
-export class DefaultCoffeeParams extends CoffeeParams {
+export class StandardCoffeeParameters extends CoffeeParameters {
     constructor(coffeeRecipeId: CoffeeRecipeId, beanInGrams: number, coffeeToWaterRatio: number, waterInGrams: number) {
-        console.log('DefaultCoffeeParams coffeeRecipeId: ', coffeeRecipeId,
+        console.log('StandardCoffeeParameters coffeeRecipeId: ', coffeeRecipeId,
             ' beanInGrams: ', beanInGrams, 
             ' coffeeToWaterRatio: ', coffeeToWaterRatio, 
             ' waterInGrams: ', waterInGrams);

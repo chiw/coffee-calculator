@@ -1,15 +1,5 @@
-export enum PourOverStage {
-    BLOOMING = 'BLOOMING',
-    POURING = 'POURING',
-    FIRST_POUR = 'FIRST_POUR',
-    SECOND_POUR = 'SECOND_POUR',
-    THIRD_POUR = 'THIRD_POUR',
-    FOURTH_POUR = 'FOURTH_POUR',
-    FIFTH_POUR = 'FIFTH_POUR',
-    SIXTH_POUR = 'SIXTH_POUR',
-    PAUSE = 'PAUSE',
-    FINAL = 'FINAL'
-}
+import { PourOverStage } from "$lib/coffee-recipes";
+
 
 export const isPouringStage = (stage: PourOverStage): boolean => {
     switch(stage) {

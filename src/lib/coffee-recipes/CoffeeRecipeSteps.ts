@@ -1,66 +1,53 @@
 import type { CoffeeRecipeId } from "./CoffeeRecipeConstants";
-import type { PourParam } from "./PourParam.type";
-import type { CoffeeParams } from "./CoffeeParams";
+import type { CoffeeParameters } from "./CoffeeParameters";
 import { displayNumber } from "$lib/utils/NumberDisplayUtils";
-import { toHHMMSS } from "$lib/utils/TimeUtils";
-import type { StepWaterInfo } from "./StepWaterInfo.type";
+import { calculateStepsTimeframe } from "$lib/utils/TimeUtils";
 import { calculatePourWaterInGrams } from "./CoffeeRecipeUtils";
+import type { PourParametersConfig, StepConfig, StepWaterInfo, Timeframe } from "./CoffeeRecipeTypes";
 export abstract class CoffeeRecipeSteps {
 
     public coffeeRecipeId: CoffeeRecipeId;
     
-    public coffeeParams: CoffeeParams;
+    public coffeeParameters: CoffeeParameters;
 
-    public pourParams: PourParam[] = [];
+    public pourParameters: PourParametersConfig[] = [];
 
-    public steps: string[] = [];
+    public steps: StepConfig[] = [];
     public stepsDurationInSeconds: number[] = [];
-    public stepsTimeframe: number[][] = [];
-    public stepsTimeframeDisplay: string[][] = [];
     
+    public stepsTimeframe: Timeframe[] = [];
+        
     public stepWaterInfos: StepWaterInfo[] = [];
     
     public isTimerRecipe: boolean = false;
     public isImmersionDripperRecipe: boolean = false;
     public timerInSeconds = 0;
 
-    constructor(coffeeRecipeId: CoffeeRecipeId, coffeeParams: CoffeeParams, stepsDurationInSeconds: number[], pourParams: PourParam[], steps, isTimerRecipe: boolean = false, isImmersionDripperRecipe: boolean = false) {
+    constructor(
+        coffeeRecipeId: CoffeeRecipeId, coffeeParams: CoffeeParameters, stepsDurationInSeconds: number[], 
+        pourParameters: PourParametersConfig[], steps: StepConfig[], isTimerRecipe: boolean = false, 
+        isImmersionDripperRecipe: boolean = false) {
+
         this.isTimerRecipe = isTimerRecipe;
         this.isImmersionDripperRecipe = isImmersionDripperRecipe;
         this.stepsDurationInSeconds = stepsDurationInSeconds;
         this.coffeeRecipeId = coffeeRecipeId;
-        this.coffeeParams = coffeeParams;
-        this.pourParams = pourParams;
+        this.coffeeParameters = coffeeParams;
+        this.pourParameters = pourParameters;
         this.steps = steps;
         this.timerInSeconds = this.sumOfDurations(stepsDurationInSeconds);
-        this.calculateStepsTimeframe();
+        this.stepsTimeframe = calculateStepsTimeframe(stepsDurationInSeconds);
         this.calculateStepWaterInfos();
     }
 
     numDisplay = (number: number) => displayNumber(number);
 
-    calculateStepsTimeframe = () => {
-        let from: number = 0;
-        this.stepsDurationInSeconds.map(duration => {
-            let timeframe = this.calculateTimeframes(from, duration);
-            this.stepsTimeframe.push(timeframe);
-            from = timeframe[1];
-
-            let stepTimeDisplay = [toHHMMSS(timeframe[0]), toHHMMSS(timeframe[1])];
-            this.stepsTimeframeDisplay.push(stepTimeDisplay);
-        })
-    }
-
-    calculateTimeframes = (from: number, duration: number) : number[] => {
-        return [from, from + duration];
-    }
-
     sumOfDurations = (durations: number[]) => durations.reduce((a, b) => a + b, 0);
 
     calculateStepWaterInfos = () => {
         let totalWaterInGrams = 0;
-        this.pourParams.map(pourParam => {
-            let stepWaterInGrams = calculatePourWaterInGrams(this.coffeeParams.waterInGrams, pourParam);
+        this.pourParameters.map(pourParam => {
+            let stepWaterInGrams = calculatePourWaterInGrams(this.coffeeParameters.waterInGrams, pourParam);
             let stepTotalWaterInGrams = totalWaterInGrams === 0 ? 0 : (stepWaterInGrams + totalWaterInGrams);
 
             let stepWaterInfo = this.createStepWaterInfo(stepWaterInGrams, stepTotalWaterInGrams, pourParam.waterTemp);

@@ -1,48 +1,49 @@
 import { CoffeeRecipeId, getCoffeeRecipeDefaultConfig } from "./CoffeeRecipeConstants";
 import { CoffeeRecipe } from "./CoffeeRecipe";
-import { CoffeeParams } from "./CoffeeParams";
-import { DefaultCoffeeRecipeSteps } from "./DefaultCoffeeRecipeSteps";
-import { DefaultCoffeeParams } from "./DefaultCoffeeParams";
-import { DefaultCoffeeRecipe } from "./DefaultCoffeeRecipe";
+import { CoffeeParameters } from "./CoffeeParameters";
+import { StandardCoffeeRecipeSteps } from "./StandardCoffeeRecipeSteps";
+import { StandardCoffeeParameters } from "./StandardCoffeeParams";
+import { StandardCoffeeRecipe } from "./StandardCoffeeRecipe";
+import type { CoffeeRecipeConfig } from "./CoffeeRecipeTypes";
 
 
 export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
     console.log('createCoffeeRecipe recipeId: ', recipeId);
 
-    let recipeDefaultConfig = getCoffeeRecipeDefaultConfig(recipeId);
-    return new DefaultCoffeeRecipe(
+    let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
+    return new StandardCoffeeRecipe(
         recipeId, 
         createCoffeeParams(
             recipeId,
-            recipeDefaultConfig.coffeeParams.beanInGrams,
-            recipeDefaultConfig.coffeeParams.coffeeToWaterRatio,
-            recipeDefaultConfig.coffeeParams.waterInGrams
+            recipeDefaultConfig.coffeeParameters.beanInGrams,
+            recipeDefaultConfig.coffeeParameters.coffeeToWaterRatio,
+            recipeDefaultConfig.coffeeParameters.waterInGrams
         ),
         recipeDefaultConfig.references
     )
 }
 
-export const createCoffeeParams = (recipeId: CoffeeRecipeId, beanInGrams: number, coffeeToWaterRatio: number, waterInGrams: number): CoffeeParams => {
+export const createCoffeeParams = (recipeId: CoffeeRecipeId, beanInGrams: number, coffeeToWaterRatio: number, waterInGrams: number): CoffeeParameters => {
     console.log('createCoffeeParams recipeId: ', recipeId, ' beanInGrams: ', beanInGrams, ' coffeeToWaterRatio: ', coffeeToWaterRatio, ' waterInGrams: ', waterInGrams);
 
     let recipeDefaultConfig = getCoffeeRecipeDefaultConfig(recipeId);
-    return new DefaultCoffeeParams(
+    return new StandardCoffeeParameters(
         recipeId,
-        beanInGrams ? beanInGrams : recipeDefaultConfig.coffeeParams.beanInGrams,
-        coffeeToWaterRatio ? coffeeToWaterRatio : recipeDefaultConfig.coffeeParams.coffeeToWaterRatio,
-        waterInGrams ? waterInGrams : recipeDefaultConfig.coffeeParams.waterInGrams
+        beanInGrams ? beanInGrams : recipeDefaultConfig.coffeeParameters.beanInGrams,
+        coffeeToWaterRatio ? coffeeToWaterRatio : recipeDefaultConfig.coffeeParameters.coffeeToWaterRatio,
+        waterInGrams ? waterInGrams : recipeDefaultConfig.coffeeParameters.waterInGrams
     );
 }
 
-export const createCoffeeRecipeSteps = (coffeeParams: CoffeeParams, stepsDurationInSeconds: number[]) => {
-    console.log('createCoffeeParams coffeeParams: ', coffeeParams);
+export const createCoffeeRecipeSteps = (coffeeParameters: CoffeeParameters, stepsDurationInSeconds: number[]) => {
+    console.log('createCoffeeParams coffeeParams: ', coffeeParameters);
 
-    let recipeDefaultConfig = getCoffeeRecipeDefaultConfig(coffeeParams.recipeId);
-    return new DefaultCoffeeRecipeSteps(
-        coffeeParams.recipeId, 
-        coffeeParams, 
+    let recipeDefaultConfig = getCoffeeRecipeDefaultConfig(coffeeParameters.recipeId);
+    return new StandardCoffeeRecipeSteps(
+        coffeeParameters.recipeId, 
+        coffeeParameters, 
         stepsDurationInSeconds ? stepsDurationInSeconds : recipeDefaultConfig.stepsDurationInSeconds, 
-        recipeDefaultConfig.pourParams, 
+        recipeDefaultConfig.pourParameters, 
         recipeDefaultConfig.steps,
         recipeDefaultConfig.isTimerRecipe,
         recipeDefaultConfig.isImmersionDripperRecipe,

@@ -12,18 +12,26 @@
 	import StepMessageDisplay from './StepMessageDisplay.svelte';
 	import { shouldDisplayTimeframe } from '$lib/utils/TimeframeDisplayUtils';
 	import TimeframeDurationDisplay from './TimeframeDurationDisplay.svelte';
+	import type { Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes';
+	import type { CoffeeRecipeSteps } from '$lib/coffee-recipes/CoffeeRecipeSteps';
     const coffeeRecipeStore = getCoffeeRecipeStore();
 
-    let { steps, stepWaterInfos, stepsTimeframeDisplay, stepsDurationInSeconds, highlightStep, closeDialog, isImmersionDripperRecipe } = $props();
+    interface StepsWithTimeframeEditorProps {
+        coffeeRecipeSteps: CoffeeRecipeSteps,
+        highlightStep: boolean,
+        closeDialog: any
+    }
+    let { coffeeRecipeSteps } : StepsWithTimeframeEditorProps = $props();
+    // let { steps, stepWaterInfos, stepsDurationInSeconds, highlightStep, closeDialog, isImmersionDripperRecipe } = $props();
 
-    let localStepsDurationInSeconds:number[] = $state.snapshot(stepsDurationInSeconds);
-    let localStepsTimeframeDisplay:string[][] = $state(calculateStepsTimeframe(localStepsDurationInSeconds));
+    let localStepsDurationInSeconds:number[] = $state.snapshot(coffeeRecipeSteps.stepsDurationInSeconds);
+    let localStepsTimeframe: Timeframe[] = $state(calculateStepsTimeframe(localStepsDurationInSeconds));
 
     onMount(() => {
 		console.log('the component has mounted');
         console.log(
             'localStepsDurationInSeconds: ', localStepsDurationInSeconds, 
-            'localStepsTimeframeDisplay: ', localStepsTimeframeDisplay);
+            'localStepsTimeframe: ', localStepsTimeframe);
 	});
 
     const recalculateStepsDurationAndTimeframe = (e, index) => {
@@ -36,10 +44,10 @@
         
         localStepsDurationInSeconds[index] = newVal;
         
-        localStepsTimeframeDisplay = calculateStepsTimeframe(localStepsDurationInSeconds);
+        localStepsTimeframe = calculateStepsTimeframe(localStepsDurationInSeconds);
         console.log(
             'recalculateStepsDurationAndTimeframe()  localStepsDurationInSeconds:', 
-            localStepsDurationInSeconds, 'localStepsTimeframeDisplay:', localStepsTimeframeDisplay);
+            localStepsDurationInSeconds, 'localStepsTimeframe:', localStepsTimeframe);
     }
 
     const updateStepsDuration = () => {
@@ -50,27 +58,27 @@
 </script>
 
 <div class="flex flex-col mt-2 mb-1">
-    {#if steps}
+    {#if coffeeRecipeSteps.steps}
         <div class="flex flex-col divide-y divide-slate-300 py-1 ">
-        {#each steps as step, index }
+        {#each coffeeRecipeSteps.steps as step, index }
             <div class=" pl-2 py-2 flex items-center">
                 <div class="border border-solid border-slate-600">
                     
-                   {#if isImmersionDripperRecipe}
+                   {#if coffeeRecipeSteps.isImmersionDripperRecipe}
                         <SwitchStateDisplay 
-                            switchState={step.switchState} isImmersionDripperRecipe={isImmersionDripperRecipe} 
-                            highlightState={highlightStep} durationInSeconds={stepsDurationInSeconds[index]}/>
+                            switchState={step.switchState} isImmersionDripperRecipe={coffeeRecipeSteps.isImmersionDripperRecipe} 
+                            highlightState={highlightStep} durationInSeconds={coffeeRecipeSteps.stepsDurationInSeconds[index]}/>
                     {:else}
-                        <TimeframeDurationDisplay durationInSeconds={stepsDurationInSeconds[index]} pouringStage={step.stage} />
+                        <TimeframeDurationDisplay durationInSeconds={coffeeRecipeSteps.stepsDurationInSeconds[index]} pouringStage={step.stage} />
                     {/if}
                     
                     
-                    {#if localStepsTimeframeDisplay && localStepsTimeframeDisplay[index] && shouldDisplayTimeframe(step)}
-                        <StepTimeFrameDisplay stepsTimeframeDisplay={localStepsTimeframeDisplay[index]} highlightStep={highlightStep}/>
+                    {#if localStepsTimeframe && localStepsTimeframe[index] && shouldDisplayTimeframe(step)}
+                        <StepTimeFrameDisplay timeframe={localStepsTimeframe[index]} highlightStep={highlightStep}/>
                     {/if}
                 </div>                        
                 <!-- <div class="grow ml-2">{@html step.msgKey(step.params)}</div> -->
-                 <StepMessageDisplay step={step} stepWaterInfo={stepWaterInfos[index]} stepsTimeframeDisplay={localStepsTimeframeDisplay[index]} />
+                 <StepMessageDisplay step={step} stepWaterInfo={coffeeRecipeSteps.stepWaterInfos[index]} timeframe={localStepsTimeframe[index]} />
 
                 <input type="number" class="ml-2 border border-solid w-14 mr-2" 
                     bind:value={localStepsDurationInSeconds[index]} 

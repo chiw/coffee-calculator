@@ -1,13 +1,14 @@
 import type { CoffeeRecipeId } from "./CoffeeRecipeConstants";
-import type { Reference } from "./Reference.type";
-import type { CoffeeParams } from "./CoffeeParams";
+
+import type { CoffeeParameters } from "./CoffeeParameters";
+import type { Reference } from "./CoffeeRecipeTypes";
 
 export abstract class CoffeeRecipe {
     recipeId: CoffeeRecipeId;
-    defaultCoffeeParams: CoffeeParams;
+    defaultCoffeeParams: CoffeeParameters;
     public references: Reference[] = [];
 
-    constructor(recipeId: CoffeeRecipeId, defaultCoffeeParams: CoffeeParams, references: Reference[]) {
+    constructor(recipeId: CoffeeRecipeId, defaultCoffeeParams: CoffeeParameters, references: Reference[]) {
         this.recipeId = recipeId;
         this.defaultCoffeeParams = defaultCoffeeParams;
         this.references = references;

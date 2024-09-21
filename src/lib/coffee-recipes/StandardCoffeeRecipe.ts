@@ -1,13 +1,13 @@
-import type { CoffeeParams } from "./CoffeeParams";
+import type { CoffeeParameters } from "./CoffeeParameters";
 import { CoffeeRecipe } from "./CoffeeRecipe";
 import type { CoffeeRecipeId } from "./CoffeeRecipeConstants";
 import type { Reference } from "./Reference.type";
 
-export class DefaultCoffeeRecipe extends CoffeeRecipe {
+export class StandardCoffeeRecipe extends CoffeeRecipe {
 
-    constructor(coffeeRecipeId: CoffeeRecipeId, defaultCoffeeParams: CoffeeParams, references: Reference[]) {
+    constructor(coffeeRecipeId: CoffeeRecipeId, defaultCoffeeParams: CoffeeParameters, references: Reference[]) {
         console.log(
-            'DefaultCoffeeRecipe coffeeRecipeId: ', coffeeRecipeId,
+            'StandardCoffeeRecipe coffeeRecipeId: ', coffeeRecipeId,
             ' defaultCoffeeParams: ', defaultCoffeeParams, 
             ' references: ', references);
         
