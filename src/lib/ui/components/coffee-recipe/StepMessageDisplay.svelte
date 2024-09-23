@@ -20,30 +20,30 @@
         {#if isPauseStage(step.stage) }
             <span class="text-sm">{@html pourOverStageMessageKey(step.stage)() }</span>
         {:else}
-            <span class="text-base">{@html pourOverStageMessageKey(step.stage)() }</span>
+            <span class="text-sm">{@html pourOverStageMessageKey(step.stage)() }</span>
         {/if}
     {/if}
     
     {#if step.pouringTechnique}
-        <span class="text-base">{@html " (" + pouringTechniqueMessageKey(step.pouringTechnique)() + ")"}</span>
+        <span class="text-sm">{@html " (" + pouringTechniqueMessageKey(step.pouringTechnique)() + ")"}</span>
     {/if}
     <span>{@html "<br/>"}</span>
     
     {#if step.msgKey}
-        <span class="mr-0 text-base">{@html  step.msgKey(step.msgParams)}</span>
+        <span class="mr-0 text-sm">{@html  step.msgKey(step.msgParams)}</span>
     {:else if isPouringStage(step.stage)}
-        <span class="mr-0 text-base">{@html stepWaterInfoMessageKey(stepWaterInfo)}</span>
+        <span class="mr-0 text-sm">{@html stepWaterInfoMessageKey(stepWaterInfo)}</span>
     {:else if isFinalStage(step.stage)}
-        <span class="mr-0 text-base">{@html finalStepMessageKey(timeframe.toDisplay)}</span>
+        <span class="mr-0 text-sm">{@html finalStepMessageKey(timeframe.toDisplay)}</span>
     {/if}
     
     {#if step.showWaterTemperature}
-        <span class="ml-0 text-base">{@html waterTemperatureMessageKey(stepWaterInfo.waterTemperature)}</span>
+        <span class="ml-0 text-sm">{@html waterTemperatureMessageKey(stepWaterInfo.waterTemperature)}</span>
     {/if}
 
     {#if step.swirl === true}
         <!-- <span>{@html "<br/>"}</span> -->
-        <span class="mr-0 text-base">{@html swirlMessageKey() }</span>
+        <span class="mr-0 text-sm">{@html swirlMessageKey() }</span>
     {/if}
 </div>
 
