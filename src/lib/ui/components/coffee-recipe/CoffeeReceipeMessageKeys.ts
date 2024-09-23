@@ -10,6 +10,7 @@ export const coffeeRecipeIdSelectMessageKey = (coffeeRecipeId: CoffeeRecipeId) =
         case CoffeeRecipeId.HarioSwitch_OleKristianBoen: return m.label_harioSwitch_OleKristianBoen;
         case CoffeeRecipeId.HarioSwitch_CoffeeChronicler: return m.label_harioSwitch_CoffeeChronicler;
         case CoffeeRecipeId.HarioV60_JamesHoffmann: return m.label_harioV60_JamesHoffmann;
+        case CoffeeRecipeId.HarioV60_MattWinton : return m.label_harioV60_MattWinton;
         default:
             return m.label_unknown_recipe;
     }

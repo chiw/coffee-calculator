@@ -6,7 +6,8 @@ export const CoffeeRecipeId = {
     HarioSwitch_EmiFukahori: 'HarioSwitch_EmiFukahori',
     HarioSwitch_OleKristianBoen: 'HarioSwitch_OleKristianBoen',
     HarioSwitch_CoffeeChronicler: 'HarioSwitch_CoffeeChronicler',
-    HarioV60_JamesHoffmann: 'HarioV60_JamesHoffmann'
+    HarioV60_JamesHoffmann: 'HarioV60_JamesHoffmann',
+    HarioV60_MattWinton: 'HarioV60_MattWinton'
 } as const;
 export type CoffeeRecipeId = keyof typeof CoffeeRecipeId;
 
@@ -15,7 +16,8 @@ export const CoffeeRecipesChoices = [
     { id: CoffeeRecipeId.HarioSwitch_EmiFukahori },
     { id: CoffeeRecipeId.HarioSwitch_OleKristianBoen },
     { id: CoffeeRecipeId.HarioSwitch_CoffeeChronicler },
-    { id: CoffeeRecipeId.HarioV60_JamesHoffmann }
+    { id: CoffeeRecipeId.HarioV60_JamesHoffmann },
+    { id: CoffeeRecipeId.HarioV60_MattWinton }
 ] as const;
 
 export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) : CoffeeRecipeConfig => {
@@ -255,6 +257,67 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) : Co
                     { 
                         description : 'A Better 1 Cup V60 Technique - James Hoffmann', 
                         url: 'https://www.youtube.com/watch?v=1oB1oDrDkHM' 
+                    }
+                ]
+            }
+        };
+        case CoffeeRecipeId.HarioV60_MattWinton : {
+            return <CoffeeRecipeConfig>{
+                isTimerRecipe: true,
+                isImmersionDripperRecipe: false,
+                coffeeParameters: {
+                    beanInGrams: 20,
+                    coffeeToWaterRatio: -1,
+                    waterInGrams: 300
+                },
+                stepsDurationInSeconds: [30, 30, 30, 30, 30, 60],
+                pourParameters: [
+                    { waterPercentage: 20, waterTemp: 93},
+                    { waterPercentage: 20, waterTemp: 93},
+                    { waterPercentage: 20, waterTemp: 93},
+                    { waterPercentage: 20, waterTemp: 93},
+                    { waterPercentage: 20, waterTemp: 93}
+                ],
+                steps: [
+                    {
+                        stage: PourOverStage.BLOOMING
+                    },
+                    {
+                        
+                        stage: PourOverStage.FIRST_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE
+                    },
+                    {
+                        
+                        stage: PourOverStage.SECOND_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE
+                    },
+                    {
+                        
+                        stage: PourOverStage.THIRD_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE
+                    },
+                    {
+                        
+                        stage: PourOverStage.FOURTH_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE
+                    },
+                    {                        
+                        stage: PourOverStage.FINAL
+                    }
+                ],
+                references: [
+                    { 
+                        description : '[HARIO] V60 Five-Pour Recipe - Matt Winton (World Brewers Cup Champion)', 
+                        url: 'https://www.youtube.com/watch?v=YIC-2nFQ7vM' 
+                    },
+                    {
+                        description : '[HARIO] V60 Five-Pour Recipe (Advanced Tips) - Matt Winton (World Brewers Cup Champion)',
+                        url: 'https://www.youtube.com/watch?v=Xm2aAuhuLks0'
+                    },
+                    {
+                        description : 'Detailed Hario V60 Five Pour Coffee – Matt Winton’s Award-Winning Recipe',
+                        url: 'https://bigcupofcoffee.com/v60-five-pour-recipe-matt-winton/'
                     }
                 ]
             }
