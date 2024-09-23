@@ -12,7 +12,7 @@
     }
 
     let { step, stepWaterInfo, timeframe } : StepMessageDisplayProps = $props();
-    console.log('StepMessageDisplay step', step, 'stepsWaterInfo', stepWaterInfo, 'timeframe', timeframe);
+    // console.log('StepMessageDisplay step', step, 'stepsWaterInfo', stepWaterInfo, 'timeframe', timeframe);
 </script>
 
 <div class="grow ml-2">

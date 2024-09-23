@@ -14,10 +14,8 @@
 
     import StepTimeFrameDisplay from './StepTimeFrameDisplay.svelte';
 	import SwitchStateDisplay from './SwitchStateDisplay.svelte';
-	import Modal from '../modal/Modal.svelte';
 
-    import StepsTimeframeEditor from './StepsTimeframeEditor.svelte';
-	import StopwatchDisplay from '../stopwatch/StopwatchDisplay.svelte';
+    import StopwatchDisplay from '../stopwatch/StopwatchDisplay.svelte';
 	import { shouldDisplayTimeframe } from '$lib/utils/TimeframeDisplayUtils';
 	import TimeframeDurationDisplay from './TimeframeDurationDisplay.svelte';
 	import type { CoffeeRecipeSteps } from '$lib/coffee-recipes/CoffeeRecipeSteps';
@@ -56,28 +54,11 @@
 
     let inEditMode = $state(false);
 
-    let showModal = $state(false);
-    let dialog = $state();
-    
-    const showModalDialog = () => {
-        if(!stopwatch.isRunning()) {
-            console.log('showModealDialog, stopwatch is not running, set showModal to true');
-            showModal = true;
-        } 
-    }
-
-    const closeDialog = () => {
-        showModal = false;
-        if(dialog) {
-            dialog.closeDialog();
-        }
-    }
-
     const recalculateStepsDurationAndTimeframe = (e, index) => {
-        console.log(
-            'e.currentTarget.value:', e.currentTarget.value, 
-            'index:', index, 
-            'stepsDurationInSeconds:', coffeeRecipeSteps.stepsDurationInSeconds);
+        // console.log(
+        //     'e.currentTarget.value:', e.currentTarget.value, 
+        //     'index:', index, 
+        //     'stepsDurationInSeconds:', coffeeRecipeSteps.stepsDurationInSeconds);
 
         let newVal = parseInt(e.currentTarget.value);
         
@@ -136,7 +117,6 @@
 </div>
 
 {#snippet stepRowDisplay(index, step, stepWaterInfos, timeframe, highlightStep)}
-    <!-- <button class="border border-solid border-slate-600" onclick="{showModalDialog}"> -->
     <div class="border border-solid border-slate-600">
         
         {#if coffeeRecipeSteps.isImmersionDripperRecipe}
@@ -151,17 +131,15 @@
             <StepTimeFrameDisplay timeframe={timeframe} highlightStep={highlightStep}/>
         {/if}
     </div>
-    <!-- </button> -->
-    <!-- <div class="grow ml-2">{@html step.msgKey(step.params)}</div> -->
+
     {#if timeframe} 
         <StepMessageDisplay stepWaterInfo={stepWaterInfos[index]} step={step} timeframe={timeframe}/>
     {/if}
 {/snippet}
 
 {#snippet stepRowDisplayWithEdit(index, step, stepWaterInfos, timeframe, stepsDurationInSeconds, highlightStep)}
-    <!-- <button class="border border-solid border-slate-600" onclick="{showModalDialog}"> -->
-    <div class="border border-solid border-slate-600">
-        
+    
+    <div class="border border-solid border-slate-600">        
         {#if coffeeRecipeSteps.isImmersionDripperRecipe}
             <SwitchStateDisplay 
                 switchState={step.switchState} isImmersionDripperRecipe={coffeeRecipeSteps.isImmersionDripperRecipe} 
@@ -174,8 +152,7 @@
             <StepTimeFrameDisplay timeframe={timeframe} highlightStep={highlightStep}/>
         {/if}
     </div>
-    <!-- </button> -->
-    <!-- <div class="grow ml-2">{@html step.msgKey(step.params)}</div> -->
+    
     {#if timeframe}
         <StepMessageDisplay stepWaterInfo={stepWaterInfos[index]} step={step} timeframe={timeframe}/>
     {/if}
@@ -204,6 +181,7 @@
 <div class="flex flex-col mb-1">
     {#if coffeeRecipeSteps.steps}
         <div class="flex flex-col divide-y divide-slate-300 py-0 ">
+        <!-- <div class="flex flex-col py-0 "> -->
         {#each coffeeRecipeSteps.steps as step, index }
             {#if (isRunningActiveStep(stopwatch.elaspedTimeInSeconds, coffeeRecipeSteps.stepsTimeframe[index]) )}
                 {#if (!isStepCloseToFinish(stopwatch.elaspedTimeInSeconds, coffeeRecipeSteps.stepsTimeframe[index], 7)) }
@@ -229,14 +207,3 @@
         </div>
     {/if}
 </div>
-
-
-<Modal bind:this={dialog} bind:showModal={showModal} dialogTitleId={m.label_edit}>
-    <StepsTimeframeEditor 
-        steps={coffeeRecipeSteps.steps} 
-        stepWaterInfos={coffeeRecipeSteps.stepWaterInfos} 
-        stepsDurationInSeconds={coffeeRecipeSteps.stepsDurationInSeconds} 
-        highlightStep={false} 
-        closeDialog={closeDialog} 
-        isImmersionDripperRecipe={coffeeRecipeSteps.isImmersionDripperRecipe} />
-</Modal>

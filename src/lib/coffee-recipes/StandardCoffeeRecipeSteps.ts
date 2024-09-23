@@ -23,6 +23,7 @@ export class StandardCoffeeRecipeSteps extends CoffeeRecipeSteps {
             'pourParameters', this.pourParameters, 
             'stepWaterInfos', this.stepWaterInfos,
             'steps', this.steps,
+            'stepsTimeframe', this.stepsTimeframe,
             'isTimerRecipe', this.isTimerRecipe,
             'isImmersionDripperRecipe', this.isImmersionDripperRecipe
         );

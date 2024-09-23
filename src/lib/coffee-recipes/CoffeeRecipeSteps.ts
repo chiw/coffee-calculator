@@ -51,11 +51,11 @@ export abstract class CoffeeRecipeSteps {
             let stepTotalWaterInGrams = totalWaterInGrams === 0 ? 0 : (stepWaterInGrams + totalWaterInGrams);
 
             let stepWaterInfo = this.createStepWaterInfo(stepWaterInGrams, stepTotalWaterInGrams, pourParam.waterTemp);
-            console.log('calculateStepWaterInfos push stepWaterInfo ', stepWaterInfo);
+            // console.log('calculateStepWaterInfos push stepWaterInfo ', stepWaterInfo);
             this.stepWaterInfos.push(stepWaterInfo);
             totalWaterInGrams +=  stepWaterInGrams;
         })
-        console.log('calculateStepWaterInfos stepWaterInfos ', this.stepWaterInfos);
+        // console.log('calculateStepWaterInfos stepWaterInfos ', this.stepWaterInfos);
     }
 
     createStepWaterInfo = (waterInGrams: number, totalWaterInGrams: number, waterTemperature: number) => {
