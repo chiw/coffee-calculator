@@ -21,7 +21,7 @@
     {#if coffeeRecipeSteps.steps}    
         <div class="flex flex-col divide-y divide-slate-300 py-1 ">
             {#each coffeeRecipeSteps.steps as step, index }           
-                <div class=" pl-2 py-2 flex items-center">
+                <div class=" pl-2 py-0.5 flex items-center">
                     <div class="border border-solid border-slate-600">
                             {#if coffeeRecipeSteps.isImmersionDripperRecipe}
                                 <SwitchStateDisplay 

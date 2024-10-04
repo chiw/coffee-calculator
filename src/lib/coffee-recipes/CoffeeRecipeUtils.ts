@@ -12,7 +12,8 @@ function calculateRecipeCoffeeToWaterRatio(waterInGrams: number, beanInGrams: nu
 }
 
 function calculatePourWaterInGrams(waterInGrams: number, pourParametersConfig: PourParametersConfig) {
-    return Math.round(waterInGrams * pourParametersConfig.waterPercentage / 100);
+//     return Math.round(waterInGrams * pourParametersConfig.waterPercentage / 100);
+        return (waterInGrams * pourParametersConfig.waterPercentage / 100);
 }
 
 export {

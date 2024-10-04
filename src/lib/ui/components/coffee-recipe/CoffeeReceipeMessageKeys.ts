@@ -5,12 +5,12 @@ import * as m from '$lib/paraglide/messages.js';
 
 export const coffeeRecipeIdSelectMessageKey = (coffeeRecipeId: CoffeeRecipeId) => {
     switch(coffeeRecipeId) {
-        case CoffeeRecipeId.HarioSwitch_TetsuKasuya : return m.label_harioSwitch_TetsuKasuya;
-        case CoffeeRecipeId.HarioSwitch_EmiFukahori : return m.label_harioSwitch_EmiFukahori;
-        case CoffeeRecipeId.HarioSwitch_OleKristianBoen: return m.label_harioSwitch_OleKristianBoen;
-        case CoffeeRecipeId.HarioSwitch_CoffeeChronicler: return m.label_harioSwitch_CoffeeChronicler;
-        case CoffeeRecipeId.HarioV60_JamesHoffmann: return m.label_harioV60_JamesHoffmann;
-        case CoffeeRecipeId.HarioV60_MattWinton : return m.label_harioV60_MattWinton;
+        case CoffeeRecipeId.hario_switch_tetsukasuya : return m.label_harioSwitch_TetsuKasuya;
+        case CoffeeRecipeId.hario_switch_emifukahori : return m.label_harioSwitch_EmiFukahori;
+        case CoffeeRecipeId.hario_switch_olekristianboen: return m.label_harioSwitch_OleKristianBoen;
+        case CoffeeRecipeId.hario_switch_coffeechronicler: return m.label_harioSwitch_CoffeeChronicler;
+        case CoffeeRecipeId.hario_v60_jameshoffmann: return m.label_harioV60_JamesHoffmann;
+        case CoffeeRecipeId.hario_v60_mattwinton : return m.label_harioV60_MattWinton;
         default:
             return m.label_unknown_recipe;
     }

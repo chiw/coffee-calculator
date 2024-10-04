@@ -1,8 +1,23 @@
-export const CoffeeDripper = {
-    HarioSwitch : 'HarioSwitch',
-    V60 : 'V60'
+export const DripperBrand = {
+    hario: 'hario'
+}
+
+export const DripperType = {
+    switch : 'switch',
+    v60 : 'v60'
 } as const;
-export type CoffeeDripper = keyof typeof CoffeeDripper;
+export type DripperType = keyof typeof DripperType;
+
+export type CoffeeRecipeInfo = {
+    brand: DripperBrand,
+    dripper: DripperType,
+    name: string
+}
+
+export type MetaInfo = {
+    name: string,
+    value: string
+}
 
 export const PouringTechnique = {
     CENTER : 'CENTER',

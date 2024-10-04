@@ -1,28 +1,125 @@
-import type { CoffeeRecipeConfig } from "./CoffeeRecipeTypes.d"; 
-import { PouringTechnique, PourOverStage, SwitchState } from "./CoffeeRecipeTypes.d";
+import type { CoffeeRecipeConfig, CoffeeRecipeInfo, MetaInfo } from "./CoffeeRecipeTypes.d"; 
+import { DripperBrand, DripperType, PouringTechnique, PourOverStage, SwitchState } from "./CoffeeRecipeTypes.d";
 
 export const CoffeeRecipeId = {
-    HarioSwitch_TetsuKasuya: 'HarioSwitch_TetsuKasuya',
-    HarioSwitch_EmiFukahori: 'HarioSwitch_EmiFukahori',
-    HarioSwitch_OleKristianBoen: 'HarioSwitch_OleKristianBoen',
-    HarioSwitch_CoffeeChronicler: 'HarioSwitch_CoffeeChronicler',
-    HarioV60_JamesHoffmann: 'HarioV60_JamesHoffmann',
-    HarioV60_MattWinton: 'HarioV60_MattWinton'
+    hario_switch_tetsukasuya: 'hario_switch_tetsukasuya',
+    hario_switch_emifukahori: 'hario_switch_emifukahori',
+    hario_switch_olekristianboen: 'hario_switch_olekristianboen',
+    hario_switch_coffeechronicler: 'hario_switch_coffeechronicler',
+    hario_v60_jameshoffmann: 'hario_v60_jameshoffmann',
+    hario_v60_mattwinton: 'hario_v60_mattwinton'
 } as const;
 export type CoffeeRecipeId = keyof typeof CoffeeRecipeId;
 
-export const CoffeeRecipesChoices = [
-    { id: CoffeeRecipeId.HarioSwitch_TetsuKasuya },
-    { id: CoffeeRecipeId.HarioSwitch_EmiFukahori },
-    { id: CoffeeRecipeId.HarioSwitch_OleKristianBoen },
-    { id: CoffeeRecipeId.HarioSwitch_CoffeeChronicler },
-    { id: CoffeeRecipeId.HarioV60_JamesHoffmann },
-    { id: CoffeeRecipeId.HarioV60_MattWinton }
-] as const;
+export const coffeeRecipePaths = () => {
+    let paths: string[] = [];
+    Object.keys(CoffeeRecipeId).forEach( key => {
+        let params = key.split('_');
+        let brand = params[0];
+        let dripper = params[1];
+        let recipe_name = params[2];
+        paths.push(brand + '/' + dripper + '/' + recipe_name);
+    });
+    return paths;
+}
+
+export type CoffeeRecipeChoice = {
+    id: CoffeeRecipeId,
+    info: CoffeeRecipeInfo,
+    defaultRecipe ?: true,
+    metaInfos: MetaInfo[]
+}
+
+const generateCoffeeRecipesChoices = (): CoffeeRecipeChoice[] => {
+    let coffeeRecipesChoices: CoffeeRecipeChoice[] = [];
+    Object.keys(CoffeeRecipeId).forEach(key => {
+        let params = key.split('_');
+        let brand = params[0];
+        let dripper = params[1];
+        let recipe_name = params[2];
+
+        let coffeeRecipeChoice = <CoffeeRecipeChoice> {
+            id: CoffeeRecipeId[key],
+            metaInfos: <MetaInfo[]> [
+                { name: 'brand', value: DripperBrand[brand]},
+                { name: 'dripper', value: DripperType[dripper]},
+                { name: 'name', value: recipe_name}
+            ]
+        }
+        // console.log('generateCoffeeRecipesChoices ', brand, dripper, recipe_name, coffeeRecipeChoice);
+
+        coffeeRecipesChoices.push(coffeeRecipeChoice);
+    });
+    return coffeeRecipesChoices;
+}
+export const CoffeeRecipesChoices = generateCoffeeRecipesChoices();
+
+export type CoffeeRecipeSearchResult = {
+    result: CoffeeRecipeChoice,
+    requiresRedirect: boolean
+}
+
+export const searchRecipeIdByParams = (inParams: string[]) :CoffeeRecipeSearchResult  => {
+    let filteredChoices = CoffeeRecipesChoices;
+    let result: CoffeeRecipeChoice;
+
+    let metaInfoSearchKeys = ['brand', 'dripper', 'name'];
+
+    inParams.forEach((inSearchStr, index) => {
+        if(!result) {
+            let tmpFilteredChoices = filterChoicesByRecipeMetaInfo(filteredChoices, inSearchStr, [metaInfoSearchKeys[index]], true);
+            if(tmpFilteredChoices && tmpFilteredChoices.length == 1) {
+                result = tmpFilteredChoices[0];
+            } else {
+                filteredChoices = tmpFilteredChoices;
+            }
+        }
+    });
+
+    if(!result) {
+        return <CoffeeRecipeSearchResult> {
+            result: (filteredChoices.length > 0) ?  filteredChoices[0] : CoffeeRecipesChoices[0],
+            requiresRedirect: true
+        }
+    }
+
+    return <CoffeeRecipeSearchResult> {
+        result: result,
+        requiresRedirect: false
+    }
+}
+
+export const filterChoicesByRecipeMetaInfo = (
+    inChoices: CoffeeRecipeChoice[], inSearchStr: string, 
+    metaInfoNameArr: string[], mustBeExactWording: boolean) : CoffeeRecipeChoice[] => {
+
+    let filteredChoices = inChoices.filter((choice) => matchChoice(choice, inSearchStr, metaInfoNameArr, mustBeExactWording));
+
+    console.log('filterChoicesByRecipeMetaInfo inSearchStr=', inSearchStr, 'metaInfoNameArr=', metaInfoNameArr, 'mustBeExactWording=', mustBeExactWording, 'filteredChoices=', filteredChoices);
+
+    return filteredChoices;
+}
+
+const matchChoice = (choice: CoffeeRecipeChoice, inSearchStr: string, metaInfoNameArr: string[], mustBeExactWording: boolean) => {
+    if(choice && inSearchStr) {
+        let match = choice.metaInfos
+            .filter((metaInfo) => metaInfoNameArr.includes(metaInfo.name))
+            .filter((metaInfo) => (mustBeExactWording) ? metaInfo.value == inSearchStr : metaInfo.value.includes(inSearchStr) )
+            .length > 0;
+
+        // console.log('match=', match, 'choice.metaInfos=', choice.metaInfos, 'inSearchStr=', inSearchStr, 'metaInfoNameArr=', metaInfoNameArr, 'mustBeExactWording=', mustBeExactWording);
+        return match;
+    }
+    return false;
+}
+
+export const firstChoice = (inChoices: CoffeeRecipeChoice[], defaultRecipeId: CoffeeRecipeId): CoffeeRecipeId => {
+    return (inChoices && inChoices.length >= 1) ? inChoices[0].id : defaultRecipeId;
+}
 
 export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) : CoffeeRecipeConfig => {
     switch(coffeeRecipId) {
-        case CoffeeRecipeId.HarioSwitch_TetsuKasuya : {
+        case CoffeeRecipeId.hario_switch_tetsukasuya : {
             return <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
                 isImmersionDripperRecipe: true,
@@ -66,7 +163,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) : Co
                 ]
             }
         };
-        case CoffeeRecipeId.HarioSwitch_EmiFukahori : {
+        case CoffeeRecipeId.hario_switch_emifukahori : {
             return  <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
                 isImmersionDripperRecipe: true,
@@ -103,7 +200,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) : Co
                 ]
             }
         };
-        case CoffeeRecipeId.HarioSwitch_OleKristianBoen : {
+        case CoffeeRecipeId.hario_switch_olekristianboen : {
             return  <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
                 isImmersionDripperRecipe: true,
@@ -147,7 +244,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) : Co
                 ]
             }
         };
-        case CoffeeRecipeId.HarioSwitch_CoffeeChronicler : {
+        case CoffeeRecipeId.hario_switch_coffeechronicler : {
             return <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
                 isImmersionDripperRecipe: true,
@@ -187,7 +284,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) : Co
                 ]
             }
         }
-        case CoffeeRecipeId.HarioV60_JamesHoffmann : {
+        case CoffeeRecipeId.hario_v60_jameshoffmann : {
             return <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
                 isImmersionDripperRecipe: false,
@@ -261,7 +358,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) : Co
                 ]
             }
         };
-        case CoffeeRecipeId.HarioV60_MattWinton : {
+        case CoffeeRecipeId.hario_v60_mattwinton : {
             return <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
                 isImmersionDripperRecipe: false,

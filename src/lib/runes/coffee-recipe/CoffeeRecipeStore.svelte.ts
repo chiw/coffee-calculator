@@ -67,7 +67,7 @@ export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
 const COFFEE_RECIPE_STORE_CONTEXT_KEY = Symbol('COFFEE_RECIPE_STORE_CONTEXT_KEY');
 
 export function setCoffeeRecipeStore() {    
-    return setContext(COFFEE_RECIPE_STORE_CONTEXT_KEY, createCoffeeRecipeStore(CoffeeRecipeId.HarioSwitch_TetsuKasuya));
+    return setContext(COFFEE_RECIPE_STORE_CONTEXT_KEY, createCoffeeRecipeStore(CoffeeRecipeId.hario_switch_tetsukasuya));
 }
 
 export function getCoffeeRecipeStore() {

@@ -1,16 +1,34 @@
 <script lang="ts">
-    import { RecipeSelect ,StepsDisplay, StepsWithTimerDisplay, RecipeReferencesDisplay } from '$lib/ui/components/coffee-recipe';
+    import type { PageData } from './$types';
+	
+	export let data: PageData;
+
+    console.log('data', data);
+
+    import { StepsWithTimerDisplay, RecipeReferencesDisplay } from '$lib/ui/components/coffee-recipe';
 
     import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';	
+    
+	import { getKeyByValue } from '$lib/utils/ObjectUtils';
+	import { CoffeeRecipeId } from '$lib/coffee-recipes';
+	import LanguageSwitcher from '$lib/ui/components/lang/LanguageSwitcher.svelte';
+	import RecipeSelectRoutes from '$lib/ui/components/coffee-recipe/RecipeSelectRoutes.svelte';
+	import { afterNavigate } from '$app/navigation';
     const coffeeRecipeStore = getCoffeeRecipeStore();
 
-    import LanguageSwitcher from '$lib/ui/components/lang/LanguageSwitcher.svelte';
+    afterNavigate(() => {
+        console.log('afterNavigate');
+        coffeeRecipeStore.recipeId = getKeyByValue(CoffeeRecipeId, data.recipeId.toString());
+    });
 
 </script>
 
+<!-- <h1>Use the {@html data.recipeId}</h1> -->
+
 <div class="m-3">
     <div class="flex flex-row items-stretch">
-        <div class="grow"><RecipeSelect /></div>
+        <!-- <div class="grow"><RecipeSelect /></div> -->
+        <div class="grow"><RecipeSelectRoutes selectedOption={coffeeRecipeStore.recipeId}/></div>
         <div class="grow-0"><LanguageSwitcher/></div>
     </div>
     

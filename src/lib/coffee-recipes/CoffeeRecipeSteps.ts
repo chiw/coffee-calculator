@@ -59,6 +59,8 @@ export abstract class CoffeeRecipeSteps {
     }
 
     createStepWaterInfo = (waterInGrams: number, totalWaterInGrams: number, waterTemperature: number) => {
+        console.log('createStepWaterInfo ', waterInGrams, totalWaterInGrams, waterTemperature);
+
         return {
             waterInGrams: this.numDisplay(waterInGrams),
             totalWaterInGrams: this.numDisplay(totalWaterInGrams),

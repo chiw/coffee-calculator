@@ -1,8 +1,20 @@
 # coffee-calculator
 
 Github page:
-- https://chiw.github.io/coffee-calculator/recipes
-- https://chiw.github.io/coffee-calculator/zh-hk/recipes
+- https://chiw.github.io/coffee-calculator/recipe/hario/switch/tetsukasuya
+- https://chiw.github.io/coffee-calculator/recipe/hario/switch/emifukahori
+- https://chiw.github.io/coffee-calculator/recipe/hario/switch/olekristianboen
+- https://chiw.github.io/coffee-calculator/recipe/hario/switch/coffeechronicler
+- https://chiw.github.io/coffee-calculator/recipe/hario/v60/jameshoffmann
+- https://chiw.github.io/coffee-calculator/recipe/hario/v60/mattwinton
+
+
+- https://chiw.github.io/coffee-calculator/zh-hk/recipe/hario/switch/tetsukasuya
+- https://chiw.github.io/coffee-calculator/zh-hk/recipe/hario/switch/emifukahori
+- https://chiw.github.io/coffee-calculator/zh-hk/recipe/hario/switch/olekristianboen
+- https://chiw.github.io/coffee-calculator/zh-hk/recipe/hario/switch/coffeechronicler
+- https://chiw.github.io/coffee-calculator/zh-hk/recipe/hario/v60/jameshoffmann
+- https://chiw.github.io/coffee-calculator/zh-hk/recipe/hario/v60/mattwinton
 
 # create-svelte
 

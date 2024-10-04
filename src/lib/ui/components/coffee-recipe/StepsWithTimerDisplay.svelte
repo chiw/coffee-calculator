@@ -80,9 +80,11 @@
 </script>
 
 <div class="flex flex-row">
-    <div class="m-1 p-2 w-[6rem]">
-        <StopwatchDisplay timerInSeconds={coffeeRecipeSteps.timerInSeconds} />
-    </div>
+    {#if coffeeRecipeSteps.isTimerRecipe}
+        <div class="m-1 p-2 w-[6rem]">
+            <StopwatchDisplay timerInSeconds={coffeeRecipeSteps.timerInSeconds} />
+        </div>
+    {/if}
     <div>    
         <RecipeParametersCardDisplay />
     </div>
