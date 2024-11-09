@@ -100,7 +100,7 @@ const generateRecipeMetaInfo = (brandName: string, dripperName: string, dripperR
 const createBrandMetaInfo = (brandName: string): MetaInfo[] => {
     const metaInfoArr: MetaInfo[] = [];
     metaInfoArr.push(<MetaInfo> { name: 'brand', value: brandName});
-    metaInfoArr.push(<MetaInfo> { name: 'path', value: brandName + '/'});
+    metaInfoArr.push(<MetaInfo> { name: 'path', value: brandName});
     metaInfoArr.push(<MetaInfo> { name: 'level', value: 'brand'});
     // console.log('brandName', brandName, 'metaInforArr', metaInfoArr);
     return metaInfoArr;
@@ -110,7 +110,7 @@ const createDripperMetaInfo = (brandName: string, dripperName: string): MetaInfo
     const metaInfoArr: MetaInfo[] = [];
     metaInfoArr.push(<MetaInfo> { name: 'brand', value: brandName});
     metaInfoArr.push(<MetaInfo> { name: 'dripper', value: dripperName});
-    metaInfoArr.push(<MetaInfo> { name: 'path', value: brandName + '/' + dripperName + '/'});
+    metaInfoArr.push(<MetaInfo> { name: 'path', value: brandName + '/' + dripperName});
     metaInfoArr.push(<MetaInfo> { name: 'level', value: 'dripper'});
     // console.log('brandName', brandName, 'dripperName', dripperName, 'metaInforArr', metaInfoArr);
     return metaInfoArr;
@@ -122,7 +122,7 @@ const createRecipeMetaInfo = (brandName: string, dripperName: string, recipeName
     metaInfoArr.push(<MetaInfo> { name: 'dripper', value: dripperName});
     metaInfoArr.push(<MetaInfo> { name: 'name', value: recipeName});
     metaInfoArr.push(<MetaInfo> { name: 'recipeId', value: recipeId});
-    metaInfoArr.push(<MetaInfo> { name: 'path', value: brandName + '/' + dripperName + '/' + recipeName + '/'});
+    metaInfoArr.push(<MetaInfo> { name: 'path', value: brandName + '/' + dripperName + '/' + recipeName});
     metaInfoArr.push(<MetaInfo> { name: 'level', value: 'recipe'});
     // console.log('brandName', brandName, 'dripperName', dripperName, 'recipeName', recipeName, 'recipeId', recipeId, 'metaInforArr', metaInfoArr);
     return metaInfoArr;
