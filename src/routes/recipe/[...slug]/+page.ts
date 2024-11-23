@@ -2,7 +2,8 @@ export const prerender = true;
 export const ssr = true;
 export const trailingSlash = 'always';
 
-import { base } from '$app/paths';
+// import { base } from '$app/paths';
+import { resolveRoute } from '$app/paths';
 import { error, redirect } from '@sveltejs/kit';
 
 import { getAllDripperRecipePaths, getPathFromMetaInfo, searchRecipeIdByParams, type CoffeeRecipeSearchResult } from '$lib/coffee-recipes/CoffeeRecipeConstants';
@@ -18,7 +19,7 @@ export const load = ({ params }) => {
 
     if(searchResult.requiresRedirect) {
         // let path = base + "/recipe/" + searchResult.result.id.replaceAll("_", "/");
-        let path = base + "/recipe/" + getPathFromMetaInfo(searchResult.result.metaInfos);
+        let path = resolveRoute + "/recipe/" + getPathFromMetaInfo(searchResult.result.metaInfos);
 
         redirect(302, path);
     } else {
