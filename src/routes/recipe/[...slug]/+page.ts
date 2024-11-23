@@ -2,6 +2,7 @@ export const prerender = true;
 export const ssr = true;
 export const trailingSlash = 'always';
 
+import { i18n } from '$lib/i18n.js';
 import { base } from '$app/paths';
 import { error, redirect } from '@sveltejs/kit';
 
@@ -19,8 +20,10 @@ export const load = ({ params }) => {
     if(searchResult.requiresRedirect) {
         // let path = base + "/recipe/" + searchResult.result.id.replaceAll("_", "/");
         let path = base + "/recipe/" + getPathFromMetaInfo(searchResult.result.metaInfos);
-
-        redirect(302, path);
+        
+        // redirect(i18n.resolveRoute("/base/about", "de"))
+        // redirect(302, path);
+        redirect(302, i18n.resolveRoute(path));
     } else {
         return {
             recipeId: searchResult.result.id
