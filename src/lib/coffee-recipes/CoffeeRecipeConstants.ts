@@ -6,6 +6,7 @@ export const CoffeeRecipeId = {
     hario_switch_emifukahori: 'hario_switch_emifukahori',
     hario_switch_olekristianboen: 'hario_switch_olekristianboen',
     hario_switch_coffeechronicler: 'hario_switch_coffeechronicler',
+    hario_v60_46method: 'hario_v60_46method',
     hario_v60_jameshoffmann: 'hario_v60_jameshoffmann',
     hario_v60_mattwinton: 'hario_v60_mattwinton'
 } as const;
@@ -28,6 +29,7 @@ const dripperBrands: DripperBrand[] = [
             <DripperType> {
                 name: 'v60',
                 recipes: [
+                    <DripperRecipe> { name: '46method', recipeId: CoffeeRecipeId.hario_v60_46method },
                     <DripperRecipe> { name: 'jameshoffmann', recipeId: CoffeeRecipeId.hario_v60_jameshoffmann },
                     <DripperRecipe> { name: 'mattwinton', recipeId: CoffeeRecipeId.hario_v60_mattwinton }
                 ]
@@ -529,6 +531,56 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) : Co
                     {
                         description : 'Detailed Hario V60 Five Pour Coffee – Matt Winton’s Award-Winning Recipe',
                         url: 'https://bigcupofcoffee.com/v60-five-pour-recipe-matt-winton/'
+                    }
+                ]
+            }
+        };
+        case CoffeeRecipeId.hario_v60_46method : {
+            return <CoffeeRecipeConfig>{
+                isTimerRecipe: true,
+                isImmersionDripperRecipe: false,
+                coffeeParameters: {
+                    beanInGrams: 20,
+                    coffeeToWaterRatio: -1,
+                    waterInGrams: 300
+                },
+                stepsDurationInSeconds: [45, 45, 45, 30, 45],
+                pourParameters: [
+                    { waterPercentage: 20, waterTemp: 93},
+                    { waterPercentage: 20, waterTemp: 93},
+                    { waterPercentage: 20, waterTemp: 93},
+                    { waterPercentage: 20, waterTemp: 93},
+                    { waterPercentage: 20, waterTemp: 93}
+                ],
+                steps: [
+                    {
+                        stage: PourOverStage.FIRST_POUR
+                    },
+                    {
+                        
+                        stage: PourOverStage.SECOND_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE
+                    },
+                    {
+                        
+                        stage: PourOverStage.THIRD_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE
+                    },
+                    {
+                        
+                        stage: PourOverStage.FOURTH_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE
+                    },
+                    {
+                        
+                        stage: PourOverStage.FIFTH_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE
+                    }
+                ],
+                references: [
+                    { 
+                        description : 'How to Make Coffee Using the 4:6 Brewing Method', 
+                        url: 'https://en.philocoffea.com/blogs/blog/coffee-brewing-method' 
                     }
                 ]
             }
