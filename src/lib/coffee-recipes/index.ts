@@ -1,4 +1,4 @@
-export { CoffeeRecipeId } from "./CoffeeRecipeConstants";
+export { CoffeeRecipeId, getAllDripperRecipePaths } from "./CoffeeRecipeConstants";
 export { CoffeeRecipesChoices } from "./CoffeeRecipeConstants";
 export { CoffeeParameters } from "./CoffeeParameters";
 export { CoffeeRecipe } from "./CoffeeRecipe";

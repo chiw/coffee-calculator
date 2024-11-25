@@ -20,7 +20,6 @@
         console.log('afterNavigate');
         coffeeRecipeStore.recipeId = getKeyByValue(CoffeeRecipeId, data.recipeId.toString());
     });
-
 </script>
 
 <!-- <h1>Use the {@html data.recipeId}</h1> -->
