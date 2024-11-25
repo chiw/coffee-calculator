@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { i18n } from '$lib/i18n.js'
+    import { i18n } from '$lib/i18n.js';
+    import { base } from '$app/paths';
     import { CoffeeRecipesChoices } from '$lib/coffee-recipes';
 
     import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch/';
@@ -13,8 +14,12 @@
     let { selectedOption } = $props();
 
     const getCoffeeRecipePath = (pathParams) => {
-        console.log('getCoffeeRecipePath', pathParams);
-        return '/recipe' + '/' + pathParams[0] + '/' + pathParams[1] + '/' + pathParams[2];
+        
+        // return '/recipe' + '/' + pathParams[0] + '/' + pathParams[1] + '/' + pathParams[2];
+        let path = base +  '/recipe' + '/' + pathParams[0] + '/' + pathParams[1] + '/' + pathParams[2];
+        console.log('getCoffeeRecipePath', pathParams, path);
+
+        return path;
     }
 
     const onChangeRecipe = (e) => {
