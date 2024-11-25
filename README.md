@@ -1,20 +1,17 @@
 # coffee-calculator
 
-Github page:
-- https://chiw.github.io/coffee-calculator/recipe/hario/switch/tetsukasuya
-- https://chiw.github.io/coffee-calculator/recipe/hario/switch/emifukahori
-- https://chiw.github.io/coffee-calculator/recipe/hario/switch/olekristianboen
-- https://chiw.github.io/coffee-calculator/recipe/hario/switch/coffeechronicler
-- https://chiw.github.io/coffee-calculator/recipe/hario/v60/jameshoffmann
-- https://chiw.github.io/coffee-calculator/recipe/hario/v60/mattwinton
+## Recipes:
+### Hario Switch
+- Tetsu Kasuya https://chiw.github.io/coffee-calculator/recipe/hario/switch/tetsukasuya
+- Emi Fukahori https://chiw.github.io/coffee-calculator/recipe/hario/switch/emifukahori
+- Ole Kristian Bøen https://chiw.github.io/coffee-calculator/recipe/hario/switch/olekristianboen
+- The Coffee Chronicler https://chiw.github.io/coffee-calculator/recipe/hario/switch/coffeechronicler
 
+### Hario V60
+- 4:6 method (by Tetsu Kasuya) https://chiw.github.io/coffee-calculator/recipe/hario/v60/46method
+- James Hoffmann https://chiw.github.io/coffee-calculator/recipe/hario/v60/jameshoffmann
+- Matt Winton https://chiw.github.io/coffee-calculator/recipe/hario/v60/mattwinton
 
-- https://chiw.github.io/coffee-calculator/zh-hk/recipe/hario/switch/tetsukasuya
-- https://chiw.github.io/coffee-calculator/zh-hk/recipe/hario/switch/emifukahori
-- https://chiw.github.io/coffee-calculator/zh-hk/recipe/hario/switch/olekristianboen
-- https://chiw.github.io/coffee-calculator/zh-hk/recipe/hario/switch/coffeechronicler
-- https://chiw.github.io/coffee-calculator/zh-hk/recipe/hario/v60/jameshoffmann
-- https://chiw.github.io/coffee-calculator/zh-hk/recipe/hario/v60/mattwinton
 
 # create-svelte
 
