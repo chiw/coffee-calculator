@@ -1,6 +1,6 @@
 export const prerender = true;
 export const ssr = true;
-export const trailingSlash = 'always';
+export const trailingSlash = 'never';
 
 import { i18n } from '$lib/i18n.js';
 import { base } from '$app/paths';
@@ -21,10 +21,14 @@ export const load = ({ params }) => {
         // let path = base + "/recipe/" + searchResult.result.id.replaceAll("_", "/");
         let path = base + "/recipe/" + getPathFromMetaInfo(searchResult.result.metaInfos);
         
+        let i18nResolveRoute = i18n.resolveRoute(path);
+        console.log('requires to redirect', path, i18nResolveRoute);
+
         // redirect(i18n.resolveRoute("/base/about", "de"))
         // redirect(302, path);
-        redirect(302, i18n.resolveRoute(path));
+        redirect(302, i18nResolveRoute);
     } else {
+        console.log('does not require to redirect', searchResult.result.id);
         return {
             recipeId: searchResult.result.id
         }
