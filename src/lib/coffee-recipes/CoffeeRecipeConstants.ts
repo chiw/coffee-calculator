@@ -1,5 +1,7 @@
-import type { CoffeeRecipeConfig, DripperBrand, DripperRecipe, DripperType, MetaInfo } from "./CoffeeRecipeTypes.d"; 
+import type { CoffeeRecipeConfig, DripperBrand, DripperRecipe, DripperType, MetaInfo, MetaInfos } from "./CoffeeRecipeTypes.d"; 
 import {  PouringTechnique, PourOverStage, SwitchState } from "./CoffeeRecipeTypes.d";
+
+import { createBrandMetaInfo, createDripperMetaInfo, createRecipeMetaInfo, getPathFromMetaInfo, getValueFromMetaInfo, isDefaultRecipe, isRecipeMetaInfo, metaInfoIsMatched, MetaInfoKey} from "./MetaInfoUtils";
 
 export const CoffeeRecipeId = {
     hario_switch_tetsukasuya: 'hario_switch_tetsukasuya',
@@ -38,11 +40,7 @@ const dripperBrands: DripperBrand[] = [
     }
 ]
 
-export const getPathFromMetaInfo = (metaInfo: MetaInfo[]) => {
-    return getValueFromMetaInfo(metaInfo, 'path');
-}
-
-export const getAllDripperRecipePaths = () => {
+export const getAllDripperRecipePaths = (): string[] => {
     const paths: string[] = DripperBrandMetaInfos.map(metaInfo => getPathFromMetaInfo(metaInfo));
     console.log('getAllDripperRecipePaths', paths);
     return paths;
@@ -51,84 +49,32 @@ export const getAllDripperRecipePaths = () => {
 export type CoffeeRecipeChoice = {
     id: CoffeeRecipeId,
     defaultRecipe ?: true,
-    metaInfos: MetaInfo[]
+    metaInfos: MetaInfos
 }
 
 
-
-const getValueFromMetaInfo = (metaInfo: MetaInfo[], name: string): string => {
-    let value = null;
-    metaInfo.forEach(entry => {
-        if(entry.name === name) {
-            value = entry.value;
-        }
-    });
-    return value;
-}
-
-const metaInfoHasValue = (metaInfo: MetaInfo[], name: string, value: string): boolean => {
-    let hasValue = false;
-    metaInfo.forEach(entry => {
-        if(entry.name == name && entry.value == value) {
-            hasValue = true;
-        }
-    });
-    // console.log('metaInfo', metaInfo, 'name', name, 'value', value, 'hasValue', hasValue);
-    return hasValue;
-}
-
-
-
-const generateDripperLevelMetaInfo = (brandName: string, drippers: DripperType[]): MetaInfo[][] => {
-    let metaInfoArr: MetaInfo[][] = [];
+const generateDripperLevelMetaInfo = (brandName: string, drippers: DripperType[]): MetaInfos[] => {
+    let metaInfosArr: MetaInfos[] = [];
     
     drippers.forEach(dripper => {
-        metaInfoArr.push(createDripperMetaInfo(brandName, dripper.name));
-        metaInfoArr = metaInfoArr.concat(generateRecipeMetaInfo(brandName, dripper.name, dripper.recipes));
+        metaInfosArr.push(createDripperMetaInfo(brandName, dripper.name));
+        metaInfosArr = metaInfosArr.concat(generateRecipeMetaInfo(brandName, dripper.name, dripper.recipes));
     });
-    return metaInfoArr;
+    return metaInfosArr;
 }
 
-const generateRecipeMetaInfo = (brandName: string, dripperName: string, dripperRecipes?: DripperRecipe[]): MetaInfo[][] => {
-    let metaInfoArr: MetaInfo[][] = [];
+const generateRecipeMetaInfo = (brandName: string, dripperName: string, dripperRecipes?: DripperRecipe[]): MetaInfos[] => {
+    let metaInfosArr: MetaInfos[] = [];
     if(dripperRecipes) {
         dripperRecipes.forEach(dripperRecipe => {
-            metaInfoArr.push(createRecipeMetaInfo(brandName, dripperName, dripperRecipe.name, dripperRecipe.recipeId));
+            let isDefaultRecipe = metaInfosArr.length == 0;
+            metaInfosArr.push(createRecipeMetaInfo(brandName, dripperName, dripperRecipe.name, dripperRecipe.recipeId, isDefaultRecipe));
         });
     }
-    return metaInfoArr;
+    return metaInfosArr;
 }
 
-const createBrandMetaInfo = (brandName: string): MetaInfo[] => {
-    const metaInfoArr: MetaInfo[] = [];
-    metaInfoArr.push(<MetaInfo> { name: 'brand', value: brandName});
-    metaInfoArr.push(<MetaInfo> { name: 'path', value: brandName});
-    metaInfoArr.push(<MetaInfo> { name: 'level', value: 'brand'});
-    // console.log('brandName', brandName, 'metaInforArr', metaInfoArr);
-    return metaInfoArr;
-}
 
-const createDripperMetaInfo = (brandName: string, dripperName: string): MetaInfo[] => {
-    const metaInfoArr: MetaInfo[] = [];
-    metaInfoArr.push(<MetaInfo> { name: 'brand', value: brandName});
-    metaInfoArr.push(<MetaInfo> { name: 'dripper', value: dripperName});
-    metaInfoArr.push(<MetaInfo> { name: 'path', value: brandName + '/' + dripperName});
-    metaInfoArr.push(<MetaInfo> { name: 'level', value: 'dripper'});
-    // console.log('brandName', brandName, 'dripperName', dripperName, 'metaInforArr', metaInfoArr);
-    return metaInfoArr;
-}
-
-const createRecipeMetaInfo = (brandName: string, dripperName: string, recipeName: string, recipeId: string): MetaInfo[] => {
-    const metaInfoArr: MetaInfo[] = [];
-    metaInfoArr.push(<MetaInfo> { name: 'brand', value: brandName});
-    metaInfoArr.push(<MetaInfo> { name: 'dripper', value: dripperName});
-    metaInfoArr.push(<MetaInfo> { name: 'name', value: recipeName});
-    metaInfoArr.push(<MetaInfo> { name: 'recipeId', value: recipeId});
-    metaInfoArr.push(<MetaInfo> { name: 'path', value: brandName + '/' + dripperName + '/' + recipeName});
-    metaInfoArr.push(<MetaInfo> { name: 'level', value: 'recipe'});
-    // console.log('brandName', brandName, 'dripperName', dripperName, 'recipeName', recipeName, 'recipeId', recipeId, 'metaInforArr', metaInfoArr);
-    return metaInfoArr;
-}
 
 export type CoffeeRecipeSearchResult = {
     result: CoffeeRecipeChoice,
@@ -139,7 +85,7 @@ export const searchRecipeIdByParams = (inParams: string[]) :CoffeeRecipeSearchRe
     let filteredChoices = CoffeeRecipesChoices;
     let result: CoffeeRecipeChoice;
 
-    let metaInfoSearchKeys = ['brand', 'dripper', 'name'];
+    let metaInfoSearchKeys = [MetaInfoKey.brand, MetaInfoKey.dripper, MetaInfoKey.name];
 
     inParams.forEach((inSearchStr, index) => {
         if(!result) {
@@ -169,41 +115,28 @@ export const filterChoicesByRecipeMetaInfo = (
     inChoices: CoffeeRecipeChoice[], inSearchStr: string, 
     metaInfoNameArr: string[], mustBeExactWording: boolean) : CoffeeRecipeChoice[] => {
 
-    let filteredChoices = inChoices.filter((choice) => matchChoice(choice, inSearchStr, metaInfoNameArr, mustBeExactWording));
+    let filteredChoices = inChoices.filter((choice) => metaInfoIsMatched(choice.metaInfos, inSearchStr, metaInfoNameArr, mustBeExactWording));
 
     // console.log('filterChoicesByRecipeMetaInfo inSearchStr=', inSearchStr, 'metaInfoNameArr=', metaInfoNameArr, 'mustBeExactWording=', mustBeExactWording, 'filteredChoices=', filteredChoices);
 
     return filteredChoices;
 }
 
-const matchChoice = (choice: CoffeeRecipeChoice, inSearchStr: string, metaInfoNameArr: string[], mustBeExactWording: boolean) => {
-    if(choice && inSearchStr) {
-        let match = choice.metaInfos
-            .filter((metaInfo) => metaInfoNameArr.includes(metaInfo.name))
-            .filter((metaInfo) => (mustBeExactWording) ? metaInfo.value == inSearchStr : metaInfo.value.includes(inSearchStr) )
-            .length > 0;
+// export const firstChoice = (inChoices: CoffeeRecipeChoice[], defaultRecipeId: CoffeeRecipeId): CoffeeRecipeId => {
+//     return (inChoices && inChoices.length >= 1) ? inChoices[0].id : defaultRecipeId;
+// }
 
-        // console.log('match=', match, 'choice.metaInfos=', choice.metaInfos, 'inSearchStr=', inSearchStr, 'metaInfoNameArr=', metaInfoNameArr, 'mustBeExactWording=', mustBeExactWording);
-        return match;
-    }
-    return false;
-}
-
-export const firstChoice = (inChoices: CoffeeRecipeChoice[], defaultRecipeId: CoffeeRecipeId): CoffeeRecipeId => {
-    return (inChoices && inChoices.length >= 1) ? inChoices[0].id : defaultRecipeId;
-}
-
-const dripperBrandMetaInfos = (dripperBrands: DripperBrand[]): MetaInfo[][] => {
-    let metaInfoArr: MetaInfo[][] = [];
+const dripperBrandMetaInfos = (dripperBrands: DripperBrand[]): MetaInfos[] => {
+    let metaInfosArr: MetaInfos[] = [];
 
     dripperBrands.forEach(brand => {
         // console.log('brand', brand);
-        metaInfoArr.push(createBrandMetaInfo(brand.name));
-        metaInfoArr = metaInfoArr.concat(generateDripperLevelMetaInfo(brand.name, brand.drippers))
+        metaInfosArr.push(createBrandMetaInfo(brand.name));
+        metaInfosArr = metaInfosArr.concat(generateDripperLevelMetaInfo(brand.name, brand.drippers))
     });
 
-    console.log('dripperBrandMetaInfos metaInfoArr', metaInfoArr);
-    return metaInfoArr;
+    console.log('dripperBrandMetaInfos metaInfosArr', metaInfosArr);
+    return metaInfosArr;
 }
 export const DripperBrandMetaInfos = dripperBrandMetaInfos(dripperBrands);
 
@@ -211,24 +144,15 @@ const generateCoffeeRecipesChoices = (): CoffeeRecipeChoice[] => {
     // console.log('recipes', recipes);
     // console.log('getAllDripperRecipePaths()', getAllDripperRecipePaths());
 
-    let coffeeRecipesChoices: CoffeeRecipeChoice[] = [];
-    let metaInfoArr : MetaInfo[][] = DripperBrandMetaInfos
-        .filter(metaInfo => metaInfoHasValue(metaInfo, 'level',  'recipe'));
+    let coffeeRecipesChoices: CoffeeRecipeChoice[] = DripperBrandMetaInfos
+        .filter(metaInfos => isRecipeMetaInfo(metaInfos))
+        .map(metaInfos => <CoffeeRecipeChoice> {
+            id: getValueFromMetaInfo(metaInfos, MetaInfoKey.recipeId),
+            defaultRecipe: isDefaultRecipe(metaInfos),
+            metaInfos: <MetaInfos> metaInfos
+        });
 
-    // console.log('metaInfoArr', metaInfoArr);
-
-    metaInfoArr.forEach(metaInfo => {
-        let id = getValueFromMetaInfo(metaInfo, 'recipeId');
-        if(id) {
-            let coffeeRecipeChoice = <CoffeeRecipeChoice> {
-                id: id,
-                metaInfos: <MetaInfo[]> metaInfo
-            };
-            coffeeRecipesChoices.push(coffeeRecipeChoice);
-        }
-    });
-
-    // console.log('generateCoffeeRecipesChoices coffeeRecipesChoices', coffeeRecipesChoices);
+    console.log('generateCoffeeRecipesChoices coffeeRecipesChoices', coffeeRecipesChoices);
     return coffeeRecipesChoices;
 }
 export const CoffeeRecipesChoices = generateCoffeeRecipesChoices();
@@ -399,7 +323,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) : Co
                     }
                 ]
             }
-        }
+        };
         case CoffeeRecipeId.hario_v60_jameshoffmann : {
             return <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
