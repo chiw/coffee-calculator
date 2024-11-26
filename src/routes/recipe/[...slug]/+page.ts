@@ -6,8 +6,9 @@ import { i18n } from '$lib/i18n.js';
 import { base } from '$app/paths';
 import { error, redirect } from '@sveltejs/kit';
 
-import { getAllDripperRecipePaths, getPathFromMetaInfo, searchRecipeIdByParams, type CoffeeRecipeSearchResult } from '$lib/coffee-recipes/CoffeeRecipeConstants';
+import { getAllDripperRecipePaths, searchRecipeIdByParams, type CoffeeRecipeSearchResult } from '$lib/coffee-recipes/CoffeeRecipeConstants';
 import type { EntryGenerator } from './$types.js';
+import { getPathFromMetaInfo } from '$lib/coffee-recipes/MetaInfoUtils.js';
 
 export const load = ({ params }) => {
     console.log('page load', params);

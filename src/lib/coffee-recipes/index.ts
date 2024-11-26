@@ -7,3 +7,11 @@ export { SwitchState, PourOverStage, PouringTechnique } from "./CoffeeRecipeType
 export type { CoffeeRecipeConfig, Reference, StepWaterInfo } from "./CoffeeRecipeTypes.d";
 
 export { createCoffeeParams, createCoffeeRecipe, createCoffeeRecipeSteps } from "$lib/coffee-recipes/CoffeeRecipesFactory";
+
+export { 
+    createBrandMetaInfo, createDripperMetaInfo, createRecipeMetaInfo,
+    getPathFromMetaInfo, getValueFromMetaInfo, 
+    isBrandMetaInfo, isDripperMetaInfo, isRecipeMetaInfo, isDefaultRecipe,
+    metaInfoIsMatched
+} from "./MetaInfoUtils";
+export type { MetaInfoKey, MetaInfoLevel } from "./MetaInfoUtils";

@@ -1,12 +1,14 @@
 <script lang="ts">
     import { i18n } from '$lib/i18n.js';
     import { base } from '$app/paths';
-    import { CoffeeRecipesChoices } from '$lib/coffee-recipes';
+    import { CoffeeRecipeId, CoffeeRecipesChoices, getValueFromMetaInfo } from '$lib/coffee-recipes';
+    import type { MetaInfoKey } from '$lib/coffee-recipes';
 
     import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch/';
     import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';
 	import { coffeeRecipeIdSelectMessageKey } from './CoffeeReceipeMessageKeys';
     import { goto } from '$app/navigation';
+	import type { MetaInfos } from '$lib/coffee-recipes/CoffeeRecipeTypes';
 
     const stopwatch: StopWatchStore = getStopWatchStore();
     const coffeeRecipeStore = getCoffeeRecipeStore();
@@ -25,9 +27,11 @@
     const onChangeRecipe = (e) => {
         const pathParams = selectedOption.split('_');
         const path = getCoffeeRecipePath(pathParams);
-        console.log('onChangeRecipe', pathParams, path);
+        
+        console.log('onChangeRecipe', path);
         goto(i18n.resolveRoute(path));
     }
+
 </script>
 
 <div class="flex flex-row ">

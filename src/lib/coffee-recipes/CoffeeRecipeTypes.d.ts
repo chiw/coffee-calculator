@@ -18,6 +18,10 @@ export type MetaInfo = {
     value: string
 }
 
+export type MetaInfos = {
+    values: MetaInfo[];
+}
+
 export const PouringTechnique = {
     CENTER : 'CENTER',
     CIRCLE : 'CIRCLE'
