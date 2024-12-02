@@ -1,7 +1,22 @@
 import { CoffeeRecipeId, PouringTechnique, PourOverStage, SwitchState, type StepWaterInfo } from '$lib/coffee-recipes';
 import * as m from '$lib/paraglide/messages.js';
 
+export const brandMessageKey = (brandName: string) => {
+    switch(brandName) {
+        case 'hario' : return m.label_brand_hario;
+        default:
+            return m.label_brand_unknwon;
+    }
+}
 
+export const dripperMessageKey = (dripperName: string) => {
+    switch(dripperName) {
+        case 'switch' : return m.label_dripper_switch;
+        case 'v60' : return m.label_dripper_v60;
+        default:
+            return m.label_dripper_unknown;
+    }
+}
 
 export const coffeeRecipeIdSelectMessageKey = (coffeeRecipeId: CoffeeRecipeId) => {
     switch(coffeeRecipeId) {

@@ -38,13 +38,20 @@
     "label_pouring_technique_center" : "<b>往中心注水</b>",
     "label_pouring_technique_circular" : "<b>繞圈注水</b>",
 
-    "label_step_msg_water_volume" : "水量 <b>{waterInGrams}g</b>",
-    "label_step_msg_water_volume_with_total" : "水量 <b>{waterInGrams}g</b> (總量: <b>{totalWaterInGrams}g</b>)",
+    "label_step_msg_water_volume" : "<b>+{waterInGrams}g</b> 水",
+    "label_step_msg_water_volume_with_total" : "<b>+{waterInGrams}g</b> 水 (總量: <b>{totalWaterInGrams}g</b>)",
     "label_step_msg_water_temperature" : ", 水溫 {waterTemperature}°C",
     "label_step_msg_let_water_flow" : "讓水流畢",
     "label_step_msg_let_water_flow_until" : "讓水流直到 {time}",
     "label_step_pause": "等待",
     "label_step_swirl": " 輕輕搖晃濾杯",
+
+    "label_brand_hario" : "Hario",
+    "label_brand_unknwon" : "Unknown Brand",
+
+    "label_dripper_switch" : "Switch",
+    "label_dripper_v60" : "V60",
+    "label_dripper_unknown" : "Unknown dripper",
 
     "label_harioSwitch_TetsuKasuya" : "Hario Switch (粕谷哲)",
     "label_harioSwitch_EmiFukahori" : "Hario Switch (Emi Fukahori)",
