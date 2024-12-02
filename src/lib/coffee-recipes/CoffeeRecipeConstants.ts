@@ -1,5 +1,6 @@
 import type { CoffeeRecipeConfig, DripperBrand, DripperRecipe, DripperType, MetaInfo, MetaInfos } from "./CoffeeRecipeTypes.d"; 
 import {  PouringTechnique, PourOverStage, SwitchState } from "./CoffeeRecipeTypes.d";
+import { getCoffeeRecipeMenu, type MenuGroup } from "./menu/CoffeeRecipeMenuUtils";
 
 import { createBrandMetaInfo, createDripperMetaInfo, createRecipeMetaInfo, getPathFromMetaInfo, getValueFromMetaInfo, isDefaultRecipe, isRecipeMetaInfo, metaInfoIsMatched, MetaInfoKey} from "./MetaInfoUtils";
 
@@ -39,6 +40,8 @@ const dripperBrands: DripperBrand[] = [
         ]
     }
 ]
+
+export const CoffeeRecipeMenu: MenuGroup[] = getCoffeeRecipeMenu(dripperBrands);
 
 export const getAllDripperRecipePaths = (): string[] => {
     const paths: string[] = DripperBrandMetaInfos.map(metaInfo => getPathFromMetaInfo(metaInfo));
