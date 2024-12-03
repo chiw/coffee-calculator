@@ -106,11 +106,13 @@ export const getValueFromMetaInfo = (metaInfos: MetaInfos, name: string): string
 
 export const metaInfoHasValue = (metaInfos: MetaInfos, name: string, value: string): boolean => {
     let hasValue = false;
-    metaInfos.values.forEach(entry => {
-        if(entry.name == name && entry.value == value) {
-            hasValue = true;
-        }
-    });
+    if(metaInfos && metaInfos.values) {
+        metaInfos.values.forEach(entry => {
+            if(entry.name == name && entry.value == value) {
+                hasValue = true;
+            }
+        });
+    }
     // console.log('metaInfo', metaInfo, 'name', name, 'value', value, 'hasValue', hasValue);
     return hasValue;
 }

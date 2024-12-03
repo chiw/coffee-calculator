@@ -2,7 +2,7 @@ export { CoffeeRecipeId, getAllDripperRecipePaths } from "./CoffeeRecipeConstant
 export { CoffeeRecipesChoices } from "./CoffeeRecipeConstants";
 export { CoffeeParameters } from "./CoffeeParameters";
 export { CoffeeRecipe } from "./CoffeeRecipe";
-export { CoffeeRecipeMenu } from "./CoffeeRecipeConstants";
+export { Menu } from "./CoffeeRecipeConstants";
 
 export { SwitchState, PourOverStage, PouringTechnique } from "./CoffeeRecipeTypes.d";
 export type { CoffeeRecipeConfig, Reference, StepWaterInfo } from "./CoffeeRecipeTypes.d";
@@ -17,4 +17,4 @@ export {
 } from "./MetaInfoUtils";
 export type { MetaInfoKey, MetaInfoLevel } from "./MetaInfoUtils";
 
-export type { Menu, MenuGroup, MenuItem } from "./menu/CoffeeRecipeMenuUtils";
+export type { CoffeeRecipeMenu, DripperMenu as MenuGroup, RecipeMenu as MenuItem } from "./menu/CoffeeRecipeMenuUtils";
