@@ -1,67 +1,139 @@
 import { type CoffeeRecipeId } from "../CoffeeRecipeConstants"
 import type { DripperBrand, DripperRecipe, DripperType, MetaInfos } from "../CoffeeRecipeTypes"
-import { createBrandMetaInfo, createRecipeMetaInfo } from "../MetaInfoUtils"
+import { createBrandMetaInfo, createDripperMetaInfo, createRecipeMetaInfo } from "../MetaInfoUtils"
 
-export type MenuGroup = {
+export type CoffeeRecipeMenu = {
+    brandMenus: BrandMenu[]
+}
+
+export type BrandMenu = {
     brandName: string,
-    dripperName: string
     metaInfos: MetaInfos,
-    items: MenuItem[],
+    dripperMenus: DripperMenu[]
+}
+
+export type DripperMenu = {
+    brandName: string,
+    dripperName: string,
+    metaInfos: MetaInfos,
+    recipeMenus: RecipeMenu[],
     hasItems: boolean
 }
 
-export type MenuItem = {
+export type RecipeMenu = {
     id: CoffeeRecipeId,
     defaultRecipe ?: true,
     metaInfos: MetaInfos
 }
 
-export const getCoffeeRecipeMenu = (dripperBrands: DripperBrand[]): MenuGroup[] => {
-    let menuGroups: MenuGroup[] = [];
+export const getCoffeeRecipeMenu = (dripperBrands: DripperBrand[]): CoffeeRecipeMenu => {
+    let coffeeRecipeMenu = <CoffeeRecipeMenu> {
+        brandMenus: createBrandMenus(dripperBrands)
+    };
+
+    console.log('coffeeRecipeMenu', coffeeRecipeMenu);
+    return coffeeRecipeMenu;
+}
+
+const createBrandMenus = (dripperBrands: DripperBrand[]): BrandMenu[] => {
+    let brandMenus: BrandMenu[] = [];
 
     dripperBrands.forEach(brand => {
-        menuGroups = menuGroups.concat(createMenuGroups(brand.name, brand.drippers));
+        brandMenus.push(createBrandMenu(brand));
     });
-    
-    console.log('menu', menuGroups);
-    return menuGroups;
+    // console.log('brandMenus', brandMenus);
+    return brandMenus;
 }
 
-const createMenuGroups = (brandName: string, drippers: DripperType[]): MenuGroup[] => {
-    let menuGroups: MenuGroup[] = [];
-    drippers.forEach(dripper => {
-        menuGroups.push(createMenuGroup(brandName, dripper));
-    });
-    // console.log('menuGroups', menuGroups);
-    return menuGroups;
-}
-
-const createMenuGroup = (brandName: string, dripper: DripperType): MenuGroup => {
-    let menuItems: MenuItem[] = createMenuItems(brandName, dripper.name, dripper.recipes);
-    return <MenuGroup> {
-        brandName: brandName,
-        dripperName: dripper.name,
-        items: menuItems,
-        hasItems: menuItems.length > 0
+const createBrandMenu = (dripperBrand: DripperBrand): BrandMenu => {
+    let dripperMenus: DripperMenu[] = createDripperMenus(dripperBrand.name, dripperBrand.drippers);
+    return <BrandMenu> {
+        brandName: dripperBrand.name,
+        metaInfos: createBrandMetaInfo(dripperBrand.name),
+        dripperMenus: dripperMenus
     }
 }
 
-const createMenuItems = (brandName: string, dripperName: string, dripperRecipes?: DripperRecipe[]): MenuItem[] => {
-    let menuItems: MenuItem[] = [];
+const createDripperMenus = (brandName: string, drippers: DripperType[]): DripperMenu[] => {
+    let dripperMenus: DripperMenu[] = [];
+    drippers.forEach(dripper => {
+        dripperMenus.push(createDripperMenu(brandName, dripper));
+    });
+    // console.log('dripperMenus', dripperMenus);
+    return dripperMenus;
+}
+
+const createDripperMenu = (brandName: string, dripper: DripperType): DripperMenu => {
+    let recipeMenus: RecipeMenu[] = createRecipeMenus(brandName, dripper.name, dripper.recipes);
+    return <DripperMenu> {
+        brandName: brandName,
+        dripperName: dripper.name,
+        metaInfos: createDripperMetaInfo(brandName, dripper.name),
+        recipeMenus: recipeMenus,
+        hasItems: recipeMenus.length > 0
+    }
+}
+
+const createRecipeMenus = (brandName: string, dripperName: string, dripperRecipes?: DripperRecipe[]): RecipeMenu[] => {
+    let menuItems: RecipeMenu[] = [];
     if(dripperRecipes) {
         dripperRecipes.forEach(recipe => {
             let isDefaultRecipe = menuItems.length == 0;
-            menuItems.push(createMenuItem(brandName, dripperName, recipe, isDefaultRecipe));
+            menuItems.push(createRecipeMenu(brandName, dripperName, recipe, isDefaultRecipe));
         });
     }
     // console.log('menuItems', menuItems);
     return menuItems;
 }
 
-const createMenuItem = (brandName: string, dripperName: string, recipe: DripperRecipe, defaultRecipe: boolean): MenuItem => {
-    return <MenuItem> {
+const createRecipeMenu = (brandName: string, dripperName: string, recipe: DripperRecipe, defaultRecipe: boolean): RecipeMenu => {
+    return <RecipeMenu> {
         id: recipe.recipeId,
         defaultRecipe: defaultRecipe,
         metaInfos: createRecipeMetaInfo(brandName, dripperName, recipe.name, recipe.recipeId, defaultRecipe)
     }
+}
+
+export const getMenuMetaInfos = (coffeeRecipeMenu: CoffeeRecipeMenu): MetaInfos[] => {
+    let metaInfosArr: MetaInfos[] = [];
+
+    metaInfosArr = metaInfosArr.concat(getBrandMenusMetaInfoArr(coffeeRecipeMenu.brandMenus));
+    console.log('getMenuMetaInfos', metaInfosArr);
+
+    return metaInfosArr;
+}
+
+const getBrandMenusMetaInfoArr = (brandMenus: BrandMenu[]): MetaInfos[] => {
+    let metaInfosArr: MetaInfos[] = [];
+
+    brandMenus.forEach(brandMenu => {
+        metaInfosArr.push(brandMenu.metaInfos);
+        metaInfosArr = metaInfosArr.concat(getDripperMenuMetaInfoArr(brandMenu.dripperMenus));
+    });
+    // console.log('getBrandMenusMetaInfoArr', metaInfosArr);
+
+    return metaInfosArr;
+}
+
+const getDripperMenuMetaInfoArr = (dripperMenus: DripperMenu[]): MetaInfos[] => {
+    let metaInfosArr: MetaInfos[] = [];
+
+    dripperMenus.forEach(dripperMenu => {
+        metaInfosArr.push(dripperMenu.metaInfos);
+        metaInfosArr = metaInfosArr.concat(getRecipeMenuMetaInfoArr(dripperMenu.recipeMenus));
+    });
+    // console.log('getDripperMenuMetaInfoArr', metaInfosArr);
+
+    return metaInfosArr;
+}
+
+const getRecipeMenuMetaInfoArr = (recipeMenus: RecipeMenu[]): MetaInfos[] => {
+    let metaInfosArr: MetaInfos[] = [];
+
+    recipeMenus.forEach(recipeMenu => {
+        metaInfosArr.push(recipeMenu.metaInfos);
+    });
+    // console.log('getRecipeMenuMetaInfoArr', metaInfosArr);
+
+    return metaInfosArr;
 }

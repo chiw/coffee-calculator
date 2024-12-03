@@ -1,7 +1,7 @@
 <script lang="ts">
     import { i18n } from '$lib/i18n.js';
     import { base } from '$app/paths';
-    import { CoffeeRecipeMenu } from '$lib/coffee-recipes';
+    import { Menu } from '$lib/coffee-recipes';
     
     import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch/';
     import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';
@@ -38,12 +38,14 @@
         <div>{ coffeeRecipeIdSelectMessageKey(coffeeRecipeStore.recipeId)() }</div>
     {:else}
         <select class="border border-slate-200 w-full h-[2rem]" bind:value={selectedOption} onchange={onChangeRecipe}>
-            {#each CoffeeRecipeMenu as menuGroup, i}
-                <optgroup label={brandMessageKey(menuGroup.brandName)() + ' ' + dripperMessageKey(menuGroup.dripperName)()}>
-                    {#each menuGroup.items as item, j}
-                        <option value={item.id}>{coffeeRecipeIdSelectMessageKey(item.id)()}</option>
-                    {/each}
-                </optgroup>
+            {#each Menu.brandMenus as brandMenu, i}
+                {#each brandMenu.dripperMenus as dripperMenu, j}
+                    <optgroup label={brandMessageKey(dripperMenu.brandName)() + ' ' + dripperMessageKey(dripperMenu.dripperName)()}>
+                        {#each dripperMenu.recipeMenus as item, j}
+                            <option value={item.id}>{coffeeRecipeIdSelectMessageKey(item.id)()}</option>
+                        {/each}
+                    </optgroup>
+                {/each}                
             {/each}
 
         </select>

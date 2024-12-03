@@ -1,6 +1,6 @@
 import type { CoffeeRecipeConfig, DripperBrand, DripperRecipe, DripperType, MetaInfo, MetaInfos } from "./CoffeeRecipeTypes.d"; 
 import {  PouringTechnique, PourOverStage, SwitchState } from "./CoffeeRecipeTypes.d";
-import { getCoffeeRecipeMenu, type MenuGroup } from "./menu/CoffeeRecipeMenuUtils";
+import { getCoffeeRecipeMenu, getMenuMetaInfos, type CoffeeRecipeMenu, type DripperMenu } from "./menu/CoffeeRecipeMenuUtils";
 
 import { createBrandMetaInfo, createDripperMetaInfo, createRecipeMetaInfo, getPathFromMetaInfo, getValueFromMetaInfo, isDefaultRecipe, isRecipeMetaInfo, metaInfoIsMatched, MetaInfoKey} from "./MetaInfoUtils";
 
@@ -41,10 +41,11 @@ const dripperBrands: DripperBrand[] = [
     }
 ]
 
-export const CoffeeRecipeMenu: MenuGroup[] = getCoffeeRecipeMenu(dripperBrands);
+export const Menu: CoffeeRecipeMenu = getCoffeeRecipeMenu(dripperBrands);
 
 export const getAllDripperRecipePaths = (): string[] => {
-    const paths: string[] = DripperBrandMetaInfos.map(metaInfo => getPathFromMetaInfo(metaInfo));
+    // const paths: string[] = DripperBrandMetaInfos.map(metaInfo => getPathFromMetaInfo(metaInfo));
+    const paths: string[] = MenuMetaInfos.map(metaInfo => getPathFromMetaInfo(metaInfo));
     console.log('getAllDripperRecipePaths', paths);
     return paths;
 }
@@ -54,29 +55,6 @@ export type CoffeeRecipeChoice = {
     defaultRecipe ?: true,
     metaInfos: MetaInfos
 }
-
-
-const generateDripperLevelMetaInfo = (brandName: string, drippers: DripperType[]): MetaInfos[] => {
-    let metaInfosArr: MetaInfos[] = [];
-    
-    drippers.forEach(dripper => {
-        metaInfosArr.push(createDripperMetaInfo(brandName, dripper.name));
-        metaInfosArr = metaInfosArr.concat(generateRecipeMetaInfo(brandName, dripper.name, dripper.recipes));
-    });
-    return metaInfosArr;
-}
-
-const generateRecipeMetaInfo = (brandName: string, dripperName: string, dripperRecipes?: DripperRecipe[]): MetaInfos[] => {
-    let metaInfosArr: MetaInfos[] = [];
-    if(dripperRecipes) {
-        dripperRecipes.forEach(dripperRecipe => {
-            let isDefaultRecipe = metaInfosArr.length == 0;
-            metaInfosArr.push(createRecipeMetaInfo(brandName, dripperName, dripperRecipe.name, dripperRecipe.recipeId, isDefaultRecipe));
-        });
-    }
-    return metaInfosArr;
-}
-
 
 
 export type CoffeeRecipeSearchResult = {
@@ -125,29 +103,14 @@ export const filterChoicesByRecipeMetaInfo = (
     return filteredChoices;
 }
 
-// export const firstChoice = (inChoices: CoffeeRecipeChoice[], defaultRecipeId: CoffeeRecipeId): CoffeeRecipeId => {
-//     return (inChoices && inChoices.length >= 1) ? inChoices[0].id : defaultRecipeId;
-// }
 
-const dripperBrandMetaInfos = (dripperBrands: DripperBrand[]): MetaInfos[] => {
-    let metaInfosArr: MetaInfos[] = [];
-
-    dripperBrands.forEach(brand => {
-        // console.log('brand', brand);
-        metaInfosArr.push(createBrandMetaInfo(brand.name));
-        metaInfosArr = metaInfosArr.concat(generateDripperLevelMetaInfo(brand.name, brand.drippers))
-    });
-
-    console.log('dripperBrandMetaInfos metaInfosArr', metaInfosArr);
-    return metaInfosArr;
-}
-export const DripperBrandMetaInfos = dripperBrandMetaInfos(dripperBrands);
+export const MenuMetaInfos: MetaInfos[] = getMenuMetaInfos(Menu);
 
 const generateCoffeeRecipesChoices = (): CoffeeRecipeChoice[] => {
     // console.log('recipes', recipes);
     // console.log('getAllDripperRecipePaths()', getAllDripperRecipePaths());
 
-    let coffeeRecipesChoices: CoffeeRecipeChoice[] = DripperBrandMetaInfos
+    let coffeeRecipesChoices: CoffeeRecipeChoice[] = MenuMetaInfos
         .filter(metaInfos => isRecipeMetaInfo(metaInfos))
         .map(metaInfos => <CoffeeRecipeChoice> {
             id: getValueFromMetaInfo(metaInfos, MetaInfoKey.recipeId),
