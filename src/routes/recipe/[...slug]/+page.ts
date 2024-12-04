@@ -6,9 +6,9 @@ import { i18n } from '$lib/i18n.js';
 import { base } from '$app/paths';
 import { error, redirect } from '@sveltejs/kit';
 
-import { getAllDripperRecipePaths, searchRecipeIdByParams, type CoffeeRecipeSearchResult } from '$lib/coffee-recipes/CoffeeRecipeConstants';
+import { AllRecipePaths, searchRecipeIdByParams, type CoffeeRecipeSearchResult } from '$lib/coffee-recipes/CoffeeRecipeConstants';
 import type { EntryGenerator } from './$types.js';
-import { getPathFromMetaInfo } from '$lib/coffee-recipes/MetaInfoUtils.js';
+import { getPathFromMetaInfo, getValueFromMetaInfo, MetaInfoKey } from '$lib/coffee-recipes/MetaInfoUtils.js';
 
 export const load = ({ params }) => {
     console.log('page load', params);
@@ -19,19 +19,17 @@ export const load = ({ params }) => {
     let searchResult : CoffeeRecipeSearchResult = searchRecipeIdByParams(pathParamsArr);
 
     if(searchResult.requiresRedirect) {
-        // let path = base + "/recipe/" + searchResult.result.id.replaceAll("_", "/");
-        let path = base + "/recipe/" + getPathFromMetaInfo(searchResult.result.metaInfos);
+        let path = base + "/recipe/" + getPathFromMetaInfo(searchResult.metaInfos);
         
         let i18nResolveRoute = i18n.resolveRoute(path);
         console.log('requires to redirect', path, i18nResolveRoute);
 
-        // redirect(i18n.resolveRoute("/base/about", "de"))
-        // redirect(302, path);
         redirect(302, i18nResolveRoute);
     } else {
-        console.log('does not require to redirect', searchResult.result.id);
+        let recipeId = getValueFromMetaInfo(searchResult.metaInfos, MetaInfoKey.recipeId);
+        console.log('does not require to redirect', recipeId);
         return {
-            recipeId: searchResult.result.id
+            recipeId: recipeId
         }
     }
 }
@@ -39,7 +37,7 @@ export const load = ({ params }) => {
 export const entries: EntryGenerator = () => {
     let paths: string[] = [];
     
-    getAllDripperRecipePaths().forEach(path => paths.push({ slug: path}));
+    AllRecipePaths.forEach(path => paths.push({ slug: path}));
 
     return paths;
 };

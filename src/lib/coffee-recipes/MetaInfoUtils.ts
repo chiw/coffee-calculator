@@ -47,6 +47,12 @@ export const MetaInfoLevel = {
 } as const;
 export type MetaInfoLevel = keyof typeof MetaInfoLevel;
 
+export type MetaInfosSearchParam = {
+    metaInfoKey: MetaInfoKey,
+    searchStr: string,
+    exactWording: boolean
+}
+
 const convertToMetaInfos = (metaInfoArr: MetaInfo[]): MetaInfos => {
     return <MetaInfos> {
         values: metaInfoArr
@@ -90,7 +96,7 @@ export const createRecipeMetaInfo = (brandName: string, dripperName: string, rec
     return convertToMetaInfos(metaInfoArr);
 }
 
-export const getPathFromMetaInfo = (metaInfos: MetaInfos) => {
+export const getPathFromMetaInfo = (metaInfos: MetaInfos): string => {
     return getValueFromMetaInfo(metaInfos, MetaInfoKey.path);
 }
 
@@ -133,15 +139,44 @@ export const isDefaultRecipe = (metaInfos: MetaInfos): boolean => {
     return metaInfoHasValue(metaInfos, MetaInfoKey.isDefaultRecipe, 'true');
 }
 
-export const metaInfoIsMatched = (metaInfos: MetaInfos, inSearchStr: string, metaInfoNameArr: string[], mustBeExactWording: boolean) => {
+export const metaInfoIsMatched = (metaInfos: MetaInfos, metaInfoSearchParam: MetaInfosSearchParam) => {
+    let inSearchStr = metaInfoSearchParam.searchStr;
+    let metaInfoNameArr = [metaInfoSearchParam.metaInfoKey];
+    let exactWording = metaInfoSearchParam.exactWording;
+
     if(metaInfos && inSearchStr) {
         let match = metaInfos.values
             .filter((metaInfo) => metaInfoNameArr.includes(metaInfo.name))
-            .filter((metaInfo) => (mustBeExactWording) ? metaInfo.value == inSearchStr : metaInfo.value.includes(inSearchStr) )
+            .filter((metaInfo) => (exactWording) ? metaInfo.value == inSearchStr : metaInfo.value.includes(inSearchStr) )
             .length > 0;
 
         // console.log('match=', match, 'choice.metaInfos=', choice.metaInfos, 'inSearchStr=', inSearchStr, 'metaInfoNameArr=', metaInfoNameArr, 'mustBeExactWording=', mustBeExactWording);
         return match;
     }
     return false;
+}
+
+export const createSearchParams = (inParams: string[]): MetaInfosSearchParam[] => {
+    let searchParams: MetaInfosSearchParam[] = [];
+
+    let metaInfoSearchKeys = [MetaInfoKey.brand, MetaInfoKey.dripper, MetaInfoKey.name];
+
+    inParams.forEach((searchStr, index) => {
+        searchParams.push(<MetaInfosSearchParam> {
+            metaInfoKey: metaInfoSearchKeys[index],
+            searchStr: searchStr,
+            exactWording: true
+        });
+    });
+
+    console.log('createSearchParams', searchParams);
+    return searchParams;
+}
+
+export const filterMetaInfosBySearchParam = (inMetaInfosArr: MetaInfos[], searchParam: MetaInfosSearchParam) : MetaInfos[] => {
+    let filteredMetaInfosArr = inMetaInfosArr.filter((metaInfos) => metaInfoIsMatched(metaInfos, searchParam));
+    
+    console.log('filterMetaInfosBySearchStr', searchParam, filteredMetaInfosArr);
+
+    return filteredMetaInfosArr;
 }
