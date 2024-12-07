@@ -54,13 +54,13 @@
     "label_dripper_v60" : "V60",
     "label_dripper_unknown" : "Unknown dripper",
 
-    "label_harioSwitch_TetsuKasuya" : "Hario Switch (Tetsu Kasuya)",
-    "label_harioSwitch_EmiFukahori" : "Hario Switch (Emi Fukahori)",
-    "label_harioSwitch_OleKristianBoen": "Hario Switch (Ole Kristian Bøen)",
-    "label_harioSwitch_CoffeeChronicler" : "Hario Switch (Coffee Chronicler)",
-    "label_harioV60_46method" : "Hario V60 4:6 method (Tetsu Kasuya)",
-    "label_harioV60_JamesHoffmann" : "Hario V60 (James Hoffmann)",
-    "label_harioV60_MattWinton" : "Hario V60 (Matt Winton)",    
+    "label_hario_switch_tetsukasuya" : "Hario Switch (Tetsu Kasuya)",
+    "label_hario_switch_emifukahori" : "Hario Switch (Emi Fukahori)",
+    "label_hario_switch_olekristianboen": "Hario Switch (Ole Kristian Bøen)",
+    "label_hario_switch_coffeechronicler" : "Hario Switch (Coffee Chronicler)",
+    "label_hario_v60_46method" : "Hario V60 4:6 method (Tetsu Kasuya)",
+    "label_hario_v60_jameshoffmann" : "Hario V60 (James Hoffmann)",
+    "label_hario_v60_mattwinton" : "Hario V60 (Matt Winton)",    
     "label_unknown_recipe" : "Unknown Recipe"
     
 }
