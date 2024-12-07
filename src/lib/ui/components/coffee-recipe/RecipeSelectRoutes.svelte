@@ -34,7 +34,7 @@
 </script>
 
 <div class="flex flex-row ">
-    {#if StopWatchState.RUNNING === stopwatch.stopwatchState}
+    {#if stopwatch.isRunning() }
         <div>{ coffeeRecipeIdSelectMessageKey(coffeeRecipeStore.recipeId)() }</div>
     {:else}
         <select class="border border-slate-200 w-full h-[2rem]" bind:value={selectedOption} onchange={onChangeRecipe}>

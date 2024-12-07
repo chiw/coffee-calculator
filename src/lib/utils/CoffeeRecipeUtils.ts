@@ -24,3 +24,7 @@ export const isFinalStage = (stage: PourOverStage): boolean => {
 export const isPauseStage = (stage: PourOverStage): boolean => {
     return PourOverStage.PAUSE === stage;
 }
+
+export const isBloomingStage = (stage: PourOverStage): boolean => {
+    return PourOverStage.BLOOMING === stage;
+}
