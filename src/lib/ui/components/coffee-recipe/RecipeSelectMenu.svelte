@@ -86,9 +86,9 @@
                             {#each brandMenu.dripperMenus as dripperMenu, j}
                                 <li><span class="font-bold">{brandMessageKey(dripperMenu.brandName)() + ' ' + dripperMessageKey(dripperMenu.dripperName)()}</span></li>
                                 {#each dripperMenu.recipeMenus as item, j}
-                                    <li class="pl-2 pt-2 pb-2">
+                                    <li class="pl-2 pt-2 pb-2 w-full">
                                         <a href="{base + "/recipe/" + getPathFromMetaInfo(item.metaInfos)}" onclick="{closeDropdown}" 
-                                            class="group relative before:absolute before:inset-x-0 before:bottom-0 before:h-2 h-8">
+                                            class="group relative before:absolute before:inset-x-0 before:bottom-0 before:h-2 h-8 block">
                                             <span class="relative ">{coffeeRecipeIdSelectMessageKey(item.id)()}</span>
                                         </a>
                                     </li>

@@ -32,7 +32,7 @@
     </div>
     
     {#if coffeeRecipeStore.coffeeRecipe}    
-        <div class="mt-5">
+        <div class="mt-2">
             <!-- {#if coffeeRecipeStore.coffeeRecipeSteps.isTimerRecipe} -->
                 <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeStore.coffeeRecipeSteps} />
             <!-- {:else} -->
