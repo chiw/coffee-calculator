@@ -18,7 +18,7 @@
 <div class="grow ml-2">
     {#if step.stage}
         {#if isPauseStage(step.stage) }
-            <span class="text-sm">{@html pourOverStageMessageKey(step.stage)() }</span>
+            <span class="text-sm">{@html pourOverStageMessageKey(step.stage)() + ' ' + (step.swirl ? '<b>(' + swirlMessageKey() + ')</b>' : '') }</span>
         {:else}
             <span class="text-sm">{@html pourOverStageMessageKey(step.stage)() }</span>
         {/if}
@@ -41,9 +41,11 @@
         <span class="ml-0 text-sm">{@html waterTemperatureMessageKey(stepWaterInfo.waterTemperature)}</span>
     {/if}
 
-    {#if step.swirl === true}
+    {#if step.swirl}
         <!-- <span>{@html "<br/>"}</span> -->
-        <span class="mr-0 text-sm">{@html swirlMessageKey() }</span>
+         {#if !isPauseStage(step.stage) }
+            <span class="mr-0 text-sm">{@html swirlMessageKey() }</span>
+        {/if}
     {/if}
 </div>
 

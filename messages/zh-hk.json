@@ -44,7 +44,7 @@
     "label_step_msg_let_water_flow" : "讓水流畢",
     "label_step_msg_let_water_flow_until" : "讓水流直到 {time}",
     "label_step_pause": "等待",
-    "label_step_swirl": " 輕輕搖晃濾杯",
+    "label_step_swirl": "輕輕搖晃濾杯",
 
     "label_brand_hario" : "Hario",
     "label_brand_unknwon" : "Unknown Brand",
@@ -55,7 +55,7 @@
 
     "label_hario_switch_tetsukasuya" : "Hario Switch (粕谷哲)",
     "label_hario_switch_emifukahori" : "Hario Switch (Emi Fukahori)",
-    "label_hario_switch_olekristianboen": "Hario Switch (Ole Kristian Boen)",
+    "label_hario_switch_olekristianboen": "Hario Switch (Ole Kristian Bøen)",
     "label_hario_switch_coffeechronicler" : "Hario Switch (Coffee Chronicler)",
     "label_hario_v60_46method" : "Hario V60 4:6法 (粕谷哲)",
     "label_hario_v60_jameshoffmann" : "Hario V60 (James Hoffmann)",
