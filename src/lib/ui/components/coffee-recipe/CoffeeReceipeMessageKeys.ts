@@ -20,13 +20,13 @@ export const dripperMessageKey = (dripperName: string) => {
 
 export const coffeeRecipeIdSelectMessageKey = (coffeeRecipeId: CoffeeRecipeId) => {
     switch(coffeeRecipeId) {
-        case CoffeeRecipeId.hario_switch_tetsukasuya : return m.label_harioSwitch_TetsuKasuya;
-        case CoffeeRecipeId.hario_switch_emifukahori : return m.label_harioSwitch_EmiFukahori;
-        case CoffeeRecipeId.hario_switch_olekristianboen: return m.label_harioSwitch_OleKristianBoen;
-        case CoffeeRecipeId.hario_switch_coffeechronicler: return m.label_harioSwitch_CoffeeChronicler;
-        case CoffeeRecipeId.hario_v60_46method : return m.label_harioV60_46method;
-        case CoffeeRecipeId.hario_v60_jameshoffmann: return m.label_harioV60_JamesHoffmann;
-        case CoffeeRecipeId.hario_v60_mattwinton : return m.label_harioV60_MattWinton;        
+        case CoffeeRecipeId.hario_switch_tetsukasuya : return m.label_hario_switch_tetsukasuya;
+        case CoffeeRecipeId.hario_switch_emifukahori : return m.label_hario_switch_emifukahori;
+        case CoffeeRecipeId.hario_switch_olekristianboen: return m.label_hario_switch_olekristianboen;
+        case CoffeeRecipeId.hario_switch_coffeechronicler: return m.label_hario_switch_coffeechronicler;
+        case CoffeeRecipeId.hario_v60_46method : return m.label_hario_v60_46method;
+        case CoffeeRecipeId.hario_v60_jameshoffmann: return m.label_hario_v60_jameshoffmann;
+        case CoffeeRecipeId.hario_v60_mattwinton : return m.label_hario_v60_mattwinton;        
         default:
             return m.label_unknown_recipe;
     }

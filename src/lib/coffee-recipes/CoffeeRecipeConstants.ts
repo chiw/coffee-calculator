@@ -2,7 +2,7 @@ import type { CoffeeRecipeConfig, DripperBrand, DripperRecipe, DripperType, Meta
 import {  PouringTechnique, PourOverStage, SwitchState } from "./CoffeeRecipeTypes.d";
 import { getCoffeeRecipeMenu, getMenuMetaInfos, type CoffeeRecipeMenu } from "./menu/CoffeeRecipeMenuUtils";
 
-import { createSearchParams, filterMetaInfosBySearchParam, getPathFromMetaInfo, isRecipeMetaInfo} from "./MetaInfoUtils";
+import { createSearchParams, filterMetaInfosBySearchParams, getPathFromMetaInfo, isRecipeMetaInfo} from "./MetaInfoUtils";
 
 export const CoffeeRecipeId = {
     hario_switch_tetsukasuya: 'hario_switch_tetsukasuya',
@@ -23,18 +23,18 @@ const dripperBrands: DripperBrand[] = [
             <DripperType> {
                 name: 'switch',
                 recipes: [
-                    <DripperRecipe> { name: 'tetsukasuya', recipeId: CoffeeRecipeId.hario_switch_tetsukasuya },
-                    <DripperRecipe> { name: 'emifukahori', recipeId: CoffeeRecipeId.hario_switch_emifukahori },
-                    <DripperRecipe> { name: 'olekristianboen', recipeId: CoffeeRecipeId.hario_switch_olekristianboen },
-                    <DripperRecipe> { name: 'coffeechronicler', recipeId: CoffeeRecipeId.hario_switch_coffeechronicler }
+                    <DripperRecipe> { recipeId: CoffeeRecipeId.hario_switch_tetsukasuya, name: 'tetsukasuya', createdBy: 'tetsukasuya' },
+                    <DripperRecipe> { recipeId: CoffeeRecipeId.hario_switch_emifukahori, name: 'emifukahori', createdBy: 'emifukahori'  },
+                    <DripperRecipe> { recipeId: CoffeeRecipeId.hario_switch_olekristianboen, name: 'olekristianboen', createdBy: 'olekristianboen' },
+                    <DripperRecipe> { recipeId: CoffeeRecipeId.hario_switch_coffeechronicler, name: 'coffeechronicler', createdBy: 'coffeechronicler' }
                 ]
             },
             <DripperType> {
                 name: 'v60',
                 recipes: [
-                    <DripperRecipe> { name: '46method', recipeId: CoffeeRecipeId.hario_v60_46method },
-                    <DripperRecipe> { name: 'jameshoffmann', recipeId: CoffeeRecipeId.hario_v60_jameshoffmann },
-                    <DripperRecipe> { name: 'mattwinton', recipeId: CoffeeRecipeId.hario_v60_mattwinton }
+                    <DripperRecipe> { recipeId: CoffeeRecipeId.hario_v60_46method, name: '46method', createdBy: 'tetsukasuya' },
+                    <DripperRecipe> { recipeId: CoffeeRecipeId.hario_v60_jameshoffmann, name: 'jameshoffmann', createdBy: 'jameshoffmann' },
+                    <DripperRecipe> { recipeId: CoffeeRecipeId.hario_v60_mattwinton, name: 'mattwinton', createdBy: 'mattwinton' }
                 ]
             }
         ]
@@ -55,32 +55,24 @@ export type CoffeeRecipeSearchResult = {
 export const searchRecipeIdByParams = (inParams: string[]) :CoffeeRecipeSearchResult  => {
     let allRecipeMetaInfos = MenuMetaInfos.filter(isRecipeMetaInfo);
     let filteredMetaInfosArr = allRecipeMetaInfos;
-    let result: MetaInfos;
-
     let searchParams = createSearchParams(inParams);
 
-    searchParams.forEach((searchParam) => {
-        if(!result) {
-            let tmpFilteredMetaInfosArr = filterMetaInfosBySearchParam(filteredMetaInfosArr, searchParam);
-            if(tmpFilteredMetaInfosArr && tmpFilteredMetaInfosArr.length == 1) {
-                result = tmpFilteredMetaInfosArr[0];
-            } else {
-                filteredMetaInfosArr = tmpFilteredMetaInfosArr;
-            }
-        }
-    });
+    let resultArr = filterMetaInfosBySearchParams(filteredMetaInfosArr, searchParams);
 
-    if(!result) {
-        let result: MetaInfos = (filteredMetaInfosArr.length > 0) ? filteredMetaInfosArr[0] : allRecipeMetaInfos[0];
+    console.log('searchRecipeIdByParams', resultArr);
+
+    if(resultArr && resultArr.length > 0) {
+        console.log('searchRecipeIdByParams found result/results');
         return <CoffeeRecipeSearchResult> {
-            metaInfos: result,
+            metaInfos: resultArr[0],
+            requiresRedirect: resultArr.length != 1
+        }
+    } else {
+        console.log('searchRecipeIdByParams cannot find recipe, redirect to first recipe');
+        return <CoffeeRecipeSearchResult> {
+            metaInfos: allRecipeMetaInfos[0],
             requiresRedirect: true
         }
-    }
-
-    return <CoffeeRecipeSearchResult> {
-        metaInfos: result,
-        requiresRedirect: false
     }
 }
 

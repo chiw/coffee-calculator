@@ -169,14 +169,24 @@ export const createSearchParams = (inParams: string[]): MetaInfosSearchParam[] =
         });
     });
 
-    console.log('createSearchParams', searchParams);
+    // console.log('createSearchParams', searchParams);
     return searchParams;
 }
 
-export const filterMetaInfosBySearchParam = (inMetaInfosArr: MetaInfos[], searchParam: MetaInfosSearchParam) : MetaInfos[] => {
+const filterMetaInfosBySearchParam = (inMetaInfosArr: MetaInfos[], searchParam: MetaInfosSearchParam) : MetaInfos[] => {
     let filteredMetaInfosArr = inMetaInfosArr.filter((metaInfos) => metaInfoIsMatched(metaInfos, searchParam));
     
-    console.log('filterMetaInfosBySearchStr', searchParam, filteredMetaInfosArr);
+    // console.log('filterMetaInfosBySearchStr', searchParam, filteredMetaInfosArr);
 
+    return filteredMetaInfosArr;
+}
+
+export const filterMetaInfosBySearchParams = (inMetaInfoArr: MetaInfos[], searchParams: MetaInfosSearchParam[]): MetaInfos[] => {
+    let filteredMetaInfosArr = inMetaInfoArr;
+    searchParams.forEach((searchParam) => {
+        filteredMetaInfosArr = filterMetaInfosBySearchParam(filteredMetaInfosArr, searchParam);
+    });
+
+    // console.log('filterMetaInfosBySearchParams', filteredMetaInfosArr);
     return filteredMetaInfosArr;
 }

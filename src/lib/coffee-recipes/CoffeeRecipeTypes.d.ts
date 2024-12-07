@@ -9,8 +9,9 @@ export type DripperType = {
 }
 
 export type DripperRecipe = {
-    name: string,
-    recipeId: string
+    recipeId: string,
+    name?: string,
+    createdBy: string,
 }
 
 export type MetaInfo = {
