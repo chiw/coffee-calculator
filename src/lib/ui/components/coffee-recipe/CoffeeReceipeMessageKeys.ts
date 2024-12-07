@@ -32,6 +32,20 @@ export const coffeeRecipeIdSelectMessageKey = (coffeeRecipeId: CoffeeRecipeId) =
     }
 }
 
+export const coffeeRecipeIdSelectNavItemMessageKey = (coffeeRecipeId: CoffeeRecipeId) => {
+    switch(coffeeRecipeId) {
+        case CoffeeRecipeId.hario_switch_tetsukasuya : return m.label_nav_item_hario_switch_tetsukasuya;
+        case CoffeeRecipeId.hario_switch_emifukahori : return m.label_nav_item_hario_switch_emifukahori;
+        case CoffeeRecipeId.hario_switch_olekristianboen: return m.label_nav_item_hario_switch_olekristianboen;
+        case CoffeeRecipeId.hario_switch_coffeechronicler: return m.label_nav_item_hario_switch_coffeechronicler;
+        case CoffeeRecipeId.hario_v60_46method : return m.label_nav_item_hario_v60_46method;
+        case CoffeeRecipeId.hario_v60_jameshoffmann: return m.label_nav_item_hario_v60_jameshoffmann;
+        case CoffeeRecipeId.hario_v60_mattwinton : return m.label_nav_item_hario_v60_mattwinton;        
+        default:
+            return m.label_nav_item_unknown_recipe;
+    }
+}
+
 export const pourOverStageMessageKey = (pourOverStage: PourOverStage) => {
     switch(pourOverStage) {
         case PourOverStage.BLOOMING : return m.label_stages_blooming;

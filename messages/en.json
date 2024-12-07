@@ -61,6 +61,14 @@
     "label_hario_v60_46method" : "Hario V60 4:6 method (Tetsu Kasuya)",
     "label_hario_v60_jameshoffmann" : "Hario V60 (James Hoffmann)",
     "label_hario_v60_mattwinton" : "Hario V60 (Matt Winton)",    
-    "label_unknown_recipe" : "Unknown Recipe"
-    
+    "label_unknown_recipe" : "Unknown Recipe",
+
+    "label_nav_item_hario_switch_tetsukasuya" : "Tetsu Kasuya",
+    "label_nav_item_hario_switch_emifukahori" : "Emi Fukahori",
+    "label_nav_item_hario_switch_olekristianboen": "Ole Kristian Bøen",
+    "label_nav_item_hario_switch_coffeechronicler" : "Coffee Chronicler",
+    "label_nav_item_hario_v60_46method" : "4:6 method (Tetsu Kasuya)",
+    "label_nav_item_hario_v60_jameshoffmann" : "James Hoffmann",
+    "label_nav_item_hario_v60_mattwinton" : "Matt Winton",
+    "label_nav_item_unknown_recipe" : "Unknown Recipe"
 }

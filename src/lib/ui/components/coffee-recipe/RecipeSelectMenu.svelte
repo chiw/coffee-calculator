@@ -5,7 +5,7 @@
     
     import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch/';
     import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';
-	import { brandMessageKey, coffeeRecipeIdSelectMessageKey, dripperMessageKey } from './CoffeeReceipeMessageKeys';
+	import { brandMessageKey, coffeeRecipeIdSelectMessageKey, coffeeRecipeIdSelectNavItemMessageKey, dripperMessageKey } from './CoffeeReceipeMessageKeys';
     import { goto } from '$app/navigation';
 	
 
@@ -89,7 +89,7 @@
                                     <li class="pl-2 pt-2 pb-2 w-full">
                                         <a href="{base + "/recipe/" + getPathFromMetaInfo(item.metaInfos)}" onclick="{closeDropdown}" 
                                             class="group relative before:absolute before:inset-x-0 before:bottom-0 before:h-2 h-8 block">
-                                            <span class="relative ">{coffeeRecipeIdSelectMessageKey(item.id)()}</span>
+                                            <span class="relative ">{coffeeRecipeIdSelectNavItemMessageKey(item.id)()}</span>
                                         </a>
                                     </li>
                                 {/each}
