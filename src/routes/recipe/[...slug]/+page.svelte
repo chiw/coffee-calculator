@@ -5,7 +5,7 @@
 
     console.log('data', data);
 
-    import { StepsWithTimerDisplay, RecipeReferencesDisplay, RecipeSelectMenu, LanguageSwitcher } from '$lib/ui/components/coffee-recipe';
+    import { StepsWithTimerDisplay, RecipeReferencesDisplay, RecipeSelectMenu, LanguageSwitcher, RecipeSelectRoutes } from '$lib/ui/components/coffee-recipe';
 
     import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';	
     
@@ -26,8 +26,8 @@
 <div class="m-3">
     <div class="flex flex-row items-stretch">
         <!-- <div class="grow"><RecipeSelect /></div> -->
-        <!-- <div class="grow"><RecipeSelectRoutes selectedOption={coffeeRecipeStore.recipeId}/></div> -->
-        <div class="grow"><RecipeSelectMenu selectedOption={coffeeRecipeStore.recipeId}/></div>
+        <div class="grow"><RecipeSelectRoutes selectedOption={coffeeRecipeStore.recipeId}/></div>
+        <!-- <div class="grow"><RecipeSelectMenu selectedOption={coffeeRecipeStore.recipeId}/></div> -->
         <div class="grow-0"><LanguageSwitcher/></div>
     </div>
     
