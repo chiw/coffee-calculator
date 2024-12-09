@@ -69,7 +69,8 @@ export type StepConfig = {
     pouringTechnique?: PouringTechnique,
     msgKey?: any,
     msgParams?: any,
-    swirl?: boolean
+    swirl?: boolean,
+    stir? : boolean
 }
 
 export type TimeframeDisplayConfig = {

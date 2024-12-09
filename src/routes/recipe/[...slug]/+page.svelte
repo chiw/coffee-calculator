@@ -23,7 +23,7 @@
 
 <!-- <h1>Use the {@html data.recipeId}</h1> -->
 
-<div class="m-3">
+<div class="m-2">
     <div class="flex flex-row items-stretch">
         <!-- <div class="grow"><RecipeSelect /></div> -->
         <!-- <div class="grow"><RecipeSelectRoutes selectedOption={coffeeRecipeStore.recipeId}/></div> -->
@@ -32,7 +32,7 @@
     </div>
     
     {#if coffeeRecipeStore.coffeeRecipe}    
-        <div class="mt-2">
+        <div class="mt-0">
             <!-- {#if coffeeRecipeStore.coffeeRecipeSteps.isTimerRecipe} -->
                 <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeStore.coffeeRecipeSteps} />
             <!-- {:else} -->
