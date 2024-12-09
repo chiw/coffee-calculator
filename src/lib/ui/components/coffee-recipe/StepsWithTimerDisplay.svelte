@@ -90,7 +90,7 @@
     </div>
 </div>
 
-<div class="flex flex-row-reverse items-center mt-2">
+<div class="flex flex-row-reverse items-center mt-1">
     {#if !stopwatch.isRunning()}
         {#if inEditMode}
             <button class="flex flex-row border border-solid border-black rounded border-1 items-center bg-black w-18 px-1 ba" onclick={() => { inEditMode = !inEditMode }}>

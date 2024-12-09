@@ -26,16 +26,16 @@
 
     "label_stages_blooming" : "悶蒸階段",
     "label_stages_pouring" : "注水階段",
-    "label_stages_first_pour" : "第一次注水",
-    "label_stages_second_pour" : "第二次注水",
-    "label_stages_third_pour" : "第三次注水",
-    "label_stages_fourth_pour" : "第四次注水",
-    "label_stages_fifth_pour" : "第五次注水",
-    "label_stages_sixth_pour" : "第六次注水",
+    "label_stages_first_pour" : "第一段注水",
+    "label_stages_second_pour" : "第二段注水",
+    "label_stages_third_pour" : "第三段注水",
+    "label_stages_fourth_pour" : "第四段注水",
+    "label_stages_fifth_pour" : "第五段注水",
+    "label_stages_sixth_pour" : "第六段注水",
     "label_stages_final" : "",
     "label_stages_unknown" : "",
 
-    "label_pouring_technique_center" : "<b>往中心注水</b>",
+    "label_pouring_technique_center" : "<b>中心注水</b>",
     "label_pouring_technique_circular" : "<b>繞圈注水</b>",
 
     "label_step_msg_water_volume" : "<b>+{waterInGrams}g</b> 水",
@@ -45,6 +45,7 @@
     "label_step_msg_let_water_flow_until" : "讓水流直到 {time}",
     "label_step_pause": "等待",
     "label_step_swirl": "輕輕搖晃濾杯",
+    "label_step_stir": "攪拌",
 
     "label_brand_hario" : "Hario",
     "label_brand_unknwon" : "Unknown Brand",
