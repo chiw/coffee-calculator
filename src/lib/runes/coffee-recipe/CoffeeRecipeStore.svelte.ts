@@ -1,6 +1,7 @@
-import { CoffeeRecipe, CoffeeRecipeId } from "$lib/coffee-recipes";
+import { CoffeeRecipeId } from "$lib/coffee-recipes";
+import { getCoffeeRecipeDefaultConfig } from "$lib/coffee-recipes/CoffeeRecipeConstants";
 import { createCoffeeParams, createCoffeeRecipe, createCoffeeRecipeSteps } from "$lib/coffee-recipes/CoffeeRecipesFactory";
-import type { CoffeeParametersConfig } from "$lib/coffee-recipes/CoffeeRecipeTypes";
+import type { CoffeeParametersConfig, CoffeeRecipe } from "$lib/coffee-recipes/CoffeeRecipeTypes";
 
 import { getContext, setContext } from "svelte";
 
@@ -14,7 +15,7 @@ export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
     let _coffeeToWaterRatio = $state(_coffeeRecipe.defaultCoffeeParams.coffeeToWaterRatio);
     let _waterInGrams = $state(_coffeeRecipe.defaultCoffeeParams.waterInGrams);
 
-    let _stepsDurationInSeconds = $state(null);
+    let _stepsDurationInSeconds = $state(getCoffeeRecipeDefaultConfig(defaultCoffeeRecipeId).stepsDurationInSeconds);
 
     $effect(() => {
         _coffeeRecipe = createCoffeeRecipe(_recipeId);
@@ -28,7 +29,7 @@ export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
         _beanInGrams = _coffeeRecipe.defaultCoffeeParams.beanInGrams;
         _coffeeToWaterRatio = _coffeeRecipe.defaultCoffeeParams.coffeeToWaterRatio;
         _waterInGrams = _coffeeRecipe.defaultCoffeeParams.waterInGrams;
-        _stepsDurationInSeconds = null;
+        _stepsDurationInSeconds = getCoffeeRecipeDefaultConfig(_recipeId).stepsDurationInSeconds;
     }
     
     let _coffeeParams = $derived(deriveCoffeeParams(_coffeeRecipe.recipeId, _beanInGrams, _coffeeToWaterRatio, _waterInGrams));
@@ -39,7 +40,7 @@ export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
 
     function deriveCoffeeParams(recipeId: CoffeeRecipeId, beanInGrams: number, coffeeToWaterRatio: number, waterInGrams: number): CoffeeParametersConfig {
         console.log('deriveCoffeeParams recipeId: ', recipeId, ' beanInGrams: ', beanInGrams, ' coffeeToWaterRatio: ', coffeeToWaterRatio, ' waterInGrams: ', waterInGrams);
-        // return createCoffeeParams(recipeId, beanInGrams, coffeeToWaterRatio, waterInGrams);
+        
         let inCoffeeParams = <CoffeeParametersConfig> { beanInGrams, coffeeToWaterRatio, waterInGrams }
         return createCoffeeParams(recipeId, inCoffeeParams);
     }

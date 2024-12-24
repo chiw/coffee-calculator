@@ -6,7 +6,7 @@
     import StepTimeFrameDisplay from "./StepTimeFrameDisplay.svelte";
 	import { shouldDisplayTimeframe } from "$lib/utils/TimeframeDisplayUtils";
 	import TimeframeDurationDisplay from "./TimeframeDurationDisplay.svelte";
-	import type { CoffeeRecipeSteps } from "$lib/coffee-recipes/CoffeeRecipeSteps";
+	import type { CoffeeRecipeSteps } from "$lib/coffee-recipes/CoffeeRecipeTypes";
 
     interface StepDisplayProps {
         coffeeRecipeSteps: CoffeeRecipeSteps

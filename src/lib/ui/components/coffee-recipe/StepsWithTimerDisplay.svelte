@@ -18,8 +18,7 @@
     import StopwatchDisplay from '../stopwatch/StopwatchDisplay.svelte';
 	import { shouldDisplayTimeframe } from '$lib/utils/TimeframeDisplayUtils';
 	import TimeframeDurationDisplay from './TimeframeDurationDisplay.svelte';
-	import type { CoffeeRecipeSteps } from '$lib/coffee-recipes/CoffeeRecipeSteps';
-	import type { Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes';
+	import type { CoffeeRecipeSteps, Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes';
 	
 
     interface StepsWithTimerDisplayProps {
