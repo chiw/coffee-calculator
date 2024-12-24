@@ -17,11 +17,13 @@ export const toHHMMSS = (secNum: number) => {
 export const calculateStepsTimeframe = (stepsDurationInSeconds: number[]): Timeframe[] => {
   let from: number = 0;
   let stepsTimeframe: Timeframe[] = [];
-  stepsDurationInSeconds.map(duration => {
-      let timeframe = calculateTimeframe(from, duration);
-      stepsTimeframe.push(timeframe);
-      from = timeframe.to;
-  });
+  if(stepsDurationInSeconds) {
+    stepsDurationInSeconds.map(duration => {
+        let timeframe = calculateTimeframe(from, duration);
+        stepsTimeframe.push(timeframe);
+        from = timeframe.to;
+    });
+  }
   return stepsTimeframe;
 }
 

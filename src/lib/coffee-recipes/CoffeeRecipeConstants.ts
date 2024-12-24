@@ -76,7 +76,7 @@ export const searchRecipeIdByParams = (inParams: string[]) :CoffeeRecipeSearchRe
     }
 }
 
-export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: CoffeeRecipeId) : CoffeeRecipeConfig => {
+export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeRecipeConfig => {
     switch(coffeeRecipId) {
         case CoffeeRecipeId.hario_switch_tetsukasuya : {
             return <CoffeeRecipeConfig>{

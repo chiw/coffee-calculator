@@ -108,9 +108,27 @@ export type StepWaterInfo = {
     waterTemperature: number;
 }
 
+export type CoffeeRecipeSteps = {
+    steps: StepConfig[];
+    stepsDurationInSeconds: number[];
+    
+    stepsTimeframe: Timeframe[];
+        
+    stepWaterInfos: StepWaterInfo[];
+    
+    isTimerRecipe: boolean;
+    isImmersionDripperRecipe: boolean;
+    timerInSeconds: number;
+}
+
 export type Reference = {
     description: string;
     url: string;
 }
 
+export type CoffeeRecipe = {
+    recipeId: string;
+    defaultCoffeeParams: CoffeeParametersConfig;
+    references: Reference[]
+}
 

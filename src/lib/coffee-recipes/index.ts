@@ -1,6 +1,4 @@
 export { CoffeeRecipeId } from "./CoffeeRecipeConstants";
-export { CoffeeParameters } from "./CoffeeParameters";
-export { CoffeeRecipe } from "./CoffeeRecipe";
 export { Menu, AllRecipePaths } from "./CoffeeRecipeConstants";
 
 export { SwitchState, PourOverStage, PouringTechnique } from "./CoffeeRecipeTypes.d";
