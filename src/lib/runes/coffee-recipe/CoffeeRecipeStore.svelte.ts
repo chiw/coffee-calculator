@@ -1,6 +1,6 @@
 import { CoffeeRecipeId } from "$lib/coffee-recipes";
 import { getCoffeeRecipeDefaultConfig } from "$lib/coffee-recipes/CoffeeRecipeConstants";
-import { createCoffeeParams, createCoffeeRecipe, createCoffeeRecipeSteps } from "$lib/coffee-recipes/CoffeeRecipesFactory";
+import { createCoffeeRecipe, createCoffeeRecipeSteps } from "$lib/coffee-recipes/CoffeeRecipesFactory";
 import type { CoffeeParametersConfig, CoffeeRecipe } from "$lib/coffee-recipes/CoffeeRecipeTypes";
 
 import { getContext, setContext } from "svelte";
@@ -9,59 +9,34 @@ export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
 
     let _recipeId: CoffeeRecipeId = $state(defaultCoffeeRecipeId);
 
-    let _coffeeRecipe: CoffeeRecipe = $state(createCoffeeRecipe(defaultCoffeeRecipeId));
+    let _coffeeRecipe: CoffeeRecipe = $derived(createCoffeeRecipe(_recipeId));
 
-    let _beanInGrams = $state(_coffeeRecipe.defaultCoffeeParams.beanInGrams);
-    let _coffeeToWaterRatio = $state(_coffeeRecipe.defaultCoffeeParams.coffeeToWaterRatio);
-    let _waterInGrams = $state(_coffeeRecipe.defaultCoffeeParams.waterInGrams);
+    let _coffeeParams: CoffeeParametersConfig = $state(_coffeeRecipe.defaultCoffeeParams);
 
     let _stepsDurationInSeconds = $state(getCoffeeRecipeDefaultConfig(defaultCoffeeRecipeId).stepsDurationInSeconds);
-
-    $effect(() => {
-        _coffeeRecipe = createCoffeeRecipe(_recipeId);
-    });
 
     $effect(() => {
         setToRecipeDefault();
     });
 
     function setToRecipeDefault() {
-        _beanInGrams = _coffeeRecipe.defaultCoffeeParams.beanInGrams;
-        _coffeeToWaterRatio = _coffeeRecipe.defaultCoffeeParams.coffeeToWaterRatio;
-        _waterInGrams = _coffeeRecipe.defaultCoffeeParams.waterInGrams;
+        _coffeeParams = _coffeeRecipe.defaultCoffeeParams;
         _stepsDurationInSeconds = getCoffeeRecipeDefaultConfig(_recipeId).stepsDurationInSeconds;
     }
     
-    let _coffeeParams = $derived(deriveCoffeeParams(_coffeeRecipe.recipeId, _beanInGrams, _coffeeToWaterRatio, _waterInGrams));
-
     let _coffeeRecipeSteps = $derived(createCoffeeRecipeSteps(_recipeId, _coffeeParams, _stepsDurationInSeconds));
 
     $inspect(_recipeId, _coffeeRecipe, _coffeeParams, _coffeeRecipeSteps);
-
-    function deriveCoffeeParams(recipeId: CoffeeRecipeId, beanInGrams: number, coffeeToWaterRatio: number, waterInGrams: number): CoffeeParametersConfig {
-        console.log('deriveCoffeeParams recipeId: ', recipeId, ' beanInGrams: ', beanInGrams, ' coffeeToWaterRatio: ', coffeeToWaterRatio, ' waterInGrams: ', waterInGrams);
-        
-        let inCoffeeParams = <CoffeeParametersConfig> { beanInGrams, coffeeToWaterRatio, waterInGrams }
-        return createCoffeeParams(recipeId, inCoffeeParams);
-    }
 
     return {
         get recipeId() { return _recipeId; },
         set recipeId(value) { _recipeId = value; },
 
         get coffeeRecipe() { return _coffeeRecipe; },
-        set coffeeRecipe(value) { _coffeeRecipe = value; },
-
-        get beanInGrams() { return _beanInGrams; },
-        set beanInGrams(value) { _beanInGrams = value; },
-
-        get coffeeToWaterRatio() { return _coffeeToWaterRatio; },
-
-        get waterInGrams() { return _waterInGrams; },
-
         get coffeeRecipeSteps() { return _coffeeRecipeSteps; },
 
         get coffeeParams() { return _coffeeParams; },
+        set coffeeParams(value) { _coffeeParams = value; },
 
         get stepsDurationInSeconds() { return _stepsDurationInSeconds; },
         set stepsDurationInSeconds(value) { _stepsDurationInSeconds = value; }

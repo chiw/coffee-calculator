@@ -19,6 +19,7 @@
 	import { shouldDisplayTimeframe } from '$lib/utils/TimeframeDisplayUtils';
 	import TimeframeDurationDisplay from './TimeframeDurationDisplay.svelte';
 	import type { CoffeeRecipeSteps, Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes';
+	import { getCoffeeRecipeDefaultConfig } from '$lib/coffee-recipes/CoffeeRecipeConstants';
 	
 
     interface StepsWithTimerDisplayProps {
@@ -72,7 +73,7 @@
     }
 
     const resetStepsDurationToDefault = () => {
-        coffeeRecipeStore.stepsDurationInSeconds = null;
+        coffeeRecipeStore.stepsDurationInSeconds = getCoffeeRecipeDefaultConfig(coffeeRecipeStore.recipeId).stepsDurationInSeconds;
     }
 
     
