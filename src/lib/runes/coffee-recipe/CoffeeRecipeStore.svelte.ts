@@ -1,5 +1,6 @@
-import { CoffeeParameters, CoffeeRecipe, CoffeeRecipeId } from "$lib/coffee-recipes";
+import { CoffeeRecipe, CoffeeRecipeId } from "$lib/coffee-recipes";
 import { createCoffeeParams, createCoffeeRecipe, createCoffeeRecipeSteps } from "$lib/coffee-recipes/CoffeeRecipesFactory";
+import type { CoffeeParametersConfig } from "$lib/coffee-recipes/CoffeeRecipeTypes";
 
 import { getContext, setContext } from "svelte";
 
@@ -32,13 +33,15 @@ export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
     
     let _coffeeParams = $derived(deriveCoffeeParams(_coffeeRecipe.recipeId, _beanInGrams, _coffeeToWaterRatio, _waterInGrams));
 
-    let _coffeeRecipeSteps = $derived(createCoffeeRecipeSteps(_coffeeParams, _stepsDurationInSeconds));
+    let _coffeeRecipeSteps = $derived(createCoffeeRecipeSteps(_recipeId, _coffeeParams, _stepsDurationInSeconds));
 
     $inspect(_recipeId, _coffeeRecipe, _coffeeParams, _coffeeRecipeSteps);
 
-    function deriveCoffeeParams(recipeId: CoffeeRecipeId, beanInGrams: number, coffeeToWaterRatio: number, waterInGrams: number): CoffeeParameters {
+    function deriveCoffeeParams(recipeId: CoffeeRecipeId, beanInGrams: number, coffeeToWaterRatio: number, waterInGrams: number): CoffeeParametersConfig {
         console.log('deriveCoffeeParams recipeId: ', recipeId, ' beanInGrams: ', beanInGrams, ' coffeeToWaterRatio: ', coffeeToWaterRatio, ' waterInGrams: ', waterInGrams);
-        return createCoffeeParams(recipeId, beanInGrams, coffeeToWaterRatio, waterInGrams);
+        // return createCoffeeParams(recipeId, beanInGrams, coffeeToWaterRatio, waterInGrams);
+        let inCoffeeParams = <CoffeeParametersConfig> { beanInGrams, coffeeToWaterRatio, waterInGrams }
+        return createCoffeeParams(recipeId, inCoffeeParams);
     }
 
     return {

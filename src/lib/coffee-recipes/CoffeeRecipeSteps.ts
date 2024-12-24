@@ -1,14 +1,13 @@
 import type { CoffeeRecipeId } from "./CoffeeRecipeConstants";
-import type { CoffeeParameters } from "./CoffeeParameters";
 import { displayNumber } from "$lib/utils/NumberDisplayUtils";
 import { calculateStepsTimeframe } from "$lib/utils/TimeUtils";
-import { calculatePourWaterInGrams } from "./CoffeeRecipeUtils";
-import type { PourParametersConfig, StepConfig, StepWaterInfo, Timeframe } from "./CoffeeRecipeTypes";
+import { calculatePourWaterInGrams } from "./CoffeeParametersUtils";
+import type { CoffeeParametersConfig, PourParametersConfig, StepConfig, StepWaterInfo, Timeframe } from "./CoffeeRecipeTypes";
 export abstract class CoffeeRecipeSteps {
 
     public coffeeRecipeId: CoffeeRecipeId;
     
-    public coffeeParameters: CoffeeParameters;
+    public coffeeParameters: CoffeeParametersConfig;
 
     public pourParameters: PourParametersConfig[] = [];
 
@@ -24,7 +23,7 @@ export abstract class CoffeeRecipeSteps {
     public timerInSeconds = 0;
 
     constructor(
-        coffeeRecipeId: CoffeeRecipeId, coffeeParams: CoffeeParameters, stepsDurationInSeconds: number[], 
+        coffeeRecipeId: CoffeeRecipeId, coffeeParams: CoffeeParametersConfig, stepsDurationInSeconds: number[], 
         pourParameters: PourParametersConfig[], steps: StepConfig[], isTimerRecipe: boolean = false, 
         isImmersionDripperRecipe: boolean = false) {
 
