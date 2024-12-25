@@ -71,7 +71,7 @@ export const pouringTechniqueMessageKey = (pouringTechnique: PouringTechnique) =
 }
 
 export const stepWaterInfoMessageKey = (stepWaterInfo: StepWaterInfo) => {
-    console.log('CoffeeRecipeMessageKeys stepWaterInfo:', stepWaterInfo);
+    // console.log('CoffeeRecipeMessageKeys stepWaterInfo:', stepWaterInfo);
     return stepWaterInfo.showTotalWaterInGrams ? 
         m.label_step_msg_water_volume_with_total(stepWaterInfo) 
         : m.label_step_msg_water_volume(stepWaterInfo);

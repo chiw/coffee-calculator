@@ -6,11 +6,9 @@ import { calculateStepsTimeframe } from "./StepsTimeframeUtils";
 
 
 export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
-    console.log('createCoffeeRecipe recipeId: ', recipeId);
-
     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
 
-    console.log('createCoffeeRecipe recipeDefaultConfig:', recipeDefaultConfig);
+    console.log('createCoffeeRecipe recipeId:', recipeId, 'recipeDefaultConfig:', recipeDefaultConfig);
    
     return <CoffeeRecipe> {
         recipeId: recipeId,
@@ -36,7 +34,7 @@ export const createCoffeeParams = (recipeId: CoffeeRecipeId, inCoffeeParams: Cof
 
     // calculate the coffeeToWaterRatio and waterInGrams based on input, so water
     let result =  caculateCoffeeParameters(coffeeParams);
-    console.log('createCoffeeParams result', result);
+    // console.log('createCoffeeParams result', result);
     return result;
 }
 
@@ -45,12 +43,10 @@ export const createCoffeeRecipeSteps = (recipeId: CoffeeRecipeId, coffeeParamete
 
     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
 
-    console.log('createCoffeeRecipeSteps recipeDefaultConfig:', recipeDefaultConfig);
-
     let stepsDurationInSeconds: number[] = steps.map(step => step.durationInSeconds);
     let pourParameters: PourParametersConfig[] = steps.map(step => step.pourParameters);
 
-    console.log('createCoffeeRecipeSteps stepsDurationInSeconds:', stepsDurationInSeconds, 'pourParameters:', pourParameters);
+    console.log('createCoffeeRecipeSteps recipeDefaultConfig:', recipeDefaultConfig, 'stepsDurationInSeconds:', stepsDurationInSeconds, 'pourParameters:', pourParameters);
    
     return <CoffeeRecipeSteps> {
         isTimerRecipe : recipeDefaultConfig.isTimerRecipe,

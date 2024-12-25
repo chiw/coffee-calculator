@@ -13,18 +13,14 @@ export function createCoffeeRecipeRunes(defaultCoffeeRecipeId: CoffeeRecipeId) {
 
     let _coffeeParams: CoffeeParametersConfig = $state(_coffeeRecipe.defaultCoffeeParams);
 
-    // let _stepsDurationInSeconds: number[] = $state(getCoffeeRecipeDefaultConfig(defaultCoffeeRecipeId).stepsDurationInSeconds);
-
     let _stepsConfig: StepConfig[] = $state(getCoffeeRecipeDefaultConfig(defaultCoffeeRecipeId).steps);
 
     $effect(() => {
         console.log('in $effect');
         _coffeeParams = _coffeeRecipe.defaultCoffeeParams;
-        // _stepsDurationInSeconds = _coffeeRecipe.defaultStepsDurationInSeconds;
         _stepsConfig = _coffeeRecipe.defaultSteps;
     });
 
-    // let _coffeeRecipeSteps: CoffeeRecipeSteps = $derived(createCoffeeRecipeSteps(_recipeId, _coffeeParams, _stepsDurationInSeconds, _stepsConfig));
     let _coffeeRecipeSteps: CoffeeRecipeSteps = $derived(createCoffeeRecipeSteps(_recipeId, _coffeeParams, _stepsConfig));
 
     $inspect(_recipeId, _coffeeRecipe, _coffeeParams, _coffeeRecipeSteps);
@@ -38,10 +34,7 @@ export function createCoffeeRecipeRunes(defaultCoffeeRecipeId: CoffeeRecipeId) {
 
         get coffeeParams() { return _coffeeParams; },
         set coffeeParams(value) { _coffeeParams = value; },
-
-        // get stepsDurationInSeconds() { return _stepsDurationInSeconds; },
-        // set stepsDurationInSeconds(value) { _stepsDurationInSeconds = value; },
-
+        
         get stepsConfig() { return _stepsConfig; },
         set stepsConfig(value) { _stepsConfig = value; }
     }
