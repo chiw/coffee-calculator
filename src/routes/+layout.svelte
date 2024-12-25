@@ -5,11 +5,11 @@
 
 	const { children } = $props()
 	
-	import { setStopWatchStore } from "$lib/runes/stopwatch";
-	import { setCoffeeRecipeStore } from "$lib/runes/coffee-recipe";
+	import { setStopWatchRunes } from "$lib/runes/stopwatch";
+	import { setCoffeeRecipeRunes } from "$lib/runes/coffee-recipe";
 	import LanguageSwitcher from "$lib/ui/components/lang/LanguageSwitcher.svelte";
-	setStopWatchStore();
-	setCoffeeRecipeStore();
+	setStopWatchRunes();
+	setCoffeeRecipeRunes();
 	
 </script>
 

@@ -1,6 +1,6 @@
 import type { Timeframe } from "$lib/coffee-recipes/CoffeeRecipeTypes";
 
-export const toHHMMSS = (secNum: number) => {
+const toHHMMSS = (secNum: number) => {
     let hours: number = Math.floor(secNum / 3600);
     let hh: string = '';
     if(hours > 0) {
@@ -14,6 +14,18 @@ export const toHHMMSS = (secNum: number) => {
     return `${hh}${mm}:${ss}`;
 }
 
+const calculateTimeframe = (from: number, duration: number) : Timeframe => {
+  let fromVal = from;
+  let toVal = from + duration;
+
+  return <Timeframe>{
+      from: fromVal,
+      to: toVal,
+      fromDisplay: toHHMMSS(fromVal),
+      toDisplay: toHHMMSS(toVal)
+  }
+}
+
 export const calculateStepsTimeframe = (stepsDurationInSeconds: number[]): Timeframe[] => {
   let from: number = 0;
   let stepsTimeframe: Timeframe[] = [];
@@ -25,16 +37,4 @@ export const calculateStepsTimeframe = (stepsDurationInSeconds: number[]): Timef
     });
   }
   return stepsTimeframe;
-}
-
-const calculateTimeframe = (from: number, duration: number) : Timeframe => {
-  let fromVal = from;
-  let toVal = from + duration;
-
-  return <Timeframe>{
-      from: fromVal,
-      to: toVal,
-      fromDisplay: toHHMMSS(fromVal),
-      toDisplay: toHHMMSS(toVal)
-  }
 }

@@ -23,7 +23,7 @@ export const calculateStepWaterInfos = (coffeeParameters: CoffeeParametersConfig
 }
 
 const createStepWaterInfo = (waterInGrams: number, totalWaterInGrams: number, waterTemperature: number) => {
-    console.log('createStepWaterInfo ', waterInGrams, totalWaterInGrams, waterTemperature);
+    // console.log('createStepWaterInfo ', waterInGrams, totalWaterInGrams, waterTemperature);
 
     return <StepWaterInfo> {
         waterInGrams: displayNumber(waterInGrams),

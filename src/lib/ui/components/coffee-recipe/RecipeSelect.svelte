@@ -1,19 +1,19 @@
 <script lang="ts">
     import { Menu } from '$lib/coffee-recipes';
 
-    import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch/';
-    import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';
+    import { StopWatchState, StopWatchRunes, getStopWatchRunes } from '$lib/runes/stopwatch/';
+    import { getCoffeeRecipeRunes } from '$lib/runes/coffee-recipe';
 	import { brandMessageKey, coffeeRecipeIdSelectMessageKey, dripperMessageKey } from './CoffeeReceipeMessageKeys';
 
-    const stopwatch: StopWatchStore = getStopWatchStore();
-    const coffeeRecipeStore = getCoffeeRecipeStore();
+    const stopwatch: StopWatchRunes = getStopWatchRunes();
+    const coffeeRecipeRunes = getCoffeeRecipeRunes();
 </script>
 
 <div class="flex flex-row ">
     {#if stopwatch.isRunning() }
-        <div>{ coffeeRecipeIdSelectMessageKey(coffeeRecipeStore.recipeId)() }</div>
+        <div>{ coffeeRecipeIdSelectMessageKey(coffeeRecipeRunes.recipeId)() }</div>
     {:else}
-        <select class="border border-slate-200 w-full h-[2rem]" bind:value={coffeeRecipeStore.recipeId}>
+        <select class="border border-slate-200 w-full h-[2rem]" bind:value={coffeeRecipeRunes.recipeId}>
             {#each Menu.brandMenus as brandMenu, i}
                 {#each brandMenu.dripperMenus as dripperMenu, j}
                     <optgroup label={brandMessageKey(dripperMenu.brandName)() + ' ' + dripperMessageKey(dripperMenu.dripperName)()}>

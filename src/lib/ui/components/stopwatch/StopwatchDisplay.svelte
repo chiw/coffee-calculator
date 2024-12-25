@@ -1,13 +1,13 @@
 <script lang="ts">
     import 'iconify-icon';
 
-    import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch';
+    import { StopWatchState, StopWatchRunes, getStopWatchRunes } from '$lib/runes/stopwatch';
 
     let { timerInSeconds } = $props();
 
     let startBtnClicked = $state(false);
 
-    const stopwatch: StopWatchStore = getStopWatchStore();
+    const stopwatch: StopWatchRunes = getStopWatchRunes();
 
     function startTimer() {
         console.log('clicked start button');

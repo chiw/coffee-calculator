@@ -7,17 +7,17 @@
 
     import { StepsWithTimerDisplay, RecipeReferencesDisplay, RecipeSelectMenu, LanguageSwitcher, RecipeSelectRoutes } from '$lib/ui/components/coffee-recipe';
 
-    import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';	
+    import { getCoffeeRecipeRunes } from '$lib/runes/coffee-recipe';	
     
 	import { getKeyByValue } from '$lib/utils/ObjectUtils';
 	import { CoffeeRecipeId } from '$lib/coffee-recipes';
 	import { afterNavigate } from '$app/navigation';
 
-    const coffeeRecipeStore = getCoffeeRecipeStore();
+    const coffeeRecipeRunes = getCoffeeRecipeRunes();
 
     afterNavigate(() => {
         console.log('afterNavigate');
-        coffeeRecipeStore.recipeId = getKeyByValue(CoffeeRecipeId, data.recipeId.toString());
+        coffeeRecipeRunes.recipeId = getKeyByValue(CoffeeRecipeId, data.recipeId.toString());
     });
 </script>
 
@@ -26,19 +26,19 @@
 <div class="m-2">
     <div class="flex flex-row items-stretch">
         <!-- <div class="grow"><RecipeSelect /></div> -->
-        <!-- <div class="grow"><RecipeSelectRoutes selectedOption={coffeeRecipeStore.recipeId}/></div> -->
-        <div class="grow"><RecipeSelectMenu selectedOption={coffeeRecipeStore.recipeId}/></div>
+        <!-- <div class="grow"><RecipeSelectRoutes selectedOption={coffeeRecipeRunes.recipeId}/></div> -->
+        <div class="grow"><RecipeSelectMenu selectedOption={coffeeRecipeRunes.recipeId}/></div>
         <div class="grow-0"><LanguageSwitcher/></div>
     </div>
     
-    {#if coffeeRecipeStore.coffeeRecipe}    
+    {#if coffeeRecipeRunes.coffeeRecipe}    
         <div class="mt-0">
-            <!-- {#if coffeeRecipeStore.coffeeRecipeSteps.isTimerRecipe} -->
-                <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeStore.coffeeRecipeSteps} />
+            <!-- {#if coffeeRecipeRunes.coffeeRecipeSteps.isTimerRecipe} -->
+                <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeRunes.coffeeRecipeSteps} />
             <!-- {:else} -->
                 <!-- <div class="text-xl font-bold italic">{m.label_steps()}</div> -->
-                <!-- <StepsDisplay coffeeRecipeSteps={coffeeRecipeStore.coffeeRecipeSteps}  /> -->
-                <!-- <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeStore.coffeeRecipeSteps} /> -->
+                <!-- <StepsDisplay coffeeRecipeSteps={coffeeRecipeRunes.coffeeRecipeSteps}  /> -->
+                <!-- <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeRunes.coffeeRecipeSteps} /> -->
             <!-- {/if} -->
         </div>
         

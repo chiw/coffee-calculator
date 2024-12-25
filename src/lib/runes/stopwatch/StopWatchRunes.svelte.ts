@@ -1,7 +1,7 @@
 import { getContext, setContext } from "svelte";
 import { StopWatchState } from "./StopwatchState.type";
 
-export class StopWatchStore {
+export class StopWatchRunes {
     
     pad2 = (number: number) => `00${number}`.slice(-2);
     pad3 = (number: number) => `000${number}`.slice(-3);
@@ -53,12 +53,12 @@ export class StopWatchStore {
     }
 }
 
-const STOPWATCH_STORE_CONTEXT_KEY = Symbol('STOPWATCH_STORE_CONTEXT_KEY');
+const STOPWATCH_RUNES_CONTEXT_KEY = Symbol('STOPWATCH_RUNES_CONTEXT_KEY');
 
-export function setStopWatchStore() {
-    return setContext(STOPWATCH_STORE_CONTEXT_KEY, new StopWatchStore());
+export const setStopWatchRunes = () => {
+    return setContext(STOPWATCH_RUNES_CONTEXT_KEY, new StopWatchRunes());
 }
 
-export function getStopWatchStore(): StopWatchStore {
-    return getContext<ReturnType<typeof setStopWatchStore>>(STOPWATCH_STORE_CONTEXT_KEY);
+export const getStopWatchRunes = (): StopWatchRunes => {
+    return getContext<ReturnType<typeof setStopWatchRunes>>(STOPWATCH_RUNES_CONTEXT_KEY);
 }
