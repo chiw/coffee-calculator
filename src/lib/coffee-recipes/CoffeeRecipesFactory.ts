@@ -2,7 +2,7 @@ import { CoffeeRecipeId, getCoffeeRecipeDefaultConfig } from "./CoffeeRecipeCons
 import type { CoffeeParametersConfig, CoffeeRecipeConfig, CoffeeRecipe, CoffeeRecipeSteps } from "./CoffeeRecipeTypes";
 import { caculateCoffeeParameters } from "./CoffeeParametersUtils";
 import { calculateStepWaterInfos, sumOfDurations } from "./CoffeeRecipeStepsUtils";
-import { calculateStepsTimeframe } from "$lib/utils/TimeUtils";
+import { calculateStepsTimeframe } from "./StepsTimeframeUtils";
 
 
 export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {

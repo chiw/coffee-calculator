@@ -3,10 +3,10 @@
 
     import 'iconify-icon';
 
-    import { StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch';
+    import { StopWatchRunes, getStopWatchRunes } from '$lib/runes/stopwatch';
 
-    import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';
-    const coffeeRecipeStore = getCoffeeRecipeStore();
+    import { getCoffeeRecipeRunes } from '$lib/runes/coffee-recipe';
+    const coffeeRecipeRunes = getCoffeeRecipeRunes();
 
     import RecipeParametersCardDisplay from './RecipeParametersCardDisplay.svelte';
 
@@ -30,10 +30,10 @@
     console.log('steps: ', coffeeRecipeSteps.steps);
     console.log('stepWaterInfos', coffeeRecipeSteps.stepWaterInfos);
     console.log('stepsTimeframe: ', coffeeRecipeSteps.stepsTimeframe);
-    console.log('stepsDurationInSeconds: ', coffeeRecipeSteps.stepsDurationInSeconds);
+    console.log('stepsDurationInSeconds: ', $state.snapshot(coffeeRecipeSteps.stepsDurationInSeconds));
     console.log('timerInSeconds: ', coffeeRecipeSteps.timerInSeconds);
 
-    const stopwatch: StopWatchStore = getStopWatchStore();
+    const stopwatch: StopWatchRunes = getStopWatchRunes();
 
     const isRunningActiveStep = (elaspedTimeInSeconds:number, timeframe:Timeframe): boolean => {
         return stopwatch.isRunning() && isActiveStep(elaspedTimeInSeconds, timeframe);
@@ -64,7 +64,7 @@
         
         coffeeRecipeSteps.stepsDurationInSeconds[index] = newVal;
 
-        coffeeRecipeStore.stepsDurationInSeconds = coffeeRecipeSteps.stepsDurationInSeconds;
+        coffeeRecipeRunes.stepsDurationInSeconds = coffeeRecipeSteps.stepsDurationInSeconds;
         
         // localStepsTimeframeDisplay = calculateStepsTimeframe(localStepsDurationInSeconds);
         // console.log(
@@ -73,7 +73,7 @@
     }
 
     const resetStepsDurationToDefault = () => {
-        coffeeRecipeStore.stepsDurationInSeconds = getCoffeeRecipeDefaultConfig(coffeeRecipeStore.recipeId).stepsDurationInSeconds;
+        coffeeRecipeRunes.stepsDurationInSeconds = getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).stepsDurationInSeconds;
     }
 
     
@@ -160,7 +160,7 @@
     {/if}
 
     {#if inEditMode}
-        <button onclick={() => {stepsDurationInSeconds[index] -= 1; coffeeRecipeStore.stepsDurationInSeconds = stepsDurationInSeconds;} }>
+        <button onclick={() => {stepsDurationInSeconds[index] -= 1; coffeeRecipeRunes.stepsDurationInSeconds = stepsDurationInSeconds;} }>
             <iconify-icon icon="mdi-light:minus-circle"
                 class="text-[30px] hover:text-slate-600">
             </iconify-icon>
@@ -171,7 +171,7 @@
             oninput={(e) => recalculateStepsDurationAndTimeframe(e, index)} />
         <span class="font-normal text-s">s</span>
 
-        <button onclick={() => {stepsDurationInSeconds[index] += 1; coffeeRecipeStore.stepsDurationInSeconds = stepsDurationInSeconds;} }>
+        <button onclick={() => {stepsDurationInSeconds[index] += 1; coffeeRecipeRunes.stepsDurationInSeconds = stepsDurationInSeconds;} }>
             <iconify-icon icon="mdi-light:plus-circle"
                 class="text-[30px] hover:text-slate-600">
             </iconify-icon>

@@ -1,2 +1,2 @@
 export { StopWatchState } from "./StopwatchState.type";
-export { StopWatchStore, setStopWatchStore, getStopWatchStore } from "./StopWatchStore.svelte";
+export { StopWatchRunes, setStopWatchRunes, getStopWatchRunes } from "./StopWatchRunes.svelte";

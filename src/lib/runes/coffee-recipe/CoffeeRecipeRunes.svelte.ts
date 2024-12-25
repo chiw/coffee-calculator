@@ -5,7 +5,7 @@ import type { CoffeeParametersConfig, CoffeeRecipe } from "$lib/coffee-recipes/C
 
 import { getContext, setContext } from "svelte";
 
-export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
+export function createCoffeeRecipeRunes(defaultCoffeeRecipeId: CoffeeRecipeId) {
 
     let _recipeId: CoffeeRecipeId = $state(defaultCoffeeRecipeId);
 
@@ -16,14 +16,10 @@ export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
     let _stepsDurationInSeconds = $state(getCoffeeRecipeDefaultConfig(defaultCoffeeRecipeId).stepsDurationInSeconds);
 
     $effect(() => {
-        setToRecipeDefault();
-    });
-
-    function setToRecipeDefault() {
         _coffeeParams = _coffeeRecipe.defaultCoffeeParams;
         _stepsDurationInSeconds = getCoffeeRecipeDefaultConfig(_recipeId).stepsDurationInSeconds;
-    }
-    
+    });
+
     let _coffeeRecipeSteps = $derived(createCoffeeRecipeSteps(_recipeId, _coffeeParams, _stepsDurationInSeconds));
 
     $inspect(_recipeId, _coffeeRecipe, _coffeeParams, _coffeeRecipeSteps);
@@ -43,12 +39,12 @@ export function createCoffeeRecipeStore(defaultCoffeeRecipeId: CoffeeRecipeId) {
     }
 }
 
-const COFFEE_RECIPE_STORE_CONTEXT_KEY = Symbol('COFFEE_RECIPE_STORE_CONTEXT_KEY');
+const COFFEE_RECIPE_RUNES_CONTEXT_KEY = Symbol('COFFEE_RECIPE_RUNES_CONTEXT_KEY');
 
-export function setCoffeeRecipeStore() {    
-    return setContext(COFFEE_RECIPE_STORE_CONTEXT_KEY, createCoffeeRecipeStore(CoffeeRecipeId.hario_switch_tetsukasuya));
+export const setCoffeeRecipeRunes = () => {    
+    return setContext(COFFEE_RECIPE_RUNES_CONTEXT_KEY, createCoffeeRecipeRunes(CoffeeRecipeId.hario_switch_tetsukasuya));
 }
 
-export function getCoffeeRecipeStore() {
-    return getContext<ReturnType<typeof setCoffeeRecipeStore>>(COFFEE_RECIPE_STORE_CONTEXT_KEY);
+export const getCoffeeRecipeRunes = () => {
+    return getContext<ReturnType<typeof setCoffeeRecipeRunes>>(COFFEE_RECIPE_RUNES_CONTEXT_KEY);
 }

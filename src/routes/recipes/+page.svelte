@@ -1,8 +1,8 @@
 <script lang="ts">
     import { RecipeSelect ,StepsDisplay, StepsWithTimerDisplay, RecipeReferencesDisplay } from '$lib/ui/components/coffee-recipe';
 
-    import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';	
-    const coffeeRecipeStore = getCoffeeRecipeStore();
+    import { getCoffeeRecipeRunes } from '$lib/runes/coffee-recipe';	
+    const coffeeRecipeRunes = getCoffeeRecipeRunes();
 
     import LanguageSwitcher from '$lib/ui/components/lang/LanguageSwitcher.svelte';
 
@@ -14,14 +14,14 @@
         <div class="grow-0"><LanguageSwitcher/></div>
     </div>
     
-    {#if coffeeRecipeStore.coffeeRecipe}    
+    {#if coffeeRecipeRunes.coffeeRecipe}    
         <div class="mt-5">
-            <!-- {#if coffeeRecipeStore.coffeeRecipeSteps.isTimerRecipe} -->
-                <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeStore.coffeeRecipeSteps} />
+            <!-- {#if coffeeRecipeRunes.coffeeRecipeSteps.isTimerRecipe} -->
+                <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeRunes.coffeeRecipeSteps} />
             <!-- {:else} -->
                 <!-- <div class="text-xl font-bold italic">{m.label_steps()}</div> -->
-                <!-- <StepsDisplay coffeeRecipeSteps={coffeeRecipeStore.coffeeRecipeSteps}  /> -->
-                <!-- <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeStore.coffeeRecipeSteps} /> -->
+                <!-- <StepsDisplay coffeeRecipeSteps={coffeeRecipeRunes.coffeeRecipeSteps}  /> -->
+                <!-- <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeRunes.coffeeRecipeSteps} /> -->
             <!-- {/if} -->
         </div>
         

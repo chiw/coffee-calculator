@@ -3,14 +3,14 @@
     import { base } from '$app/paths';
     import { Menu } from '$lib/coffee-recipes';
     
-    import { StopWatchState, StopWatchStore, getStopWatchStore } from '$lib/runes/stopwatch/';
-    import { getCoffeeRecipeStore } from '$lib/runes/coffee-recipe';
+    import { StopWatchState, StopWatchRunes, getStopWatchRunes } from '$lib/runes/stopwatch/';
+    import { getCoffeeRecipeRunes } from '$lib/runes/coffee-recipe';
 	import { brandMessageKey, coffeeRecipeIdSelectMessageKey, dripperMessageKey } from './CoffeeReceipeMessageKeys';
     import { goto } from '$app/navigation';
 	
 
-    const stopwatch: StopWatchStore = getStopWatchStore();
-    const coffeeRecipeStore = getCoffeeRecipeStore();
+    const stopwatch: StopWatchRunes = getStopWatchRunes();
+    const coffeeRecipeRunes = getCoffeeRecipeRunes();
 
     let { selectedOption } = $props();
 
@@ -35,7 +35,7 @@
 
 <div class="flex flex-row ">
     {#if stopwatch.isRunning() }
-        <div>{ coffeeRecipeIdSelectMessageKey(coffeeRecipeStore.recipeId)() }</div>
+        <div>{ coffeeRecipeIdSelectMessageKey(coffeeRecipeRunes.recipeId)() }</div>
     {:else}
         <select class="border border-slate-200 w-full h-[2rem]" bind:value={selectedOption} onchange={onChangeRecipe}>
             {#each Menu.brandMenus as brandMenu, i}
