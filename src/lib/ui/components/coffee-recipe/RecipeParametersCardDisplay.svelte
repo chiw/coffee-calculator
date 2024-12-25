@@ -46,7 +46,7 @@
                     </iconify-icon>
                 {:else}
                     <input class="ml-2 mr-1 border border-slate-200 text-center text-xl font-bold italic max-w-16 disabled:opacity-100 disabled:bg-transparent" 
-                        bind:value={coffeeRecipeRunes.beanInGrams}
+                        bind:value={coffeeRecipeRunes.coffeeParams.beanInGrams}
                         disabled=true 
                         /> 
                     <div class="mr-2">(g)</div>
