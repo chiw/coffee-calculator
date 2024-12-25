@@ -1,5 +1,5 @@
 import { CoffeeRecipeId, getCoffeeRecipeDefaultConfig } from "./CoffeeRecipeConstants";
-import type { CoffeeParametersConfig, CoffeeRecipeConfig, CoffeeRecipe, CoffeeRecipeSteps } from "./CoffeeRecipeTypes";
+import type { CoffeeParametersConfig, CoffeeRecipeConfig, CoffeeRecipe, CoffeeRecipeSteps, StepConfig, PourParametersConfig } from "./CoffeeRecipeTypes";
 import { caculateCoffeeParameters } from "./CoffeeParametersUtils";
 import { calculateStepWaterInfos, sumOfDurations } from "./CoffeeRecipeStepsUtils";
 import { calculateStepsTimeframe } from "./StepsTimeframeUtils";
@@ -9,10 +9,14 @@ export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
     console.log('createCoffeeRecipe recipeId: ', recipeId);
 
     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
+
+    console.log('createCoffeeRecipe recipeDefaultConfig:', recipeDefaultConfig);
    
     return <CoffeeRecipe> {
         recipeId: recipeId,
         defaultCoffeeParams: createCoffeeParams(recipeId, recipeDefaultConfig.coffeeParameters),
+        defaultStepsDurationInSeconds: recipeDefaultConfig.stepsDurationInSeconds,
+        defaultSteps: recipeDefaultConfig.steps,
         references: recipeDefaultConfig.references
     }
 }
@@ -21,6 +25,8 @@ export const createCoffeeParams = (recipeId: CoffeeRecipeId, inCoffeeParams: Cof
     console.log('createCoffeeParams recipeId: ', recipeId, ' beanInGrams: ', inCoffeeParams.beanInGrams, ' coffeeToWaterRatio: ', inCoffeeParams.coffeeToWaterRatio, ' waterInGrams: ', inCoffeeParams.waterInGrams);
 
     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
+
+    console.log('createCoffeeParams recipeDefaultConfig:', recipeDefaultConfig);
     
     let coffeeParams = <CoffeeParametersConfig> {
         beanInGrams : inCoffeeParams.beanInGrams ? inCoffeeParams.beanInGrams : recipeDefaultConfig.coffeeParameters.beanInGrams,
@@ -29,23 +35,47 @@ export const createCoffeeParams = (recipeId: CoffeeRecipeId, inCoffeeParams: Cof
     };
 
     // calculate the coffeeToWaterRatio and waterInGrams based on input, so water
-    return caculateCoffeeParameters(coffeeParams);
+    let result =  caculateCoffeeParameters(coffeeParams);
+    console.log('createCoffeeParams result', result);
+    return result;
 }
 
-export const createCoffeeRecipeSteps = (recipeId: CoffeeRecipeId, coffeeParametersConfig: CoffeeParametersConfig, stepsDurationInSeconds: number[]) : CoffeeRecipeSteps => {
-    console.log('createCoffeeRecipeSteps coffeeParametersConfig: ', coffeeParametersConfig, 'stepsDurationInSeconds:', stepsDurationInSeconds);
+export const createCoffeeRecipeSteps = (recipeId: CoffeeRecipeId, coffeeParametersConfig: CoffeeParametersConfig, steps: StepConfig[]) : CoffeeRecipeSteps => {
+    console.log('createCoffeeRecipeSteps recipeId: ', recipeId, ' coffeeParametersConfig: ', coffeeParametersConfig, 'steps:', steps);
 
     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
+
+    console.log('createCoffeeRecipeSteps recipeDefaultConfig:', recipeDefaultConfig);
+
+    let stepsDurationInSeconds: number[] = steps.map(step => step.durationInSeconds);
+    let pourParameters: PourParametersConfig[] = steps.map(step => step.pourParameters);
+
+    console.log('createCoffeeRecipeSteps stepsDurationInSeconds:', stepsDurationInSeconds, 'pourParameters:', pourParameters);
    
     return <CoffeeRecipeSteps> {
         isTimerRecipe : recipeDefaultConfig.isTimerRecipe,
         isImmersionDripperRecipe : recipeDefaultConfig.isImmersionDripperRecipe,
-        stepsDurationInSeconds : stepsDurationInSeconds ? stepsDurationInSeconds : recipeDefaultConfig.stepsDurationInSeconds,
+        // stepsDurationInSeconds : stepsDurationInSeconds ? stepsDurationInSeconds : recipeDefaultConfig.stepsDurationInSeconds,
+        stepsDurationInSeconds: stepsDurationInSeconds,
         
-        steps : recipeDefaultConfig.steps,
+        steps : steps ? steps : recipeDefaultConfig.steps,
         timerInSeconds : stepsDurationInSeconds ? sumOfDurations(stepsDurationInSeconds): 0,
         stepsTimeframe : calculateStepsTimeframe(stepsDurationInSeconds),
         
-        stepWaterInfos : calculateStepWaterInfos(coffeeParametersConfig, recipeDefaultConfig.pourParameters)
+        stepWaterInfos : calculateStepWaterInfos(coffeeParametersConfig, pourParameters)
     }
+}
+
+export const updateSteps = (originalStepConfigs: StepConfig[], stepsDurationInSeconds: number[]) => {
+    console.log('updateSteps originalCoffeeRecipeSteps: ', originalStepConfigs, 'stepsDurationInSeconds', stepsDurationInSeconds);
+
+    let result: StepConfig[] = [];
+
+    originalStepConfigs.forEach((origStepConfig, index) => {
+        let newStepConfig: StepConfig = <StepConfig> JSON.parse(JSON.stringify(origStepConfig));
+        newStepConfig.durationInSeconds = stepsDurationInSeconds[index];
+        result.push(newStepConfig);
+    });
+
+    return result;
 }

@@ -91,27 +91,39 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 pourParameters: [
                     { waterPercentage: 21.4285, waterTemp: 93},
                     { waterPercentage: 21.4285, waterTemp: 93},
-                    { waterPercentage: 100 - (21.4285 * 2), waterTemp: 70}
+                    { waterPercentage: 57.1430, waterTemp: 70}
                 ],
                 steps: [
                     {
                         switchState: SwitchState.OPEN,
                         stage: PourOverStage.BLOOMING,
-                        showWaterTemperature: true
+                        showWaterTemperature: true,
+
+                        durationInSeconds: 30,
+                        pourParameters: { waterPercentage: 21.4285, waterTemp: 93}
                     },
                     {
                         switchState: SwitchState.OPEN,
                         stage: PourOverStage.FIRST_POUR,
-                        showWaterTemperature: true
+                        showWaterTemperature: true,
+
+                        durationInSeconds: 45,
+                        pourParameters: { waterPercentage: 21.4285, waterTemp: 93}
                     },
                     {
                         switchState: SwitchState.CLOSED,
                         stage: PourOverStage.SECOND_POUR,
-                        showWaterTemperature: true
+                        showWaterTemperature: true,
+
+                        durationInSeconds: 30,
+                        pourParameters: { waterPercentage: 57.1430, waterTemp: 70}
                     },
                     {
                         switchState: SwitchState.OPEN,
-                        stage: PourOverStage.FINAL
+                        stage: PourOverStage.FINAL,
+
+                        durationInSeconds: 75,
+                        pourParameters: { waterPercentage: 0, waterTemp: 70}
                     }
                 ],
                 references: [
@@ -139,16 +151,25 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 steps: [
                     {
                         switchState: SwitchState.CLOSED,
-                        stage: PourOverStage.BLOOMING
+                        stage: PourOverStage.BLOOMING,
+
+                        durationInSeconds: 30,
+                        pourParameters: { waterPercentage: 25, waterTemp: 93}
                     },
                     {
                         switchState: SwitchState.OPEN,
                         stage: PourOverStage.POURING,
-                        pouringTechnique: PouringTechnique.CENTER
+                        pouringTechnique: PouringTechnique.CENTER,
+
+                        durationInSeconds: 40,
+                        pourParameters: { waterPercentage: 75, waterTemp: 93}
                     },
                     {
                         switchState: SwitchState.OPEN,
-                        stage: PourOverStage.FINAL
+                        stage: PourOverStage.FINAL,
+
+                        durationInSeconds: 70,
+                        pourParameters: { waterPercentage: 0, waterTemp: 93}
                     }
                 ],
                 references: [
@@ -178,21 +199,33 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                     {
                         switchState: SwitchState.CLOSED,
                         stage: PourOverStage.BLOOMING,
-                        showWaterTemperature: true
+                        showWaterTemperature: true,
+
+                        durationInSeconds: 40,
+                        pourParameters: { waterPercentage: 20.8333, waterTemp: 96}
                     },
                     {
                         switchState: SwitchState.OPEN,
                         stage: PourOverStage.FIRST_POUR,
-                        pouringTechnique: PouringTechnique.CENTER
+                        pouringTechnique: PouringTechnique.CENTER,
+
+                        durationInSeconds: 50,
+                        pourParameters: { waterPercentage: 41.6667, waterTemp: 96}
                     },
                     {
                         switchState: SwitchState.CLOSED,
                         stage: PourOverStage.SECOND_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 40,
+                        pourParameters: { waterPercentage: 37.5, waterTemp: 96}
                     },
                     {
                         switchState: SwitchState.OPEN,
-                        stage: PourOverStage.FINAL
+                        stage: PourOverStage.FINAL,
+
+                        durationInSeconds: 65,
+                        pourParameters: { waterPercentage: 0, waterTemp: 96}
                     }
                 ],
                 references: [
@@ -220,15 +253,24 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 steps: [
                     {
                         switchState: SwitchState.OPEN,
-                        stage: PourOverStage.FIRST_POUR
+                        stage: PourOverStage.FIRST_POUR,
+
+                        durationInSeconds: 25,
+                        pourParameters: { waterPercentage: 50, waterTemp: 93}
                     },
                     {
                         switchState: SwitchState.CLOSED,
-                        stage: PourOverStage.SECOND_POUR
+                        stage: PourOverStage.SECOND_POUR,
+
+                        durationInSeconds: 95,
+                        pourParameters: { waterPercentage: 50, waterTemp: 93}
                     },
                     {
                         switchState: SwitchState.OPEN,
-                        stage: PourOverStage.FINAL
+                        stage: PourOverStage.FINAL,
+
+                        durationInSeconds: 75,
+                        pourParameters: { waterPercentage: 0, waterTemp: 93}
                     }
                 ],
                 references: [
@@ -267,46 +309,69 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 steps: [
                     {
                         stage: PourOverStage.BLOOMING,
-                        swirl: true
+                        swirl: true,
+
+                        durationInSeconds: 45,
+                        pourParameters: { waterPercentage: 20, waterTemp: 93}
                     },
-                    {
-                        
+                    {                        
                         stage: PourOverStage.FIRST_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 15,
+                        pourParameters: { waterPercentage: 20, waterTemp: 93}
                     },
                     {                        
-                        stage: PourOverStage.PAUSE
-                    },
-                    {
-                        
-                        stage: PourOverStage.SECOND_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE
-                    },
-                    {
-                        
-                        stage: PourOverStage.PAUSE
-                    },
-                    {
-                        
-                        stage: PourOverStage.THIRD_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE
-                    },
-                    {
-                        
-                        stage: PourOverStage.PAUSE
-                    },
-                    {
-                        
-                        stage: PourOverStage.FOURTH_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE
-                    },
-                    {
-                        
                         stage: PourOverStage.PAUSE,
-                        swirl: true
+
+                        durationInSeconds: 10,
+                        pourParameters: { waterPercentage: 0, waterTemp: 93}
                     },
                     {                        
-                        stage: PourOverStage.FINAL
+                        stage: PourOverStage.SECOND_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 10,
+                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                    },
+                    {                        
+                        stage: PourOverStage.PAUSE,
+
+                        durationInSeconds: 10,
+                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                    },
+                    {                        
+                        stage: PourOverStage.THIRD_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 10,
+                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                    },
+                    {                        
+                        stage: PourOverStage.PAUSE,
+
+                        durationInSeconds: 10,
+                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                    },
+                    {                        
+                        stage: PourOverStage.FOURTH_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 10,
+                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                    },
+                    {                        
+                        stage: PourOverStage.PAUSE,
+                        swirl: true,
+
+                        durationInSeconds: 5,
+                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                    },
+                    {                        
+                        stage: PourOverStage.FINAL,
+
+                        durationInSeconds: 55,
+                        pourParameters: { waterPercentage: 0, waterTemp: 93}
                     }
                 ],
                 references: [
@@ -336,30 +401,44 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 ],
                 steps: [
                     {
-                        stage: PourOverStage.BLOOMING
-                    },
-                    {
-                        
-                        stage: PourOverStage.FIRST_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE
-                    },
-                    {
-                        
-                        stage: PourOverStage.SECOND_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE
-                    },
-                    {
-                        
-                        stage: PourOverStage.THIRD_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE
-                    },
-                    {
-                        
-                        stage: PourOverStage.FOURTH_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE
+                        stage: PourOverStage.BLOOMING,
+
+                        durationInSeconds: 30,
+                        pourParameters: { waterPercentage: 20, waterTemp: 93}
                     },
                     {                        
-                        stage: PourOverStage.FINAL
+                        stage: PourOverStage.FIRST_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 30,
+                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                    },
+                    {                        
+                        stage: PourOverStage.SECOND_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 30,
+                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                    },
+                    {                        
+                        stage: PourOverStage.THIRD_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 30,
+                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                    },
+                    {                        
+                        stage: PourOverStage.FOURTH_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 30,
+                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                    },
+                    {                        
+                        stage: PourOverStage.FINAL,
+
+                        durationInSeconds: 60,
+                        pourParameters: { waterPercentage: 0, waterTemp: 93}
                     }
                 ],
                 references: [
@@ -397,27 +476,38 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 ],
                 steps: [
                     {
-                        stage: PourOverStage.FIRST_POUR
+                        stage: PourOverStage.FIRST_POUR,
+
+                        durationInSeconds: 45,
+                        pourParameters: { waterPercentage: 20, waterTemp: 93}
                     },
-                    {
-                        
+                    {                        
                         stage: PourOverStage.SECOND_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 45,
+                        pourParameters: { waterPercentage: 20, waterTemp: 93}
                     },
-                    {
-                        
+                    {   
                         stage: PourOverStage.THIRD_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 45,
+                        pourParameters: { waterPercentage: 20, waterTemp: 93}
                     },
-                    {
-                        
+                    {   
                         stage: PourOverStage.FOURTH_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 30,
+                        pourParameters: { waterPercentage: 20, waterTemp: 93}
                     },
-                    {
-                        
+                    {   
                         stage: PourOverStage.FIFTH_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 45,
+                        pourParameters: { waterPercentage: 20, waterTemp: 93}
                     }
                 ],
                 references: [
