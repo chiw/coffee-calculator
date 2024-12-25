@@ -70,7 +70,10 @@ export type StepConfig = {
     msgKey?: any,
     msgParams?: any,
     swirl?: boolean,
-    stir? : boolean
+    stir? : boolean,
+
+    pourParameters?: PourParametersConfig,
+    durationInSeconds: number
 }
 
 export type TimeframeDisplayConfig = {
@@ -129,6 +132,8 @@ export type Reference = {
 export type CoffeeRecipe = {
     recipeId: string;
     defaultCoffeeParams: CoffeeParametersConfig;
+    defaultStepsDurationInSeconds: number[];
+    defaultSteps: StepConfig[];
     references: Reference[]
 }
 

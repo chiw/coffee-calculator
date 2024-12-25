@@ -20,6 +20,7 @@
 	import TimeframeDurationDisplay from './TimeframeDurationDisplay.svelte';
 	import type { CoffeeRecipeSteps, Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes';
 	import { getCoffeeRecipeDefaultConfig } from '$lib/coffee-recipes/CoffeeRecipeConstants';
+	import { updateSteps } from '$lib/coffee-recipes/CoffeeRecipesFactory';
 	
 
     interface StepsWithTimerDisplayProps {
@@ -64,7 +65,9 @@
         
         coffeeRecipeSteps.stepsDurationInSeconds[index] = newVal;
 
-        coffeeRecipeRunes.stepsDurationInSeconds = coffeeRecipeSteps.stepsDurationInSeconds;
+        // coffeeRecipeRunes.stepsDurationInSeconds = coffeeRecipeSteps.stepsDurationInSeconds;
+
+        coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, coffeeRecipeSteps.stepsDurationInSeconds);
         
         // localStepsTimeframeDisplay = calculateStepsTimeframe(localStepsDurationInSeconds);
         // console.log(
@@ -73,7 +76,8 @@
     }
 
     const resetStepsDurationToDefault = () => {
-        coffeeRecipeRunes.stepsDurationInSeconds = getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).stepsDurationInSeconds;
+        // coffeeRecipeRunes.stepsDurationInSeconds = getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).stepsDurationInSeconds;
+        coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).stepsDurationInSeconds);
     }
 
     
@@ -160,7 +164,7 @@
     {/if}
 
     {#if inEditMode}
-        <button onclick={() => {stepsDurationInSeconds[index] -= 1; coffeeRecipeRunes.stepsDurationInSeconds = stepsDurationInSeconds;} }>
+        <button onclick={() => {stepsDurationInSeconds[index] -= 1; coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, stepsDurationInSeconds);} }>
             <iconify-icon icon="mdi-light:minus-circle"
                 class="text-[30px] hover:text-slate-600">
             </iconify-icon>
@@ -171,7 +175,7 @@
             oninput={(e) => recalculateStepsDurationAndTimeframe(e, index)} />
         <span class="font-normal text-s">s</span>
 
-        <button onclick={() => {stepsDurationInSeconds[index] += 1; coffeeRecipeRunes.stepsDurationInSeconds = stepsDurationInSeconds;} }>
+        <button onclick={() => {stepsDurationInSeconds[index] += 1; coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, stepsDurationInSeconds);} }>
             <iconify-icon icon="mdi-light:plus-circle"
                 class="text-[30px] hover:text-slate-600">
             </iconify-icon>
