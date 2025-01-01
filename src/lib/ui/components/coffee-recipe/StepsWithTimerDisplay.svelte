@@ -3,7 +3,7 @@
 
     import 'iconify-icon';
 
-    import { StopWatchRunes, getStopWatchRunes } from '$lib/runes/stopwatch';
+    import { StopWatchRunes, StopWatchState, getStopWatchRunes } from '$lib/runes/stopwatch';
 
     import { getCoffeeRecipeRunes } from '$lib/runes/coffee-recipe';
     const coffeeRecipeRunes = getCoffeeRecipeRunes();
@@ -18,9 +18,11 @@
     import StopwatchDisplay from '../stopwatch/StopwatchDisplay.svelte';
 	import { shouldDisplayTimeframe } from '$lib/utils/TimeframeDisplayUtils';
 	import TimeframeDurationDisplay from './TimeframeDurationDisplay.svelte';
-	import type { CoffeeRecipeSteps, Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes';
+	import type { CoffeeParametersConfig, CoffeeRecipeSteps, Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes';
 	import { getCoffeeRecipeDefaultConfig } from '$lib/coffee-recipes/CoffeeRecipeConstants';
 	import { updateSteps } from '$lib/coffee-recipes/CoffeeRecipesFactory';
+	import { caculateCoffeeParameters } from '$lib/coffee-recipes/CoffeeParametersUtils';
+	import { displayNumber } from '$lib/utils/NumberDisplayUtils';
 	
 
     interface StepsWithTimerDisplayProps {
@@ -80,7 +82,33 @@
         coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).stepsDurationInSeconds);
     }
 
-    
+
+    const updateCoffeeParamsBeanInGrams = (value: number) => {
+        console.log('updateCoffeeParamsBeanInGrams value, beanInGrams, newValue', value, coffeeRecipeRunes.coffeeParams.beanInGrams, coffeeRecipeRunes.coffeeParams.beanInGrams + value);
+        let newBeanInGrams: number = displayNumber(coffeeRecipeRunes.coffeeParams.beanInGrams + value) * 1;
+        updateCoffeeParams(newBeanInGrams);
+    }
+
+    const handleCoffeeParamsBeanInGramsInputChange = (event: InputEvent) => {
+        console.log('handleCoffeeParamsBeanInGramsInputChange', event);
+        const { value } = event.target as HTMLInputElement;
+        console.log('handleCoffeeParamsBeanInGramsInputChange value', value);
+        updateCoffeeParams(value * 1);
+    }
+
+    const updateCoffeeParams = (beanInGrams: number) => {
+        console.log('updateCoffeeParams beanInGrams', beanInGrams);
+        let newCoffeeParams = <CoffeeParametersConfig> {
+            beanInGrams: beanInGrams,
+            coffeeToWaterRatio: coffeeRecipeRunes.coffeeParams.coffeeToWaterRatio,
+            waterInGrams: coffeeRecipeRunes.coffeeParams.waterInGrams
+        }
+        newCoffeeParams = caculateCoffeeParameters(newCoffeeParams);
+        console.log('updateCoffeeParams newCoffeeParams', newCoffeeParams);
+
+        coffeeRecipeRunes.coffeeParams = newCoffeeParams;
+    }
+
 </script>
 
 <div class="flex flex-row">
@@ -90,7 +118,11 @@
         </div>
     {/if}
     <div>    
-        <CoffeeParametersDisplay />
+        <CoffeeParametersDisplay
+            coffeeParameters={coffeeRecipeRunes.coffeeParams}
+            editEnabled={StopWatchState.NEW === stopwatch.stopwatchState}
+            handleBtnClick={updateCoffeeParamsBeanInGrams} 
+            handleInputChange={handleCoffeeParamsBeanInGramsInputChange} />
     </div>
 </div>
 
