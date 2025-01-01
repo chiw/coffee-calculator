@@ -14,13 +14,36 @@
 	import { caculateCoffeeParameters } from '$lib/coffee-recipes/CoffeeParametersUtils';
 
     const updateCoffeeParamsBeanInGrams = (value: number) => {
+        console.log('updateCoffeeParamsBeanInGrams value, beanInGrams, newValue', value, coffeeRecipeRunes.coffeeParams.beanInGrams, coffeeRecipeRunes.coffeeParams.beanInGrams + value);
+        let newBeanInGrams: number = displayNumber(coffeeRecipeRunes.coffeeParams.beanInGrams + value) * 1;
         let newCoffeeParams = <CoffeeParametersConfig> {
-            beanInGrams: coffeeRecipeRunes.coffeeParams.beanInGrams += value,
+            beanInGrams: newBeanInGrams,
+            coffeeToWaterRatio: coffeeRecipeRunes.coffeeParams.coffeeToWaterRatio,
+            waterInGrams: coffeeRecipeRunes.coffeeParams.waterInGrams
+        }
+        console.log('updateCoffeeParamsBeanInGrams before calculate newCoffeeParams', newCoffeeParams);
+        newCoffeeParams = caculateCoffeeParameters(newCoffeeParams);
+        console.log('updateCoffeeParamsBeanInGrams newCoffeeParams', newCoffeeParams);
+
+        coffeeRecipeRunes.coffeeParams = newCoffeeParams;
+    }
+
+    const handleCoffeeParamsBeanInGramsInputChange = (event: InputEvent) => {
+        console.log('handleCoffeeParamsBeanInGramsInputChange', event);
+        const { value } = event.target as HTMLInputElement;
+        console.log('handleCoffeeParamsBeanInGramsInputChange value', value);
+        updateCoffeeParams(value * 1);
+    }
+
+    const updateCoffeeParams = (beanInGrams: number) => {
+        console.log('updateCoffeeParams beanInGrams', beanInGrams);
+        let newCoffeeParams = <CoffeeParametersConfig> {
+            beanInGrams: beanInGrams,
             coffeeToWaterRatio: coffeeRecipeRunes.coffeeParams.coffeeToWaterRatio,
             waterInGrams: coffeeRecipeRunes.coffeeParams.waterInGrams
         }
         newCoffeeParams = caculateCoffeeParameters(newCoffeeParams);
-        console.log('updateCoffeeParamsBeanInGrams newCoffeeParams', newCoffeeParams);
+        console.log('updateCoffeeParams newCoffeeParams', newCoffeeParams);
 
         coffeeRecipeRunes.coffeeParams = newCoffeeParams;
     }
@@ -37,7 +60,8 @@
                         class="text-[30px] hover:text-slate-600"
                         onclick={() => updateCoffeeParamsBeanInGrams(-1)}>
                     </iconify-icon>
-                    <input class="ml-2 mr-1 border border-slate-200 text-center text-xl font-bold italic max-w-16" bind:value={coffeeRecipeRunes.coffeeParams.beanInGrams} /> 
+                    <!-- <input class="ml-2 mr-1 border border-slate-200 text-center text-xl font-bold italic max-w-16" bind:value={coffeeRecipeRunes.coffeeParams.beanInGrams} />  -->
+                    <input type="number" class="ml-2 mr-1 border border-slate-200 text-center text-xl font-bold italic max-w-16 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" bind:value={coffeeRecipeRunes.coffeeParams.beanInGrams} oninput={handleCoffeeParamsBeanInGramsInputChange}/>
                     <div class="mr-2">(g)</div>
                     <!--<button class="w-7 h-7 rounded-full border border-slate-400 text-black hover:bg-black hover:text-white font-bold" onclick={() => coffeeRecipeRunes.beanInGrams+=1}>&plus;</button>-->
                     <iconify-icon icon="mdi-light:plus-circle"
