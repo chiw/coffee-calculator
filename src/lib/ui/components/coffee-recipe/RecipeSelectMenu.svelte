@@ -3,7 +3,7 @@
     import { base } from '$app/paths';
     import { getPathFromMetaInfo, Menu } from '$lib/coffee-recipes';
     
-    import { StopWatchState, StopWatchRunes, getStopWatchRunes } from '$lib/runes/stopwatch/';
+    import { StopWatchRunes, getStopWatchRunes } from '$lib/runes/stopwatch/';
     import { getCoffeeRecipeRunes } from '$lib/runes/coffee-recipe';
 	import { brandMessageKey, coffeeRecipeIdSelectMessageKey, coffeeRecipeIdSelectNavItemMessageKey, dripperMessageKey } from './CoffeeReceipeMessageKeys';
     import { goto } from '$app/navigation';

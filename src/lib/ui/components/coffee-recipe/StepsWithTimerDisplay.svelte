@@ -8,7 +8,7 @@
     import { getCoffeeRecipeRunes } from '$lib/runes/coffee-recipe';
     const coffeeRecipeRunes = getCoffeeRecipeRunes();
 
-    import RecipeParametersCardDisplay from './RecipeParametersCardDisplay.svelte';
+    import CoffeeParametersDisplay from './CoffeeParametersDisplay.svelte';
 
     import StepMessageDisplay from './StepMessageDisplay.svelte';
 
@@ -90,7 +90,7 @@
         </div>
     {/if}
     <div>    
-        <RecipeParametersCardDisplay />
+        <CoffeeParametersDisplay />
     </div>
 </div>
 

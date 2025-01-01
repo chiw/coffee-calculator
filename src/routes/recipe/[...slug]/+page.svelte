@@ -5,7 +5,7 @@
 
     console.log('data', data);
 
-    import { StepsWithTimerDisplay, RecipeReferencesDisplay, RecipeSelectMenu, LanguageSwitcher, RecipeSelectRoutes } from '$lib/ui/components/coffee-recipe';
+    import { StepsWithTimerDisplay, RecipeReferencesDisplay, RecipeSelectMenu, LanguageSwitcher } from '$lib/ui/components/coffee-recipe';
 
     import { getCoffeeRecipeRunes } from '$lib/runes/coffee-recipe';	
     
@@ -25,21 +25,13 @@
 
 <div class="m-2">
     <div class="flex flex-row items-stretch">
-        <!-- <div class="grow"><RecipeSelect /></div> -->
-        <!-- <div class="grow"><RecipeSelectRoutes selectedOption={coffeeRecipeRunes.recipeId}/></div> -->
         <div class="grow"><RecipeSelectMenu selectedOption={coffeeRecipeRunes.recipeId}/></div>
         <div class="grow-0"><LanguageSwitcher/></div>
     </div>
     
     {#if coffeeRecipeRunes.coffeeRecipe}    
         <div class="mt-0">
-            <!-- {#if coffeeRecipeRunes.coffeeRecipeSteps.isTimerRecipe} -->
-                <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeRunes.coffeeRecipeSteps} />
-            <!-- {:else} -->
-                <!-- <div class="text-xl font-bold italic">{m.label_steps()}</div> -->
-                <!-- <StepsDisplay coffeeRecipeSteps={coffeeRecipeRunes.coffeeRecipeSteps}  /> -->
-                <!-- <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeRunes.coffeeRecipeSteps} /> -->
-            <!-- {/if} -->
+            <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeRunes.coffeeRecipeSteps} />
         </div>
         
         <RecipeReferencesDisplay />
