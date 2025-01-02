@@ -73,7 +73,10 @@ export type StepConfig = {
     stir? : boolean,
 
     pourParameters?: PourParametersConfig,
-    durationInSeconds: number
+    stepWaterInfo?: StepWaterInfo,
+
+    durationInSeconds: number,
+    timeFrame?: Timeframe
 }
 
 export type TimeframeDisplayConfig = {
@@ -114,10 +117,6 @@ export type StepWaterInfo = {
 export type CoffeeRecipeSteps = {
     steps: StepConfig[];
     stepsDurationInSeconds: number[];
-    
-    stepsTimeframe: Timeframe[];
-        
-    stepWaterInfos: StepWaterInfo[];
     
     isTimerRecipe: boolean;
     isImmersionDripperRecipe: boolean;
