@@ -30,11 +30,7 @@
     }
     let { coffeeRecipeSteps } : StepsWithTimerDisplayProps = $props();
 
-    console.log('steps: ', coffeeRecipeSteps.steps);
-    console.log('stepWaterInfos', coffeeRecipeSteps.stepWaterInfos);
-    console.log('stepsTimeframe: ', coffeeRecipeSteps.stepsTimeframe);
-    console.log('stepsDurationInSeconds: ', $state.snapshot(coffeeRecipeSteps.stepsDurationInSeconds));
-    console.log('timerInSeconds: ', coffeeRecipeSteps.timerInSeconds);
+    console.log('StepsWithTimerDisplay coffeeRecipeSteps', coffeeRecipeSteps);
 
     const stopwatch: StopWatchRunes = getStopWatchRunes();
 
@@ -90,14 +86,14 @@
     }
 
     const handleCoffeeParamsBeanInGramsInputChange = (event: InputEvent) => {
-        console.log('handleCoffeeParamsBeanInGramsInputChange', event);
+        // console.log('handleCoffeeParamsBeanInGramsInputChange', event);
         const { value } = event.target as HTMLInputElement;
         console.log('handleCoffeeParamsBeanInGramsInputChange value', value);
         updateCoffeeParams(value * 1);
     }
 
     const updateCoffeeParams = (beanInGrams: number) => {
-        console.log('updateCoffeeParams beanInGrams', beanInGrams);
+        // console.log('updateCoffeeParams beanInGrams', beanInGrams);
         let newCoffeeParams = <CoffeeParametersConfig> {
             beanInGrams: beanInGrams,
             coffeeToWaterRatio: coffeeRecipeRunes.coffeeParams.coffeeToWaterRatio,
@@ -154,46 +150,32 @@
     {/if}
 </div>
 
-{#snippet stepRowDisplay(index, step, stepWaterInfos, timeframe, highlightStep)}
-    <div class="border border-solid border-slate-600">
-        
-        {#if coffeeRecipeSteps.isImmersionDripperRecipe}
-            <SwitchStateDisplay 
-                switchState={step.switchState} isImmersionDripperRecipe={coffeeRecipeSteps.isImmersionDripperRecipe} 
-                highlightState={highlightStep} durationInSeconds={coffeeRecipeSteps.stepsDurationInSeconds[index]}/>
-        {:else}
-            <TimeframeDurationDisplay durationInSeconds={coffeeRecipeSteps.stepsDurationInSeconds[index]} pouringStage={step.stage} />
-        {/if}
-        
-        {#if timeframe && shouldDisplayTimeframe(step)}
-            <StepTimeFrameDisplay timeframe={timeframe} highlightStep={highlightStep}/>
-        {/if}
-    </div>
-
-    {#if timeframe} 
-        <StepMessageDisplay stepWaterInfo={stepWaterInfos[index]} step={step} timeframe={timeframe}/>
-    {/if}
-{/snippet}
-
-{#snippet stepRowDisplayWithEdit(index, step, stepWaterInfos, timeframe, stepsDurationInSeconds, highlightStep)}
-    
+{#snippet stepRowTimeFrameAndSwitchStateDisplay(step, highlightStep)}
     <div class="border border-solid border-slate-600">        
         {#if coffeeRecipeSteps.isImmersionDripperRecipe}
             <SwitchStateDisplay 
                 switchState={step.switchState} isImmersionDripperRecipe={coffeeRecipeSteps.isImmersionDripperRecipe} 
-                highlightState={highlightStep} durationInSeconds={stepsDurationInSeconds[index]}/>
+                highlightState={highlightStep} durationInSeconds={step.durationInSeconds}/>
         {:else}
-            <TimeframeDurationDisplay durationInSeconds={stepsDurationInSeconds[index]} pouringStage={step.stage} />
+            <TimeframeDurationDisplay durationInSeconds={step.durationInSeconds} pouringStage={step.stage} />
         {/if}
-
-        {#if timeframe && shouldDisplayTimeframe(step)}
-            <StepTimeFrameDisplay timeframe={timeframe} highlightStep={highlightStep}/>
+        
+        {#if step.timeFrame && shouldDisplayTimeframe(step)}
+            <StepTimeFrameDisplay timeFrame={step.timeFrame} highlightStep={highlightStep}/>
         {/if}
     </div>
-    
-    {#if timeframe}
-        <StepMessageDisplay stepWaterInfo={stepWaterInfos[index]} step={step} timeframe={timeframe}/>
+
+    {#if step.timeFrame} 
+        <StepMessageDisplay step={step} />
     {/if}
+{/snippet}
+
+{#snippet stepRowDisplay(index, step, highlightStep)}
+    {@render stepRowTimeFrameAndSwitchStateDisplay(step, highlightStep)}
+{/snippet}
+
+{#snippet stepRowDisplayWithEdit(index, step, stepsDurationInSeconds, highlightStep)}
+    {@render stepRowTimeFrameAndSwitchStateDisplay(step, highlightStep)}
 
     {#if inEditMode}
         <button onclick={() => {stepsDurationInSeconds[index] -= 1; coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, stepsDurationInSeconds);} }>
@@ -221,24 +203,24 @@
         <div class="flex flex-col divide-y divide-slate-300 py-0 ">
         <!-- <div class="flex flex-col py-0 "> -->
         {#each coffeeRecipeSteps.steps as step, index }
-            {#if (isRunningActiveStep(stopwatch.elaspedTimeInSeconds, coffeeRecipeSteps.stepsTimeframe[index]) )}
-                {#if (!isStepCloseToFinish(stopwatch.elaspedTimeInSeconds, coffeeRecipeSteps.stepsTimeframe[index], 7)) }
+            {#if (isRunningActiveStep(stopwatch.elaspedTimeInSeconds, step.timeFrame) )}
+                {#if (!isStepCloseToFinish(stopwatch.elaspedTimeInSeconds, step.timeFrame, 7)) }
                     <div class="pl-2 py-0.5 flex items-center bg-gray-900 text-white">
-                        {@render stepRowDisplay(index, step, coffeeRecipeSteps.stepWaterInfos, coffeeRecipeSteps.stepsTimeframe[index], true)}
+                        {@render stepRowDisplay(index, step, true)}
                     </div>
                     
                 {:else}
                     <div class="pl-2 py-0.5 flex items-center bg-gray-900 text-white animate-pulse ">
-                        {@render stepRowDisplay(index, step, coffeeRecipeSteps.stepWaterInfos, coffeeRecipeSteps.stepsTimeframe[index], true)}
+                        {@render stepRowDisplay(index, step, true)}
                     </div>
                 {/if}
-            {:else if (isRunningNonActiveStep(stopwatch.elaspedTimeInSeconds, coffeeRecipeSteps.stepsTimeframe[index]))}
+            {:else if (isRunningNonActiveStep(stopwatch.elaspedTimeInSeconds, step.timeFrame))}
                 <div class=" pl-2 py-0.5 flex items-center text-slate-300">
-                    {@render stepRowDisplay(index, step, coffeeRecipeSteps.stepWaterInfos, coffeeRecipeSteps.stepsTimeframe[index], false)}
+                    {@render stepRowDisplay(index, step, false)}
                 </div>
             {:else}
                 <div class=" pl-2 py-0.5 flex items-center">
-                    {@render stepRowDisplayWithEdit(index, step, coffeeRecipeSteps.stepWaterInfos, coffeeRecipeSteps.stepsTimeframe[index], coffeeRecipeSteps.stepsDurationInSeconds, true)}
+                    {@render stepRowDisplayWithEdit(index, step, coffeeRecipeSteps.stepsDurationInSeconds, true)}
                 </div>
             {/if}
         {/each}
