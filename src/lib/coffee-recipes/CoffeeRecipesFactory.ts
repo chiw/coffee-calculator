@@ -57,7 +57,7 @@ export const createCoffeeRecipeSteps = (recipeId: CoffeeRecipeId, coffeeParamete
     let result: CoffeeRecipeSteps = <CoffeeRecipeSteps> {
         isTimerRecipe : recipeDefaultConfig.isTimerRecipe,
         isImmersionDripperRecipe : recipeDefaultConfig.isImmersionDripperRecipe,
-       stepsDurationInSeconds: stepsDurationInSeconds,
+        stepsDurationInSeconds: stepsDurationInSeconds,
 
         steps: stepsWithTimeframeAndWaterInfo,
         timerInSeconds : timerInSeconds,
@@ -81,4 +81,15 @@ export const updateSteps = (originalStepConfigs: StepConfig[], stepsDurationInSe
     });
 
     return result;
+}
+
+export const updateStepDurationInSeconds = (originalStepConfigs: StepConfig[], index: number, newDurationInSeconds: number): StepConfig[] => {
+    console.log('updateStepDurationInSeconds originalStepConfigs: ', originalStepConfigs, 'index', index, 'newDurationInSeconds', newDurationInSeconds);
+
+    let newStepConfigs: StepConfig[] = <StepConfig[]> JSON.parse(JSON.stringify(originalStepConfigs));
+    let clonedStepsDurationInSeconds: number[] = newStepConfigs.map(step => step.durationInSeconds);
+
+    clonedStepsDurationInSeconds[index] = newDurationInSeconds;
+
+    return updateSteps(originalStepConfigs, clonedStepsDurationInSeconds);
 }

@@ -20,7 +20,7 @@
 	import TimeframeDurationDisplay from './TimeframeDurationDisplay.svelte';
 	import type { CoffeeParametersConfig, CoffeeRecipeSteps, Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes';
 	import { getCoffeeRecipeDefaultConfig } from '$lib/coffee-recipes/CoffeeRecipeConstants';
-	import { updateSteps } from '$lib/coffee-recipes/CoffeeRecipesFactory';
+	import { updateStepDurationInSeconds, updateSteps } from '$lib/coffee-recipes/CoffeeRecipesFactory';
 	import { caculateCoffeeParameters } from '$lib/coffee-recipes/CoffeeParametersUtils';
 	import { displayNumber } from '$lib/utils/NumberDisplayUtils';
 	
@@ -29,6 +29,8 @@
         coffeeRecipeSteps: CoffeeRecipeSteps
     }
     let { coffeeRecipeSteps } : StepsWithTimerDisplayProps = $props();
+
+    
 
     console.log('StepsWithTimerDisplay coffeeRecipeSteps', coffeeRecipeSteps);
 
@@ -53,6 +55,11 @@
 
     let inEditMode = $state(false);
 
+    const updateRunesStepsConfig = (index: number, newVal: number) => {
+        console.log('updateRunesStepsConfig', 'index', index, 'newVal', newVal);
+        coffeeRecipeRunes.stepsConfig = updateStepDurationInSeconds(coffeeRecipeRunes.stepsConfig, index, newVal);
+    }
+
     const recalculateStepsDurationAndTimeframe = (e, index) => {
         // console.log(
         //     'e.currentTarget.value:', e.currentTarget.value, 
@@ -61,11 +68,7 @@
 
         let newVal = parseInt(e.currentTarget.value);
         
-        coffeeRecipeSteps.stepsDurationInSeconds[index] = newVal;
-
-        // coffeeRecipeRunes.stepsDurationInSeconds = coffeeRecipeSteps.stepsDurationInSeconds;
-
-        coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, coffeeRecipeSteps.stepsDurationInSeconds);
+        updateRunesStepsConfig(index, newVal);
         
         // localStepsTimeframeDisplay = calculateStepsTimeframe(localStepsDurationInSeconds);
         // console.log(
@@ -74,7 +77,6 @@
     }
 
     const resetStepsDurationToDefault = () => {
-        // coffeeRecipeRunes.stepsDurationInSeconds = getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).stepsDurationInSeconds;
         coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).stepsDurationInSeconds);
     }
 
@@ -170,26 +172,26 @@
     {/if}
 {/snippet}
 
-{#snippet stepRowDisplay(index, step, highlightStep)}
+{#snippet stepRowDisplay(step, highlightStep)}
     {@render stepRowTimeFrameAndSwitchStateDisplay(step, highlightStep)}
 {/snippet}
 
-{#snippet stepRowDisplayWithEdit(index, step, stepsDurationInSeconds, highlightStep)}
+{#snippet stepRowDisplayWithEdit(index, step, highlightStep)}
     {@render stepRowTimeFrameAndSwitchStateDisplay(step, highlightStep)}
 
     {#if inEditMode}
-        <button onclick={() => {stepsDurationInSeconds[index] -= 1; coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, stepsDurationInSeconds);} }>
+       <button onclick={() => updateRunesStepsConfig(index, step.durationInSeconds -= 1) }>
             <iconify-icon icon="mdi-light:minus-circle"
                 class="text-[30px] hover:text-slate-600">
             </iconify-icon>
         </button>
 
         <input type="number" class="border border-solid text-center w-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" 
-            bind:value={stepsDurationInSeconds[index]} 
+            bind:value={step.durationInSeconds}
             oninput={(e) => recalculateStepsDurationAndTimeframe(e, index)} />
         <span class="font-normal text-s">s</span>
 
-        <button onclick={() => {stepsDurationInSeconds[index] += 1; coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, stepsDurationInSeconds);} }>
+        <button onclick={() => updateRunesStepsConfig(index, step.durationInSeconds += 1) }>
             <iconify-icon icon="mdi-light:plus-circle"
                 class="text-[30px] hover:text-slate-600">
             </iconify-icon>
@@ -206,21 +208,21 @@
             {#if (isRunningActiveStep(stopwatch.elaspedTimeInSeconds, step.timeFrame) )}
                 {#if (!isStepCloseToFinish(stopwatch.elaspedTimeInSeconds, step.timeFrame, 7)) }
                     <div class="pl-2 py-0.5 flex items-center bg-gray-900 text-white">
-                        {@render stepRowDisplay(index, step, true)}
+                        {@render stepRowDisplay(step, true)}
                     </div>
                     
                 {:else}
                     <div class="pl-2 py-0.5 flex items-center bg-gray-900 text-white animate-pulse ">
-                        {@render stepRowDisplay(index, step, true)}
+                        {@render stepRowDisplay(step, true)}
                     </div>
                 {/if}
             {:else if (isRunningNonActiveStep(stopwatch.elaspedTimeInSeconds, step.timeFrame))}
                 <div class=" pl-2 py-0.5 flex items-center text-slate-300">
-                    {@render stepRowDisplay(index, step, false)}
+                    {@render stepRowDisplay(step, false)}
                 </div>
             {:else}
                 <div class=" pl-2 py-0.5 flex items-center">
-                    {@render stepRowDisplayWithEdit(index, step, coffeeRecipeSteps.stepsDurationInSeconds, true)}
+                    {@render stepRowDisplayWithEdit(index, step, true)}
                 </div>
             {/if}
         {/each}
