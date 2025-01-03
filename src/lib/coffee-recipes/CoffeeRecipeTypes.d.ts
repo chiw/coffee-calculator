@@ -89,8 +89,6 @@ export type CoffeeRecipeConfig = {
     isTimerRecipe: boolean,
     isImmersionDripperRecipe: boolean,
     coffeeParameters: CoffeeParametersConfig,
-    stepsDurationInSeconds: number[],
-    pourParameters: PourParametersConfig[],
     steps: StepConfig[],
     references: Reference[],
 }

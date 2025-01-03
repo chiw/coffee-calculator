@@ -5,6 +5,10 @@ import { calculateStepWaterInfos, sumOfDurations } from "./CoffeeRecipeStepsUtil
 import { calculateStepsTimeframe } from "./StepsTimeframeUtils";
 
 
+export const getStepsDurationInSeconds = (stepConfigs: StepConfig[]): number[] => {
+    return stepConfigs.map(step => step.durationInSeconds);
+}
+
 export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
 
@@ -13,7 +17,7 @@ export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
     return <CoffeeRecipe> {
         recipeId: recipeId,
         defaultCoffeeParams: createCoffeeParams(recipeId, recipeDefaultConfig.coffeeParameters),
-        defaultStepsDurationInSeconds: recipeDefaultConfig.stepsDurationInSeconds,
+        defaultStepsDurationInSeconds: getStepsDurationInSeconds(recipeDefaultConfig.steps),
         defaultSteps: recipeDefaultConfig.steps,
         references: recipeDefaultConfig.references
     }
@@ -43,7 +47,7 @@ export const createCoffeeRecipeSteps = (recipeId: CoffeeRecipeId, coffeeParamete
 
     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
 
-    let stepsDurationInSeconds: number[] = steps.map(step => step.durationInSeconds);
+    let stepsDurationInSeconds: number[] = getStepsDurationInSeconds(steps);
     let stepsWithTimeframe: StepConfig[] = updateSteps(steps, stepsDurationInSeconds);
     let timerInSeconds: number = stepsDurationInSeconds ? sumOfDurations(stepsDurationInSeconds): 0;
     
@@ -87,7 +91,7 @@ export const updateStepDurationInSeconds = (originalStepConfigs: StepConfig[], i
     console.log('updateStepDurationInSeconds originalStepConfigs: ', originalStepConfigs, 'index', index, 'newDurationInSeconds', newDurationInSeconds);
 
     let newStepConfigs: StepConfig[] = <StepConfig[]> JSON.parse(JSON.stringify(originalStepConfigs));
-    let clonedStepsDurationInSeconds: number[] = newStepConfigs.map(step => step.durationInSeconds);
+    let clonedStepsDurationInSeconds: number[] = getStepsDurationInSeconds(newStepConfigs);
 
     clonedStepsDurationInSeconds[index] = newDurationInSeconds;
 
