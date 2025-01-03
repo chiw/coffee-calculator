@@ -19,7 +19,8 @@ export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
         defaultCoffeeParams: createCoffeeParams(recipeId, recipeDefaultConfig.coffeeParameters),
         defaultStepsDurationInSeconds: getStepsDurationInSeconds(recipeDefaultConfig.steps),
         defaultSteps: recipeDefaultConfig.steps,
-        references: recipeDefaultConfig.references
+        references: recipeDefaultConfig.references,
+        is46Method: recipeDefaultConfig.is46Method
     }
 }
 

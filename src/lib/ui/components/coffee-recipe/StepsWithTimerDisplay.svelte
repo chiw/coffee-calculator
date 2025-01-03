@@ -18,19 +18,19 @@
     import StopwatchDisplay from '../stopwatch/StopwatchDisplay.svelte';
 	import { shouldDisplayTimeframe } from '$lib/utils/TimeframeDisplayUtils';
 	import TimeframeDurationDisplay from './TimeframeDurationDisplay.svelte';
-	import type { CoffeeParametersConfig, CoffeeRecipeSteps, Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes';
+	import type { CoffeeParametersConfig, CoffeeRecipeSteps, StepConfig, Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes';
 	import { getCoffeeRecipeDefaultConfig } from '$lib/coffee-recipes/CoffeeRecipeConstants';
 	import { getStepsDurationInSeconds, updateStepDurationInSeconds, updateSteps } from '$lib/coffee-recipes/CoffeeRecipesFactory';
 	import { caculateCoffeeParameters } from '$lib/coffee-recipes/CoffeeParametersUtils';
 	import { displayNumber } from '$lib/utils/NumberDisplayUtils';
+	import SimpleModal from '../modal/SimpleModal.svelte';
+	import Config46Method from './Config46Method.svelte';
 	
 
     interface StepsWithTimerDisplayProps {
         coffeeRecipeSteps: CoffeeRecipeSteps
     }
     let { coffeeRecipeSteps } : StepsWithTimerDisplayProps = $props();
-
-    
 
     console.log('StepsWithTimerDisplay coffeeRecipeSteps', coffeeRecipeSteps);
 
@@ -51,6 +51,65 @@
 
     const isStepCloseToFinish = (elaspedTimeInSeconds:number, timeframe:Timeframe, offset:number) => {
         return elaspedTimeInSeconds > (timeframe.to - offset);
+    }
+
+    let show46MethodModal = $state(false);
+    let pourRatios40 = $state('standard');
+    let pourRatios60 = $state('evenstronger');
+
+    $effect(() => {
+        if(coffeeRecipeRunes.coffeeRecipe.is46Method) {
+            coffeeRecipeRunes.stepsConfig = calculate46MethodSteps(pourRatios40, pourRatios60);
+        }
+    });
+
+    const calculate46MethodSteps = (pourRatios40: string, pourRatios60: string): StepConfig[] => {
+        let stepConfigs : StepConfig[] = [];
+
+        let stages: string[] = ["FIRST_POUR", "SECOND_POUR", "THIRD_POUR", "FOURTH_POUR", "FIFTH_POUR"];
+        
+        let pourRatios40WaterPercentages: number[] = [20, 20];
+        let pourRatios40StepsDurationInSeconds: number[] = [45, 45];
+
+        if(pourRatios40 == 'standard') {
+            pourRatios40WaterPercentages = [20, 20];
+        } else if (pourRatios40 == 'sweeter') {
+            pourRatios40WaterPercentages = [16.6667, 23.3333];
+        } else if (pourRatios40 == 'brighter') {
+            pourRatios40WaterPercentages = [23.3333, 16.6667];
+        }
+        console.log('calculate46MethodSteps pourRation40', pourRatios40, 'pourRatios40WaterPercentages', pourRatios40WaterPercentages);
+
+        let pourRatios60WaterPercentages: number[] = [20, 20, 20];
+        let pourRatios60StepsDurationInSeconds: number[] = [45, 30, 45];
+
+        if(pourRatios60 == 'lighter') {
+            pourRatios60WaterPercentages = [60];
+            pourRatios60StepsDurationInSeconds = [120];
+        } else if (pourRatios60 == 'stronger') {
+            pourRatios60WaterPercentages = [30, 30];
+            pourRatios60StepsDurationInSeconds = [60, 60];
+        } else if (pourRatios60 == 'evenstronger') {
+            pourRatios60WaterPercentages = [20, 20, 20];
+            pourRatios60StepsDurationInSeconds = [45, 30, 45];
+        }
+        console.log('calculate46MethodSteps pourRatios60', pourRatios60, 'pourRatios60WaterPercentages', pourRatios60WaterPercentages);
+
+        let waterTemp = 93;
+        let stepsWaterPercentages = pourRatios40WaterPercentages.concat(pourRatios60WaterPercentages);
+        let stepsDurationInSeconds = pourRatios40StepsDurationInSeconds.concat(pourRatios60StepsDurationInSeconds);
+
+        stepsWaterPercentages.forEach((percentage, index) => {
+            stepConfigs.push(<StepConfig> {
+                stage: stages[index],
+                durationInSeconds: stepsDurationInSeconds[index],
+                pourParameters: { waterPercentage: stepsWaterPercentages[index], waterTemp: waterTemp}
+            });
+        });
+
+        console.log('calculate46MethodSteps stepConfigs', stepConfigs);
+
+        return stepConfigs;
     }
 
     let inEditMode = $state(false);
@@ -77,7 +136,17 @@
     }
 
     const resetStepsDurationToDefault = () => {
-        coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, getStepsDurationInSeconds(getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).steps));
+        if(coffeeRecipeRunes.coffeeRecipe.is46Method) {
+            let stepsDurationInSeconds = getStepsDurationInSeconds(getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).steps);
+            if(coffeeRecipeRunes.stepsConfig.length === 4) {
+                stepsDurationInSeconds = [45, 45, 60, 60]
+            } else if (coffeeRecipeRunes.stepsConfig.length === 3) {
+                stepsDurationInSeconds = [45, 45, 120]
+            }
+            coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, stepsDurationInSeconds);
+        } else {
+            coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, getStepsDurationInSeconds(getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).steps));
+        }
     }
 
 
@@ -124,32 +193,46 @@
     </div>
 </div>
 
-<div class="flex flex-row-reverse items-center mt-1">
-    {#if !stopwatch.isRunning()}
-        {#if inEditMode}
-            <button class="flex flex-row border border-solid border-black rounded border-1 items-center bg-black w-18 px-1 ba" onclick={() => { inEditMode = !inEditMode }}>
-                <iconify-icon icon="material-symbols-light:check-circle-outline-rounded"
-                    class="text-[22px] hover:text-white text-white">
-                </iconify-icon>
-                <span class="font-bold text-xs text-white">{m.label_finish_edit()}</span>
-            </button>
+<div>
+    <div>
+        
+    </div>
+    <div class="flex flex-row-reverse items-center mt-1">
+        {#if !stopwatch.isRunning()}
+            {#if inEditMode}
+                <button class="flex flex-row border border-solid border-black rounded border-1 items-center bg-black w-18 px-1 ba" onclick={() => { inEditMode = !inEditMode }}>
+                    <iconify-icon icon="material-symbols-light:check-circle-outline-rounded"
+                        class="text-[22px] hover:text-white text-white">
+                    </iconify-icon>
+                    <span class="font-bold text-xs text-white">{m.label_finish_edit()}</span>
+                </button>
 
-            <button class="flex flex-row border border-solid border-black rounded border-1 items-center w-18 px-1 mr-1" onclick={resetStepsDurationToDefault}>
-                <iconify-icon icon="material-symbols-light:refresh-rounded"
-                    class="text-[22px] hover:text-slate-600">
-                </iconify-icon>
-                <span class="font-bold text-xs">{m.label_default()}</span>
-            </button>
-        {:else}
-            <button class="flex flex-row border border-solid border-black rounded border-1 items-center w-18 px-1" onclick={() => { inEditMode = !inEditMode }}>
-                
-                <iconify-icon icon="material-symbols-light:timer-outline"
-                    class="text-[22px] hover:text-slate-600">
-                </iconify-icon>
-                <span class="font-bold text-xs">{m.label_edit()}</span>
-            </button>
+                <button class="flex flex-row border border-solid border-black rounded border-1 items-center w-18 px-1 mr-1" onclick={resetStepsDurationToDefault}>
+                    <iconify-icon icon="material-symbols-light:refresh-rounded"
+                        class="text-[22px] hover:text-slate-600">
+                    </iconify-icon>
+                    <span class="font-bold text-xs">{m.label_default()}</span>
+                </button>
+            {:else}
+                <button class="flex flex-row border border-solid border-black rounded border-1 items-center w-18 px-1" onclick={() => { inEditMode = !inEditMode }}>
+                    
+                    <iconify-icon icon="material-symbols-light:timer-outline"
+                        class="text-[22px] hover:text-slate-600">
+                    </iconify-icon>
+                    <span class="font-bold text-xs">{m.label_edit()}</span>
+                </button>
+            {/if}
+
+            {#if coffeeRecipeRunes.coffeeRecipe.is46Method && !inEditMode}
+                <button class="flex flex-row border border-solid border-black rounded border-1 items-center w-18 px-1 mr-1" onclick={() => { show46MethodModal = !show46MethodModal }}>
+                    <iconify-icon icon="material-symbols-light:discover-tune-rounded"
+                        class="text-[22px] hover:text-slate-600">
+                    </iconify-icon>
+                    <span class="font-bold text-xs">{m.label_46_method_adjust()}</span>
+                </button>
+            {/if}
         {/if}
-    {/if}
+    </div>
 </div>
 
 {#snippet stepRowTimeFrameAndSwitchStateDisplay(step, highlightStep)}
@@ -229,3 +312,14 @@
         </div>
     {/if}
 </div>
+
+<SimpleModal bind:showModal={show46MethodModal}>
+    {#snippet header()}
+		<div><b>{m.label_46_method_adjust_title()}</b>
+			<!-- <small><em>adjective</em> mod·al \ˈmō-dəl\</small> -->
+        </div>
+	{/snippet}
+
+    <Config46Method bind:pourRatios40={pourRatios40} bind:pourRatios60={pourRatios60} />
+    
+</SimpleModal>
