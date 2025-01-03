@@ -419,6 +419,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
             return <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
                 isImmersionDripperRecipe: false,
+                is46Method: true,
                 coffeeParameters: {
                     beanInGrams: 20,
                     coffeeToWaterRatio: -1,

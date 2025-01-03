@@ -88,6 +88,7 @@ export type TimeframeDisplayConfig = {
 export type CoffeeRecipeConfig = {
     isTimerRecipe: boolean,
     isImmersionDripperRecipe: boolean,
+    is46Method?: boolean,
     coffeeParameters: CoffeeParametersConfig,
     steps: StepConfig[],
     references: Reference[],
@@ -131,6 +132,7 @@ export type CoffeeRecipe = {
     defaultCoffeeParams: CoffeeParametersConfig;
     defaultStepsDurationInSeconds: number[];
     defaultSteps: StepConfig[];
-    references: Reference[]
+    references: Reference[],
+    is46Method?: boolean
 }
 
