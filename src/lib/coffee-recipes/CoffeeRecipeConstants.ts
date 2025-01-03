@@ -87,12 +87,6 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                     coffeeToWaterRatio: -1,
                     waterInGrams: 280
                 },
-                stepsDurationInSeconds: [30, 45, 30, 75],
-                pourParameters: [
-                    { waterPercentage: 21.4285, waterTemp: 93},
-                    { waterPercentage: 21.4285, waterTemp: 93},
-                    { waterPercentage: 57.1430, waterTemp: 70}
-                ],
                 steps: [
                     {
                         switchState: SwitchState.OPEN,
@@ -143,11 +137,6 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                     coffeeToWaterRatio: -1,
                     waterInGrams: 200
                 },
-                stepsDurationInSeconds: [30, 40, 70],
-                pourParameters: [
-                    { waterPercentage: 25, waterTemp: 93},
-                    { waterPercentage: 75, waterTemp: 93}
-                ],
                 steps: [
                     {
                         switchState: SwitchState.CLOSED,
@@ -189,12 +178,6 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                     coffeeToWaterRatio: -1,
                     waterInGrams: 240
                 },
-                stepsDurationInSeconds: [40, 50, 40, 65],
-                pourParameters: [
-                    { waterPercentage: 20.8333, waterTemp: 96},
-                    { waterPercentage: 41.6667, waterTemp: 96},
-                    { waterPercentage: 37.5, waterTemp: 96},
-                ],
                 steps: [
                     {
                         switchState: SwitchState.CLOSED,
@@ -245,11 +228,6 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                     coffeeToWaterRatio: 16,
                     waterInGrams: -1
                 },
-                stepsDurationInSeconds: [25, 95, 75],
-                pourParameters: [
-                    { waterPercentage: 50, waterTemp: 93},
-                    { waterPercentage: 50, waterTemp: 93}
-                ],
                 steps: [
                     {
                         switchState: SwitchState.OPEN,
@@ -294,18 +272,6 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                     coffeeToWaterRatio: -1,
                     waterInGrams: 250
                 },
-                stepsDurationInSeconds: [45, 15, 10, 10, 10, 10, 10, 10, 5, 55],
-                pourParameters: [
-                    { waterPercentage: 20, waterTemp: 93},
-                    { waterPercentage: 20, waterTemp: 93},
-                    { waterPercentage: 0, waterTemp: 93},
-                    { waterPercentage: 20, waterTemp: 93},
-                    { waterPercentage: 0, waterTemp: 93},
-                    { waterPercentage: 20, waterTemp: 93},
-                    { waterPercentage: 0, waterTemp: 93},
-                    { waterPercentage: 20, waterTemp: 93},
-                    { waterPercentage: 0, waterTemp: 93},
-                ],
                 steps: [
                     {
                         stage: PourOverStage.BLOOMING,
@@ -391,14 +357,6 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                     coffeeToWaterRatio: -1,
                     waterInGrams: 300
                 },
-                stepsDurationInSeconds: [30, 30, 30, 30, 30, 60],
-                pourParameters: [
-                    { waterPercentage: 20, waterTemp: 93},
-                    { waterPercentage: 20, waterTemp: 93},
-                    { waterPercentage: 20, waterTemp: 93},
-                    { waterPercentage: 20, waterTemp: 93},
-                    { waterPercentage: 20, waterTemp: 93}
-                ],
                 steps: [
                     {
                         stage: PourOverStage.BLOOMING,
@@ -466,14 +424,6 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                     coffeeToWaterRatio: -1,
                     waterInGrams: 300
                 },
-                stepsDurationInSeconds: [45, 45, 45, 30, 45],
-                pourParameters: [
-                    { waterPercentage: 20, waterTemp: 93},
-                    { waterPercentage: 20, waterTemp: 93},
-                    { waterPercentage: 20, waterTemp: 93},
-                    { waterPercentage: 20, waterTemp: 93},
-                    { waterPercentage: 20, waterTemp: 93}
-                ],
                 steps: [
                     {
                         stage: PourOverStage.FIRST_POUR,
@@ -527,8 +477,6 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                     coffeeToWaterRatio: -1,
                     waterInGrams: -1
                 },
-                stepsDurationInSeconds: [],
-                pourParameters: [],
                 steps: [],
                 references: []
             }

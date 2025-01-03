@@ -20,7 +20,7 @@
 	import TimeframeDurationDisplay from './TimeframeDurationDisplay.svelte';
 	import type { CoffeeParametersConfig, CoffeeRecipeSteps, Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes';
 	import { getCoffeeRecipeDefaultConfig } from '$lib/coffee-recipes/CoffeeRecipeConstants';
-	import { updateStepDurationInSeconds, updateSteps } from '$lib/coffee-recipes/CoffeeRecipesFactory';
+	import { getStepsDurationInSeconds, updateStepDurationInSeconds, updateSteps } from '$lib/coffee-recipes/CoffeeRecipesFactory';
 	import { caculateCoffeeParameters } from '$lib/coffee-recipes/CoffeeParametersUtils';
 	import { displayNumber } from '$lib/utils/NumberDisplayUtils';
 	
@@ -77,7 +77,7 @@
     }
 
     const resetStepsDurationToDefault = () => {
-        coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).stepsDurationInSeconds);
+        coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, getStepsDurationInSeconds(getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).steps));
     }
 
 
