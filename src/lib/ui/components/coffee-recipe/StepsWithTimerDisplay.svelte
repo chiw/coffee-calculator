@@ -26,7 +26,7 @@
 	import { displayNumber } from '$lib/utils/NumberDisplayUtils';
 	import SimpleModal from '../modal/SimpleModal.svelte';
 	import Config46Method from './Config46Method.svelte';
-	import { calculate46MethodSteps, getRatio40WaterInGrams, getRatio60WaterInGrams } from '$lib/coffee-recipes/Adjust46MethodUtils';
+	import { calculate46MethodSteps, getRatio40WaterInGrams, getRatio60WaterInGrams, PourRatio40Config, PourRatio60Config } from '$lib/coffee-recipes/Adjust46MethodUtils';
 	import Display46Method from './Display46Method.svelte';
 	
 
@@ -95,9 +95,11 @@
         if(coffeeRecipeRunes.coffeeRecipe.is46Method) {
             let stepsDurationInSeconds = getStepsDurationInSeconds(getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).steps);
             if(coffeeRecipeRunes.stepsConfig.length === 4) {
-                stepsDurationInSeconds = [45, 45, 60, 60]
+                // stepsDurationInSeconds = [45, 45, 60, 60]
+                stepsDurationInSeconds = PourRatio40Config.STANDARD.durationInSeconds.concat(PourRatio60Config.STRONGER.durationInSeconds);
             } else if (coffeeRecipeRunes.stepsConfig.length === 3) {
-                stepsDurationInSeconds = [45, 45, 120]
+                // stepsDurationInSeconds = [45, 45, 120]
+                stepsDurationInSeconds = PourRatio40Config.STANDARD.durationInSeconds.concat(PourRatio60Config.LIGHTER.durationInSeconds);
             }
             coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, stepsDurationInSeconds);
         } else {

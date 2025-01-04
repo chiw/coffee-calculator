@@ -4,14 +4,14 @@ const stages: string[] = [
     PourOverStage.FIRST_POUR, PourOverStage.SECOND_POUR, PourOverStage.THIRD_POUR, PourOverStage.FOURTH_POUR, PourOverStage.FIFTH_POUR
 ];
 
-const PourRatio40Config = {
+export const PourRatio40Config = {
     "STANDARD" : { "waterPercentage": [20, 20], "durationInSeconds" : [45, 45] },
     "SWEETER"  : { "waterPercentage": [16.6667, 23.3333], "durationInSeconds" : [45, 45] },
     "BRIGHTER" : { "waterPercentage": [23.3333, 16.6667], "durationInSeconds" : [45, 45] },
     "DEFAULT"  : { "waterPercentage": [20, 20], "durationInSeconds" : [45, 45] }
 }
 
-const PourRatio60Config = {
+export const PourRatio60Config = {
     "LIGHTER" : { "waterPercentage": [60], "durationInSeconds" : [120] },
     "STRONGER" : { "waterPercentage": [30, 30], "durationInSeconds" : [60, 60] },
     "EVEN_STRONGER" : { "waterPercentage": [20, 20, 20], "durationInSeconds" : [45, 30, 45] },
