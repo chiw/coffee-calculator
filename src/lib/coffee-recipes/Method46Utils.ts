@@ -60,7 +60,7 @@ export const getRatio60WaterInGrams = (pourRatios60: string, waterInGrams: numbe
     return getPourRatio60WaterPercentages(pourRatios60).map(waterPercentage => (waterPercentage * waterInGrams) / 100);
 }
 
-export const calculate46MethodSteps = (pourRatios40: string, pourRatios60: string): StepConfig[] => {
+export const calculateMethod46Steps = (pourRatios40: string, pourRatios60: string): StepConfig[] => {
  
     let stepConfigs : StepConfig[] = [];
 
@@ -75,7 +75,7 @@ export const calculate46MethodSteps = (pourRatios40: string, pourRatios60: strin
         pourRatios40WaterPercentages = PourRatio40Config.BRIGHTER.waterPercentage;
     }
 
-    console.log('calculate46MethodSteps pourRation40', pourRatios40, 'pourRatios40WaterPercentages', pourRatios40WaterPercentages);
+    console.log('calculateMethod46Steps pourRation40', pourRatios40, 'pourRatios40WaterPercentages', pourRatios40WaterPercentages);
 
     let pourRatios60WaterPercentages: number[] = PourRatio60Config.DEFAULT.waterPercentage;
     let pourRatios60StepsDurationInSeconds: number[] = PourRatio60Config.DEFAULT.durationInSeconds;
@@ -90,7 +90,7 @@ export const calculate46MethodSteps = (pourRatios40: string, pourRatios60: strin
         pourRatios60WaterPercentages = PourRatio60Config.EVEN_STRONGER.waterPercentage;
         pourRatios60StepsDurationInSeconds = PourRatio60Config.EVEN_STRONGER.durationInSeconds;
     }
-    console.log('calculate46MethodSteps pourRatios60', pourRatios60, 'pourRatios60WaterPercentages', pourRatios60WaterPercentages);
+    console.log('calculateMethod46Steps pourRatios60', pourRatios60, 'pourRatios60WaterPercentages', pourRatios60WaterPercentages);
 
     let waterTemp = 93;
     let stepsWaterPercentages = pourRatios40WaterPercentages.concat(pourRatios60WaterPercentages);
@@ -105,7 +105,7 @@ export const calculate46MethodSteps = (pourRatios40: string, pourRatios60: strin
         });
     });
 
-    console.log('calculate46MethodSteps stepConfigs', stepConfigs);
+    console.log('calculateMethod46Steps stepConfigs', stepConfigs);
 
     return stepConfigs;
 }

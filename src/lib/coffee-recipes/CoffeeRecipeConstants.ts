@@ -267,6 +267,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
             return <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
                 isImmersionDripperRecipe: false,
+                showTimeframeEndTime: true,
                 coffeeParameters: {
                     beanInGrams: 15,
                     coffeeToWaterRatio: -1,
@@ -352,6 +353,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
             return <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
                 isImmersionDripperRecipe: false,
+                showTimeframeEndTime: true,
                 coffeeParameters: {
                     beanInGrams: 20,
                     coffeeToWaterRatio: -1,
@@ -419,6 +421,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
             return <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
                 isImmersionDripperRecipe: false,
+                showTimeframeEndTime: true,
                 is46Method: true,
                 coffeeParameters: {
                     beanInGrams: 20,
