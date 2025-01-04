@@ -25,9 +25,9 @@
 	import { caculateCoffeeParameters } from '$lib/coffee-recipes/CoffeeParametersUtils';
 	import { displayNumber } from '$lib/utils/NumberDisplayUtils';
 	import SimpleModal from '../modal/SimpleModal.svelte';
-	import Config46Method from './Config46Method.svelte';
-	import { calculate46MethodSteps, getRatio40WaterInGrams, getRatio60WaterInGrams, PourRatio40Config, PourRatio60Config } from '$lib/coffee-recipes/Adjust46MethodUtils';
-	import Display46Method from './Display46Method.svelte';
+	import ConfigMethod46 from './ConfigMethod46.svelte';
+	import { calculateMethod46Steps, getRatio40WaterInGrams, getRatio60WaterInGrams, PourRatio40Config, PourRatio60Config } from '$lib/coffee-recipes/Method46Utils';
+	import Display46Method from './DisplayMethod46.svelte';
 	
 
     interface StepsWithTimerDisplayProps {
@@ -64,7 +64,7 @@
 
     $effect(() => {
         if(coffeeRecipeRunes.coffeeRecipe.is46Method) {
-            coffeeRecipeRunes.stepsConfig = calculate46MethodSteps(pourRatios40, pourRatios60);
+            coffeeRecipeRunes.stepsConfig = calculateMethod46Steps(pourRatios40, pourRatios60);
         }
     });
 
@@ -198,13 +198,13 @@
         {#if coffeeRecipeSteps.isImmersionDripperRecipe}
             <SwitchStateDisplay 
                 switchState={step.switchState} isImmersionDripperRecipe={coffeeRecipeSteps.isImmersionDripperRecipe} 
-                highlightState={highlightStep} durationInSeconds={step.durationInSeconds}/>
+                highlightState={highlightStep} showTimeframeEndTime={coffeeRecipeSteps.showTimeframeEndTime} durationInSeconds={step.durationInSeconds}/>
         {:else}
             <TimeframeDurationDisplay durationInSeconds={step.durationInSeconds} pouringStage={step.stage} />
         {/if}
         
         {#if step.timeFrame && shouldDisplayTimeframe(step)}
-            <StepTimeFrameDisplay timeFrame={step.timeFrame} highlightStep={highlightStep}/>
+            <StepTimeFrameDisplay timeFrame={step.timeFrame} showTimeframeEndTime={coffeeRecipeSteps.showTimeframeEndTime} highlightStep={highlightStep}/>
         {/if}
     </div>
 
@@ -278,7 +278,7 @@
         </div>
 	{/snippet}
 
-    <Config46Method bind:pourRatios40={pourRatios40} bind:pourRatios60={pourRatios60} />
+    <ConfigMethod46 bind:pourRatios40={pourRatios40} bind:pourRatios60={pourRatios60} />
 
     <br/>
 

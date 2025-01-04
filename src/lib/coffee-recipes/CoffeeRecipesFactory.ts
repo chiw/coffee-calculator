@@ -59,6 +59,11 @@ export const createCoffeeRecipeSteps = (recipeId: CoffeeRecipeId, coffeeParamete
 
     console.log('createCoffeeRecipeSteps recipeDefaultConfig:', recipeDefaultConfig, 'stepsDurationInSeconds:', stepsDurationInSeconds, 'pourParameters:', pourParameters);
    
+    let showTimeframeEndTime: boolean = true;
+    if(recipeDefaultConfig.showTimeframeEndTime === false) {
+        showTimeframeEndTime = false;
+    }
+
     let result: CoffeeRecipeSteps = <CoffeeRecipeSteps> {
         isTimerRecipe : recipeDefaultConfig.isTimerRecipe,
         isImmersionDripperRecipe : recipeDefaultConfig.isImmersionDripperRecipe,
@@ -66,6 +71,7 @@ export const createCoffeeRecipeSteps = (recipeId: CoffeeRecipeId, coffeeParamete
 
         steps: stepsWithTimeframeAndWaterInfo,
         timerInSeconds : timerInSeconds,
+        showTimeframeEndTime: showTimeframeEndTime
     }
 
     console.log('createCoffeeRecipeSteps recipeDefaultConfig:', recipeDefaultConfig, 'stepsDurationInSeconds:', stepsDurationInSeconds, 'pourParameters:', pourParameters, 'result:', result);

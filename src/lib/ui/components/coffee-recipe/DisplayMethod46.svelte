@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getRatio40WaterInGrams, getRatio60WaterInGrams } from "$lib/coffee-recipes/Adjust46MethodUtils";
+	import { getRatio40WaterInGrams, getRatio60WaterInGrams } from "$lib/coffee-recipes/Method46Utils";
 	import type { Method46Flavor, Method46Concentration } from "$lib/coffee-recipes/CoffeeRecipeTypes.d";
 	import { displayNumber } from "$lib/utils/NumberDisplayUtils";
 	import { Method46ConcentrationKey, method46FlavorKey } from "./CoffeeReceipeMessageKeys";
