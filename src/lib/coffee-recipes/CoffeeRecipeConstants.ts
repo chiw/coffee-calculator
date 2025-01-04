@@ -428,6 +428,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 steps: [
                     {
                         stage: PourOverStage.FIRST_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE,
 
                         durationInSeconds: 45,
                         pourParameters: { waterPercentage: 20, waterTemp: 93}
