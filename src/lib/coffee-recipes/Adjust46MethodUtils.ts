@@ -1,4 +1,4 @@
-import { PourOverStage, Method46Flavor, Method46Concentration, type StepConfig } from "./CoffeeRecipeTypes.d";
+import { PourOverStage, Method46Flavor, Method46Concentration, PouringTechnique, type StepConfig } from "./CoffeeRecipeTypes.d";
 
 const stages: string[] = [
     PourOverStage.FIRST_POUR, PourOverStage.SECOND_POUR, PourOverStage.THIRD_POUR, PourOverStage.FOURTH_POUR, PourOverStage.FIFTH_POUR
@@ -99,6 +99,7 @@ export const calculate46MethodSteps = (pourRatios40: string, pourRatios60: strin
     stepsWaterPercentages.forEach((percentage, index) => {
         stepConfigs.push(<StepConfig> {
             stage: stages[index],
+            pouringTechnique: PouringTechnique.CIRCLE,
             durationInSeconds: stepsDurationInSeconds[index],
             pourParameters: { waterPercentage: stepsWaterPercentages[index], waterTemp: waterTemp}
         });
