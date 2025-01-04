@@ -10,10 +10,10 @@
 <div class="mt-4"></div>
 <div class="text-sm mb-2"><b>{m.label_46_method_40()}</b></div>    
 <div>
-    <fieldset class="flex flex-wrap gap-3">
+    <fieldset class="flex flex-wrap gap-2">
     <div>
         <label class="flex cursor-pointer items-center justify-center rounded 
-            border border-gray-300 bg-white px-3 py-1 text-gray-900 
+            border border-gray-300 bg-white px-2 py-1 text-gray-900 
             hover:border-gray-900 
             has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
         >
@@ -21,13 +21,13 @@
             class="sr-only"
           />
     
-          <p class="text-sm font-bold">{m.label_46_method_40_choices_standard()}</p>
+          <p class="text-xs font-bold">{m.label_46_method_40_choices_standard()}</p>
         </label>
     </div>
 
     <div>
         <label class="flex cursor-pointer items-center justify-center rounded 
-            border border-gray-300 bg-white px-3 py-1 text-gray-900 
+            border border-gray-300 bg-white px-2 py-1 text-gray-900 
             hover:border-gray-900 
             has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
         >
@@ -35,13 +35,13 @@
             class="sr-only"
           />
     
-          <p class="text-sm font-bold">{m.label_46_method_40_choices_sweeter()}</p>
+          <p class="text-xs font-bold">{m.label_46_method_40_choices_sweeter()}</p>
         </label>
     </div>
 
     <div>
         <label class="flex cursor-pointer items-center justify-center rounded 
-            border border-gray-300 bg-white px-3 py-1 text-gray-900 
+            border border-gray-300 bg-white px-2 py-1 text-gray-900 
             hover:border-gray-900 
             has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
         >
@@ -49,7 +49,7 @@
             class="sr-only"
           />
     
-          <p class="text-sm font-bold">{m.label_46_method_40_choices_brighter()}</p>
+          <p class="text-xs font-bold">{m.label_46_method_40_choices_brighter()}</p>
         </label>
     </div>
     </fieldset>
@@ -58,10 +58,10 @@
 <div class="mt-4"></div>
 <div class="text-sm mb-2"><b>{m.label_46_method_60()}</b></div>
 <div>
-    <fieldset class="flex flex-wrap gap-3">
+    <fieldset class="flex flex-wrap gap-2">
     <div>
         <label class="flex cursor-pointer items-center justify-center rounded-md 
-            border border-gray-300 bg-white px-3 py-1 text-gray-900 
+            border border-gray-300 bg-white px-2 py-1 text-gray-900 
             hover:border-gray-900 
             has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
         >
@@ -69,13 +69,13 @@
             class="sr-only"
           />
     
-          <p class="text-sm font-bold">{m.label_46_method_60_choices_lighter()}</p>
+          <p class="text-xs font-bold">{m.label_46_method_60_choices_lighter()}</p>
         </label>
     </div>
 
     <div>
         <label class="flex cursor-pointer items-center justify-center rounded-md 
-            border border-gray-300 bg-white px-3 py-1 text-gray-900 
+            border border-gray-300 bg-white px-2 py-1 text-gray-900 
             hover:border-gray-900 
             has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
         >
@@ -83,13 +83,13 @@
             class="sr-only"
           />
     
-          <p class="text-sm font-bold">{m.label_46_method_60_choices_stronger()}</p>
+          <p class="text-xs font-bold">{m.label_46_method_60_choices_stronger()}</p>
         </label>
     </div>
 
     <div>
         <label class="flex cursor-pointer items-center justify-center rounded-md 
-            border border-gray-300 bg-white px-3 py-1 text-gray-900 
+            border border-gray-300 bg-white px-2 py-1 text-gray-900 
             hover:border-gray-900 
             has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
         >
@@ -97,7 +97,7 @@
             class="sr-only"
           />
     
-          <p class="text-sm font-bold">{m.label_46_method_60_choices_evenstronger()}</p>
+          <p class="text-xs font-bold">{m.label_46_method_60_choices_evenstronger()}</p>
         </label>
     </div>
     </fieldset>
