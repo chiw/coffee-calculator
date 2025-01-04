@@ -1,4 +1,5 @@
 import { CoffeeRecipeId, PouringTechnique, PourOverStage, SwitchState, type StepWaterInfo } from '$lib/coffee-recipes';
+import { Method46Concentration, Method46Flavor } from '$lib/coffee-recipes/CoffeeRecipeTypes.d';
 import * as m from '$lib/paraglide/messages.js';
 
 export const brandMessageKey = (brandName: string) => {
@@ -94,4 +95,20 @@ export const switchStateMessage = (switchState: SwitchState) => {
 
 export const swirlMessageKey = () => {
     return m.label_step_swirl();
+}
+
+export const method46FlavorKey = (pourRatios40: Method46Flavor) => {
+    switch(pourRatios40) {
+        case Method46Flavor.STANDARD : return m.label_46_method_40_choices_standard();
+        case Method46Flavor.SWEETER : return m.label_46_method_40_choices_sweeter();
+        case Method46Flavor.BRIGHTER: return m.label_46_method_40_choices_brighter();
+    }
+}
+
+export const Method46ConcentrationKey = (pourRatios60: Method46Concentration) => {
+    switch(pourRatios60) {
+        case Method46Concentration.LIGHTER: return m.label_46_method_60_choices_lighter();
+        case Method46Concentration.STRONGER: return m.label_46_method_60_choices_stronger();
+        case Method46Concentration.EVEN_STRONGER: return m.label_46_method_60_choices_evenstronger();
+    }
 }

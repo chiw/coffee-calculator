@@ -18,13 +18,16 @@
     import StopwatchDisplay from '../stopwatch/StopwatchDisplay.svelte';
 	import { shouldDisplayTimeframe } from '$lib/utils/TimeframeDisplayUtils';
 	import TimeframeDurationDisplay from './TimeframeDurationDisplay.svelte';
-	import type { CoffeeParametersConfig, CoffeeRecipeSteps, StepConfig, Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes';
+	import type { CoffeeParametersConfig, CoffeeRecipeSteps, StepConfig, Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes.d';
+    import { Method46Flavor, Method46Concentration } from '$lib/coffee-recipes/CoffeeRecipeTypes.d';
 	import { getCoffeeRecipeDefaultConfig } from '$lib/coffee-recipes/CoffeeRecipeConstants';
 	import { getStepsDurationInSeconds, updateStepDurationInSeconds, updateSteps } from '$lib/coffee-recipes/CoffeeRecipesFactory';
 	import { caculateCoffeeParameters } from '$lib/coffee-recipes/CoffeeParametersUtils';
 	import { displayNumber } from '$lib/utils/NumberDisplayUtils';
 	import SimpleModal from '../modal/SimpleModal.svelte';
 	import Config46Method from './Config46Method.svelte';
+	import { calculate46MethodSteps, getRatio40WaterInGrams, getRatio60WaterInGrams } from '$lib/coffee-recipes/Adjust46MethodUtils';
+	import Display46Method from './Display46Method.svelte';
 	
 
     interface StepsWithTimerDisplayProps {
@@ -54,63 +57,16 @@
     }
 
     let show46MethodModal = $state(false);
-    let pourRatios40 = $state('standard');
-    let pourRatios60 = $state('evenstronger');
+    let pourRatios40 = $state(Method46Flavor.STANDARD);
+    let pourRatios60 = $state(Method46Concentration.EVEN_STRONGER);
+    let pourRatios40WaterInGrams = $derived(getRatio40WaterInGrams(pourRatios40, coffeeRecipeRunes.coffeeParams.waterInGrams));
+    let pourRatios60WaterInGrams = $derived(getRatio60WaterInGrams(pourRatios60, coffeeRecipeRunes.coffeeParams.waterInGrams));
 
     $effect(() => {
         if(coffeeRecipeRunes.coffeeRecipe.is46Method) {
             coffeeRecipeRunes.stepsConfig = calculate46MethodSteps(pourRatios40, pourRatios60);
         }
     });
-
-    const calculate46MethodSteps = (pourRatios40: string, pourRatios60: string): StepConfig[] => {
-        let stepConfigs : StepConfig[] = [];
-
-        let stages: string[] = ["FIRST_POUR", "SECOND_POUR", "THIRD_POUR", "FOURTH_POUR", "FIFTH_POUR"];
-        
-        let pourRatios40WaterPercentages: number[] = [20, 20];
-        let pourRatios40StepsDurationInSeconds: number[] = [45, 45];
-
-        if(pourRatios40 == 'standard') {
-            pourRatios40WaterPercentages = [20, 20];
-        } else if (pourRatios40 == 'sweeter') {
-            pourRatios40WaterPercentages = [16.6667, 23.3333];
-        } else if (pourRatios40 == 'brighter') {
-            pourRatios40WaterPercentages = [23.3333, 16.6667];
-        }
-        console.log('calculate46MethodSteps pourRation40', pourRatios40, 'pourRatios40WaterPercentages', pourRatios40WaterPercentages);
-
-        let pourRatios60WaterPercentages: number[] = [20, 20, 20];
-        let pourRatios60StepsDurationInSeconds: number[] = [45, 30, 45];
-
-        if(pourRatios60 == 'lighter') {
-            pourRatios60WaterPercentages = [60];
-            pourRatios60StepsDurationInSeconds = [120];
-        } else if (pourRatios60 == 'stronger') {
-            pourRatios60WaterPercentages = [30, 30];
-            pourRatios60StepsDurationInSeconds = [60, 60];
-        } else if (pourRatios60 == 'evenstronger') {
-            pourRatios60WaterPercentages = [20, 20, 20];
-            pourRatios60StepsDurationInSeconds = [45, 30, 45];
-        }
-        console.log('calculate46MethodSteps pourRatios60', pourRatios60, 'pourRatios60WaterPercentages', pourRatios60WaterPercentages);
-
-        let waterTemp = 93;
-        let stepsWaterPercentages = pourRatios40WaterPercentages.concat(pourRatios60WaterPercentages);
-        let stepsDurationInSeconds = pourRatios40StepsDurationInSeconds.concat(pourRatios60StepsDurationInSeconds);
-
-        stepsWaterPercentages.forEach((percentage, index) => {
-            stepConfigs.push(<StepConfig> {
-                stage: stages[index],
-                durationInSeconds: stepsDurationInSeconds[index],
-                pourParameters: { waterPercentage: stepsWaterPercentages[index], waterTemp: waterTemp}
-            });
-        });
-
-        console.log('calculate46MethodSteps stepConfigs', stepConfigs);
-
-        return stepConfigs;
-    }
 
     let inEditMode = $state(false);
 
@@ -321,5 +277,12 @@
 	{/snippet}
 
     <Config46Method bind:pourRatios40={pourRatios40} bind:pourRatios60={pourRatios60} />
+
+    <br/>
+
+    <Display46Method 
+        pourRatios40={pourRatios40} pourRatios60={pourRatios60} 
+        pourRatios40WaterInGrams={pourRatios40WaterInGrams}
+        pourRatios60WaterInGrams={pourRatios60WaterInGrams} />
     
 </SimpleModal>

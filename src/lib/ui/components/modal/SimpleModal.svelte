@@ -9,7 +9,7 @@
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
-<dialog
+<dialog class="w-4/5"
 	bind:this={dialog}
 	onclose={() => (showModal = false)}
 	onclick={(e) => { if (e.target === dialog) dialog.close(); }}
@@ -21,7 +21,7 @@
 		{@render header?.()}
 		<hr />
 		{@render children?.()}
-		<hr />
+		<!-- <hr /> -->
 		<!-- svelte-ignore a11y_autofocus -->
 		
 	</div>
