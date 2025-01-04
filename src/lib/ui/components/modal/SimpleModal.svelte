@@ -16,7 +16,7 @@
 >
 	<div>
         <div class="flex flex-row-reverse items-center mt-0">
-            <button autofocus onclick={() => dialog.close()}>&times</button>
+            <button autofocus class="focus:outline-none" onclick={() => dialog.close()}>&times</button>
         </div>
 		{@render header?.()}
 		<hr />
