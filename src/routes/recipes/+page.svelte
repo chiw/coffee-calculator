@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { RecipeSelectMenu , StepsWithTimerDisplay, RecipeReferencesDisplay } from '$lib/ui/components/coffee-recipe';
+    import { RecipeSelectMenu , CoffeeRecipeWithTimerDisplay, RecipeReferencesDisplay } from '$lib/ui/components/coffee-recipe';
 
     import { getCoffeeRecipeRunes } from '$lib/runes/coffee-recipe';	
     const coffeeRecipeRunes = getCoffeeRecipeRunes();
@@ -17,7 +17,7 @@
     
     {#if coffeeRecipeRunes.coffeeRecipe}    
         <div class="mt-5">
-            <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeRunes.coffeeRecipeSteps} />
+            <CoffeeRecipeWithTimerDisplay coffeeRecipeSteps={coffeeRecipeRunes.coffeeRecipeSteps} />
         </div>
         
         <RecipeReferencesDisplay />

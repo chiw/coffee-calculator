@@ -30,12 +30,12 @@
 	import Display46Method from './DisplayMethod46.svelte';
 	
 
-    interface StepsWithTimerDisplayProps {
+    interface CoffeeRecipeWithTimerDisplayProps {
         coffeeRecipeSteps: CoffeeRecipeSteps
     }
-    let { coffeeRecipeSteps } : StepsWithTimerDisplayProps = $props();
+    let { coffeeRecipeSteps } : CoffeeRecipeWithTimerDisplayProps = $props();
 
-    console.log('StepsWithTimerDisplay coffeeRecipeSteps', coffeeRecipeSteps);
+    console.log('CoffeeRecipeWithTimerDisplayProps coffeeRecipeSteps', coffeeRecipeSteps);
 
     const stopwatch: StopWatchRunes = getStopWatchRunes();
 
