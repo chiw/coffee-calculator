@@ -5,7 +5,7 @@
 
     import { displayNumber } from '$lib/utils/NumberDisplayUtils';
 	
-    let { coffeeParameters, editEnabled, handleBtnClick, handleInputChange } = $props();
+    let { coffeeParameters, editEnabled, beanInGramsOffset=0.1, handleBtnClick, handleInputChange } = $props();
 </script>
 
 <div class="mt-3">
@@ -17,7 +17,7 @@
                     <!---<button class="w-7 h-7 rounded-full border border-slate-400 text-black hover:bg-black hover:text-white font-bold" onclick={() => coffeeRecipeRunes.beanInGrams-=1}>&minus;</button>-->
                     <iconify-icon icon="mdi-light:minus-circle"
                         class="text-[30px] hover:text-slate-600"
-                        onclick={() => handleBtnClick(-1)}>
+                        onclick={() => handleBtnClick(-beanInGramsOffset)}>
                     </iconify-icon>
                     <!-- <input class="ml-2 mr-1 border border-slate-200 text-center text-xl font-bold italic max-w-16" bind:value={coffeeRecipeRunes.coffeeParams.beanInGrams} />  -->
                     <input type="number" class="ml-2 mr-1 border border-slate-200 text-center text-xl font-bold italic max-w-16 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" 
@@ -27,7 +27,7 @@
                     <!--<button class="w-7 h-7 rounded-full border border-slate-400 text-black hover:bg-black hover:text-white font-bold" onclick={() => coffeeRecipeRunes.beanInGrams+=1}>&plus;</button>-->
                     <iconify-icon icon="mdi-light:plus-circle"
                         class="text-[30px] hover:text-slate-600"
-                        onclick={() => handleBtnClick(1)}>
+                        onclick={() => handleBtnClick(beanInGramsOffset)}>
                     </iconify-icon>
                 {:else}
                     <input class="ml-2 mr-1 border border-slate-200 text-center text-xl font-bold italic max-w-16 disabled:opacity-100 disabled:bg-transparent" 
