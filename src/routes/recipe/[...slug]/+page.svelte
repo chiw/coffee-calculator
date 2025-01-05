@@ -5,7 +5,7 @@
 
     console.log('data', data);
 
-    import { StepsWithTimerDisplay, RecipeReferencesDisplay, RecipeSelectMenu, LanguageSwitcher } from '$lib/ui/components/coffee-recipe';
+    import { CoffeeRecipeWithTimerDisplay, RecipeReferencesDisplay, RecipeSelectMenu, LanguageSwitcher } from '$lib/ui/components/coffee-recipe';
 
     import { getCoffeeRecipeRunes } from '$lib/runes/coffee-recipe';	
     
@@ -31,7 +31,7 @@
     
     {#if coffeeRecipeRunes.coffeeRecipe}    
         <div class="mt-0">
-            <StepsWithTimerDisplay coffeeRecipeSteps={coffeeRecipeRunes.coffeeRecipeSteps} />
+            <CoffeeRecipeWithTimerDisplay coffeeRecipeSteps={coffeeRecipeRunes.coffeeRecipeSteps} />
         </div>
         
         <RecipeReferencesDisplay />
