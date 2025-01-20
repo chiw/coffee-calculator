@@ -35,6 +35,18 @@
     "label_46_method_60_choices_stronger" : "Stronger",
     "label_46_method_60_choices_evenstronger" : "Even Stronger",
 
+    "label_twoStepsRatios_title" : "40% (Flavor)",
+
+    "label_twoStepsRatios_sweeter" : "Sweeter",
+    "label_twoStepsRatios_standard" : "Standard",
+    "label_twoStepsRatios_brighter" : "Brighter",
+
+    "label_pourDivisions_title" : "60% (Concentration)",
+
+    "label_pourDivisions_lighter" : "Lighter",
+    "label_pourDivisions_stronger" : "Stronger",
+    "label_pourDivisions_evenStronger" : "Even Stronger",
+
     "label_stages_blooming" : "Blooming stage",
     "label_stages_pouring" : "Pouring stage",
     "label_stages_first_pour" : "1st pour",
@@ -66,6 +78,7 @@
     "label_dripper_v60" : "V60",
     "label_dripper_unknown" : "Unknown dripper",
 
+    "label_hario_switch_tetsukasuyanewhybrid" : "Hario Switch New Hybrid (Tetsu Kasuya)",
     "label_hario_switch_tetsukasuya" : "Hario Switch (Tetsu Kasuya)",
     "label_hario_switch_emifukahori" : "Hario Switch (Emi Fukahori)",
     "label_hario_switch_olekristianboen": "Hario Switch (Ole Kristian Bøen)",
@@ -75,6 +88,7 @@
     "label_hario_v60_mattwinton" : "Hario V60 (Matt Winton)",    
     "label_unknown_recipe" : "Unknown Recipe",
 
+    "label_nav_item_hario_switch_tetsukasuyanewhybrid" : "New Hybrid (Tetsu Kasuya)",
     "label_nav_item_hario_switch_tetsukasuya" : "Tetsu Kasuya",
     "label_nav_item_hario_switch_emifukahori" : "Emi Fukahori",
     "label_nav_item_hario_switch_olekristianboen": "Ole Kristian Bøen",

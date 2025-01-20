@@ -21,6 +21,7 @@ export const dripperMessageKey = (dripperName: string) => {
 
 export const coffeeRecipeIdSelectMessageKey = (coffeeRecipeId: CoffeeRecipeId) => {
     switch(coffeeRecipeId) {
+        case CoffeeRecipeId.hario_switch_tetsukasuyanewhybrid : return m.label_hario_switch_tetsukasuyanewhybrid;
         case CoffeeRecipeId.hario_switch_tetsukasuya : return m.label_hario_switch_tetsukasuya;
         case CoffeeRecipeId.hario_switch_emifukahori : return m.label_hario_switch_emifukahori;
         case CoffeeRecipeId.hario_switch_olekristianboen: return m.label_hario_switch_olekristianboen;
@@ -35,6 +36,7 @@ export const coffeeRecipeIdSelectMessageKey = (coffeeRecipeId: CoffeeRecipeId) =
 
 export const coffeeRecipeIdSelectNavItemMessageKey = (coffeeRecipeId: CoffeeRecipeId) => {
     switch(coffeeRecipeId) {
+        case CoffeeRecipeId.hario_switch_tetsukasuyanewhybrid : return m.label_nav_item_hario_switch_tetsukasuyanewhybrid;
         case CoffeeRecipeId.hario_switch_tetsukasuya : return m.label_nav_item_hario_switch_tetsukasuya;
         case CoffeeRecipeId.hario_switch_emifukahori : return m.label_nav_item_hario_switch_emifukahori;
         case CoffeeRecipeId.hario_switch_olekristianboen: return m.label_nav_item_hario_switch_olekristianboen;
@@ -111,4 +113,42 @@ export const Method46ConcentrationKey = (pourRatios60: Method46Concentration) =>
         case Method46Concentration.STRONGER: return m.label_46_method_60_choices_stronger();
         case Method46Concentration.EVEN_STRONGER: return m.label_46_method_60_choices_evenstronger();
     }
+}
+
+export const getStepAdjustmentTitleMessageKey = (stepAdjustment: string) => {
+    switch(stepAdjustment) {
+        case 'twoStepsRatios' : return m.label_twoStepsRatios_title();
+        case 'pourDivisions' : return m.label_pourDivisions_title();
+    }
+}
+
+export const getStepAdjustmentOptionMessageKey = (stepAdjustment: string, option: string) => {
+    // let messageKey = "m." + "label_" + stepAdjustment + "_" + option;
+    // // console.log('getStepAdjustmentOptionMessageKey', messageKey);
+    // return eval(messageKey)();
+
+    if(stepAdjustment === 'twoStepsRatios' && option === 'sweeter') {
+        return m.label_twoStepsRatios_sweeter();
+    }
+
+    if(stepAdjustment === 'twoStepsRatios' && option === 'standard') {
+        return m.label_twoStepsRatios_standard();
+    }
+
+    if(stepAdjustment === 'twoStepsRatios' && option === 'brighter') {
+        return m.label_twoStepsRatios_brighter();
+    }
+
+    if(stepAdjustment === 'pourDivisions' && option === 'lighter') {
+        return m.label_pourDivisions_lighter();
+    }
+
+    if(stepAdjustment === 'pourDivisions' && option === 'stronger') {
+        return m.label_pourDivisions_stronger();
+    }
+
+    if(stepAdjustment === 'pourDivisions' && option === 'evenStronger') {
+        return m.label_pourDivisions_evenStronger();
+    }
+
 }

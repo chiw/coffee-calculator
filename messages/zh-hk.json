@@ -35,6 +35,16 @@
     "label_46_method_60_choices_stronger" : "較強",
     "label_46_method_60_choices_evenstronger" : "強",
 
+    "label_twoStepsRatios_title" : "40% (口味)",
+    "label_twoStepsRatios_sweeter" : "甜",
+    "label_twoStepsRatios_standard" : "基本",
+    "label_twoStepsRatios_brighter" : "明亮",
+
+    "label_pourDivisions_title" : "60% (強度)",
+    "label_pourDivisions_lighter" : "輕",
+    "label_pourDivisions_stronger" : "較強",
+    "label_pourDivisions_evenStronger" : "強",
+
     "label_stages_blooming" : "悶蒸階段",
     "label_stages_pouring" : "注水階段",
     "label_stages_first_pour" : "第一段注水",
@@ -46,7 +56,7 @@
     "label_stages_final" : "",
     "label_stages_unknown" : "",
 
-    "label_pouring_technique_center" : "<b>中心注水</b>",
+    "label_pouring_technique_center" : "<b>中心點注水</b>",
     "label_pouring_technique_circular" : "<b>繞圈注水</b>",
 
     "label_step_msg_water_volume" : "<b>+{waterInGrams}g</b> 水",
@@ -65,6 +75,7 @@
     "label_dripper_v60" : "V60",
     "label_dripper_unknown" : "Unknown dripper",
 
+    "label_hario_switch_tetsukasuyanewhybrid" : "Hario Switch New Hybrid (粕谷哲)",
     "label_hario_switch_tetsukasuya" : "Hario Switch (粕谷哲)",
     "label_hario_switch_emifukahori" : "Hario Switch (Emi Fukahori)",
     "label_hario_switch_olekristianboen": "Hario Switch (Ole Kristian Bøen)",
@@ -74,6 +85,7 @@
     "label_hario_v60_mattwinton" : "Hario V60 (Matt Winton)",    
     "label_unknown_recipe" : "Unknown Recipe",
 
+    "label_nav_item_hario_switch_tetsukasuyanewhybrid" : "New Hybrid (粕谷哲)",
     "label_nav_item_hario_switch_tetsukasuya" : "粕谷哲",
     "label_nav_item_hario_switch_emifukahori" : "Emi Fukahori",
     "label_nav_item_hario_switch_olekristianboen": "Ole Kristian Bøen",

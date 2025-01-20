@@ -90,7 +90,8 @@ export type StepConfig = {
     stepWaterInfo?: StepWaterInfo,
 
     durationInSeconds: number,
-    timeFrame?: Timeframe
+    timeFrame?: Timeframe,
+    stepAdjustment?: string
 }
 
 export type TimeframeDisplayConfig = {
@@ -99,11 +100,61 @@ export type TimeframeDisplayConfig = {
     showStartTimeOnly?: boolean
 }
 
+export type TwoStepsRatioOptionConfig = {
+    name: string,
+    default?: boolean,
+    useDefault?: boolean,
+    waterPercentageRatios: number[]
+}
+
+export type TwoStepsRatiosConfig = {
+    minPercentage: number,
+    maxPercentage: number,
+    defaultSteps: StepConfig[],
+    selectMode: string,
+    options: TwoStepsRatioOptionConfig[],
+}
+
+export type PourDivisionsOptionConfig = {
+    name: string,
+    default? : boolean,
+    useDefault? : boolean,
+    steps?: StepConfig[]
+}
+
+export type PourDivisionsConfig = {
+    maxSteps: number,
+    totalPercentages: number,
+    stepsStages: PourOverStage[],
+    selectMode: string,
+    defaultSteps: StepConfig[],
+    options: PourDivisionsOptionConfig[]
+}
+
+export type StepAdjustmentsConfig = {
+    order: string[],
+    twoStepsRatios?: TwoStepsRatiosConfig,
+    pourDivisions?: PourDivisionsConfig
+}
+
+export type StepAdjustmentAvailableOptions = {
+    stepAdjustment: string,
+    availableOptions: string[]
+}
+
+export type StepAdjustmentSelectedOptionConfig = {
+    stepAdjustment: string,
+    selectedOption: string
+}
+
 export type CoffeeRecipeConfig = {
     isTimerRecipe: boolean,
     isImmersionDripperRecipe: boolean,
     is46Method?: boolean,
     coffeeParameters: CoffeeParametersConfig,
+    enableStepsAdjustments?: boolean,
+    stepAdjustmentSelectedOptions? : StepAdjustmentSelectedOptionConfig[],
+    stepAdjustments? : StepAdjustmentsConfig,
     steps: StepConfig[],
     references: Reference[],
     showTimeframeEndTime?: boolean
@@ -122,33 +173,39 @@ export type TimeframeDisplay = {
 }
 
 export type StepWaterInfo = {
-    waterInGrams: string;
-    totalWaterInGrams: string;
-    showTotalWaterInGrams: boolean;
-    waterTemperature: number;
+    waterInGrams: string,
+    waterPercentage: number,
+    totalWaterInGrams: string,
+    showTotalWaterInGrams: boolean,
+    waterTemperature: number,
 }
 
 export type CoffeeRecipeSteps = {
-    steps: StepConfig[];
-    stepsDurationInSeconds: number[];
-    
-    isTimerRecipe: boolean;
-    isImmersionDripperRecipe: boolean;
-    timerInSeconds: number;
-    showTimeframeEndTime?: boolean;
+    steps: StepConfig[],
+    stepsDurationInSeconds: number[],
+    enableStepsAdjustments?: boolean,
+    stepAdjustmentSelectedOptions?: StepAdjustmentSelectedOptionConfig[],
+    StepAdjustmentAvailableOptions?: StepAdjustmentAvailableOptions[],
+    stepsAdjustments? : StepAdjustmentsConfig,
+    isTimerRecipe: boolean,
+    isImmersionDripperRecipe: boolean,
+    timerInSeconds: number,
+    showTimeframeEndTime?: boolean
 }
 
 export type Reference = {
-    description: string;
-    url: string;
+    description: string,
+    url: string,
 }
 
 export type CoffeeRecipe = {
-    recipeId: string;
-    defaultCoffeeParams: CoffeeParametersConfig;
-    defaultStepsDurationInSeconds: number[];
-    defaultSteps: StepConfig[];
-    references: Reference[];
-    is46Method?: boolean;
+    recipeId: string,
+    defaultCoffeeParams: CoffeeParametersConfig,
+    defaultStepsDurationInSeconds: number[],
+    defaultSteps: StepConfig[],
+    references: Reference[],
+    is46Method?: boolean,
+    enableStepsAdjustments?: boolean,
+    defaultStepAdjustmentSelectedOptions?: StepAdjustmentSelectedOptionConfig[]
 }
 

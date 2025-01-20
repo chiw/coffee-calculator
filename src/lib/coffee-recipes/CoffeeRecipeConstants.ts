@@ -5,6 +5,7 @@ import { getCoffeeRecipeMenu, getMenuMetaInfos, type CoffeeRecipeMenu } from "./
 import { createSearchParams, filterMetaInfosBySearchParams, getPathFromMetaInfo, isRecipeMetaInfo} from "./MetaInfoUtils";
 
 export const CoffeeRecipeId = {
+    hario_switch_tetsukasuyanewhybrid: 'hario_switch_tetsukasuyanewhybrid',
     hario_switch_tetsukasuya: 'hario_switch_tetsukasuya',
     hario_switch_emifukahori: 'hario_switch_emifukahori',
     hario_switch_olekristianboen: 'hario_switch_olekristianboen',
@@ -23,6 +24,7 @@ const dripperBrands: DripperBrand[] = [
             <DripperType> {
                 name: 'switch',
                 recipes: [
+                    <DripperRecipe> { recipeId: CoffeeRecipeId.hario_switch_tetsukasuyanewhybrid, name: 'tetsukasuyanewhybrid', createdBy: 'tetsukasuya'},
                     <DripperRecipe> { recipeId: CoffeeRecipeId.hario_switch_tetsukasuya, name: 'tetsukasuya', createdBy: 'tetsukasuya' },
                     <DripperRecipe> { recipeId: CoffeeRecipeId.hario_switch_emifukahori, name: 'emifukahori', createdBy: 'emifukahori'  },
                     <DripperRecipe> { recipeId: CoffeeRecipeId.hario_switch_olekristianboen, name: 'olekristianboen', createdBy: 'olekristianboen' },
@@ -78,6 +80,68 @@ export const searchRecipeIdByParams = (inParams: string[]) :CoffeeRecipeSearchRe
 
 export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeRecipeConfig => {
     switch(coffeeRecipId) {
+        case CoffeeRecipeId.hario_switch_tetsukasuyanewhybrid : {
+            return <CoffeeRecipeConfig>{
+                isTimerRecipe: true,
+                isImmersionDripperRecipe: true,
+                coffeeParameters: {
+                    beanInGrams: 20,
+                    coffeeToWaterRatio: -1,
+                    waterInGrams: 300
+                },
+                steps: [
+                    {
+                        switchState: SwitchState.CLOSED,
+                        stage: PourOverStage.BLOOMING,
+                        pouringTechnique: PouringTechnique.CIRCLE,
+                        showWaterTemperature: true,
+
+                        durationInSeconds: 45,
+                        pourParameters: { waterPercentage: 16.6667, waterTemp: 93}
+                    },
+                    {
+                        switchState: SwitchState.OPEN,
+                        stage: PourOverStage.FIRST_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE,
+                        showWaterTemperature: true,
+
+                        durationInSeconds: 45,
+                        pourParameters: { waterPercentage: 23.3333, waterTemp: 93}
+                    },
+                    {
+                        switchState: SwitchState.OPEN,
+                        stage: PourOverStage.SECOND_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE,
+                        showWaterTemperature: true,
+
+                        durationInSeconds: 40,
+                        pourParameters: { waterPercentage: 26.6667, waterTemp: 93}
+                    },
+                    {
+                        switchState: SwitchState.CLOSED,
+                        stage: PourOverStage.THIRD_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE,
+                        showWaterTemperature: true,
+
+                        durationInSeconds: 35,
+                        pourParameters: { waterPercentage: 33.3333, waterTemp: 70}
+                    },
+                    {
+                        switchState: SwitchState.OPEN,
+                        stage: PourOverStage.FINAL,
+
+                        durationInSeconds: 45,
+                        pourParameters: { waterPercentage: 0, waterTemp: 70}
+                    }
+                ],
+                references: [
+                    { 
+                        description : 'The Ultimate Recipe for Brewing Any Coffee Bean Deliciously Has Evolved Even Further! - Tetsu Kasuya', 
+                        url: 'https://www.youtube.com/watch?v=4FeUp_zNiiY' 
+                    }
+                ]
+            }
+        };
         case CoffeeRecipeId.hario_switch_tetsukasuya : {
             return <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
@@ -428,42 +492,143 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                     coffeeToWaterRatio: -1,
                     waterInGrams: 300
                 },
+                enableStepsAdjustments: true,
+                stepAdjustmentSelectedOptions: [
+                    { stepAdjustment: 'twoStepsRatios', selectedOption: 'standard' },
+                    { stepAdjustment: 'pourDivisions', selectedOption: 'evenStronger' }
+                ],
+                stepAdjustments: {
+                    titleMessageKey: 'stepsAdjustments',
+                    order: ['twoStepsRatios', 'pourDivisions'],
+                    twoStepsRatios: {
+                        titleMessageKey: 'stepsAdjustments_twoStepsRatios',
+                        minPercentage: 16.6667,
+                        maxPercentage: 23.3333,
+                        defaultSteps : [
+                            {
+                                stage: PourOverStage.FIRST_POUR,
+                                pouringTechnique: PouringTechnique.CIRCLE,
+        
+                                durationInSeconds: 45,
+                                pourParameters: { waterPercentage: 20, waterTemp: 93},
+                                stepAdjustment: 'twoStepsRatios'
+                            },
+                            {                        
+                                stage: PourOverStage.SECOND_POUR,
+                                pouringTechnique: PouringTechnique.CIRCLE,
+        
+                                durationInSeconds: 45,
+                                pourParameters: { waterPercentage: 20, waterTemp: 93},
+                                stepAdjustment: 'twoStepsRatios'
+                            }
+                        ],
+                        selectMode: 'OPTIONS',
+                        options: [
+                            { name: 'sweeter', default: false, waterPercentageRatios: [16.6667, 23.3333]}, 
+                            { name: 'standard', default: true, useDefault: true}, 
+                            { name: 'brighter', default: false, waterPercentageRatios: [23.3333, 16.6667]},
+                        ]
+                    },
+                    pourDivisions: {
+                        maxSteps: 3,
+                        totalPercentages: 60,
+                        stepsStages: [PourOverStage.THIRD_POUR, PourOverStage.FOURTH_POUR, PourOverStage.FIFTH_POUR],
+                        selectMode: 'OPTIONS',
+                        defaultSteps: [
+                            {   
+                                stage: PourOverStage.THIRD_POUR,
+                                pouringTechnique: PouringTechnique.CIRCLE,
+        
+                                durationInSeconds: 45,
+                                pourParameters: { waterPercentage: 20, waterTemp: 93},
+                                stepAdjustment: 'pourDivisions'
+                            },
+                            {   
+                                stage: PourOverStage.FOURTH_POUR,
+                                pouringTechnique: PouringTechnique.CIRCLE,
+        
+                                durationInSeconds: 30,
+                                pourParameters: { waterPercentage: 20, waterTemp: 93},
+                                stepAdjustment: 'pourDivisions'
+                            },
+                            {   
+                                stage: PourOverStage.FIFTH_POUR,
+                                pouringTechnique: PouringTechnique.CIRCLE,
+        
+                                durationInSeconds: 45,
+                                pourParameters: { waterPercentage: 20, waterTemp: 93},
+                                stepAdjustment: 'pourDivisions'
+                            }
+                        ],
+                        options: [
+                            { name: 'lighter', default: false, steps: [
+                                {   
+                                    stage: PourOverStage.THIRD_POUR,
+                                    pouringTechnique: PouringTechnique.CIRCLE,
+            
+                                    durationInSeconds: 120,
+                                    pourParameters: { waterPercentage: 60, waterTemp: 93},
+                                    stepAdjustment: 'pourDivisions'
+                                }
+                            ]},
+                            { name: 'stronger', default: false, steps: [
+                                {   
+                                    stage: PourOverStage.THIRD_POUR,
+                                    pouringTechnique: PouringTechnique.CIRCLE,
+            
+                                    durationInSeconds: 60,
+                                    pourParameters: { waterPercentage: 30, waterTemp: 93},
+                                    stepAdjustment: 'pourDivisions'
+                                },
+                                {   
+                                    stage: PourOverStage.FOURTH_POUR,
+                                    pouringTechnique: PouringTechnique.CIRCLE,
+            
+                                    durationInSeconds: 60,
+                                    pourParameters: { waterPercentage: 30, waterTemp: 93},
+                                    stepAdjustment: 'pourDivisions'
+                                },
+                            ]},
+                            { name: 'evenStronger', default: true, useDefault: true},
+                        ] 
+                    },
+                },
                 steps: [
-                    {
-                        stage: PourOverStage.FIRST_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE,
+                    // {
+                    //     stage: PourOverStage.FIRST_POUR,
+                    //     pouringTechnique: PouringTechnique.CIRCLE,
 
-                        durationInSeconds: 45,
-                        pourParameters: { waterPercentage: 20, waterTemp: 93}
-                    },
-                    {                        
-                        stage: PourOverStage.SECOND_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE,
+                    //     durationInSeconds: 45,
+                    //     pourParameters: { waterPercentage: 20, waterTemp: 93}
+                    // },
+                    // {                        
+                    //     stage: PourOverStage.SECOND_POUR,
+                    //     pouringTechnique: PouringTechnique.CIRCLE,
 
-                        durationInSeconds: 45,
-                        pourParameters: { waterPercentage: 20, waterTemp: 93}
-                    },
-                    {   
-                        stage: PourOverStage.THIRD_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE,
+                    //     durationInSeconds: 45,
+                    //     pourParameters: { waterPercentage: 20, waterTemp: 93}
+                    // },
+                    // {   
+                    //     stage: PourOverStage.THIRD_POUR,
+                    //     pouringTechnique: PouringTechnique.CIRCLE,
 
-                        durationInSeconds: 45,
-                        pourParameters: { waterPercentage: 20, waterTemp: 93}
-                    },
-                    {   
-                        stage: PourOverStage.FOURTH_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE,
+                    //     durationInSeconds: 45,
+                    //     pourParameters: { waterPercentage: 20, waterTemp: 93}
+                    // },
+                    // {   
+                    //     stage: PourOverStage.FOURTH_POUR,
+                    //     pouringTechnique: PouringTechnique.CIRCLE,
 
-                        durationInSeconds: 30,
-                        pourParameters: { waterPercentage: 20, waterTemp: 93}
-                    },
-                    {   
-                        stage: PourOverStage.FIFTH_POUR,
-                        pouringTechnique: PouringTechnique.CIRCLE,
+                    //     durationInSeconds: 30,
+                    //     pourParameters: { waterPercentage: 20, waterTemp: 93}
+                    // },
+                    // {   
+                    //     stage: PourOverStage.FIFTH_POUR,
+                    //     pouringTechnique: PouringTechnique.CIRCLE,
 
-                        durationInSeconds: 45,
-                        pourParameters: { waterPercentage: 20, waterTemp: 93}
-                    }
+                    //     durationInSeconds: 45,
+                    //     pourParameters: { waterPercentage: 20, waterTemp: 93}
+                    // }
                 ],
                 references: [
                     { 

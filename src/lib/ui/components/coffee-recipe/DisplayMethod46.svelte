@@ -25,7 +25,8 @@
             <td class="border border-gray-300">
                 {#if pourRatios40WaterInGrams}
                     {#each pourRatios40WaterInGrams as waterInGrams}
-                        <div class="bg-black text-white text-center rounded text-xs m-1 p-1 w-12 font-bold">{displayNumber(waterInGrams)}g</div>
+                        <!-- <div class="bg-black text-white text-center rounded text-xs m-1 p-1 w-12 font-bold">{displayNumber(waterInGrams)}g</div> -->
+                        <div class="bg-black text-white text-center rounded text-xs m-1 p-1 w-12 font-bold">{waterInGrams}g</div>
                     {/each}
                 {/if}                
             </td>
@@ -38,7 +39,8 @@
             <td class="border border-gray-300">
                 {#if pourRatios60WaterInGrams}
                     {#each pourRatios60WaterInGrams as waterInGrams}
-                    <div class="bg-black text-white text-center rounded text-xs m-1 p-1 w-12 font-bold">{displayNumber(waterInGrams)}g</div>
+                    <!-- <div class="bg-black text-white text-center rounded text-xs m-1 p-1 w-12 font-bold">{displayNumber(waterInGrams)}g</div> -->
+                    <div class="bg-black text-white text-center rounded text-xs m-1 p-1 w-12 font-bold">{waterInGrams}g</div>
                     {/each}
                 {/if}
             </td>
