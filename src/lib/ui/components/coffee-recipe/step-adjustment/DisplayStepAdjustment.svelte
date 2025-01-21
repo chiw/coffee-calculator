@@ -6,9 +6,10 @@
 	
     interface DisplayStepAdjustmentProps {
         stepAdjustmentSelectedOptions: StepAdjustmentSelectedOptionConfig[],
-        steps: StepConfig[]
+        steps: StepConfig[],
+        isMethod46: boolean
     }
-    let { stepAdjustmentSelectedOptions, steps }: DisplayStepAdjustmentProps = $props(); 
+    let { stepAdjustmentSelectedOptions, steps, isMethod46 }: DisplayStepAdjustmentProps = $props(); 
 </script>
 
 <table class="w-full border border-gray-300">
@@ -16,8 +17,8 @@
         {#each stepAdjustmentSelectedOptions as selectedOption}
             <tr>
                 <td class="border border-gray-300">
-                    <div class="text-sm font-bold ml-2">{getStepAdjustmentTitleMessageKey(selectedOption.stepAdjustment)}</div>
-                    <div class="text-sm ml-2">{getStepAdjustmentOptionMessageKey(selectedOption.stepAdjustment, selectedOption.selectedOption)}</div>
+                    <div class="text-sm font-bold ml-2">{getStepAdjustmentTitleMessageKey(selectedOption.stepAdjustment, isMethod46)}</div>
+                    <div class="text-sm ml-2">{getStepAdjustmentOptionMessageKey(selectedOption.stepAdjustment, selectedOption.selectedOption, isMethod46)}</div>
                 </td>
                 
                 <td class="border border-gray-300">

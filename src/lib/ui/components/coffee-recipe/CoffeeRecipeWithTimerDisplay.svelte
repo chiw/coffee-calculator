@@ -221,7 +221,7 @@
                     <iconify-icon icon="material-symbols-light:discover-tune-rounded"
                         class="text-[22px] hover:text-slate-600">
                     </iconify-icon>
-                    <span class="font-bold text-xs">{m.label_46_method_adjust()}</span>
+                    <span class="font-bold text-xs">{m.label_edit_stepAdjustments()}</span>
                 </button>
             {/if}
         {/if}
@@ -308,7 +308,7 @@
 
 <SimpleModal bind:showModal={showStepAdjustmentModal}>
     {#snippet header()}
-		<div class="font-bold">{m.label_46_method_adjust_title()}
+		<div class="font-bold">{m.label_edit_stepAdjustments_modal_title()}
 			<!-- <small><em>adjective</em> mod·al \ˈmō-dəl\</small> -->
         </div>
 	{/snippet}
@@ -321,7 +321,8 @@
             <ConfigStepAdjustment
                 stepAdjustmentSelectedOption={selectedOption} 
                 stepAdjustmentAvailableOptions={getStepAdjustmentAvailableOptions(selectedOption.stepAdjustment)[0]} 
-                handleSelect={handleStepAdjustmentSelectedOption} />
+                handleSelect={handleStepAdjustmentSelectedOption}
+                isMethod46={coffeeRecipeRunes.coffeeRecipe.is46Method} />
         {/if}
     {/each}
     
@@ -342,7 +343,7 @@
     
     <DisplayStepAdjustment 
         stepAdjustmentSelectedOptions={coffeeRecipeSteps.stepAdjustmentSelectedOptions}
-        steps={coffeeRecipeSteps.steps} />
+        steps={coffeeRecipeSteps.steps} isMethod46={coffeeRecipeRunes.coffeeRecipe.is46Method} />
     
     {/if}
     
