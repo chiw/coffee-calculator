@@ -1,8 +1,9 @@
 import { CoffeeRecipeId, getCoffeeRecipeDefaultConfig } from "./CoffeeRecipeConstants";
-import type { CoffeeParametersConfig, CoffeeRecipeConfig, CoffeeRecipe, CoffeeRecipeSteps, StepConfig, PourParametersConfig, Timeframe, StepWaterInfo } from "./CoffeeRecipeTypes";
+import type { CoffeeParametersConfig, CoffeeRecipeConfig, CoffeeRecipe, CoffeeRecipeSteps, StepConfig, PourParametersConfig, Timeframe, StepWaterInfo, StepAdjustmentsConfig, TwoStepsRatiosConfig, PourDivisionsConfig, StepAdjustmentSelectedOptionConfig, StepAdjustmentAvailableOptions } from "./CoffeeRecipeTypes";
 import { caculateCoffeeParameters } from "./CoffeeParametersUtils";
 import { calculateStepWaterInfos, sumOfDurations } from "./CoffeeRecipeStepsUtils";
 import { calculateStepsTimeframe } from "./StepsTimeframeUtils";
+import { createStepsFromStepAdjustments, getStepAdjustmentAvailableOptions } from "./StepAdjustmentUtils";
 
 
 export const getStepsDurationInSeconds = (stepConfigs: StepConfig[]): number[] => {
@@ -13,14 +14,23 @@ export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
 
     console.log('createCoffeeRecipe recipeId:', recipeId, 'recipeDefaultConfig:', recipeDefaultConfig);
-   
+
+    if(recipeDefaultConfig.enableStepsAdjustments) {
+        console.log('createCoffeeRecipe recipeDefaultConfig.enableStepsAdjustments', recipeDefaultConfig.enableStepsAdjustments);
+        console.log('createCoffeeRecipe recipeDefaultConfig.stepsAdjustments', recipeDefaultConfig.stepAdjustments);
+    }
+
     return <CoffeeRecipe> {
         recipeId: recipeId,
         defaultCoffeeParams: createCoffeeParams(recipeId, recipeDefaultConfig.coffeeParameters),
         defaultStepsDurationInSeconds: getStepsDurationInSeconds(recipeDefaultConfig.steps),
-        defaultSteps: recipeDefaultConfig.steps,
+        defaultSteps: recipeDefaultConfig.enableStepsAdjustments == true ? 
+            createStepsFromStepAdjustments(recipeDefaultConfig.stepAdjustments, recipeDefaultConfig.stepAdjustmentSelectedOptions) 
+            : recipeDefaultConfig.steps,
         references: recipeDefaultConfig.references,
-        is46Method: recipeDefaultConfig.is46Method
+        is46Method: recipeDefaultConfig.is46Method,
+        enableStepsAdjustments: recipeDefaultConfig.enableStepsAdjustments ? recipeDefaultConfig.enableStepsAdjustments : false,
+        defaultStepAdjustmentSelectedOptions: recipeDefaultConfig.stepAdjustmentSelectedOptions
     }
 }
 
@@ -43,7 +53,9 @@ export const createCoffeeParams = (recipeId: CoffeeRecipeId, inCoffeeParams: Cof
     return result;
 }
 
-export const createCoffeeRecipeSteps = (recipeId: CoffeeRecipeId, coffeeParametersConfig: CoffeeParametersConfig, steps: StepConfig[]) : CoffeeRecipeSteps => {
+export const createCoffeeRecipeSteps = (recipeId: CoffeeRecipeId, coffeeParametersConfig: CoffeeParametersConfig, 
+    steps: StepConfig[], stepAdjustmentSelectedOptions: StepAdjustmentSelectedOptionConfig[]) : CoffeeRecipeSteps => {
+
     console.log('createCoffeeRecipeSteps recipeId: ', recipeId, ' coffeeParametersConfig: ', coffeeParametersConfig, 'steps:', steps);
 
     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
@@ -64,11 +76,17 @@ export const createCoffeeRecipeSteps = (recipeId: CoffeeRecipeId, coffeeParamete
         showTimeframeEndTime = false;
     }
 
+    let stepAdjustmentAvailableOptions: StepAdjustmentAvailableOptions[] = recipeDefaultConfig.enableStepsAdjustments == true ? 
+        getStepAdjustmentAvailableOptions(recipeDefaultConfig.stepAdjustments) : [];
+
     let result: CoffeeRecipeSteps = <CoffeeRecipeSteps> {
         isTimerRecipe : recipeDefaultConfig.isTimerRecipe,
         isImmersionDripperRecipe : recipeDefaultConfig.isImmersionDripperRecipe,
         stepsDurationInSeconds: stepsDurationInSeconds,
-
+        enableStepsAdjustments: recipeDefaultConfig.enableStepsAdjustments ? recipeDefaultConfig.enableStepsAdjustments : false,
+        stepAdjustmentSelectedOptions: stepAdjustmentSelectedOptions ? stepAdjustmentSelectedOptions : recipeDefaultConfig.stepAdjustmentSelectedOptions,
+        stepAdjustmentAvailableOptions: stepAdjustmentAvailableOptions,
+        stepsAdjustments: recipeDefaultConfig.stepAdjustments,
         steps: stepsWithTimeframeAndWaterInfo,
         timerInSeconds : timerInSeconds,
         showTimeframeEndTime: showTimeframeEndTime

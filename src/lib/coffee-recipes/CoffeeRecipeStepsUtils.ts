@@ -13,7 +13,7 @@ export const calculateStepWaterInfos = (coffeeParameters: CoffeeParametersConfig
         let stepWaterInGrams = calculatePourWaterInGrams(coffeeParameters.waterInGrams, pourParam.waterPercentage);
         let stepTotalWaterInGrams = totalWaterInGrams === 0 ? 0 : (stepWaterInGrams + totalWaterInGrams);
 
-        let stepWaterInfo = createStepWaterInfo(stepWaterInGrams, stepTotalWaterInGrams, pourParam.waterTemp);
+        let stepWaterInfo = createStepWaterInfo(stepWaterInGrams, stepTotalWaterInGrams, pourParam.waterTemp, pourParam.waterPercentage);
         // console.log('calculateStepWaterInfos push stepWaterInfo ', stepWaterInfo);
         stepWaterInfos.push(stepWaterInfo);
         totalWaterInGrams +=  stepWaterInGrams;
@@ -22,13 +22,14 @@ export const calculateStepWaterInfos = (coffeeParameters: CoffeeParametersConfig
     return stepWaterInfos;
 }
 
-const createStepWaterInfo = (waterInGrams: number, totalWaterInGrams: number, waterTemperature: number) => {
+const createStepWaterInfo = (waterInGrams: number, totalWaterInGrams: number, waterTemperature: number, waterPercentage: number) => {
     // console.log('createStepWaterInfo ', waterInGrams, totalWaterInGrams, waterTemperature);
 
     return <StepWaterInfo> {
         waterInGrams: displayNumber(waterInGrams),
         totalWaterInGrams: displayNumber(totalWaterInGrams),
         showTotalWaterInGrams: totalWaterInGrams > 0 ? true : false,
-        waterTemperature: waterTemperature
+        waterTemperature: waterTemperature,
+        waterPercentage: waterPercentage
     };
 }

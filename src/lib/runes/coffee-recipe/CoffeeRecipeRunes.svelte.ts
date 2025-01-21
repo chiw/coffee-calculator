@@ -13,15 +13,18 @@ export function createCoffeeRecipeRunes(defaultCoffeeRecipeId: CoffeeRecipeId) {
 
     let _coffeeParams: CoffeeParametersConfig = $state(_coffeeRecipe.defaultCoffeeParams);
 
+    let _stepAdjustmentSelectedOptions: StepAdjustmentSelectedOptionConfig[] = $state(_coffeeRecipe.defaultStepAdjustmentSelectedOptions);
+
     let _stepsConfig: StepConfig[] = $state(getCoffeeRecipeDefaultConfig(defaultCoffeeRecipeId).steps);
 
     $effect(() => {
         console.log('in $effect');
         _coffeeParams = _coffeeRecipe.defaultCoffeeParams;
         _stepsConfig = _coffeeRecipe.defaultSteps;
+        _stepAdjustmentSelectedOptions = _coffeeRecipe.defaultStepAdjustmentSelectedOptions;
     });
 
-    let _coffeeRecipeSteps: CoffeeRecipeSteps = $derived(createCoffeeRecipeSteps(_recipeId, _coffeeParams, _stepsConfig));
+    let _coffeeRecipeSteps: CoffeeRecipeSteps = $derived(createCoffeeRecipeSteps(_recipeId, _coffeeParams, _stepsConfig, _stepAdjustmentSelectedOptions));
 
     $inspect(_recipeId, _coffeeRecipe, _coffeeParams, _coffeeRecipeSteps);
 
@@ -36,7 +39,10 @@ export function createCoffeeRecipeRunes(defaultCoffeeRecipeId: CoffeeRecipeId) {
         set coffeeParams(value) { _coffeeParams = value; },
         
         get stepsConfig() { return _stepsConfig; },
-        set stepsConfig(value) { _stepsConfig = value; }
+        set stepsConfig(value) { _stepsConfig = value; },
+
+        get stepAdjustmentSelectedOptions() { return _stepAdjustmentSelectedOptions; },
+        set stepAdjustmentSelectedOptions(value) { _stepAdjustmentSelectedOptions = value; }
     }
 }
 
