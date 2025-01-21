@@ -1,18 +1,24 @@
 import { getCoffeeRecipeDefaultConfig, type CoffeeRecipeId } from "./CoffeeRecipeConstants";
-import type { PourDivisionsConfig, PourParametersConfig, StepAdjustmentSelectedOptionConfig, StepConfig, StepAdjustmentsConfig, TwoStepsRatiosConfig, StepAdjustmentAvailableOptions, CoffeeRecipeConfig } from "./CoffeeRecipeTypes";
+import { type PourDivisionsConfig, type PourParametersConfig, type StepAdjustmentSelectedOptionConfig, type StepConfig, type StepAdjustmentsConfig, type TwoStepsRatiosConfig, type StepAdjustmentAvailableOptions, type CoffeeRecipeConfig, StepAdjustment } from "./CoffeeRecipeTypes.d";
+
+export const canEditStepAdjustment = (stepAdjustmensts: StepAdjustmentsConfig, adjustment: string) => {
+    if(adjustment === StepAdjustment.TWO_STEPS_RATIOS) return stepAdjustmensts.twoStepsRatios?.canEdit;
+    if(adjustment === StepAdjustment.POUR_DIVISIONS) return stepAdjustmensts.pourDivisions?.canEdit;
+    return false;
+}
 
 export const getStepAdjustmentAvailableOptions = (stepsAdjustments: StepAdjustmentsConfig): StepAdjustmentAvailableOptions[] => {
     let stepAdjustmentAvailableOptions: StepAdjustmentAvailableOptions[] = [];
 
     stepsAdjustments.order.forEach(adjustment => {
-        if(adjustment === 'twoStepsRatios') {
+        if(adjustment === StepAdjustment.TWO_STEPS_RATIOS) {
             stepAdjustmentAvailableOptions.push(<StepAdjustmentAvailableOptions>{
                 stepAdjustment: adjustment,
                 availableOptions: stepsAdjustments.twoStepsRatios?.options.map(option => option.name)
             });
         }
 
-        if(adjustment === 'pourDivisions') {
+        if(adjustment === StepAdjustment.POUR_DIVISIONS) {
             stepAdjustmentAvailableOptions.push(<StepAdjustmentAvailableOptions>{
                 stepAdjustment: adjustment,
                 availableOptions: stepsAdjustments.pourDivisions?.options.map(option => option.name)
@@ -62,11 +68,11 @@ export const createStepsFromStepAdjustments = (stepsAdjustments: StepAdjustments
     stepsAdjustments.order.forEach(adjustment => {
         let options = stepAdjustmentSelectedOptions.filter(option => option.stepAdjustment === adjustment);
 
-        if(adjustment === 'twoStepsRatios') {
+        if(adjustment === StepAdjustment.TWO_STEPS_RATIOS) {
             steps = steps.concat(createStepsFromTwoStepsRatios(stepsAdjustments.twoStepsRatios, options ? options[0].selectedOption : null));
         }
 
-        if(adjustment === 'pourDivisions') {
+        if(adjustment === StepAdjustment.POUR_DIVISIONS) {
             steps = steps.concat(createStepsFromPourDivisions(stepsAdjustments.pourDivisions, options ? options[0].selectedOption : null));
         }
     });

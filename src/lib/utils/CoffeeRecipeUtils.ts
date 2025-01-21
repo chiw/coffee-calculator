@@ -21,6 +21,10 @@ export const isFinalStage = (stage: PourOverStage): boolean => {
     return PourOverStage.FINAL === stage;
 }
 
+export const isWaterFlowStage = (stage: PourOverStage): boolean => {
+    return PourOverStage.WATER_FLOW === stage;
+}
+
 export const isPauseStage = (stage: PourOverStage): boolean => {
     return PourOverStage.PAUSE === stage;
 }

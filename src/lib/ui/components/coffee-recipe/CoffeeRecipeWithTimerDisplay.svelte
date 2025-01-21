@@ -19,7 +19,7 @@
 	import { shouldDisplayTimeframe } from '$lib/utils/TimeframeDisplayUtils';
 	import TimeframeDurationDisplay from './TimeframeDurationDisplay.svelte';
 	import type { CoffeeParametersConfig, CoffeeRecipeSteps, StepAdjustmentAvailableOptions, StepAdjustmentSelectedOptionConfig, StepConfig, Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes.d';
-    import { Method46Flavor, Method46Concentration } from '$lib/coffee-recipes/CoffeeRecipeTypes.d';
+    import { Method46Flavor, Method46Concentration, StepAdjustment } from '$lib/coffee-recipes/CoffeeRecipeTypes.d';
 	import { getCoffeeRecipeDefaultConfig } from '$lib/coffee-recipes/CoffeeRecipeConstants';
 	import { getStepsDurationInSeconds, updateStepDurationInSeconds, updateSteps } from '$lib/coffee-recipes/CoffeeRecipesFactory';
 	import { caculateCoffeeParameters } from '$lib/coffee-recipes/CoffeeParametersUtils';
@@ -29,7 +29,7 @@
 	import { calculateMethod46Steps, getRatio40WaterInGrams, getRatio60WaterInGrams, PourRatio40Config, PourRatio60Config } from '$lib/coffee-recipes/Method46Utils';
 	import Display46Method from './DisplayMethod46.svelte';
 	import ConfigStepAdjustment from './step-adjustment/ConfigStepAdjustment.svelte';
-	import { createStepsFromStepAdjustments, getNewStepAdjustmentSelectedOptions, hasChangedStepAdjustmentSelectedOption, recreateSteps } from '$lib/coffee-recipes/StepAdjustmentUtils';
+	import { canEditStepAdjustment, createStepsFromStepAdjustments, getNewStepAdjustmentSelectedOptions, hasChangedStepAdjustmentSelectedOption, recreateSteps } from '$lib/coffee-recipes/StepAdjustmentUtils';
 	import DisplayStepAdjustment from './step-adjustment/DisplayStepAdjustment.svelte';
 	
 
@@ -317,10 +317,12 @@
 
     {#if coffeeRecipeSteps.enableStepsAdjustments}
     {#each coffeeRecipeSteps.stepAdjustmentSelectedOptions as selectedOption}
-        <ConfigStepAdjustment
-            stepAdjustmentSelectedOption={selectedOption} 
-            stepAdjustmentAvailableOptions={getStepAdjustmentAvailableOptions(selectedOption.stepAdjustment)[0]} 
-            handleSelect={handleStepAdjustmentSelectedOption} />
+        {#if canEditStepAdjustment(coffeeRecipeSteps.stepsAdjustments, selectedOption.stepAdjustment) }
+            <ConfigStepAdjustment
+                stepAdjustmentSelectedOption={selectedOption} 
+                stepAdjustmentAvailableOptions={getStepAdjustmentAvailableOptions(selectedOption.stepAdjustment)[0]} 
+                handleSelect={handleStepAdjustmentSelectedOption} />
+        {/if}
     {/each}
     
 

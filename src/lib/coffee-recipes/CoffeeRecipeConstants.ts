@@ -1,5 +1,5 @@
 import type { CoffeeRecipeConfig, DripperBrand, DripperRecipe, DripperType, MetaInfos } from "./CoffeeRecipeTypes.d"; 
-import {  PouringTechnique, PourOverStage, SwitchState } from "./CoffeeRecipeTypes.d";
+import {  PouringTechnique, PourOverStage, StepAdjustment, SwitchState } from "./CoffeeRecipeTypes.d";
 import { getCoffeeRecipeMenu, getMenuMetaInfos, type CoffeeRecipeMenu } from "./menu/CoffeeRecipeMenuUtils";
 
 import { createSearchParams, filterMetaInfosBySearchParams, getPathFromMetaInfo, isRecipeMetaInfo} from "./MetaInfoUtils";
@@ -10,6 +10,7 @@ export const CoffeeRecipeId = {
     hario_switch_emifukahori: 'hario_switch_emifukahori',
     hario_switch_olekristianboen: 'hario_switch_olekristianboen',
     hario_switch_coffeechronicler: 'hario_switch_coffeechronicler',
+    hario_switch_cafetaster : 'hario_switch_cafetaster',
     hario_v60_46method: 'hario_v60_46method',
     hario_v60_jameshoffmann: 'hario_v60_jameshoffmann',
     hario_v60_mattwinton: 'hario_v60_mattwinton'
@@ -28,7 +29,8 @@ const dripperBrands: DripperBrand[] = [
                     <DripperRecipe> { recipeId: CoffeeRecipeId.hario_switch_tetsukasuya, name: 'tetsukasuya', createdBy: 'tetsukasuya' },
                     <DripperRecipe> { recipeId: CoffeeRecipeId.hario_switch_emifukahori, name: 'emifukahori', createdBy: 'emifukahori'  },
                     <DripperRecipe> { recipeId: CoffeeRecipeId.hario_switch_olekristianboen, name: 'olekristianboen', createdBy: 'olekristianboen' },
-                    <DripperRecipe> { recipeId: CoffeeRecipeId.hario_switch_coffeechronicler, name: 'coffeechronicler', createdBy: 'coffeechronicler' }
+                    <DripperRecipe> { recipeId: CoffeeRecipeId.hario_switch_coffeechronicler, name: 'coffeechronicler', createdBy: 'coffeechronicler' },
+                    <DripperRecipe> { recipeId: CoffeeRecipeId.hario_switch_cafetaster, name: 'cafetaster', createdBy: 'cafetaster' }
                 ]
             },
             <DripperType> {
@@ -327,6 +329,71 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 ]
             }
         };
+        case CoffeeRecipeId.hario_switch_cafetaster : {
+            return <CoffeeRecipeConfig>{
+                isTimerRecipe: true,
+                isImmersionDripperRecipe: true,
+                coffeeParameters: {
+                    beanInGrams: 15,
+                    coffeeToWaterRatio: -1,
+                    waterInGrams: 225
+                },
+                steps: [
+                    {
+                        switchState: SwitchState.CLOSED,
+                        stage: PourOverStage.FIRST_POUR,
+
+                        durationInSeconds: 45,
+                        pourParameters: { waterPercentage: 50.2222, waterTemp: 93}
+                    },
+                    {
+                        switchState: SwitchState.CLOSED,
+                        stage: PourOverStage.PAUSE,
+                        stir: true,
+
+                        timeFrameDisplay: {
+                            showStartTimeOnly: false,
+                            showTimeframe: true
+                        },
+
+                        durationInSeconds: 15,
+                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                    },
+                    {
+                        switchState: SwitchState.OPEN,
+                        stage: PourOverStage.WATER_FLOW,
+
+                        timeFrameDisplay: {
+                            showStartTimeOnly: false,
+                            showTimeframe: true
+                        },
+
+                        durationInSeconds: 30,
+                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                    },
+                    {
+                        switchState: SwitchState.CLOSED,
+                        stage: PourOverStage.SECOND_POUR,
+
+                        durationInSeconds: 60,
+                        pourParameters: { waterPercentage: 49.7777, waterTemp: 93}
+                    },
+                    {
+                        switchState: SwitchState.OPEN,
+                        stage: PourOverStage.FINAL,
+
+                        durationInSeconds: 30,
+                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                    }
+                ],
+                references: [
+                    { 
+                        description : 'https://www.facebook.com/reel/645724447883746', 
+                        url: 'https://www.facebook.com/reel/645724447883746' 
+                    }
+                ]
+            }
+        };
         case CoffeeRecipeId.hario_v60_jameshoffmann : {
             return <CoffeeRecipeConfig>{
                 isTimerRecipe: true,
@@ -494,14 +561,13 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 },
                 enableStepsAdjustments: true,
                 stepAdjustmentSelectedOptions: [
-                    { stepAdjustment: 'twoStepsRatios', selectedOption: 'standard' },
-                    { stepAdjustment: 'pourDivisions', selectedOption: 'evenStronger' }
+                    { stepAdjustment: StepAdjustment.TWO_STEPS_RATIOS, selectedOption: 'standard' },
+                    { stepAdjustment: StepAdjustment.POUR_DIVISIONS, selectedOption: 'evenStronger' }
                 ],
                 stepAdjustments: {
-                    titleMessageKey: 'stepsAdjustments',
-                    order: ['twoStepsRatios', 'pourDivisions'],
+                    order: [StepAdjustment.TWO_STEPS_RATIOS, StepAdjustment.POUR_DIVISIONS],
                     twoStepsRatios: {
-                        titleMessageKey: 'stepsAdjustments_twoStepsRatios',
+                        canEdit: true,
                         minPercentage: 16.6667,
                         maxPercentage: 23.3333,
                         defaultSteps : [
@@ -511,7 +577,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
         
                                 durationInSeconds: 45,
                                 pourParameters: { waterPercentage: 20, waterTemp: 93},
-                                stepAdjustment: 'twoStepsRatios'
+                                stepAdjustment: StepAdjustment.TWO_STEPS_RATIOS
                             },
                             {                        
                                 stage: PourOverStage.SECOND_POUR,
@@ -519,7 +585,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
         
                                 durationInSeconds: 45,
                                 pourParameters: { waterPercentage: 20, waterTemp: 93},
-                                stepAdjustment: 'twoStepsRatios'
+                                stepAdjustment: StepAdjustment.TWO_STEPS_RATIOS
                             }
                         ],
                         selectMode: 'OPTIONS',
@@ -530,6 +596,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         ]
                     },
                     pourDivisions: {
+                        canEdit: true,
                         maxSteps: 3,
                         totalPercentages: 60,
                         stepsStages: [PourOverStage.THIRD_POUR, PourOverStage.FOURTH_POUR, PourOverStage.FIFTH_POUR],
@@ -541,7 +608,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
         
                                 durationInSeconds: 45,
                                 pourParameters: { waterPercentage: 20, waterTemp: 93},
-                                stepAdjustment: 'pourDivisions'
+                                stepAdjustment: StepAdjustment.POUR_DIVISIONS
                             },
                             {   
                                 stage: PourOverStage.FOURTH_POUR,
@@ -549,7 +616,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
         
                                 durationInSeconds: 30,
                                 pourParameters: { waterPercentage: 20, waterTemp: 93},
-                                stepAdjustment: 'pourDivisions'
+                                stepAdjustment: StepAdjustment.POUR_DIVISIONS
                             },
                             {   
                                 stage: PourOverStage.FIFTH_POUR,
@@ -557,7 +624,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
         
                                 durationInSeconds: 45,
                                 pourParameters: { waterPercentage: 20, waterTemp: 93},
-                                stepAdjustment: 'pourDivisions'
+                                stepAdjustment: StepAdjustment.POUR_DIVISIONS
                             }
                         ],
                         options: [
@@ -568,7 +635,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
             
                                     durationInSeconds: 120,
                                     pourParameters: { waterPercentage: 60, waterTemp: 93},
-                                    stepAdjustment: 'pourDivisions'
+                                    stepAdjustment: StepAdjustment.POUR_DIVISIONS
                                 }
                             ]},
                             { name: 'stronger', default: false, steps: [
@@ -578,7 +645,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
             
                                     durationInSeconds: 60,
                                     pourParameters: { waterPercentage: 30, waterTemp: 93},
-                                    stepAdjustment: 'pourDivisions'
+                                    stepAdjustment: StepAdjustment.POUR_DIVISIONS
                                 },
                                 {   
                                     stage: PourOverStage.FOURTH_POUR,
@@ -586,7 +653,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
             
                                     durationInSeconds: 60,
                                     pourParameters: { waterPercentage: 30, waterTemp: 93},
-                                    stepAdjustment: 'pourDivisions'
+                                    stepAdjustment: StepAdjustment.POUR_DIVISIONS
                                 },
                             ]},
                             { name: 'evenStronger', default: true, useDefault: true},
