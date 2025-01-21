@@ -35,15 +35,26 @@
     "label_46_method_60_choices_stronger" : "較強",
     "label_46_method_60_choices_evenstronger" : "強",
 
-    "label_twoStepsRatios_title" : "40% (口味)",
+    "label_edit_stepAdjustments" : "調整步驟",
+    "label_edit_stepAdjustments_modal_title" : "調整步驟",
+
+    "label_twoStepsRatios_title" : "酸甜感",
+    "label_twoStepsRatios_method46_title" : "40% (酸甜感)",
+
     "label_twoStepsRatios_sweeter" : "甜",
-    "label_twoStepsRatios_standard" : "基本",
+    "label_twoStepsRatios_standard" : "平衡",
     "label_twoStepsRatios_brighter" : "明亮",
 
-    "label_pourDivisions_title" : "60% (強度)",
-    "label_pourDivisions_lighter" : "輕",
-    "label_pourDivisions_stronger" : "較強",
-    "label_pourDivisions_evenStronger" : "強",
+    "label_pourDivisions_title" : "注水次數",
+    "label_pourDivisions_method46_title" : "60% (強度)",
+
+    "label_pourDivisions_lighter" : "一次",
+    "label_pourDivisions_stronger" : "兩次",
+    "label_pourDivisions_evenStronger" : "三次",
+
+    "label_pourDivisions_method46_lighter" : "輕",
+    "label_pourDivisions_method46_stronger" : "中",
+    "label_pourDivisions_method46_evenStronger" : "強",
 
     "label_stages_blooming" : "悶蒸階段",
     "label_stages_pouring" : "注水階段",

@@ -6,10 +6,11 @@
     interface ConfigStepAdjustmentProps {
         stepAdjustmentSelectedOption: StepAdjustmentSelectedOptionConfig,
         stepAdjustmentAvailableOptions: StepAdjustmentAvailableOptions,
-        handleSelect: any
+        handleSelect: any,
+        isMethod46: boolean
     }    
 
-    let { stepAdjustmentSelectedOption, stepAdjustmentAvailableOptions, handleSelect} : ConfigStepAdjustmentProps = $props();
+    let { stepAdjustmentSelectedOption, stepAdjustmentAvailableOptions, handleSelect, isMethod46} : ConfigStepAdjustmentProps = $props();
 
     let selectedOption = $state(stepAdjustmentSelectedOption.selectedOption);
 
@@ -31,7 +32,7 @@
 </script>
 
 <div class="mt-4"></div>
-<div class="text-sm font-bold mb-2">{getStepAdjustmentTitleMessageKey(stepAdjustmentSelectedOption.stepAdjustment)}</div>
+<div class="text-sm font-bold mb-2">{getStepAdjustmentTitleMessageKey(stepAdjustmentSelectedOption.stepAdjustment, isMethod46)}</div>
 
 <fieldset class="flex flex-wrap gap-2">
 {#each stepAdjustmentAvailableOptions.availableOptions as availableOption, i }
@@ -46,7 +47,7 @@
             class="sr-only"
           />
     
-          <p class="text-xs font-bold">{getStepAdjustmentOptionMessageKey(stepAdjustmentAvailableOptions.stepAdjustment, availableOption)}</p>
+          <p class="text-xs font-bold">{getStepAdjustmentOptionMessageKey(stepAdjustmentAvailableOptions.stepAdjustment, availableOption, isMethod46)}</p>
         </label>
     </div>
 {/each}
