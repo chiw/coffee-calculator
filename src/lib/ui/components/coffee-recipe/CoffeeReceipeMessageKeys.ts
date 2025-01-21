@@ -1,5 +1,5 @@
 import { CoffeeRecipeId, PouringTechnique, PourOverStage, SwitchState, type StepWaterInfo } from '$lib/coffee-recipes';
-import { Method46Concentration, Method46Flavor } from '$lib/coffee-recipes/CoffeeRecipeTypes.d';
+import { Method46Concentration, Method46Flavor, StepAdjustment } from '$lib/coffee-recipes/CoffeeRecipeTypes.d';
 import * as m from '$lib/paraglide/messages.js';
 
 export const brandMessageKey = (brandName: string) => {
@@ -26,6 +26,7 @@ export const coffeeRecipeIdSelectMessageKey = (coffeeRecipeId: CoffeeRecipeId) =
         case CoffeeRecipeId.hario_switch_emifukahori : return m.label_hario_switch_emifukahori;
         case CoffeeRecipeId.hario_switch_olekristianboen: return m.label_hario_switch_olekristianboen;
         case CoffeeRecipeId.hario_switch_coffeechronicler: return m.label_hario_switch_coffeechronicler;
+        case CoffeeRecipeId.hario_switch_cafetaster: return m.label_hario_switch_cafetaster;
         case CoffeeRecipeId.hario_v60_46method : return m.label_hario_v60_46method;
         case CoffeeRecipeId.hario_v60_jameshoffmann: return m.label_hario_v60_jameshoffmann;
         case CoffeeRecipeId.hario_v60_mattwinton : return m.label_hario_v60_mattwinton;        
@@ -41,6 +42,7 @@ export const coffeeRecipeIdSelectNavItemMessageKey = (coffeeRecipeId: CoffeeReci
         case CoffeeRecipeId.hario_switch_emifukahori : return m.label_nav_item_hario_switch_emifukahori;
         case CoffeeRecipeId.hario_switch_olekristianboen: return m.label_nav_item_hario_switch_olekristianboen;
         case CoffeeRecipeId.hario_switch_coffeechronicler: return m.label_nav_item_hario_switch_coffeechronicler;
+        case CoffeeRecipeId.hario_switch_cafetaster: return m.label_nav_item_hario_switch_cafetaster;
         case CoffeeRecipeId.hario_v60_46method : return m.label_nav_item_hario_v60_46method;
         case CoffeeRecipeId.hario_v60_jameshoffmann: return m.label_nav_item_hario_v60_jameshoffmann;
         case CoffeeRecipeId.hario_v60_mattwinton : return m.label_nav_item_hario_v60_mattwinton;        
@@ -88,6 +90,10 @@ export const finalStepMessageKey = (time: string) => {
     return m.label_step_msg_let_water_flow_until({time: time});
 }
 
+export const waterFlowMessageKey = (time: string) => {
+    return m.label_step_msg_let_water_flow_until({time: time});
+}
+
 export const switchStateMessage = (switchState: SwitchState) => {
     switch(switchState) {
         case SwitchState.CLOSED : return m.label_switchState_closed();
@@ -97,6 +103,10 @@ export const switchStateMessage = (switchState: SwitchState) => {
 
 export const swirlMessageKey = () => {
     return m.label_step_swirl();
+}
+
+export const stirMessageKey = () => {
+    return m.label_step_stir();
 }
 
 export const method46FlavorKey = (pourRatios40: Method46Flavor) => {
@@ -117,8 +127,8 @@ export const Method46ConcentrationKey = (pourRatios60: Method46Concentration) =>
 
 export const getStepAdjustmentTitleMessageKey = (stepAdjustment: string) => {
     switch(stepAdjustment) {
-        case 'twoStepsRatios' : return m.label_twoStepsRatios_title();
-        case 'pourDivisions' : return m.label_pourDivisions_title();
+        case StepAdjustment.TWO_STEPS_RATIOS : return m.label_twoStepsRatios_title();
+        case StepAdjustment.POUR_DIVISIONS : return m.label_pourDivisions_title();
     }
 }
 
@@ -127,28 +137,27 @@ export const getStepAdjustmentOptionMessageKey = (stepAdjustment: string, option
     // // console.log('getStepAdjustmentOptionMessageKey', messageKey);
     // return eval(messageKey)();
 
-    if(stepAdjustment === 'twoStepsRatios' && option === 'sweeter') {
-        return m.label_twoStepsRatios_sweeter();
+    switch(stepAdjustment) {
+        case StepAdjustment.TWO_STEPS_RATIOS: return getStepAdjustmentTwoStepsRatiosOptionMessageKey(option);
+        case StepAdjustment.POUR_DIVISIONS: return getStepAdjustmentPourDivisionsOptionMessageKey(option);
     }
 
-    if(stepAdjustment === 'twoStepsRatios' && option === 'standard') {
-        return m.label_twoStepsRatios_standard();
-    }
+}
 
-    if(stepAdjustment === 'twoStepsRatios' && option === 'brighter') {
-        return m.label_twoStepsRatios_brighter();
-    }
+export const getStepAdjustmentTwoStepsRatiosOptionMessageKey = (option: string) => {
+    switch(option) {
+        case 'sweeter': return m.label_twoStepsRatios_sweeter();
+        case 'standard': return m.label_twoStepsRatios_standard();
+        case 'brighter': return m.label_twoStepsRatios_brighter();
 
-    if(stepAdjustment === 'pourDivisions' && option === 'lighter') {
-        return m.label_pourDivisions_lighter();
     }
+}
 
-    if(stepAdjustment === 'pourDivisions' && option === 'stronger') {
-        return m.label_pourDivisions_stronger();
+
+export const getStepAdjustmentPourDivisionsOptionMessageKey = (option: string) => {
+    switch(option) {
+        case 'lighter': return m.label_pourDivisions_lighter();
+        case 'stronger': return m.label_pourDivisions_stronger();
+        case 'evenStronger': return m.label_pourDivisions_evenStronger();
     }
-
-    if(stepAdjustment === 'pourDivisions' && option === 'evenStronger') {
-        return m.label_pourDivisions_evenStronger();
-    }
-
 }

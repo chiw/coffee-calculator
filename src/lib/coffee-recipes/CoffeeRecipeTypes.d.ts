@@ -39,7 +39,8 @@ export const PourOverStage = {
     FIFTH_POUR : 'FIFTH_POUR',
     SIXTH_POUR : 'SIXTH_POUR',
     PAUSE : 'PAUSE',
-    FINAL : 'FINAL'
+    FINAL : 'FINAL',
+    WATER_FLOW: 'WATER_FLOW'
 } as const;
 export type PourOverStage = keyof typeof PourOverStage;
 
@@ -63,6 +64,12 @@ export const Method46Concentration = {
     EVEN_STRONGER : 'EVEN_STRONGER'
 } as const;
 export type Method46Concentration = keyof typeof Method46Concentration;
+
+export const StepAdjustment = {
+    TWO_STEPS_RATIOS : 'TWO_STEPS_RATIOS',
+    POUR_DIVISIONS : 'POUR_DIVISIONS'
+}
+export type StepAdjustment = keyof typeof StepAdjustment;
 
 export type CoffeeParametersConfig = {
     beanInGrams: number,
@@ -113,13 +120,14 @@ export type TwoStepsRatiosConfig = {
     defaultSteps: StepConfig[],
     selectMode: string,
     options: TwoStepsRatioOptionConfig[],
+    canEdit: boolean
 }
 
 export type PourDivisionsOptionConfig = {
     name: string,
     default? : boolean,
     useDefault? : boolean,
-    steps?: StepConfig[]
+    steps?: StepConfig[],
 }
 
 export type PourDivisionsConfig = {
@@ -128,7 +136,8 @@ export type PourDivisionsConfig = {
     stepsStages: PourOverStage[],
     selectMode: string,
     defaultSteps: StepConfig[],
-    options: PourDivisionsOptionConfig[]
+    options: PourDivisionsOptionConfig[],
+    canEdit: boolean
 }
 
 export type StepAdjustmentsConfig = {
