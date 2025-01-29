@@ -134,38 +134,45 @@ export const getStepAdjustmentTitleMessageKey = (stepAdjustment: string, isMetho
     }
 }
 
-export const getStepAdjustmentOptionMessageKey = (stepAdjustment: string, option: string, isMethod46: boolean) => {
+export const getStepAdjustmentOptionMessageKey = (stepAdjustment: string, option: string) => {
     // let messageKey = "m." + "label_" + stepAdjustment + "_" + option;
     // // console.log('getStepAdjustmentOptionMessageKey', messageKey);
     // return eval(messageKey)();
 
     switch(stepAdjustment) {
-        case StepAdjustment.TWO_STEPS_RATIOS: return getStepAdjustmentTwoStepsRatiosOptionMessageKey(option, isMethod46);
-        case StepAdjustment.POUR_DIVISIONS: return getStepAdjustmentPourDivisionsOptionMessageKey(option, isMethod46);
+        case StepAdjustment.TWO_STEPS_RATIOS: return getStepAdjustmentTwoStepsRatiosOptionMessageKey(option);
+        case StepAdjustment.POUR_DIVISIONS: return getStepAdjustmentPourDivisionsOptionMessageKey(option);
     }
 
 }
 
-export const getStepAdjustmentTwoStepsRatiosOptionMessageKey = (option: string, isMethod46: boolean) => {
+export const getStepAdjustmentTwoStepsRatiosOptionMessageKey = (option: string) => {
     switch(option) {
-        case 'sweeter': 
-            return isMethod46 ? m.label_twoStepsRatios_sweeter() :  m.label_twoStepsRatios_sweeter();
-        case 'standard': 
-            return isMethod46 ? m.label_twoStepsRatios_standard() :  m.label_twoStepsRatios_standard();
-        case 'brighter': 
-            return isMethod46 ? m.label_twoStepsRatios_brighter() :  m.label_twoStepsRatios_brighter();
+        case 'sweeter': m.label_twoStepsRatios_sweeter();
+        case 'standard': m.label_twoStepsRatios_standard();
+        case 'brighter': m.label_twoStepsRatios_brighter();
 
+        case 'method46Sweeter' : return m.label_twoStepsRatios_method46Sweeter();
+        case 'method46Standard' : return m.label_twoStepsRatios_method46Standard();
+        case 'method46Brighter' : return m.label_twoStepsRatios_method46Brighter();
+
+        case 'newHybridSweeter' : return m.label_twoStepsRatios_newHybridSweeter();
+        case 'newHybridBalanced' : return m.label_twoStepsRatios_newHybridBalanced();
+        case 'newHybridBrighter' : return m.label_twoStepsRatios_newHybridBrighter();
     }
 }
 
 
-export const getStepAdjustmentPourDivisionsOptionMessageKey = (option: string, isMethod46: boolean) => {
+export const getStepAdjustmentPourDivisionsOptionMessageKey = (option: string) => {
     switch(option) {
-        case 'lighter': 
-            return isMethod46 ? m.label_pourDivisions_method46_lighter() :  m.label_pourDivisions_lighter();
-        case 'stronger': 
-            return isMethod46 ? m.label_pourDivisions_method46_stronger() :  m.label_pourDivisions_stronger();
-        case 'evenStronger': 
-            return isMethod46 ? m.label_pourDivisions_method46_evenStronger() :  m.label_pourDivisions_evenStronger();
+        case 'lighter': return m.label_pourDivisions_lighter();
+        case 'stronger': return m.label_pourDivisions_stronger();
+        case 'evenStronger': return m.label_pourDivisions_evenStronger();
+
+        case 'method46Lighter': return m.label_pourDivisions_method46Lighter();
+        case 'method46Stronger': return m.label_pourDivisions_method46Stronger();
+        case 'method46EvenStronger': return m.label_pourDivisions_method46EvenStronger();
+
+        case 'newHybridTwoPours': return m.label_pourDivisions_newHybridTwoPours();
     }
 }

@@ -1,9 +1,9 @@
 import { CoffeeRecipeId, getCoffeeRecipeDefaultConfig } from "./CoffeeRecipeConstants";
-import type { CoffeeParametersConfig, CoffeeRecipeConfig, CoffeeRecipe, CoffeeRecipeSteps, StepConfig, PourParametersConfig, Timeframe, StepWaterInfo, StepAdjustmentsConfig, TwoStepsRatiosConfig, PourDivisionsConfig, StepAdjustmentSelectedOptionConfig, StepAdjustmentAvailableOptions } from "./CoffeeRecipeTypes";
+import { type CoffeeParametersConfig, type CoffeeRecipeConfig, type CoffeeRecipe, type CoffeeRecipeSteps, type StepConfig, type PourParametersConfig, type Timeframe, type StepWaterInfo, type StepAdjustmentSelectedOptionConfig, type StepAdjustmentAvailableOptions, type StepControls, type RecipeChangeFactors } from "./CoffeeRecipeTypes.d";
 import { caculateCoffeeParameters } from "./CoffeeParametersUtils";
 import { calculateStepWaterInfos, sumOfDurations } from "./CoffeeRecipeStepsUtils";
 import { calculateStepsTimeframe } from "./StepsTimeframeUtils";
-import { createStepsFromStepAdjustments, getStepAdjustmentAvailableOptions } from "./StepAdjustmentUtils";
+import { createEmptyStepControls, createStepControls, createStepsFromStepAdjustments, getStepAdjustmentAvailableOptions, recreateStepsWithStepControl } from "./StepAdjustmentUtils";
 
 
 export const getStepsDurationInSeconds = (stepConfigs: StepConfig[]): number[] => {
@@ -13,33 +13,50 @@ export const getStepsDurationInSeconds = (stepConfigs: StepConfig[]): number[] =
 export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
 
-    console.log('createCoffeeRecipe recipeId:', recipeId, 'recipeDefaultConfig:', recipeDefaultConfig);
+    // console.log('createCoffeeRecipe recipeId:', recipeId, 'recipeDefaultConfig:', recipeDefaultConfig);
 
-    if(recipeDefaultConfig.enableStepsAdjustments) {
-        console.log('createCoffeeRecipe recipeDefaultConfig.enableStepsAdjustments', recipeDefaultConfig.enableStepsAdjustments);
-        console.log('createCoffeeRecipe recipeDefaultConfig.stepsAdjustments', recipeDefaultConfig.stepAdjustments);
+    // if(recipeDefaultConfig.enableStepsAdjustments) {
+    //     console.log('createCoffeeRecipe recipeDefaultConfig.enableStepsAdjustments', recipeDefaultConfig.enableStepsAdjustments);
+    //     console.log('createCoffeeRecipe recipeDefaultConfig.stepsAdjustments', recipeDefaultConfig.stepAdjustments);
+    // }
+
+    let defaultCoffeeParams = createCoffeeParams(recipeId, recipeDefaultConfig.coffeeParameters);
+
+    let defaultSteps = recipeDefaultConfig.enableStepsAdjustments == true ? 
+        createStepsFromStepAdjustments(recipeDefaultConfig.stepAdjustments, recipeDefaultConfig.stepAdjustments?.selectedOptions) 
+        : recipeDefaultConfig.steps;
+
+    let defaultStepsDurationInSeconds = getStepsDurationInSeconds(defaultSteps);
+
+    let defaultStepControls = recipeDefaultConfig.enableStepsAdjustments ? 
+        createStepControls(recipeDefaultConfig.stepAdjustments, recipeDefaultConfig.stepAdjustments?.selectedOptions)
+        : createEmptyStepControls();
+
+    let defaultRecipeChangeFactors = <RecipeChangeFactors> {
+        coffeeParameters: defaultCoffeeParams,
+        stepsDurationInSeconds: defaultStepsDurationInSeconds,
+        stepControls: defaultStepControls
     }
 
-    return <CoffeeRecipe> {
+    let coffeeRecipe: CoffeeRecipe = <CoffeeRecipe> {
         recipeId: recipeId,
-        defaultCoffeeParams: createCoffeeParams(recipeId, recipeDefaultConfig.coffeeParameters),
-        defaultStepsDurationInSeconds: getStepsDurationInSeconds(recipeDefaultConfig.steps),
-        defaultSteps: recipeDefaultConfig.enableStepsAdjustments == true ? 
-            createStepsFromStepAdjustments(recipeDefaultConfig.stepAdjustments, recipeDefaultConfig.stepAdjustmentSelectedOptions) 
-            : recipeDefaultConfig.steps,
+        defaultSteps: defaultSteps,
         references: recipeDefaultConfig.references,
         is46Method: recipeDefaultConfig.is46Method,
         enableStepsAdjustments: recipeDefaultConfig.enableStepsAdjustments ? recipeDefaultConfig.enableStepsAdjustments : false,
-        defaultStepAdjustmentSelectedOptions: recipeDefaultConfig.stepAdjustmentSelectedOptions
+        defaultRecipeChangeFactors: defaultRecipeChangeFactors
     }
+
+    console.log('createCoffeeRecipe coffeeRecipe: ', coffeeRecipe);
+    return coffeeRecipe;
 }
 
 export const createCoffeeParams = (recipeId: CoffeeRecipeId, inCoffeeParams: CoffeeParametersConfig): CoffeeParametersConfig => {
-    console.log('createCoffeeParams recipeId: ', recipeId, ' beanInGrams: ', inCoffeeParams.beanInGrams, ' coffeeToWaterRatio: ', inCoffeeParams.coffeeToWaterRatio, ' waterInGrams: ', inCoffeeParams.waterInGrams);
+    // console.log('createCoffeeParams recipeId: ', recipeId, ' beanInGrams: ', inCoffeeParams.beanInGrams, ' coffeeToWaterRatio: ', inCoffeeParams.coffeeToWaterRatio, ' waterInGrams: ', inCoffeeParams.waterInGrams);
 
     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
 
-    console.log('createCoffeeParams recipeDefaultConfig:', recipeDefaultConfig);
+    // console.log('createCoffeeParams recipeDefaultConfig:', recipeDefaultConfig);
     
     let coffeeParams = <CoffeeParametersConfig> {
         beanInGrams : inCoffeeParams.beanInGrams ? inCoffeeParams.beanInGrams : recipeDefaultConfig.coffeeParameters.beanInGrams,
@@ -53,11 +70,62 @@ export const createCoffeeParams = (recipeId: CoffeeRecipeId, inCoffeeParams: Cof
     return result;
 }
 
+export const createCoffeeRecipeStepsWithChangeFactors = (recipeId: CoffeeRecipeId, recipeChangeFactors: RecipeChangeFactors): CoffeeRecipeSteps => {
+
+    console.log('createCoffeeRecipeStepsWithChangeFactors recipeId: ', recipeId, ' recipeChangeFactors: ', recipeChangeFactors);
+
+    let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
+    
+    let steps: StepConfig[] = recipeDefaultConfig.enableStepsAdjustments ? 
+        recreateStepsWithStepControl(recipeId, recipeChangeFactors.stepControls):
+        recipeDefaultConfig.steps;
+
+    console.log('steps', steps);
+
+    let stepsDurationInSeconds: number[] = (steps.length == recipeChangeFactors.stepsDurationInSeconds.length) ?
+        recipeChangeFactors.stepsDurationInSeconds
+        : getStepsDurationInSeconds(steps);
+    
+    let clonedRecipeChangeFactors: RecipeChangeFactors = <RecipeChangeFactors> JSON.parse(JSON.stringify(recipeChangeFactors));
+    clonedRecipeChangeFactors.stepsDurationInSeconds = stepsDurationInSeconds;
+    console.log('stepsDurationInSeconds', stepsDurationInSeconds);
+
+    
+
+    let stepsWithTimeframe: StepConfig[] = updateSteps(steps, stepsDurationInSeconds);
+    let timerInSeconds: number = stepsDurationInSeconds ? sumOfDurations(stepsDurationInSeconds): 0;
+    let pourParameters: PourParametersConfig[] = steps.map(step => step.pourParameters);
+    let stepWaterInfos: StepWaterInfo[] = calculateStepWaterInfos(clonedRecipeChangeFactors.coffeeParameters, pourParameters);
+
+    let stepsWithTimeframeAndWaterInfo: StepConfig[] = stepsWithTimeframe.map((step, index) => { step.stepWaterInfo = stepWaterInfos[index]; return step;});
+
+    let showTimeframeEndTime: boolean = true;
+    if(recipeDefaultConfig.showTimeframeEndTime === false) {
+        showTimeframeEndTime = false;
+    }
+
+    let stepAdjustmentAvailableOptions: StepAdjustmentAvailableOptions[] = clonedRecipeChangeFactors.stepControls.availableOptions;
+
+    let result: CoffeeRecipeSteps = <CoffeeRecipeSteps> {
+        isTimerRecipe : recipeDefaultConfig.isTimerRecipe,
+        isImmersionDripperRecipe : recipeDefaultConfig.isImmersionDripperRecipe,
+        enableStepsAdjustments: recipeDefaultConfig.enableStepsAdjustments ? recipeDefaultConfig.enableStepsAdjustments : false,
+        stepsAdjustments: recipeDefaultConfig.stepAdjustments,
+        steps: stepsWithTimeframeAndWaterInfo,
+        timerInSeconds : timerInSeconds,
+        showTimeframeEndTime: showTimeframeEndTime,
+        recipeChangeFactors: clonedRecipeChangeFactors
+    }
+
+    // console.log('createCoffeeRecipeSteps recipeDefaultConfig:', recipeDefaultConfig, 'stepsDurationInSeconds:', stepsDurationInSeconds, 'pourParameters:', pourParameters, 'result:', result);
+    console.log('createCoffeeRecipeStepsWithChangeFactors result:', result);
+    return result;
+}
+
 export const createCoffeeRecipeSteps = (recipeId: CoffeeRecipeId, coffeeParametersConfig: CoffeeParametersConfig, 
-    steps: StepConfig[], stepAdjustmentSelectedOptions: StepAdjustmentSelectedOptionConfig[]) : CoffeeRecipeSteps => {
+        steps: StepConfig[], stepControls: StepControls) : CoffeeRecipeSteps => {
 
-    console.log('createCoffeeRecipeSteps recipeId: ', recipeId, ' coffeeParametersConfig: ', coffeeParametersConfig, 'steps:', steps);
-
+    console.log('createCoffeeRecipeSteps recipeId: ', recipeId, ' coffeeParametersConfig: ', coffeeParametersConfig, 'steps:', steps, 'stepControls', stepControls);
     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
 
     let stepsDurationInSeconds: number[] = getStepsDurationInSeconds(steps);
@@ -69,35 +137,43 @@ export const createCoffeeRecipeSteps = (recipeId: CoffeeRecipeId, coffeeParamete
 
     let stepsWithTimeframeAndWaterInfo: StepConfig[] = stepsWithTimeframe.map((step, index) => { step.stepWaterInfo = stepWaterInfos[index]; return step;});
 
-    console.log('createCoffeeRecipeSteps recipeDefaultConfig:', recipeDefaultConfig, 'stepsDurationInSeconds:', stepsDurationInSeconds, 'pourParameters:', pourParameters);
+    // console.log('createCoffeeRecipeSteps recipeDefaultConfig:', recipeDefaultConfig, 'stepsDurationInSeconds:', stepsDurationInSeconds, 'pourParameters:', pourParameters);
    
     let showTimeframeEndTime: boolean = true;
     if(recipeDefaultConfig.showTimeframeEndTime === false) {
         showTimeframeEndTime = false;
     }
 
-    let stepAdjustmentAvailableOptions: StepAdjustmentAvailableOptions[] = recipeDefaultConfig.enableStepsAdjustments == true ? 
-        getStepAdjustmentAvailableOptions(recipeDefaultConfig.stepAdjustments) : [];
+    // let stepAdjustmentAvailableOptions: StepAdjustmentAvailableOptions[] = recipeDefaultConfig.enableStepsAdjustments == true ? 
+    //     getStepAdjustmentAvailableOptions(recipeDefaultConfig.stepAdjustments) : [];
+
+    let stepAdjustmentAvailableOptions: StepAdjustmentAvailableOptions[] = stepControls.availableOptions;
+
+    let newStepControls = stepControls ? 
+        stepControls :  createStepControls(recipeDefaultConfig.stepAdjustments, recipeDefaultConfig.stepAdjustments?.selectedOptions);
 
     let result: CoffeeRecipeSteps = <CoffeeRecipeSteps> {
         isTimerRecipe : recipeDefaultConfig.isTimerRecipe,
         isImmersionDripperRecipe : recipeDefaultConfig.isImmersionDripperRecipe,
-        stepsDurationInSeconds: stepsDurationInSeconds,
         enableStepsAdjustments: recipeDefaultConfig.enableStepsAdjustments ? recipeDefaultConfig.enableStepsAdjustments : false,
-        stepAdjustmentSelectedOptions: stepAdjustmentSelectedOptions ? stepAdjustmentSelectedOptions : recipeDefaultConfig.stepAdjustmentSelectedOptions,
-        stepAdjustmentAvailableOptions: stepAdjustmentAvailableOptions,
         stepsAdjustments: recipeDefaultConfig.stepAdjustments,
         steps: stepsWithTimeframeAndWaterInfo,
         timerInSeconds : timerInSeconds,
-        showTimeframeEndTime: showTimeframeEndTime
+        showTimeframeEndTime: showTimeframeEndTime,
+        recipeChangeFactors: <RecipeChangeFactors> {
+            coffeeParameters: coffeeParametersConfig,
+            stepsDurationInSeconds: stepsDurationInSeconds,
+            stepControls: newStepControls
+        }
     }
 
-    console.log('createCoffeeRecipeSteps recipeDefaultConfig:', recipeDefaultConfig, 'stepsDurationInSeconds:', stepsDurationInSeconds, 'pourParameters:', pourParameters, 'result:', result);
+    // console.log('createCoffeeRecipeSteps recipeDefaultConfig:', recipeDefaultConfig, 'stepsDurationInSeconds:', stepsDurationInSeconds, 'pourParameters:', pourParameters, 'result:', result);
+    console.log('createCoffeeRecipeSteps result:', result);
     return result;
 }
 
 export const updateSteps = (originalStepConfigs: StepConfig[], stepsDurationInSeconds: number[]): StepConfig[] => {
-    console.log('updateSteps originalCoffeeRecipeSteps: ', originalStepConfigs, 'stepsDurationInSeconds', stepsDurationInSeconds);
+    // console.log('updateSteps originalCoffeeRecipeSteps: ', originalStepConfigs, 'stepsDurationInSeconds', stepsDurationInSeconds);
 
     let result: StepConfig[] = [];
     let stepsTimeframe: Timeframe[] = calculateStepsTimeframe(stepsDurationInSeconds);

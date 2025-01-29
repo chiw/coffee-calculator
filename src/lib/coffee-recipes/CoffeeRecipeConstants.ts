@@ -91,6 +91,91 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                     coffeeToWaterRatio: -1,
                     waterInGrams: 300
                 },
+                enableStepsAdjustments: true,
+                stepAdjustmentSelectedOptions: [
+                    { stepAdjustmentName: StepAdjustment.TWO_STEPS_RATIOS, option: 'newHybridBalanced' },
+                    { stepAdjustmentName: StepAdjustment.POUR_DIVISIONS, option: 'newHybridTwoPours' }
+                ],
+                stepAdjustments: {
+                    order: [StepAdjustment.TWO_STEPS_RATIOS, StepAdjustment.POUR_DIVISIONS],
+                    selectedOptions: [
+                        { stepAdjustmentName: StepAdjustment.TWO_STEPS_RATIOS, option: 'newHybridBalanced' },
+                        { stepAdjustmentName: StepAdjustment.POUR_DIVISIONS, option: 'newHybridTwoPours' }
+                    ],
+                    twoStepsRatios: {
+                        canEdit: true,
+                        minPercentage: 16.6667,
+                        maxPercentage: 23.3333,
+                        defaultSteps : [
+                            {
+                                switchState: SwitchState.CLOSED,
+                                stage: PourOverStage.BLOOMING,
+                                pouringTechnique: PouringTechnique.CIRCLE,
+                                showWaterTemperature: true,
+
+                                durationInSeconds: 45,
+                                pourParameters: { waterPercentage: 15, waterTemp: 93},
+                                stepAdjustment: StepAdjustment.TWO_STEPS_RATIOS
+                            },
+                            {                        
+                                switchState: SwitchState.OPEN,
+                                stage: PourOverStage.FIRST_POUR,
+                                pouringTechnique: PouringTechnique.CIRCLE,
+                                showWaterTemperature: true,
+
+                                durationInSeconds: 45,
+                                pourParameters: { waterPercentage: 25, waterTemp: 93},
+                                stepAdjustment: StepAdjustment.TWO_STEPS_RATIOS
+                            }
+                        ],
+                        selectMode: 'OPTIONS',
+                        options: [
+                            { name: 'newHybridSweeter', default: true, waterPercentageRatios: [13.3333, 26.6667]}, 
+                            { name: 'newHybridBalanced', default: true, useDefault: true}, 
+                            { name: 'newHybridBrighter', default: false, waterPercentageRatios: [16.6667, 23.3333]},
+                        ]
+                    },
+                    pourDivisions: {
+                        canEdit: false,
+                        maxSteps: 3,
+                        totalPercentages: 60,
+                        stepsStages: [PourOverStage.SECOND_POUR, PourOverStage.THIRD_POUR, PourOverStage.FINAL],
+                        selectMode: 'OPTIONS',
+                        defaultSteps: [
+                            {   
+                                switchState: SwitchState.OPEN,
+                                stage: PourOverStage.SECOND_POUR,
+                                pouringTechnique: PouringTechnique.CIRCLE,
+                                showWaterTemperature: true,
+
+                                durationInSeconds: 40,
+                                pourParameters: { waterPercentage: 26.6667, waterTemp: 93},
+                                stepAdjustment: StepAdjustment.POUR_DIVISIONS
+                            },
+                            {   
+                                switchState: SwitchState.CLOSED,
+                                stage: PourOverStage.THIRD_POUR,
+                                pouringTechnique: PouringTechnique.CIRCLE,
+                                showWaterTemperature: true,
+
+                                durationInSeconds: 35,
+                                pourParameters: { waterPercentage: 33.3333, waterTemp: 70},
+                                stepAdjustment: StepAdjustment.POUR_DIVISIONS
+                            },
+                            {   
+                                switchState: SwitchState.OPEN,
+                                stage: PourOverStage.FINAL,
+
+                                durationInSeconds: 45,
+                                pourParameters: { waterPercentage: 0, waterTemp: 70},
+                                stepAdjustment: StepAdjustment.POUR_DIVISIONS
+                            }
+                        ],
+                        options: [
+                            { name: 'newHybridTwoPours', default: true, useDefault: true},
+                        ] 
+                    },
+                },
                 steps: [
                     {
                         switchState: SwitchState.CLOSED,
@@ -561,11 +646,15 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 },
                 enableStepsAdjustments: true,
                 stepAdjustmentSelectedOptions: [
-                    { stepAdjustment: StepAdjustment.TWO_STEPS_RATIOS, selectedOption: 'standard' },
-                    { stepAdjustment: StepAdjustment.POUR_DIVISIONS, selectedOption: 'evenStronger' }
+                    { stepAdjustmentName: StepAdjustment.TWO_STEPS_RATIOS, option: 'method46Standard' },
+                    { stepAdjustmentName: StepAdjustment.POUR_DIVISIONS, option: 'method46EvenStronger' }
                 ],
                 stepAdjustments: {
                     order: [StepAdjustment.TWO_STEPS_RATIOS, StepAdjustment.POUR_DIVISIONS],
+                    selectedOptions: [
+                        { stepAdjustmentName: StepAdjustment.TWO_STEPS_RATIOS, option: 'method46Standard' },
+                        { stepAdjustmentName: StepAdjustment.POUR_DIVISIONS, option: 'method46EvenStronger' }
+                    ],
                     twoStepsRatios: {
                         canEdit: true,
                         minPercentage: 16.6667,
@@ -590,9 +679,9 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         ],
                         selectMode: 'OPTIONS',
                         options: [
-                            { name: 'sweeter', default: false, waterPercentageRatios: [16.6667, 23.3333]}, 
-                            { name: 'standard', default: true, useDefault: true}, 
-                            { name: 'brighter', default: false, waterPercentageRatios: [23.3333, 16.6667]},
+                            { name: 'method46Sweeter', default: false, waterPercentageRatios: [16.6667, 23.3333]}, 
+                            { name: 'method46Standard', default: true, useDefault: true}, 
+                            { name: 'method46Brighter', default: false, waterPercentageRatios: [23.3333, 16.6667]},
                         ]
                     },
                     pourDivisions: {
@@ -628,7 +717,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                             }
                         ],
                         options: [
-                            { name: 'lighter', default: false, steps: [
+                            { name: 'method46Lighter', default: false, steps: [
                                 {   
                                     stage: PourOverStage.THIRD_POUR,
                                     pouringTechnique: PouringTechnique.CIRCLE,
@@ -638,7 +727,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                                     stepAdjustment: StepAdjustment.POUR_DIVISIONS
                                 }
                             ]},
-                            { name: 'stronger', default: false, steps: [
+                            { name: 'method46Stronger', default: false, steps: [
                                 {   
                                     stage: PourOverStage.THIRD_POUR,
                                     pouringTechnique: PouringTechnique.CIRCLE,
@@ -656,47 +745,11 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                                     stepAdjustment: StepAdjustment.POUR_DIVISIONS
                                 },
                             ]},
-                            { name: 'evenStronger', default: true, useDefault: true},
+                            { name: 'method46EvenStronger', default: true, useDefault: true},
                         ] 
                     },
                 },
-                steps: [
-                    // {
-                    //     stage: PourOverStage.FIRST_POUR,
-                    //     pouringTechnique: PouringTechnique.CIRCLE,
-
-                    //     durationInSeconds: 45,
-                    //     pourParameters: { waterPercentage: 20, waterTemp: 93}
-                    // },
-                    // {                        
-                    //     stage: PourOverStage.SECOND_POUR,
-                    //     pouringTechnique: PouringTechnique.CIRCLE,
-
-                    //     durationInSeconds: 45,
-                    //     pourParameters: { waterPercentage: 20, waterTemp: 93}
-                    // },
-                    // {   
-                    //     stage: PourOverStage.THIRD_POUR,
-                    //     pouringTechnique: PouringTechnique.CIRCLE,
-
-                    //     durationInSeconds: 45,
-                    //     pourParameters: { waterPercentage: 20, waterTemp: 93}
-                    // },
-                    // {   
-                    //     stage: PourOverStage.FOURTH_POUR,
-                    //     pouringTechnique: PouringTechnique.CIRCLE,
-
-                    //     durationInSeconds: 30,
-                    //     pourParameters: { waterPercentage: 20, waterTemp: 93}
-                    // },
-                    // {   
-                    //     stage: PourOverStage.FIFTH_POUR,
-                    //     pouringTechnique: PouringTechnique.CIRCLE,
-
-                    //     durationInSeconds: 45,
-                    //     pourParameters: { waterPercentage: 20, waterTemp: 93}
-                    // }
-                ],
+                steps: [],
                 references: [
                     { 
                         description : 'How to Make Coffee Using the 4:6 Brewing Method', 

@@ -45,6 +45,14 @@
     "label_twoStepsRatios_standard" : "Balanced",
     "label_twoStepsRatios_brighter" : "Brighter",
 
+    "label_twoStepsRatios_method46Sweeter" : "Sweeter",
+    "label_twoStepsRatios_method46Standard" : "Balanced",
+    "label_twoStepsRatios_method46Brighter" : "Brighter",
+
+    "label_twoStepsRatios_newHybridSweeter" : "Sweeter",
+    "label_twoStepsRatios_newHybridBalanced" : "Balanced",
+    "label_twoStepsRatios_newHybridBrighter" : "Brighter",
+
     "label_pourDivisions_title" : "No. of pours",
     "label_pourDivisions_method46_title" : "60% (Stength)",
 
@@ -52,9 +60,11 @@
     "label_pourDivisions_stronger" : "2",
     "label_pourDivisions_evenStronger" : "3",
 
-    "label_pourDivisions_method46_lighter" : "Lighter",
-    "label_pourDivisions_method46_stronger" : "Stronger",
-    "label_pourDivisions_method46_evenStronger" : "Even Stronger",
+    "label_pourDivisions_method46Lighter" : "Lighter",
+    "label_pourDivisions_method46Stronger" : "Stronger",
+    "label_pourDivisions_method46EvenStronger" : "Even Stronger",
+
+    "label_pourDivisions_newHybridTwoPours" : "2",
 
     "label_stages_blooming" : "Blooming stage",
     "label_stages_pouring" : "Pouring stage",

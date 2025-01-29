@@ -2,10 +2,12 @@
 
 ## Recipes:
 ### Hario Switch
+- New hybrid (by Tetsu Kasuya) https://chiw.github.io/coffee-calculator/recipe/hario/switch/tetsukasuyanewhybrid
 - Tetsu Kasuya https://chiw.github.io/coffee-calculator/recipe/hario/switch/tetsukasuya
 - Emi Fukahori https://chiw.github.io/coffee-calculator/recipe/hario/switch/emifukahori
 - Ole Kristian Bøen https://chiw.github.io/coffee-calculator/recipe/hario/switch/olekristianboen
 - The Coffee Chronicler https://chiw.github.io/coffee-calculator/recipe/hario/switch/coffeechronicler
+- Cafetaster https://chiw.github.io/coffee-calculator/recipe/hario/switch/cafetaster
 
 ### Hario V60
 - 4:6 method (by Tetsu Kasuya) https://chiw.github.io/coffee-calculator/recipe/hario/v60/46method

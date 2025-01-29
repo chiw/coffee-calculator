@@ -142,18 +142,36 @@ export type PourDivisionsConfig = {
 
 export type StepAdjustmentsConfig = {
     order: string[],
+    selectedOptions: StepAdjustmentSelectedOptionConfig[],
     twoStepsRatios?: TwoStepsRatiosConfig,
     pourDivisions?: PourDivisionsConfig
 }
 
 export type StepAdjustmentAvailableOptions = {
-    stepAdjustment: string,
-    availableOptions: string[]
+    stepAdjustmentName: string,
+    options: string[]
 }
 
 export type StepAdjustmentSelectedOptionConfig = {
-    stepAdjustment: string,
-    selectedOption: string
+    stepAdjustmentName: string,
+    option: string
+}
+
+export type StepAdjustmentSelectableFlagConfig = {
+    stepAdjustmentName: string,
+    isSelectable: boolean
+}
+
+export type StepControls = {
+    availableOptions: StepAdjustmentAvailableOptions[],
+    isSelectableFlags: StepAdjustmentSelectableFlagConfig[],
+    selectedOptions: StepAdjustmentSelectedOptionConfig[]
+}
+
+export type RecipeChangeFactors = {
+    coffeeParameters: CoffeeParametersConfig,
+    stepsDurationInSeconds: number[],
+    stepControls?: StepControls,
 }
 
 export type CoffeeRecipeConfig = {
@@ -191,15 +209,13 @@ export type StepWaterInfo = {
 
 export type CoffeeRecipeSteps = {
     steps: StepConfig[],
-    stepsDurationInSeconds: number[],
-    enableStepsAdjustments?: boolean,
-    stepAdjustmentSelectedOptions?: StepAdjustmentSelectedOptionConfig[],
-    StepAdjustmentAvailableOptions?: StepAdjustmentAvailableOptions[],
+    enableStepsAdjustments?: boolean,    
     stepsAdjustments? : StepAdjustmentsConfig,
     isTimerRecipe: boolean,
     isImmersionDripperRecipe: boolean,
     timerInSeconds: number,
-    showTimeframeEndTime?: boolean
+    showTimeframeEndTime?: boolean,
+    recipeChangeFactors: RecipeChangeFactors
 }
 
 export type Reference = {
@@ -209,12 +225,10 @@ export type Reference = {
 
 export type CoffeeRecipe = {
     recipeId: string,
-    defaultCoffeeParams: CoffeeParametersConfig,
-    defaultStepsDurationInSeconds: number[],
     defaultSteps: StepConfig[],
     references: Reference[],
     is46Method?: boolean,
     enableStepsAdjustments?: boolean,
-    defaultStepAdjustmentSelectedOptions?: StepAdjustmentSelectedOptionConfig[]
+    defaultRecipeChangeFactors: RecipeChangeFactors
 }
 

@@ -1,5 +1,36 @@
 import { getCoffeeRecipeDefaultConfig, type CoffeeRecipeId } from "./CoffeeRecipeConstants";
-import { type PourDivisionsConfig, type PourParametersConfig, type StepAdjustmentSelectedOptionConfig, type StepConfig, type StepAdjustmentsConfig, type TwoStepsRatiosConfig, type StepAdjustmentAvailableOptions, type CoffeeRecipeConfig, StepAdjustment } from "./CoffeeRecipeTypes.d";
+import { type PourDivisionsConfig, type PourParametersConfig, type StepAdjustmentSelectedOptionConfig, type StepConfig, type StepAdjustmentsConfig, type TwoStepsRatiosConfig, type StepAdjustmentAvailableOptions, type CoffeeRecipeConfig, StepAdjustment, type StepControls, type StepAdjustmentSelectableFlagConfig } from "./CoffeeRecipeTypes.d";
+
+export const createEmptyStepControls = () => {
+    return <StepControls> {
+        availableOptions: [],
+        isSelectableFlags: [],
+        selectedOptions: []
+    }
+}
+
+export const createStepControls = (stepsAdjustments: StepAdjustmentsConfig, stepAdjustmentSelectedOptions: StepAdjustmentSelectedOptionConfig[]): StepControls => {
+    return <StepControls> {
+        availableOptions: getStepAdjustmentAvailableOptions(stepsAdjustments),
+        isSelectableFlags: getSelectableFlags(stepsAdjustments),
+        selectedOptions: stepAdjustmentSelectedOptions,
+    }
+}
+
+const getSelectableFlags = (stepAdjustments: StepAdjustmentsConfig) : StepAdjustmentSelectableFlagConfig[] => {
+    return [
+        <StepAdjustmentSelectableFlagConfig> { stepAdjustmentName: StepAdjustment.TWO_STEPS_RATIOS, isSelectable: stepAdjustments.twoStepsRatios?.canEdit },
+        <StepAdjustmentSelectableFlagConfig> { stepAdjustmentName: StepAdjustment.POUR_DIVISIONS, isSelectable: stepAdjustments.pourDivisions?.canEdit }
+    ]
+}
+
+export const stepOptionsAreSelectable = (isSelectableFlags: StepAdjustmentSelectableFlagConfig[], stepAdjustmentName: string) => {
+    // console.log('stepOptionsAreSelectable stepAdjustmentName =' + stepAdjustmentName);
+    let selectableFlag = isSelectableFlags.find(selectableFlag => selectableFlag.stepAdjustmentName === stepAdjustmentName);
+    let result = selectableFlag ? selectableFlag.isSelectable : false;
+    // console.log('stepOptionsAreSelectable stepAdjustmentName =' + stepAdjustmentName + ' isSelectable=' + result);
+    return result;
+}
 
 export const canEditStepAdjustment = (stepAdjustmensts: StepAdjustmentsConfig, adjustment: string) => {
     if(adjustment === StepAdjustment.TWO_STEPS_RATIOS) return stepAdjustmensts.twoStepsRatios?.canEdit;
@@ -13,15 +44,15 @@ export const getStepAdjustmentAvailableOptions = (stepsAdjustments: StepAdjustme
     stepsAdjustments.order.forEach(adjustment => {
         if(adjustment === StepAdjustment.TWO_STEPS_RATIOS) {
             stepAdjustmentAvailableOptions.push(<StepAdjustmentAvailableOptions>{
-                stepAdjustment: adjustment,
-                availableOptions: stepsAdjustments.twoStepsRatios?.options.map(option => option.name)
+                stepAdjustmentName: adjustment,
+                options: stepsAdjustments.twoStepsRatios?.options.map(option => option.name)
             });
         }
 
         if(adjustment === StepAdjustment.POUR_DIVISIONS) {
             stepAdjustmentAvailableOptions.push(<StepAdjustmentAvailableOptions>{
-                stepAdjustment: adjustment,
-                availableOptions: stepsAdjustments.pourDivisions?.options.map(option => option.name)
+                stepAdjustmentName: adjustment,
+                options: stepsAdjustments.pourDivisions?.options.map(option => option.name)
             });
         }
     });
@@ -29,51 +60,52 @@ export const getStepAdjustmentAvailableOptions = (stepsAdjustments: StepAdjustme
     return stepAdjustmentAvailableOptions;
 }
 
-export const hasChangedStepAdjustmentSelectedOption = (existingSelectedOptions: StepAdjustmentSelectedOptionConfig[], newSelectedOption: StepAdjustmentSelectedOptionConfig) => {
-    let existingSelectedOption = existingSelectedOptions.find(option => option.stepAdjustment === newSelectedOption.stepAdjustment);
+// export const hasChangedStepAdjustmentSelectedOption = (existingSelectedOptions: StepAdjustmentSelectedOptionConfig[], newSelectedOption: StepAdjustmentSelectedOptionConfig) => {
+//     console.log('hasChangedStepAdjustmentSelectedOption input existingSelectedOptions', existingSelectedOption, 'newSelectedOption', newSelectedOption);
+//     let existingSelectedOption = existingSelectedOptions.find(option => option.stepAdjustmentName === newSelectedOption.stepAdjustmentName);
 
-    if(existingSelectedOption?.selectedOption != newSelectedOption.selectedOption) {
-        console.log('hasChangedStepAdjustmentSelectedOption existing [' + existingSelectedOption?.selectedOption + '] !=  newSelected [' + newSelectedOption.selectedOption+ ']');
-        return true;
-    } else {
-        console.log('hasChangedStepAdjustmentSelectedOption existing [' + existingSelectedOption?.selectedOption + '] ==  newSelected [' + newSelectedOption.selectedOption+ ']');
-        return false;
-    }
-}
+//     if(existingSelectedOption?.option != newSelectedOption.option) {
+//         console.log('hasChangedStepAdjustmentSelectedOption existing [' + existingSelectedOption?.option + '] !=  newSelected [' + newSelectedOption.option+ ']');
+//         return true;
+//     } else {
+//         console.log('hasChangedStepAdjustmentSelectedOption existing [' + existingSelectedOption?.option + '] ==  newSelected [' + newSelectedOption.option+ ']');
+//         return false;
+//     }
+// }
 
-export const getNewStepAdjustmentSelectedOptions = (existingSelectedOptions: StepAdjustmentSelectedOptionConfig[], newSelectedOption: StepAdjustmentSelectedOptionConfig): StepAdjustmentSelectedOptionConfig[] => {
-    let clonedSelectedOptions: StepAdjustmentSelectedOptionConfig[] = <StepAdjustmentSelectedOptionConfig[]> JSON.parse(JSON.stringify(existingSelectedOptions));
+// export const getNewStepAdjustmentSelectedOptions = (existingSelectedOptions: StepAdjustmentSelectedOptionConfig[], newSelectedOption: StepAdjustmentSelectedOptionConfig): StepAdjustmentSelectedOptionConfig[] => {
+//     let clonedSelectedOptions: StepAdjustmentSelectedOptionConfig[] = <StepAdjustmentSelectedOptionConfig[]> JSON.parse(JSON.stringify(existingSelectedOptions));
     
-    clonedSelectedOptions.forEach((selectedOption, index) => {
-        if(selectedOption.stepAdjustment === newSelectedOption.stepAdjustment) {
-            selectedOption.selectedOption = newSelectedOption.selectedOption
-        }
-    });
-    console.log('getNewStepAdjustmentSelectedOptions', clonedSelectedOptions);
-    return clonedSelectedOptions;
-}
+//     clonedSelectedOptions.forEach((selectedOption, index) => {
+//         if(selectedOption.stepAdjustmentName === newSelectedOption.stepAdjustmentName) {
+//             selectedOption.option = newSelectedOption.option
+//         }
+//     });
+//     console.log('getNewStepAdjustmentSelectedOptions', clonedSelectedOptions);
+//     return clonedSelectedOptions;
+// }
 
-export const recreateSteps = (recipeId: CoffeeRecipeId, 
-    existingSelectedOptions: StepAdjustmentSelectedOptionConfig[], newSelectedOption: StepAdjustmentSelectedOptionConfig) : StepConfig[] => {
+// export const recreateSteps = (recipeId: CoffeeRecipeId, 
+//     existingSelectedOptions: StepAdjustmentSelectedOptionConfig[], newSelectedOption: StepAdjustmentSelectedOptionConfig) : StepConfig[] => {
 
-    let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
+//     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
     
-    let newSelectedOptions: StepAdjustmentSelectedOptionConfig[] = getNewStepAdjustmentSelectedOptions(existingSelectedOptions, newSelectedOption);
+//     let newSelectedOptions: StepAdjustmentSelectedOptionConfig[] = getNewStepAdjustmentSelectedOptions(existingSelectedOptions, newSelectedOption);
     
-    return createStepsFromStepAdjustments(recipeDefaultConfig.stepAdjustments, newSelectedOptions);
-}
+//     return createStepsFromStepAdjustments(recipeDefaultConfig.stepAdjustments, newSelectedOptions);
+// }
 
 export const createStepsFromStepAdjustments = (stepsAdjustments: StepAdjustmentsConfig, stepAdjustmentSelectedOptions: StepAdjustmentSelectedOptionConfig[]) => {
     let steps: StepConfig[] = [];
     stepsAdjustments.order.forEach(adjustment => {
-        let options = stepAdjustmentSelectedOptions.filter(option => option.stepAdjustment === adjustment);
+        let options = stepAdjustmentSelectedOptions.filter(option => option.stepAdjustmentName === adjustment);
 
         if(adjustment === StepAdjustment.TWO_STEPS_RATIOS) {
-            steps = steps.concat(createStepsFromTwoStepsRatios(stepsAdjustments.twoStepsRatios, options ? options[0].selectedOption : null));
+            steps = steps.concat(createStepsFromTwoStepsRatios(stepsAdjustments.twoStepsRatios, options ? options[0].option : null));
         }
 
         if(adjustment === StepAdjustment.POUR_DIVISIONS) {
-            steps = steps.concat(createStepsFromPourDivisions(stepsAdjustments.pourDivisions, options ? options[0].selectedOption : null));
+            steps = steps.concat(createStepsFromPourDivisions(stepsAdjustments.pourDivisions, options ? options[0].option : null));
         }
     });
 
@@ -87,7 +119,7 @@ const createStepsFromTwoStepsRatios = (twoStepsRatios: TwoStepsRatiosConfig, sel
 
     if(selectedOption) {
         let selectedOptionConfig = twoStepsRatios.options.filter(option => option.name === selectedOption);
-        console.log('createStepsFromTwoStepsRatios selectedOptionConfig', selectedOptionConfig);
+        // console.log('createStepsFromTwoStepsRatios selectedOptionConfig', selectedOptionConfig);
 
         if(selectedOptionConfig.length > 0) {
             if(!selectedOptionConfig[0].useDefault) {
@@ -111,7 +143,7 @@ const createStepsFromPourDivisions = (pourDivisionsConfig: PourDivisionsConfig, 
 
     if(selectedOption) {
         let selectedOptionConfig = pourDivisionsConfig.options.filter(option => option.name === selectedOption);
-        console.log('createStepsFromPourDivisions selectedOptionConfig', selectedOptionConfig);
+        // console.log('createStepsFromPourDivisions selectedOptionConfig', selectedOptionConfig);
 
         if(selectedOptionConfig.length > 0) {
             if(!selectedOptionConfig[0].useDefault) {
@@ -124,5 +156,27 @@ const createStepsFromPourDivisions = (pourDivisionsConfig: PourDivisionsConfig, 
         steps = steps.concat(defaultSteps);
     }
 
+    return steps;
+}
+
+export const recreateStepsWithStepControl = (recipeId: CoffeeRecipeId, stepControls: StepControls) : StepConfig[] => {
+    let steps: StepConfig[] = [];
+    let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
+ 
+    let stepAdjustments: StepAdjustmentsConfig = recipeDefaultConfig.stepAdjustments;
+
+    stepAdjustments.order.forEach(adjustmentName => {
+        let selectedOption = stepControls.selectedOptions.find(selectedOption => selectedOption.stepAdjustmentName === adjustmentName);
+
+        if(adjustmentName === StepAdjustment.TWO_STEPS_RATIOS) {
+            steps = steps.concat(createStepsFromTwoStepsRatios(stepAdjustments.twoStepsRatios, selectedOption?.option));
+        }
+
+        if(adjustmentName === StepAdjustment.POUR_DIVISIONS) {
+            steps = steps.concat(createStepsFromPourDivisions(stepAdjustments.pourDivisions, selectedOption?.option));
+        }
+    });
+
+    console.log('recreateStepsWithStepControl steps', steps);
     return steps;
 }
