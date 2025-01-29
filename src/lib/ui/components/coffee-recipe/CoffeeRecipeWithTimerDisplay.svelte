@@ -18,19 +18,16 @@
     import StopwatchDisplay from '../stopwatch/StopwatchDisplay.svelte';
 	import { shouldDisplayTimeframe } from '$lib/utils/TimeframeDisplayUtils';
 	import TimeframeDurationDisplay from './TimeframeDurationDisplay.svelte';
-	import type { CoffeeParametersConfig, CoffeeRecipeSteps, StepAdjustmentAvailableOptions, StepAdjustmentSelectedOptionConfig, StepConfig, Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes.d';
-    import { Method46Flavor, Method46Concentration, StepAdjustment } from '$lib/coffee-recipes/CoffeeRecipeTypes.d';
-	import { getCoffeeRecipeDefaultConfig } from '$lib/coffee-recipes/CoffeeRecipeConstants';
+	import { type CoffeeParametersConfig, type CoffeeRecipeSteps, type RecipeChangeFactors, type StepAdjustmentAvailableOptions, type StepAdjustmentSelectedOptionConfig, type StepConfig, type StepControls, type Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes.d';
+    import { getCoffeeRecipeDefaultConfig } from '$lib/coffee-recipes/CoffeeRecipeConstants';
 	import { getStepsDurationInSeconds, updateStepDurationInSeconds, updateSteps } from '$lib/coffee-recipes/CoffeeRecipesFactory';
 	import { caculateCoffeeParameters } from '$lib/coffee-recipes/CoffeeParametersUtils';
 	import { displayNumber } from '$lib/utils/NumberDisplayUtils';
 	import SimpleModal from '../modal/SimpleModal.svelte';
-	import ConfigMethod46 from './ConfigMethod46.svelte';
-	import { calculateMethod46Steps, getRatio40WaterInGrams, getRatio60WaterInGrams, PourRatio40Config, PourRatio60Config } from '$lib/coffee-recipes/Method46Utils';
-	import Display46Method from './DisplayMethod46.svelte';
 	import ConfigStepAdjustment from './step-adjustment/ConfigStepAdjustment.svelte';
-	import { canEditStepAdjustment, createStepsFromStepAdjustments, getNewStepAdjustmentSelectedOptions, hasChangedStepAdjustmentSelectedOption, recreateSteps } from '$lib/coffee-recipes/StepAdjustmentUtils';
+	import { createStepsFromStepAdjustments, recreateStepsWithStepControl, stepOptionsAreSelectable } from '$lib/coffee-recipes/StepAdjustmentUtils';
 	import DisplayStepAdjustment from './step-adjustment/DisplayStepAdjustment.svelte';
+	
 	
 
     interface CoffeeRecipeWithTimerDisplayProps {
@@ -59,25 +56,22 @@
         return elaspedTimeInSeconds > (timeframe.to - offset);
     }
 
-    // let show46MethodModal = $state(false);
-    // let pourRatios40 = $state(Method46Flavor.STANDARD);
-    // let pourRatios60 = $state(Method46Concentration.EVEN_STRONGER);
-    // let pourRatios40WaterInGrams = $derived(getRatio40WaterInGrams(pourRatios40, coffeeRecipeRunes.coffeeParams.waterInGrams));
-    // let pourRatios60WaterInGrams = $derived(getRatio60WaterInGrams(pourRatios60, coffeeRecipeRunes.coffeeParams.waterInGrams));
-
-    // $effect(() => {
-    //     if(coffeeRecipeRunes.coffeeRecipe.is46Method) {
-    //         coffeeRecipeRunes.stepsConfig = calculateMethod46Steps(pourRatios40, pourRatios60);
-    //     }
-    // });
-
     let showStepAdjustmentModal = $state(false);
 
     let inEditMode = $state(false);
 
+    const getClonedRecipeChangeFacotrs = () : RecipeChangeFactors => {
+        return <RecipeChangeFactors> JSON.parse(JSON.stringify(coffeeRecipeSteps.recipeChangeFactors));
+    }
+
     const updateRunesStepsConfig = (index: number, newVal: number) => {
         console.log('updateRunesStepsConfig', 'index', index, 'newVal', newVal);
-        coffeeRecipeRunes.stepsConfig = updateStepDurationInSeconds(coffeeRecipeRunes.stepsConfig, index, newVal);
+        // coffeeRecipeRunes.stepsConfig = updateStepDurationInSeconds(coffeeRecipeRunes.stepsConfig, index, newVal);
+
+        let clonedRecipeChangeFactors: RecipeChangeFactors = getClonedRecipeChangeFacotrs();
+        console.log('updateRunesStepsConfig clonedRecipeChangeFactors', clonedRecipeChangeFactors);
+        clonedRecipeChangeFactors.stepsDurationInSeconds[index] = newVal;
+        coffeeRecipeRunes.recipeChangeFactors = clonedRecipeChangeFactors;
     }
 
     const recalculateStepsDurationAndTimeframe = (e, index) => {
@@ -99,33 +93,25 @@
     const resetStepsDurationToDefault = () => {
         let stepsDurationInSeconds: number[] = [];
         if(coffeeRecipeSteps.enableStepsAdjustments) {
-            stepsDurationInSeconds = createStepsFromStepAdjustments(coffeeRecipeSteps.stepsAdjustments, coffeeRecipeSteps.stepAdjustmentSelectedOptions)
-                .map(step => step.durationInSeconds);
-            coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, stepsDurationInSeconds);
+            stepsDurationInSeconds = createStepsFromStepAdjustments(
+                coffeeRecipeSteps.stepsAdjustments, coffeeRecipeSteps.recipeChangeFactors.stepControls?.selectedOptions)
+            .map(step => step.durationInSeconds);
         } else {
-            coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, getStepsDurationInSeconds(getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).steps));
+            stepsDurationInSeconds = getStepsDurationInSeconds(getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).steps);
         }
+        // coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, stepsDurationInSeconds);
 
-
-        // if(coffeeRecipeRunes.coffeeRecipe.is46Method) {
-        //     let stepsDurationInSeconds = getStepsDurationInSeconds(getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).steps);
-        //     if(coffeeRecipeRunes.stepsConfig.length === 4) {
-        //         // stepsDurationInSeconds = [45, 45, 60, 60]
-        //         stepsDurationInSeconds = PourRatio40Config.STANDARD.durationInSeconds.concat(PourRatio60Config.STRONGER.durationInSeconds);
-        //     } else if (coffeeRecipeRunes.stepsConfig.length === 3) {
-        //         // stepsDurationInSeconds = [45, 45, 120]
-        //         stepsDurationInSeconds = PourRatio40Config.STANDARD.durationInSeconds.concat(PourRatio60Config.LIGHTER.durationInSeconds);
-        //     }
-        //     coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, stepsDurationInSeconds);
-        // } else {
-        //     coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, getStepsDurationInSeconds(getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).steps));
-        // }
+        let clonedRecipeChangeFactors: RecipeChangeFactors = getClonedRecipeChangeFacotrs();
+        clonedRecipeChangeFactors.stepsDurationInSeconds = stepsDurationInSeconds;
+        coffeeRecipeRunes.recipeChangeFactors = clonedRecipeChangeFactors;
     }
 
 
     const updateCoffeeParamsBeanInGrams = (value: number) => {
-        console.log('updateCoffeeParamsBeanInGrams value, beanInGrams, newValue', value, coffeeRecipeRunes.coffeeParams.beanInGrams, coffeeRecipeRunes.coffeeParams.beanInGrams + value);
-        let newBeanInGrams: number = displayNumber(coffeeRecipeRunes.coffeeParams.beanInGrams + value) * 1;
+        console.log('updateCoffeeParamsBeanInGrams value, beanInGrams, newValue', value, 
+            coffeeRecipeRunes.recipeChangeFactors.coffeeParameters.beanInGrams, 
+            coffeeRecipeRunes.recipeChangeFactors.coffeeParameters.beanInGrams + value);
+        let newBeanInGrams: number = displayNumber(coffeeRecipeRunes.recipeChangeFactors.coffeeParameters.beanInGrams + value) * 1;
         updateCoffeeParams(newBeanInGrams);
     }
 
@@ -140,33 +126,37 @@
         // console.log('updateCoffeeParams beanInGrams', beanInGrams);
         let newCoffeeParams = <CoffeeParametersConfig> {
             beanInGrams: beanInGrams,
-            coffeeToWaterRatio: coffeeRecipeRunes.coffeeParams.coffeeToWaterRatio,
-            waterInGrams: coffeeRecipeRunes.coffeeParams.waterInGrams
+            coffeeToWaterRatio: coffeeRecipeRunes.recipeChangeFactors.coffeeParameters.coffeeToWaterRatio,
+            waterInGrams: coffeeRecipeRunes.recipeChangeFactors.coffeeParameters.waterInGrams
         }
         newCoffeeParams = caculateCoffeeParameters(newCoffeeParams);
         console.log('updateCoffeeParams newCoffeeParams', newCoffeeParams);
 
-        coffeeRecipeRunes.coffeeParams = newCoffeeParams;
+        // coffeeRecipeRunes.coffeeParams = newCoffeeParams;
+        let clonedRecipeChangeFactors = getClonedRecipeChangeFacotrs();
+        clonedRecipeChangeFactors.coffeeParameters = newCoffeeParams
+        coffeeRecipeRunes.recipeChangeFactors = clonedRecipeChangeFactors;
     }
-
-    const getStepAdjustmentAvailableOptions = (stepAdjustment: string): StepAdjustmentAvailableOptions[] => {
-        let availableOptions = coffeeRecipeSteps.stepAdjustmentAvailableOptions?.filter(availableOptions => availableOptions.stepAdjustment === stepAdjustment);
-        // console.log('getStepAdjustmentAvailableOptions', stepAdjustment, availableOptions);
-        return availableOptions;
-    }
-
-    // const getStepAdjustmentSelectedOption = (stepAdjustment: string) => {
-    //     return coffeeRecipeSteps.stepAdjustmentSelectedOptions?.filter(option => option.stepAdjustment === stepAdjustment);
-    // }
 
     const handleStepAdjustmentSelectedOption = (stepAdjustment: string, selectedOption: string) => {
         console.log('handleStepAdjustmentSelectedOption ', stepAdjustment, selectedOption);
-        let newSelectedOption: StepAdjustmentSelectedOptionConfig = <StepAdjustmentSelectedOptionConfig>{ stepAdjustment: stepAdjustment, selectedOption: selectedOption};
-        if(hasChangedStepAdjustmentSelectedOption(coffeeRecipeSteps.stepAdjustmentSelectedOptions, newSelectedOption)) {
-            coffeeRecipeRunes.stepAdjustmentSelectedOptions = getNewStepAdjustmentSelectedOptions(coffeeRecipeSteps.stepAdjustmentSelectedOptions, newSelectedOption);
-            coffeeRecipeRunes.stepsConfig = recreateSteps(coffeeRecipeRunes.recipeId, 
-                coffeeRecipeSteps.stepAdjustmentSelectedOptions, newSelectedOption);
-        }
+        let newSelectedOption: StepAdjustmentSelectedOptionConfig = <StepAdjustmentSelectedOptionConfig>{ stepAdjustmentName: stepAdjustment, option: selectedOption};
+        
+        let clonedStepControls: StepControls = <StepControls> JSON.parse(JSON.stringify(coffeeRecipeSteps.recipeChangeFactors.stepControls));
+        console.log('handleStepAdjustmentSelectedOption clonedStepControls=', clonedStepControls);
+        console.log('handleStepAdjustmentSelectedOption newSelectedOption=', newSelectedOption);
+
+        clonedStepControls.selectedOptions.forEach(selectedOption => {
+            if(selectedOption.stepAdjustmentName === newSelectedOption.stepAdjustmentName) {
+                selectedOption.option = newSelectedOption.option;
+            }
+        });
+
+        console.log('handleStepAdjustmentSelectedOption updated clonedStepControls=', clonedStepControls);
+        
+        let clonedRecipeChangeFactors = getClonedRecipeChangeFacotrs();
+        clonedRecipeChangeFactors.stepControls = clonedStepControls;
+        coffeeRecipeRunes.recipeChangeFactors = clonedRecipeChangeFactors;
     }
 
 </script>
@@ -179,7 +169,7 @@
     {/if}
     <div>    
         <CoffeeParametersDisplay
-            coffeeParameters={coffeeRecipeRunes.coffeeParams}
+            coffeeParameters={coffeeRecipeSteps.recipeChangeFactors.coffeeParameters}
             editEnabled={StopWatchState.NEW === stopwatch.stopwatchState}
             handleBtnClick={updateCoffeeParamsBeanInGrams} 
             handleInputChange={handleCoffeeParamsBeanInGramsInputChange} />
@@ -316,34 +306,27 @@
     <!-- <ConfigMethod46 bind:pourRatios40={pourRatios40} bind:pourRatios60={pourRatios60} /> -->
 
     {#if coffeeRecipeSteps.enableStepsAdjustments}
-    {#each coffeeRecipeSteps.stepAdjustmentSelectedOptions as selectedOption}
-        {#if canEditStepAdjustment(coffeeRecipeSteps.stepsAdjustments, selectedOption.stepAdjustment) }
-            <ConfigStepAdjustment
-                stepAdjustmentSelectedOption={selectedOption} 
-                stepAdjustmentAvailableOptions={getStepAdjustmentAvailableOptions(selectedOption.stepAdjustment)[0]} 
-                handleSelect={handleStepAdjustmentSelectedOption}
-                isMethod46={coffeeRecipeRunes.coffeeRecipe.is46Method} />
-        {/if}
-    {/each}
+        <!-- {#each coffeeRecipeSteps.stepAdjustmentSelectedOptions as selectedOption} -->
+        {#each coffeeRecipeSteps.recipeChangeFactors.stepControls.selectedOptions as selectedOption, index}
+        <!-- {#each coffeeRecipeRunes.coffeeRecipe.defaultStepControls.selectedOptions as selectedOption} -->
+            <!-- <div>{JSON.stringify(selectedOption.stepAdjustmentName)}</div>
+            <div>{JSON.stringify(coffeeRecipeRunes.coffeeRecipe.defaultStepControls?.isSelectableFlags)}</div> -->
+            {#if stepOptionsAreSelectable(coffeeRecipeSteps.recipeChangeFactors.stepControls.isSelectableFlags, selectedOption.stepAdjustmentName) }
+                <!-- <div>{JSON.stringify(selectedOption)}</div> -->
+                <ConfigStepAdjustment
+                    stepAdjustmentSelectedOption={selectedOption} 
+                    stepAdjustmentAvailableOptions={coffeeRecipeSteps.recipeChangeFactors.stepControls.availableOptions[index]} 
+                    handleSelect={handleStepAdjustmentSelectedOption}
+                    isMethod46={coffeeRecipeRunes.coffeeRecipe.is46Method} />
+                
+            {/if}
+        {/each}
     
-
-    
-
-    <br/>
-
-    <!-- <Display46Method 
-        pourRatios40={pourRatios40} pourRatios60={pourRatios60} 
-        pourRatios40WaterInGrams={pourRatios40WaterInGrams}
-        pourRatios60WaterInGrams={pourRatios60WaterInGrams} /> -->
-
-    <!-- <Display46Method 
-        pourRatios40={pourRatios40} pourRatios60={pourRatios60} 
-        pourRatios40WaterInGrams={coffeeRecipeSteps.steps.filter(step => step.stepAdjustment && step.stepAdjustment === 'twoStepsRatios').map(step => step.stepWaterInfo?.waterInGrams)}
-        pourRatios60WaterInGrams={coffeeRecipeSteps.steps.filter(step => step.stepAdjustment && step.stepAdjustment === 'pourDivisions').map(step => step.stepWaterInfo?.waterInGrams)} /> -->
-    
-    <DisplayStepAdjustment 
-        stepAdjustmentSelectedOptions={coffeeRecipeSteps.stepAdjustmentSelectedOptions}
-        steps={coffeeRecipeSteps.steps} isMethod46={coffeeRecipeRunes.coffeeRecipe.is46Method} />
+        <br/>
+        <DisplayStepAdjustment 
+            stepAdjustmentSelectedOptions={coffeeRecipeSteps.recipeChangeFactors.stepControls.selectedOptions}
+            steps={coffeeRecipeSteps.steps} 
+            isMethod46={coffeeRecipeRunes.coffeeRecipe.is46Method} />
     
     {/if}
     

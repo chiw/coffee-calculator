@@ -18,7 +18,7 @@ export const calculateStepWaterInfos = (coffeeParameters: CoffeeParametersConfig
         stepWaterInfos.push(stepWaterInfo);
         totalWaterInGrams +=  stepWaterInGrams;
     })
-    console.log('calculateStepWaterInfos', stepWaterInfos);
+    // console.log('calculateStepWaterInfos', stepWaterInfos);
     return stepWaterInfos;
 }
 
