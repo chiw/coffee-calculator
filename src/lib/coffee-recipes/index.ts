@@ -4,7 +4,7 @@ export { Menu, AllRecipePaths } from "./CoffeeRecipeConstants";
 export { SwitchState, PourOverStage, PouringTechnique } from "./CoffeeRecipeTypes.d";
 export type { CoffeeRecipeConfig, Reference, StepWaterInfo } from "./CoffeeRecipeTypes.d";
 
-export { createCoffeeParams, createCoffeeRecipe, createCoffeeRecipeSteps } from "$lib/coffee-recipes/CoffeeRecipesFactory";
+export { createCoffeeParams, createCoffeeRecipe, createCoffeeRecipeStepsWithChangeFactors } from "$lib/coffee-recipes/CoffeeRecipesFactory";
 
 export { 
     createBrandMetaInfo, createDripperMetaInfo, createRecipeMetaInfo,

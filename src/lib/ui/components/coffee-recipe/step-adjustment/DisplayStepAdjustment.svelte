@@ -1,6 +1,5 @@
 <script lang="ts">
     import * as m from '$lib/paraglide/messages.js';
-	import type { StepWaterInfo } from "$lib/coffee-recipes";
 	import type { StepAdjustmentSelectedOptionConfig, StepConfig } from "$lib/coffee-recipes/CoffeeRecipeTypes";
 	import { getStepAdjustmentOptionMessageKey, getStepAdjustmentTitleMessageKey } from "../CoffeeReceipeMessageKeys";
 	

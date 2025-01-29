@@ -1,5 +1,8 @@
 import { getCoffeeRecipeDefaultConfig, type CoffeeRecipeId } from "./CoffeeRecipeConstants";
-import { type PourDivisionsConfig, type PourParametersConfig, type StepAdjustmentSelectedOptionConfig, type StepConfig, type StepAdjustmentsConfig, type TwoStepsRatiosConfig, type StepAdjustmentAvailableOptions, type CoffeeRecipeConfig, StepAdjustment, type StepControls, type StepAdjustmentSelectableFlagConfig } from "./CoffeeRecipeTypes.d";
+import { 
+    type PourDivisionsConfig, type PourParametersConfig, type StepAdjustmentSelectedOptionConfig, 
+    type StepConfig, type StepAdjustmentsConfig, type TwoStepsRatiosConfig, type StepAdjustmentAvailableOptions, 
+    type CoffeeRecipeConfig, StepAdjustment, type StepControls, type StepAdjustmentSelectableFlagConfig } from "./CoffeeRecipeTypes.d";
 
 export const createEmptyStepControls = () => {
     return <StepControls> {
@@ -32,13 +35,7 @@ export const stepOptionsAreSelectable = (isSelectableFlags: StepAdjustmentSelect
     return result;
 }
 
-export const canEditStepAdjustment = (stepAdjustmensts: StepAdjustmentsConfig, adjustment: string) => {
-    if(adjustment === StepAdjustment.TWO_STEPS_RATIOS) return stepAdjustmensts.twoStepsRatios?.canEdit;
-    if(adjustment === StepAdjustment.POUR_DIVISIONS) return stepAdjustmensts.pourDivisions?.canEdit;
-    return false;
-}
-
-export const getStepAdjustmentAvailableOptions = (stepsAdjustments: StepAdjustmentsConfig): StepAdjustmentAvailableOptions[] => {
+const getStepAdjustmentAvailableOptions = (stepsAdjustments: StepAdjustmentsConfig): StepAdjustmentAvailableOptions[] => {
     let stepAdjustmentAvailableOptions: StepAdjustmentAvailableOptions[] = [];
 
     stepsAdjustments.order.forEach(adjustment => {
@@ -59,41 +56,6 @@ export const getStepAdjustmentAvailableOptions = (stepsAdjustments: StepAdjustme
 
     return stepAdjustmentAvailableOptions;
 }
-
-// export const hasChangedStepAdjustmentSelectedOption = (existingSelectedOptions: StepAdjustmentSelectedOptionConfig[], newSelectedOption: StepAdjustmentSelectedOptionConfig) => {
-//     console.log('hasChangedStepAdjustmentSelectedOption input existingSelectedOptions', existingSelectedOption, 'newSelectedOption', newSelectedOption);
-//     let existingSelectedOption = existingSelectedOptions.find(option => option.stepAdjustmentName === newSelectedOption.stepAdjustmentName);
-
-//     if(existingSelectedOption?.option != newSelectedOption.option) {
-//         console.log('hasChangedStepAdjustmentSelectedOption existing [' + existingSelectedOption?.option + '] !=  newSelected [' + newSelectedOption.option+ ']');
-//         return true;
-//     } else {
-//         console.log('hasChangedStepAdjustmentSelectedOption existing [' + existingSelectedOption?.option + '] ==  newSelected [' + newSelectedOption.option+ ']');
-//         return false;
-//     }
-// }
-
-// export const getNewStepAdjustmentSelectedOptions = (existingSelectedOptions: StepAdjustmentSelectedOptionConfig[], newSelectedOption: StepAdjustmentSelectedOptionConfig): StepAdjustmentSelectedOptionConfig[] => {
-//     let clonedSelectedOptions: StepAdjustmentSelectedOptionConfig[] = <StepAdjustmentSelectedOptionConfig[]> JSON.parse(JSON.stringify(existingSelectedOptions));
-    
-//     clonedSelectedOptions.forEach((selectedOption, index) => {
-//         if(selectedOption.stepAdjustmentName === newSelectedOption.stepAdjustmentName) {
-//             selectedOption.option = newSelectedOption.option
-//         }
-//     });
-//     console.log('getNewStepAdjustmentSelectedOptions', clonedSelectedOptions);
-//     return clonedSelectedOptions;
-// }
-
-// export const recreateSteps = (recipeId: CoffeeRecipeId, 
-//     existingSelectedOptions: StepAdjustmentSelectedOptionConfig[], newSelectedOption: StepAdjustmentSelectedOptionConfig) : StepConfig[] => {
-
-//     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
-    
-//     let newSelectedOptions: StepAdjustmentSelectedOptionConfig[] = getNewStepAdjustmentSelectedOptions(existingSelectedOptions, newSelectedOption);
-    
-//     return createStepsFromStepAdjustments(recipeDefaultConfig.stepAdjustments, newSelectedOptions);
-// }
 
 export const createStepsFromStepAdjustments = (stepsAdjustments: StepAdjustmentsConfig, stepAdjustmentSelectedOptions: StepAdjustmentSelectedOptionConfig[]) => {
     let steps: StepConfig[] = [];

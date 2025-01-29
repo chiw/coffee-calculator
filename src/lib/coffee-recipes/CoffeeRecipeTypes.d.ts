@@ -51,20 +51,6 @@ export const SwitchState = {
 } as const;
 export type SwitchState = keyof typeof SwitchState;
 
-export const Method46Flavor = {
-    STANDARD : 'STANDARD',
-    SWEETER : 'SWEETER',
-    BRIGHTER : 'BRIGHTER'
-} as const;
-export type Method46Flavor = keyof typeof Method46Flavor;
-
-export const Method46Concentration = {
-    LIGHTER : 'LIGHTER',
-    STRONGER : 'STRONGER',
-    EVEN_STRONGER : 'EVEN_STRONGER'
-} as const;
-export type Method46Concentration = keyof typeof Method46Concentration;
-
 export const StepAdjustment = {
     TWO_STEPS_RATIOS : 'TWO_STEPS_RATIOS',
     POUR_DIVISIONS : 'POUR_DIVISIONS'
