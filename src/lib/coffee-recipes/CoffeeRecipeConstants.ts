@@ -114,7 +114,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                                 showWaterTemperature: true,
 
                                 durationInSeconds: 45,
-                                pourParameters: { waterPercentage: 15, waterTemp: 93},
+                                pourParameters: { waterPercentage: 15, waterTemp: '93'},
                                 stepAdjustment: StepAdjustment.TWO_STEPS_RATIOS
                             },
                             {                        
@@ -124,7 +124,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                                 showWaterTemperature: true,
 
                                 durationInSeconds: 45,
-                                pourParameters: { waterPercentage: 25, waterTemp: 93},
+                                pourParameters: { waterPercentage: 25, waterTemp: '93'},
                                 stepAdjustment: StepAdjustment.TWO_STEPS_RATIOS
                             }
                         ],
@@ -149,7 +149,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                                 showWaterTemperature: true,
 
                                 durationInSeconds: 40,
-                                pourParameters: { waterPercentage: 26.6667, waterTemp: 93},
+                                pourParameters: { waterPercentage: 26.6667, waterTemp: '93'},
                                 stepAdjustment: StepAdjustment.POUR_DIVISIONS
                             },
                             {   
@@ -159,7 +159,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                                 showWaterTemperature: true,
 
                                 durationInSeconds: 35,
-                                pourParameters: { waterPercentage: 33.3333, waterTemp: 70},
+                                pourParameters: { waterPercentage: 33.3333, waterTemp: '70-80'},
                                 stepAdjustment: StepAdjustment.POUR_DIVISIONS
                             },
                             {   
@@ -167,7 +167,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                                 stage: PourOverStage.FINAL,
 
                                 durationInSeconds: 45,
-                                pourParameters: { waterPercentage: 0, waterTemp: 70},
+                                pourParameters: { waterPercentage: 0, waterTemp: '70'},
                                 stepAdjustment: StepAdjustment.POUR_DIVISIONS
                             }
                         ],
@@ -184,7 +184,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         showWaterTemperature: true,
 
                         durationInSeconds: 45,
-                        pourParameters: { waterPercentage: 16.6667, waterTemp: 93}
+                        pourParameters: { waterPercentage: 16.6667, waterTemp: '93'}
                     },
                     {
                         switchState: SwitchState.OPEN,
@@ -193,7 +193,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         showWaterTemperature: true,
 
                         durationInSeconds: 45,
-                        pourParameters: { waterPercentage: 23.3333, waterTemp: 93}
+                        pourParameters: { waterPercentage: 23.3333, waterTemp: '93'}
                     },
                     {
                         switchState: SwitchState.OPEN,
@@ -202,7 +202,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         showWaterTemperature: true,
 
                         durationInSeconds: 40,
-                        pourParameters: { waterPercentage: 26.6667, waterTemp: 93}
+                        pourParameters: { waterPercentage: 26.6667, waterTemp: '93'}
                     },
                     {
                         switchState: SwitchState.CLOSED,
@@ -211,14 +211,14 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         showWaterTemperature: true,
 
                         durationInSeconds: 35,
-                        pourParameters: { waterPercentage: 33.3333, waterTemp: 70}
+                        pourParameters: { waterPercentage: 33.3333, waterTemp: '70'}
                     },
                     {
                         switchState: SwitchState.OPEN,
                         stage: PourOverStage.FINAL,
 
                         durationInSeconds: 45,
-                        pourParameters: { waterPercentage: 0, waterTemp: 70}
+                        pourParameters: { waterPercentage: 0, waterTemp: '70'}
                     }
                 ],
                 references: [
@@ -245,7 +245,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         showWaterTemperature: true,
 
                         durationInSeconds: 30,
-                        pourParameters: { waterPercentage: 21.4285, waterTemp: 93}
+                        pourParameters: { waterPercentage: 21.4285, waterTemp: '93'}
                     },
                     {
                         switchState: SwitchState.OPEN,
@@ -253,7 +253,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         showWaterTemperature: true,
 
                         durationInSeconds: 45,
-                        pourParameters: { waterPercentage: 21.4285, waterTemp: 93}
+                        pourParameters: { waterPercentage: 21.4285, waterTemp: '93'}
                     },
                     {
                         switchState: SwitchState.CLOSED,
@@ -261,14 +261,14 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         showWaterTemperature: true,
 
                         durationInSeconds: 30,
-                        pourParameters: { waterPercentage: 57.1430, waterTemp: 70}
+                        pourParameters: { waterPercentage: 57.1430, waterTemp: '70'}
                     },
                     {
                         switchState: SwitchState.OPEN,
                         stage: PourOverStage.FINAL,
 
                         durationInSeconds: 75,
-                        pourParameters: { waterPercentage: 0, waterTemp: 70}
+                        pourParameters: { waterPercentage: 0, waterTemp: '70'}
                     }
                 ],
                 references: [
@@ -294,7 +294,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         stage: PourOverStage.BLOOMING,
 
                         durationInSeconds: 30,
-                        pourParameters: { waterPercentage: 25, waterTemp: 93}
+                        pourParameters: { waterPercentage: 25, waterTemp: '93'}
                     },
                     {
                         switchState: SwitchState.OPEN,
@@ -302,14 +302,14 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         pouringTechnique: PouringTechnique.CENTER,
 
                         durationInSeconds: 40,
-                        pourParameters: { waterPercentage: 75, waterTemp: 93}
+                        pourParameters: { waterPercentage: 75, waterTemp: '93'}
                     },
                     {
                         switchState: SwitchState.OPEN,
                         stage: PourOverStage.FINAL,
 
                         durationInSeconds: 70,
-                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                        pourParameters: { waterPercentage: 0, waterTemp: '93'}
                     }
                 ],
                 references: [
@@ -336,7 +336,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         showWaterTemperature: true,
 
                         durationInSeconds: 40,
-                        pourParameters: { waterPercentage: 20.8333, waterTemp: 96}
+                        pourParameters: { waterPercentage: 20.8333, waterTemp: '96'}
                     },
                     {
                         switchState: SwitchState.OPEN,
@@ -344,7 +344,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         pouringTechnique: PouringTechnique.CENTER,
 
                         durationInSeconds: 50,
-                        pourParameters: { waterPercentage: 41.6667, waterTemp: 96}
+                        pourParameters: { waterPercentage: 41.6667, waterTemp: '96'}
                     },
                     {
                         switchState: SwitchState.CLOSED,
@@ -352,14 +352,14 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         pouringTechnique: PouringTechnique.CIRCLE,
 
                         durationInSeconds: 40,
-                        pourParameters: { waterPercentage: 37.5, waterTemp: 96}
+                        pourParameters: { waterPercentage: 37.5, waterTemp: '96'}
                     },
                     {
                         switchState: SwitchState.OPEN,
                         stage: PourOverStage.FINAL,
 
                         durationInSeconds: 65,
-                        pourParameters: { waterPercentage: 0, waterTemp: 96}
+                        pourParameters: { waterPercentage: 0, waterTemp: '96'}
                     }
                 ],
                 references: [
@@ -385,21 +385,21 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         stage: PourOverStage.FIRST_POUR,
 
                         durationInSeconds: 25,
-                        pourParameters: { waterPercentage: 50, waterTemp: 93}
+                        pourParameters: { waterPercentage: 50, waterTemp: '93'}
                     },
                     {
                         switchState: SwitchState.CLOSED,
                         stage: PourOverStage.SECOND_POUR,
 
                         durationInSeconds: 95,
-                        pourParameters: { waterPercentage: 50, waterTemp: 93}
+                        pourParameters: { waterPercentage: 50, waterTemp: '93'}
                     },
                     {
                         switchState: SwitchState.OPEN,
                         stage: PourOverStage.FINAL,
 
                         durationInSeconds: 75,
-                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                        pourParameters: { waterPercentage: 0, waterTemp: '93'}
                     }
                 ],
                 references: [
@@ -429,7 +429,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         stage: PourOverStage.FIRST_POUR,
 
                         durationInSeconds: 45,
-                        pourParameters: { waterPercentage: 50.2222, waterTemp: 93}
+                        pourParameters: { waterPercentage: 50.2222, waterTemp: '93'}
                     },
                     {
                         switchState: SwitchState.CLOSED,
@@ -442,7 +442,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         },
 
                         durationInSeconds: 15,
-                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                        pourParameters: { waterPercentage: 0, waterTemp: '93'}
                     },
                     {
                         switchState: SwitchState.OPEN,
@@ -454,21 +454,21 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         },
 
                         durationInSeconds: 30,
-                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                        pourParameters: { waterPercentage: 0, waterTemp: '93'}
                     },
                     {
                         switchState: SwitchState.CLOSED,
                         stage: PourOverStage.SECOND_POUR,
 
                         durationInSeconds: 60,
-                        pourParameters: { waterPercentage: 49.7777, waterTemp: 93}
+                        pourParameters: { waterPercentage: 49.7777, waterTemp: '93'}
                     },
                     {
                         switchState: SwitchState.OPEN,
                         stage: PourOverStage.FINAL,
 
                         durationInSeconds: 30,
-                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                        pourParameters: { waterPercentage: 0, waterTemp: '93'}
                     }
                 ],
                 references: [
@@ -495,66 +495,66 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         swirl: true,
 
                         durationInSeconds: 45,
-                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                        pourParameters: { waterPercentage: 20, waterTemp: '93'}
                     },
                     {                        
                         stage: PourOverStage.FIRST_POUR,
                         pouringTechnique: PouringTechnique.CIRCLE,
 
                         durationInSeconds: 15,
-                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                        pourParameters: { waterPercentage: 20, waterTemp: '93'}
                     },
                     {                        
                         stage: PourOverStage.PAUSE,
 
                         durationInSeconds: 10,
-                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                        pourParameters: { waterPercentage: 0, waterTemp: '93'}
                     },
                     {                        
                         stage: PourOverStage.SECOND_POUR,
                         pouringTechnique: PouringTechnique.CIRCLE,
 
                         durationInSeconds: 10,
-                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                        pourParameters: { waterPercentage: 20, waterTemp: '93'}
                     },
                     {                        
                         stage: PourOverStage.PAUSE,
 
                         durationInSeconds: 10,
-                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                        pourParameters: { waterPercentage: 0, waterTemp: '93'}
                     },
                     {                        
                         stage: PourOverStage.THIRD_POUR,
                         pouringTechnique: PouringTechnique.CIRCLE,
 
                         durationInSeconds: 10,
-                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                        pourParameters: { waterPercentage: 20, waterTemp: '93'}
                     },
                     {                        
                         stage: PourOverStage.PAUSE,
 
                         durationInSeconds: 10,
-                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                        pourParameters: { waterPercentage: 0, waterTemp: '93'}
                     },
                     {                        
                         stage: PourOverStage.FOURTH_POUR,
                         pouringTechnique: PouringTechnique.CIRCLE,
 
                         durationInSeconds: 10,
-                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                        pourParameters: { waterPercentage: 20, waterTemp: '93'}
                     },
                     {                        
                         stage: PourOverStage.PAUSE,
                         swirl: true,
 
                         durationInSeconds: 5,
-                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                        pourParameters: { waterPercentage: 0, waterTemp: '93'}
                     },
                     {                        
                         stage: PourOverStage.FINAL,
 
                         durationInSeconds: 55,
-                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                        pourParameters: { waterPercentage: 0, waterTemp: '93'}
                     }
                 ],
                 references: [
@@ -580,41 +580,41 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         stage: PourOverStage.BLOOMING,
 
                         durationInSeconds: 30,
-                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                        pourParameters: { waterPercentage: 20, waterTemp: '93'}
                     },
                     {                        
                         stage: PourOverStage.FIRST_POUR,
                         pouringTechnique: PouringTechnique.CIRCLE,
 
                         durationInSeconds: 30,
-                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                        pourParameters: { waterPercentage: 20, waterTemp: '93'}
                     },
                     {                        
                         stage: PourOverStage.SECOND_POUR,
                         pouringTechnique: PouringTechnique.CIRCLE,
 
                         durationInSeconds: 30,
-                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                        pourParameters: { waterPercentage: 20, waterTemp: '93'}
                     },
                     {                        
                         stage: PourOverStage.THIRD_POUR,
                         pouringTechnique: PouringTechnique.CIRCLE,
 
                         durationInSeconds: 30,
-                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                        pourParameters: { waterPercentage: 20, waterTemp: '93'}
                     },
                     {                        
                         stage: PourOverStage.FOURTH_POUR,
                         pouringTechnique: PouringTechnique.CIRCLE,
 
                         durationInSeconds: 30,
-                        pourParameters: { waterPercentage: 20, waterTemp: 93}
+                        pourParameters: { waterPercentage: 20, waterTemp: '93'}
                     },
                     {                        
                         stage: PourOverStage.FINAL,
 
                         durationInSeconds: 60,
-                        pourParameters: { waterPercentage: 0, waterTemp: 93}
+                        pourParameters: { waterPercentage: 0, waterTemp: '93'}
                     }
                 ],
                 references: [
@@ -665,7 +665,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                                 pouringTechnique: PouringTechnique.CIRCLE,
         
                                 durationInSeconds: 45,
-                                pourParameters: { waterPercentage: 20, waterTemp: 93},
+                                pourParameters: { waterPercentage: 20, waterTemp: '93'},
                                 stepAdjustment: StepAdjustment.TWO_STEPS_RATIOS
                             },
                             {                        
@@ -673,7 +673,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                                 pouringTechnique: PouringTechnique.CIRCLE,
         
                                 durationInSeconds: 45,
-                                pourParameters: { waterPercentage: 20, waterTemp: 93},
+                                pourParameters: { waterPercentage: 20, waterTemp: '93'},
                                 stepAdjustment: StepAdjustment.TWO_STEPS_RATIOS
                             }
                         ],
@@ -696,7 +696,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                                 pouringTechnique: PouringTechnique.CIRCLE,
         
                                 durationInSeconds: 45,
-                                pourParameters: { waterPercentage: 20, waterTemp: 93},
+                                pourParameters: { waterPercentage: 20, waterTemp: '93'},
                                 stepAdjustment: StepAdjustment.POUR_DIVISIONS
                             },
                             {   
@@ -704,7 +704,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                                 pouringTechnique: PouringTechnique.CIRCLE,
         
                                 durationInSeconds: 30,
-                                pourParameters: { waterPercentage: 20, waterTemp: 93},
+                                pourParameters: { waterPercentage: 20, waterTemp: '93'},
                                 stepAdjustment: StepAdjustment.POUR_DIVISIONS
                             },
                             {   
@@ -712,7 +712,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                                 pouringTechnique: PouringTechnique.CIRCLE,
         
                                 durationInSeconds: 45,
-                                pourParameters: { waterPercentage: 20, waterTemp: 93},
+                                pourParameters: { waterPercentage: 20, waterTemp: '93'},
                                 stepAdjustment: StepAdjustment.POUR_DIVISIONS
                             }
                         ],
@@ -723,7 +723,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                                     pouringTechnique: PouringTechnique.CIRCLE,
             
                                     durationInSeconds: 120,
-                                    pourParameters: { waterPercentage: 60, waterTemp: 93},
+                                    pourParameters: { waterPercentage: 60, waterTemp: '93'},
                                     stepAdjustment: StepAdjustment.POUR_DIVISIONS
                                 }
                             ]},
@@ -733,7 +733,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                                     pouringTechnique: PouringTechnique.CIRCLE,
             
                                     durationInSeconds: 60,
-                                    pourParameters: { waterPercentage: 30, waterTemp: 93},
+                                    pourParameters: { waterPercentage: 30, waterTemp: '93'},
                                     stepAdjustment: StepAdjustment.POUR_DIVISIONS
                                 },
                                 {   
@@ -741,7 +741,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                                     pouringTechnique: PouringTechnique.CIRCLE,
             
                                     durationInSeconds: 60,
-                                    pourParameters: { waterPercentage: 30, waterTemp: 93},
+                                    pourParameters: { waterPercentage: 30, waterTemp: '93'},
                                     stepAdjustment: StepAdjustment.POUR_DIVISIONS
                                 },
                             ]},
