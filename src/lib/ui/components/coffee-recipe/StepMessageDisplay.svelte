@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { StepConfig, StepWaterInfo, Timeframe } from "$lib/coffee-recipes/CoffeeRecipeTypes";
+	import type { StepConfig } from "$lib/coffee-recipes/CoffeeRecipeTypes";
 	import { isFinalStage, isPauseStage, isPouringStage, isWaterFlowStage } from "$lib/utils/CoffeeRecipeUtils";
 
 	import { finalStepMessageKey, pouringTechniqueMessageKey, pourOverStageMessageKey, stepWaterInfoMessageKey, stirMessageKey, swirlMessageKey, waterFlowMessageKey, waterTemperatureMessageKey } from "./CoffeeReceipeMessageKeys";

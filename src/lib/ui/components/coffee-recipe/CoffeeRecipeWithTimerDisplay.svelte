@@ -18,14 +18,14 @@
     import StopwatchDisplay from '../stopwatch/StopwatchDisplay.svelte';
 	import { shouldDisplayTimeframe } from '$lib/utils/TimeframeDisplayUtils';
 	import TimeframeDurationDisplay from './TimeframeDurationDisplay.svelte';
-	import { type CoffeeParametersConfig, type CoffeeRecipeSteps, type RecipeChangeFactors, type StepAdjustmentAvailableOptions, type StepAdjustmentSelectedOptionConfig, type StepConfig, type StepControls, type Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes.d';
+	import { type CoffeeParametersConfig, type CoffeeRecipeSteps, type RecipeChangeFactors, type StepAdjustmentSelectedOptionConfig, type StepControls, type Timeframe } from '$lib/coffee-recipes/CoffeeRecipeTypes.d';
     import { getCoffeeRecipeDefaultConfig } from '$lib/coffee-recipes/CoffeeRecipeConstants';
-	import { getStepsDurationInSeconds, updateStepDurationInSeconds, updateSteps } from '$lib/coffee-recipes/CoffeeRecipesFactory';
+	import { getStepsDurationInSeconds } from '$lib/coffee-recipes/CoffeeRecipesFactory';
 	import { caculateCoffeeParameters } from '$lib/coffee-recipes/CoffeeParametersUtils';
 	import { displayNumber } from '$lib/utils/NumberDisplayUtils';
 	import SimpleModal from '../modal/SimpleModal.svelte';
 	import ConfigStepAdjustment from './step-adjustment/ConfigStepAdjustment.svelte';
-	import { createStepsFromStepAdjustments, recreateStepsWithStepControl, stepOptionsAreSelectable } from '$lib/coffee-recipes/StepAdjustmentUtils';
+	import { createStepsFromStepAdjustments, stepOptionsAreSelectable } from '$lib/coffee-recipes/StepAdjustmentUtils';
 	import DisplayStepAdjustment from './step-adjustment/DisplayStepAdjustment.svelte';
 	
 	
@@ -66,8 +66,7 @@
 
     const updateRunesStepsConfig = (index: number, newVal: number) => {
         console.log('updateRunesStepsConfig', 'index', index, 'newVal', newVal);
-        // coffeeRecipeRunes.stepsConfig = updateStepDurationInSeconds(coffeeRecipeRunes.stepsConfig, index, newVal);
-
+        
         let clonedRecipeChangeFactors: RecipeChangeFactors = getClonedRecipeChangeFacotrs();
         console.log('updateRunesStepsConfig clonedRecipeChangeFactors', clonedRecipeChangeFactors);
         clonedRecipeChangeFactors.stepsDurationInSeconds[index] = newVal;
@@ -83,11 +82,6 @@
         let newVal = parseInt(e.currentTarget.value);
         
         updateRunesStepsConfig(index, newVal);
-        
-        // localStepsTimeframeDisplay = calculateStepsTimeframe(localStepsDurationInSeconds);
-        // console.log(
-        //     'recalculateStepsDurationAndTimeframe()  localStepsDurationInSeconds:', 
-        //     localStepsDurationInSeconds, 'localStepsTimeframeDisplay:', localStepsTimeframeDisplay);
     }
 
     const resetStepsDurationToDefault = () => {
@@ -99,8 +93,7 @@
         } else {
             stepsDurationInSeconds = getStepsDurationInSeconds(getCoffeeRecipeDefaultConfig(coffeeRecipeRunes.recipeId).steps);
         }
-        // coffeeRecipeRunes.stepsConfig = updateSteps(coffeeRecipeRunes.stepsConfig, stepsDurationInSeconds);
-
+        
         let clonedRecipeChangeFactors: RecipeChangeFactors = getClonedRecipeChangeFacotrs();
         clonedRecipeChangeFactors.stepsDurationInSeconds = stepsDurationInSeconds;
         coffeeRecipeRunes.recipeChangeFactors = clonedRecipeChangeFactors;
@@ -132,7 +125,6 @@
         newCoffeeParams = caculateCoffeeParameters(newCoffeeParams);
         console.log('updateCoffeeParams newCoffeeParams', newCoffeeParams);
 
-        // coffeeRecipeRunes.coffeeParams = newCoffeeParams;
         let clonedRecipeChangeFactors = getClonedRecipeChangeFacotrs();
         clonedRecipeChangeFactors.coffeeParameters = newCoffeeParams
         coffeeRecipeRunes.recipeChangeFactors = clonedRecipeChangeFactors;
@@ -303,14 +295,8 @@
         </div>
 	{/snippet}
 
-    <!-- <ConfigMethod46 bind:pourRatios40={pourRatios40} bind:pourRatios60={pourRatios60} /> -->
-
     {#if coffeeRecipeSteps.enableStepsAdjustments}
-        <!-- {#each coffeeRecipeSteps.stepAdjustmentSelectedOptions as selectedOption} -->
         {#each coffeeRecipeSteps.recipeChangeFactors.stepControls.selectedOptions as selectedOption, index}
-        <!-- {#each coffeeRecipeRunes.coffeeRecipe.defaultStepControls.selectedOptions as selectedOption} -->
-            <!-- <div>{JSON.stringify(selectedOption.stepAdjustmentName)}</div>
-            <div>{JSON.stringify(coffeeRecipeRunes.coffeeRecipe.defaultStepControls?.isSelectableFlags)}</div> -->
             {#if stepOptionsAreSelectable(coffeeRecipeSteps.recipeChangeFactors.stepControls.isSelectableFlags, selectedOption.stepAdjustmentName) }
                 <!-- <div>{JSON.stringify(selectedOption)}</div> -->
                 <ConfigStepAdjustment

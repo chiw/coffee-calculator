@@ -1,5 +1,5 @@
 import { CoffeeRecipeId, PouringTechnique, PourOverStage, SwitchState, type StepWaterInfo } from '$lib/coffee-recipes';
-import { Method46Concentration, Method46Flavor, StepAdjustment } from '$lib/coffee-recipes/CoffeeRecipeTypes.d';
+import { StepAdjustment } from '$lib/coffee-recipes/CoffeeRecipeTypes.d';
 import * as m from '$lib/paraglide/messages.js';
 
 export const brandMessageKey = (brandName: string) => {
@@ -109,22 +109,6 @@ export const stirMessageKey = () => {
     return m.label_step_stir();
 }
 
-export const method46FlavorKey = (pourRatios40: Method46Flavor) => {
-    switch(pourRatios40) {
-        case Method46Flavor.STANDARD : return m.label_46_method_40_choices_standard();
-        case Method46Flavor.SWEETER : return m.label_46_method_40_choices_sweeter();
-        case Method46Flavor.BRIGHTER: return m.label_46_method_40_choices_brighter();
-    }
-}
-
-export const Method46ConcentrationKey = (pourRatios60: Method46Concentration) => {
-    switch(pourRatios60) {
-        case Method46Concentration.LIGHTER: return m.label_46_method_60_choices_lighter();
-        case Method46Concentration.STRONGER: return m.label_46_method_60_choices_stronger();
-        case Method46Concentration.EVEN_STRONGER: return m.label_46_method_60_choices_evenstronger();
-    }
-}
-
 export const getStepAdjustmentTitleMessageKey = (stepAdjustment: string, isMethod46: boolean) => {
     switch(stepAdjustment) {
         case StepAdjustment.TWO_STEPS_RATIOS : 
@@ -135,10 +119,6 @@ export const getStepAdjustmentTitleMessageKey = (stepAdjustment: string, isMetho
 }
 
 export const getStepAdjustmentOptionMessageKey = (stepAdjustment: string, option: string) => {
-    // let messageKey = "m." + "label_" + stepAdjustment + "_" + option;
-    // // console.log('getStepAdjustmentOptionMessageKey', messageKey);
-    // return eval(messageKey)();
-
     switch(stepAdjustment) {
         case StepAdjustment.TWO_STEPS_RATIOS: return getStepAdjustmentTwoStepsRatiosOptionMessageKey(option);
         case StepAdjustment.POUR_DIVISIONS: return getStepAdjustmentPourDivisionsOptionMessageKey(option);
