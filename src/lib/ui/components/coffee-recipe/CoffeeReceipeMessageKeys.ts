@@ -82,7 +82,7 @@ export const stepWaterInfoMessageKey = (stepWaterInfo: StepWaterInfo) => {
         : m.label_step_msg_water_volume(stepWaterInfo);
 }
 
-export const waterTemperatureMessageKey = (waterTemperature: number) => {
+export const waterTemperatureMessageKey = (waterTemperature: string) => {
     return m.label_step_msg_water_temperature({waterTemperature: waterTemperature});
 }
 

@@ -79,7 +79,7 @@ export type CoffeeParametersConfig = {
 
 export type PourParametersConfig = {
     waterPercentage: number,
-    waterTemp: number,
+    waterTemp: string,
 }
 
 export type StepConfig = {
@@ -204,7 +204,7 @@ export type StepWaterInfo = {
     waterPercentage: number,
     totalWaterInGrams: string,
     showTotalWaterInGrams: boolean,
-    waterTemperature: number,
+    waterTemperature: string,
 }
 
 export type CoffeeRecipeSteps = {
