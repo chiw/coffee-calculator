@@ -90,10 +90,12 @@
     "label_step_stir": "用匙攪拌",
 
     "label_brand_hario" : "Hario",
+    "label_brand_kalita" : "Kalita",
     "label_brand_unknwon" : "Unknown Brand",
 
     "label_dripper_switch" : "Switch",
     "label_dripper_v60" : "V60",
+    "label_dripper_wave155" : "Wave 155",
     "label_dripper_unknown" : "Unknown dripper",
 
     "label_hario_switch_tetsukasuyanewhybrid" : "Hario Switch New Hybrid (粕谷哲)",
@@ -104,7 +106,8 @@
     "label_hario_switch_cafetaster" : "Hario Switch (Cafetaster 咖啡嗜者)",
     "label_hario_v60_46method" : "Hario V60 4:6法 (粕谷哲)",
     "label_hario_v60_jameshoffmann" : "Hario V60 (James Hoffmann)",
-    "label_hario_v60_mattwinton" : "Hario V60 (Matt Winton)",    
+    "label_hario_v60_mattwinton" : "Hario V60 (Matt Winton)",
+    "label_kalita_wave155_itoatsuomi" : "Kalita Wave 155 (伊藤篤臣 Goodman Roaster)",
     "label_unknown_recipe" : "Unknown Recipe",
 
     "label_nav_item_hario_switch_tetsukasuyanewhybrid" : "New Hybrid (粕谷哲)",
@@ -116,5 +119,6 @@
     "label_nav_item_hario_v60_46method" : "4:6法 (粕谷哲)",
     "label_nav_item_hario_v60_jameshoffmann" : "James Hoffmann",
     "label_nav_item_hario_v60_mattwinton" : "Matt Winton",
+    "label_nav_item_kalita_wave155_itoatsuomi" : "伊藤篤臣 Goodman Roaster",
     "label_nav_item_unknown_recipe" : "Unknown Recipe"
 }

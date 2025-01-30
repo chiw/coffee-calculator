@@ -13,7 +13,8 @@ export const CoffeeRecipeId = {
     hario_switch_cafetaster : 'hario_switch_cafetaster',
     hario_v60_46method: 'hario_v60_46method',
     hario_v60_jameshoffmann: 'hario_v60_jameshoffmann',
-    hario_v60_mattwinton: 'hario_v60_mattwinton'
+    hario_v60_mattwinton: 'hario_v60_mattwinton',
+    kalita_wave155_itoatsuomi: 'kalita_wave155_itoatsuomi'
 } as const;
 export type CoffeeRecipeId = keyof typeof CoffeeRecipeId;
 
@@ -39,6 +40,17 @@ const dripperBrands: DripperBrand[] = [
                     <DripperRecipe> { recipeId: CoffeeRecipeId.hario_v60_46method, name: '46method', createdBy: 'tetsukasuya' },
                     <DripperRecipe> { recipeId: CoffeeRecipeId.hario_v60_jameshoffmann, name: 'jameshoffmann', createdBy: 'jameshoffmann' },
                     <DripperRecipe> { recipeId: CoffeeRecipeId.hario_v60_mattwinton, name: 'mattwinton', createdBy: 'mattwinton' }
+                ]
+            }
+        ]
+    },
+    <DripperBrand> {
+        name: 'kalita',
+        drippers: [
+            <DripperType> {
+                name: 'wave155',
+                recipes: [
+                    <DripperRecipe> { recipeId: CoffeeRecipeId.kalita_wave155_itoatsuomi, 'name': 'itoatsuomi', createdBy: 'itoatsuomi' }
                 ]
             }
         ]
@@ -754,6 +766,61 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                     { 
                         description : 'How to Make Coffee Using the 4:6 Brewing Method', 
                         url: 'https://en.philocoffea.com/blogs/blog/coffee-brewing-method' 
+                    }
+                ]
+            }
+        };
+        case CoffeeRecipeId.kalita_wave155_itoatsuomi : {
+            return <CoffeeRecipeConfig>{
+                isTimerRecipe: true,
+                isImmersionDripperRecipe: false,
+                showTimeframeEndTime: true,
+                coffeeParameters: {
+                    beanInGrams: 14,
+                    coffeeToWaterRatio: -1,
+                    waterInGrams: 250
+                },
+                steps: [
+                    {
+                        stage: PourOverStage.BLOOMING,
+                        stir: true,
+
+                        durationInSeconds: 25,
+                        pourParameters: { waterPercentage: 20, waterTemp: '93'}
+                    },
+                    {                        
+                        stage: PourOverStage.FIRST_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 43,
+                        pourParameters: { waterPercentage: 20, waterTemp: '90-95'}
+                    },
+                    {                        
+                        stage: PourOverStage.SECOND_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 43,
+                        pourParameters: { waterPercentage: 20, waterTemp: '90-95'}
+                    },
+                    {                        
+                        stage: PourOverStage.THIRD_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 43,
+                        pourParameters: { waterPercentage: 20, waterTemp: '90-95'}
+                    },
+                    {                        
+                        stage: PourOverStage.FOURTH_POUR,
+                        pouringTechnique: PouringTechnique.CIRCLE,
+
+                        durationInSeconds: 43,
+                        pourParameters: { waterPercentage: 20, waterTemp: '90-95'}
+                    }
+                ],
+                references: [
+                    { 
+                        description : '【日本咖啡職人】手沖一杯好咖啡教學分享用kalita wave dripper', 
+                        url: 'https://www.youtube.com/watch?v=IymOKUmp2vQ' 
                     }
                 ]
             }
