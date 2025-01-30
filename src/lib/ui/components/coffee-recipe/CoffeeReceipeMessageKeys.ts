@@ -5,6 +5,7 @@ import * as m from '$lib/paraglide/messages.js';
 export const brandMessageKey = (brandName: string) => {
     switch(brandName) {
         case 'hario' : return m.label_brand_hario;
+        case 'kalita' : return m.label_brand_kalita;
         default:
             return m.label_brand_unknwon;
     }
@@ -14,6 +15,7 @@ export const dripperMessageKey = (dripperName: string) => {
     switch(dripperName) {
         case 'switch' : return m.label_dripper_switch;
         case 'v60' : return m.label_dripper_v60;
+        case 'wave155' : return m.label_dripper_wave155;
         default:
             return m.label_dripper_unknown;
     }
@@ -29,7 +31,8 @@ export const coffeeRecipeIdSelectMessageKey = (coffeeRecipeId: CoffeeRecipeId) =
         case CoffeeRecipeId.hario_switch_cafetaster: return m.label_hario_switch_cafetaster;
         case CoffeeRecipeId.hario_v60_46method : return m.label_hario_v60_46method;
         case CoffeeRecipeId.hario_v60_jameshoffmann: return m.label_hario_v60_jameshoffmann;
-        case CoffeeRecipeId.hario_v60_mattwinton : return m.label_hario_v60_mattwinton;        
+        case CoffeeRecipeId.hario_v60_mattwinton : return m.label_hario_v60_mattwinton;
+        case CoffeeRecipeId.kalita_wave155_itoatsuomi: return m.label_kalita_wave155_itoatsuomi;
         default:
             return m.label_unknown_recipe;
     }
@@ -45,7 +48,8 @@ export const coffeeRecipeIdSelectNavItemMessageKey = (coffeeRecipeId: CoffeeReci
         case CoffeeRecipeId.hario_switch_cafetaster: return m.label_nav_item_hario_switch_cafetaster;
         case CoffeeRecipeId.hario_v60_46method : return m.label_nav_item_hario_v60_46method;
         case CoffeeRecipeId.hario_v60_jameshoffmann: return m.label_nav_item_hario_v60_jameshoffmann;
-        case CoffeeRecipeId.hario_v60_mattwinton : return m.label_nav_item_hario_v60_mattwinton;        
+        case CoffeeRecipeId.hario_v60_mattwinton : return m.label_nav_item_hario_v60_mattwinton;
+        case CoffeeRecipeId.kalita_wave155_itoatsuomi: return m.label_nav_item_kalita_wave155_itoatsuomi;
         default:
             return m.label_nav_item_unknown_recipe;
     }
