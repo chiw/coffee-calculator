@@ -391,6 +391,76 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                     coffeeToWaterRatio: 16,
                     waterInGrams: -1
                 },
+                enableStepsAdjustments: true,
+                stepAdjustments: {
+                    order: [StepAdjustment.POUR_DIVISIONS],
+                    selectedOptions: [
+                        { stepAdjustmentName: StepAdjustment.POUR_DIVISIONS, option: 'coffeeChroniclerStandardVersion' }
+                    ],
+                    pourDivisions: {
+                        canEdit: true,
+                        overrideDisplayKey: 'label_pourDivisions_coffeechronicler_title',
+                        maxSteps: 3,
+                        totalPercentages: 100,
+                        stepsStages: [PourOverStage.FIRST_POUR, PourOverStage.SECOND_POUR, PourOverStage.FINAL],
+                        selectMode: 'OPTIONS',
+                        defaultSteps: [
+                            {
+                                switchState: SwitchState.OPEN,
+                                stage: PourOverStage.FIRST_POUR,
+        
+                                durationInSeconds: 45,
+                                pourParameters: { waterPercentage: 50, waterTemp: '93'},
+                                stepAdjustment: StepAdjustment.POUR_DIVISIONS
+                            },
+                            {
+                                switchState: SwitchState.CLOSED,
+                                stage: PourOverStage.SECOND_POUR,
+        
+                                durationInSeconds: 75,
+                                pourParameters: { waterPercentage: 50, waterTemp: '93'},
+                                stepAdjustment: StepAdjustment.POUR_DIVISIONS
+                            },
+                            {
+                                switchState: SwitchState.OPEN,
+                                stage: PourOverStage.FINAL,
+        
+                                durationInSeconds: 75,
+                                pourParameters: { waterPercentage: 0, waterTemp: '93'},
+                                stepAdjustment: StepAdjustment.POUR_DIVISIONS
+                            }
+                        ],
+                        options: [
+                            { name: 'coffeeChroniclerStandardVersion', default: true, useDefault: true},
+                            { name: 'coffeeChroniclerSweetVersion', default: false, steps: [
+                                {
+                                    switchState: SwitchState.OPEN,
+                                    stage: PourOverStage.FIRST_POUR,
+            
+                                    durationInSeconds: 25,
+                                    pourParameters: { waterPercentage: 50, waterTemp: '93'},
+                                    stepAdjustment: StepAdjustment.POUR_DIVISIONS
+                                },
+                                {
+                                    switchState: SwitchState.CLOSED,
+                                    stage: PourOverStage.SECOND_POUR,
+            
+                                    durationInSeconds: 95,
+                                    pourParameters: { waterPercentage: 50, waterTemp: '93'},
+                                    stepAdjustment: StepAdjustment.POUR_DIVISIONS
+                                },
+                                {
+                                    switchState: SwitchState.OPEN,
+                                    stage: PourOverStage.FINAL,
+            
+                                    durationInSeconds: 75,
+                                    pourParameters: { waterPercentage: 0, waterTemp: '93'},
+                                    stepAdjustment: StepAdjustment.POUR_DIVISIONS
+                                }
+                            ]},
+                        ] 
+                    },
+                },
                 steps: [
                     {
                         switchState: SwitchState.OPEN,
@@ -669,6 +739,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                     ],
                     twoStepsRatios: {
                         canEdit: true,
+                        overrideDisplayKey: 'label_twoStepsRatios_method46_title',
                         minPercentage: 16.6667,
                         maxPercentage: 23.3333,
                         defaultSteps : [
@@ -698,6 +769,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                     },
                     pourDivisions: {
                         canEdit: true,
+                        overrideDisplayKey: 'label_pourDivisions_method46_title',
                         maxSteps: 3,
                         totalPercentages: 60,
                         stepsStages: [PourOverStage.THIRD_POUR, PourOverStage.FOURTH_POUR, PourOverStage.FIFTH_POUR],

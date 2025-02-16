@@ -113,12 +113,32 @@ export const stirMessageKey = () => {
     return m.label_step_stir();
 }
 
-export const getStepAdjustmentTitleMessageKey = (stepAdjustment: string, isMethod46: boolean) => {
+export const getStepAdjustmentTitleMessageKey = (stepAdjustment: string, recipeId: string) => {
     switch(stepAdjustment) {
         case StepAdjustment.TWO_STEPS_RATIOS : 
-            return isMethod46 ? m.label_twoStepsRatios_method46_title() : m.label_twoStepsRatios_title();
+            return getTwoStepsRatiosTitleMessageKey(recipeId);
         case StepAdjustment.POUR_DIVISIONS : 
-            return isMethod46 ? m.label_pourDivisions_method46_title() : m.label_pourDivisions_title();
+            return getPourDivisionsTitleMessageKey(recipeId);
+    }
+}
+
+export const getTwoStepsRatiosTitleMessageKey = (recipeId: string) => {
+    switch (recipeId) {
+        case CoffeeRecipeId.hario_v60_46method:
+            return m.label_twoStepsRatios_method46_title();
+        default:
+            return m.label_twoStepsRatios_title();
+    }
+}
+
+export const getPourDivisionsTitleMessageKey = (recipeId: string) => {
+    switch (recipeId) {
+        case CoffeeRecipeId.hario_v60_46method:
+            return m.label_pourDivisions_method46_title();
+        case CoffeeRecipeId.hario_switch_coffeechronicler:
+            return m.label_pourDivisions_coffeechronicler_title();
+        default:
+            return m.label_pourDivisions_title();
     }
 }
 
@@ -158,5 +178,8 @@ export const getStepAdjustmentPourDivisionsOptionMessageKey = (option: string) =
         case 'method46EvenStronger': return m.label_pourDivisions_method46EvenStronger();
 
         case 'newHybridTwoPours': return m.label_pourDivisions_newHybridTwoPours();
+
+        case 'coffeeChroniclerStandardVersion' :  return m.label_pourDivisions_coffeeChroniclerStandardVersion();
+        case 'coffeeChroniclerSweetVersion' :  return m.label_pourDivisions_coffeeChroniclerSweetVersion();
     }
 }

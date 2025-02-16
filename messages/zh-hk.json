@@ -55,6 +55,7 @@
 
     "label_pourDivisions_title" : "注水次數",
     "label_pourDivisions_method46_title" : "60% (強度)",
+    "label_pourDivisions_coffeechronicler_title" : "風味",
 
     "label_pourDivisions_lighter" : "一次",
     "label_pourDivisions_stronger" : "兩次",
@@ -65,6 +66,9 @@
     "label_pourDivisions_method46EvenStronger" : "強",
 
     "label_pourDivisions_newHybridTwoPours" : "兩次",
+
+    "label_pourDivisions_coffeeChroniclerStandardVersion" : "基本",
+    "label_pourDivisions_coffeeChroniclerSweetVersion" : "甜",
 
     "label_stages_blooming" : "悶蒸階段",
     "label_stages_pouring" : "注水階段",

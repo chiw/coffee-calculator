@@ -70,6 +70,7 @@
         let clonedRecipeChangeFactors: RecipeChangeFactors = getClonedRecipeChangeFacotrs();
         console.log('updateRunesStepsConfig clonedRecipeChangeFactors', clonedRecipeChangeFactors);
         clonedRecipeChangeFactors.stepsDurationInSeconds[index] = newVal;
+        clonedRecipeChangeFactors.factorsToUpdate = ['stepsDurationInSeconds'];
         coffeeRecipeRunes.recipeChangeFactors = clonedRecipeChangeFactors;
     }
 
@@ -96,6 +97,7 @@
         
         let clonedRecipeChangeFactors: RecipeChangeFactors = getClonedRecipeChangeFacotrs();
         clonedRecipeChangeFactors.stepsDurationInSeconds = stepsDurationInSeconds;
+        clonedRecipeChangeFactors.factorsToUpdate = ['stepsDurationInSeconds'];
         coffeeRecipeRunes.recipeChangeFactors = clonedRecipeChangeFactors;
     }
 
@@ -127,6 +129,7 @@
 
         let clonedRecipeChangeFactors = getClonedRecipeChangeFacotrs();
         clonedRecipeChangeFactors.coffeeParameters = newCoffeeParams
+        clonedRecipeChangeFactors.factorsToUpdate = ['coffeeParameters'];
         coffeeRecipeRunes.recipeChangeFactors = clonedRecipeChangeFactors;
     }
 
@@ -148,6 +151,7 @@
         
         let clonedRecipeChangeFactors = getClonedRecipeChangeFacotrs();
         clonedRecipeChangeFactors.stepControls = clonedStepControls;
+        clonedRecipeChangeFactors.factorsToUpdate = ['stepControls'];
         coffeeRecipeRunes.recipeChangeFactors = clonedRecipeChangeFactors;
     }
 
@@ -303,7 +307,7 @@
                     stepAdjustmentSelectedOption={selectedOption} 
                     stepAdjustmentAvailableOptions={coffeeRecipeSteps.recipeChangeFactors.stepControls.availableOptions[index]} 
                     handleSelect={handleStepAdjustmentSelectedOption}
-                    isMethod46={coffeeRecipeRunes.coffeeRecipe.is46Method} />
+                    recipeId={coffeeRecipeRunes.coffeeRecipe.recipeId} />
                 
             {/if}
         {/each}
@@ -312,7 +316,7 @@
         <DisplayStepAdjustment 
             stepAdjustmentSelectedOptions={coffeeRecipeSteps.recipeChangeFactors.stepControls.selectedOptions}
             steps={coffeeRecipeSteps.steps} 
-            isMethod46={coffeeRecipeRunes.coffeeRecipe.is46Method} />
+            recipeId={coffeeRecipeRunes.coffeeRecipe.recipeId} />
     
     {/if}
     

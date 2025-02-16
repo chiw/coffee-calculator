@@ -106,7 +106,8 @@ export type TwoStepsRatiosConfig = {
     defaultSteps: StepConfig[],
     selectMode: string,
     options: TwoStepsRatioOptionConfig[],
-    canEdit: boolean
+    canEdit: boolean,
+    overrideDisplayKey?: string
 }
 
 export type PourDivisionsOptionConfig = {
@@ -123,7 +124,8 @@ export type PourDivisionsConfig = {
     selectMode: string,
     defaultSteps: StepConfig[],
     options: PourDivisionsOptionConfig[],
-    canEdit: boolean
+    canEdit: boolean,
+    overrideDisplayKey?: string
 }
 
 export type StepAdjustmentsConfig = {
@@ -158,6 +160,7 @@ export type RecipeChangeFactors = {
     coffeeParameters: CoffeeParametersConfig,
     stepsDurationInSeconds: number[],
     stepControls?: StepControls,
+    factorsToUpdate? : string[]
 }
 
 export type CoffeeRecipeConfig = {
