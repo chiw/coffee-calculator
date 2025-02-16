@@ -8,10 +8,10 @@
         stepAdjustmentSelectedOption: StepAdjustmentSelectedOptionConfig,
         stepAdjustmentAvailableOptions: StepAdjustmentAvailableOptions,
         handleSelect: any,
-        isMethod46: boolean
+        recipeId: string
     }    
 
-    let { stepAdjustmentSelectedOption, stepAdjustmentAvailableOptions, handleSelect, isMethod46} : ConfigStepAdjustmentProps = $props();
+    let { stepAdjustmentSelectedOption, stepAdjustmentAvailableOptions, handleSelect, recipeId } : ConfigStepAdjustmentProps = $props();
 
     // let selectedOption = $state(stepAdjustmentSelectedOption.option);
 
@@ -51,7 +51,7 @@
 </script>
 
 <div class="mt-4"></div>
-<div class="text-sm font-bold mb-2">{getStepAdjustmentTitleMessageKey(stepAdjustmentSelectedOption.stepAdjustmentName, isMethod46)}</div>
+<div class="text-sm font-bold mb-2">{getStepAdjustmentTitleMessageKey(stepAdjustmentSelectedOption.stepAdjustmentName, recipeId)}</div>
 
 <fieldset class="flex flex-wrap gap-2">
 {#each stepAdjustmentAvailableOptions.options as availableOption, i }

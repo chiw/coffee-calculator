@@ -80,7 +80,8 @@ export const createCoffeeRecipeStepsWithChangeFactors = (recipeId: CoffeeRecipeI
 
     console.log('steps', steps);
 
-    let stepsDurationInSeconds: number[] = (steps.length == recipeChangeFactors.stepsDurationInSeconds.length) ?
+    // let stepsDurationInSeconds: number[] = (steps.length == recipeChangeFactors.stepsDurationInSeconds.length) ?
+    let stepsDurationInSeconds: number[] = recipeChangeFactors.factorsToUpdate?.includes('stepsDurationInSeconds') ?
         recipeChangeFactors.stepsDurationInSeconds
         : getStepsDurationInSeconds(steps);
     
