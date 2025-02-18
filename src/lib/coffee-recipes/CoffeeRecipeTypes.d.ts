@@ -210,6 +210,7 @@ export type CoffeeRecipeSteps = {
 export type Reference = {
     description: string,
     url: string,
+    type?: string
 }
 
 export type CoffeeRecipe = {
