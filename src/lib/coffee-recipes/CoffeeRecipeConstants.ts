@@ -236,7 +236,8 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 references: [
                     { 
                         description : 'The Ultimate Recipe for Brewing Any Coffee Bean Deliciously Has Evolved Even Further! - Tetsu Kasuya', 
-                        url: 'https://www.youtube.com/watch?v=4FeUp_zNiiY' 
+                        url: 'https://www.youtube.com/watch?v=4FeUp_zNiiY',
+                        type: 'youtube'
                     }
                 ]
             }
@@ -286,7 +287,8 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 references: [
                     { 
                         description : 'Is it the God Recipe, or the Devil Recipe? ｜ The Ultimate Switch Recipe Ever!! - Tetsu Kasuya', 
-                        url: 'https://www.youtube.com/watch?v=gC8K40kZ_6E' 
+                        url: 'https://www.youtube.com/watch?v=gC8K40kZ_6E',
+                        type: 'youtube'
                     }
                 ]
             }
@@ -327,7 +329,8 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 references: [
                     { 
                         description : 'Easy Hario Switch Recipe from Emi Fukahori (World Brewers Cup Champion)', 
-                        url: 'https://europeancoffeetrip.com/easy-hario-switch-recipe-emi-fukahor/' 
+                        url: 'https://europeancoffeetrip.com/easy-hario-switch-recipe-emi-fukahor/',
+                        type: 'webpage'
                     }
                 ]
             }
@@ -377,7 +380,8 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 references: [
                     { 
                         description : "Ole Kristian Bøen's Hario Switch Recipe", 
-                        url: 'https://www.hario-europe.com/blogs/hario-community/ole-kristian-boens-switch-recipe' 
+                        url: 'https://www.hario-europe.com/blogs/hario-community/ole-kristian-boens-switch-recipe',
+                        type: 'webpage'
                     }
                 ]
             }
@@ -487,11 +491,13 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 references: [
                     { 
                         description : 'Hario Switch Review: The Hybrid Brewer You Need to Try', 
-                        url: 'https://coffeechronicler.com/hario-switch/' 
+                        url: 'https://coffeechronicler.com/hario-switch/',
+                        type: 'webpage'
                     },
                     { 
                         description : '(YouTube) The ultimate Hario Switch RECIPE: A consistent cup that will blow your mind', 
-                        url: 'https://www.youtube.com/watch?v=68ZOXrXbVHc' 
+                        url: 'https://www.youtube.com/watch?v=68ZOXrXbVHc',
+                        type: 'youtube' 
                     }
                 ]
             }
@@ -556,7 +562,8 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 references: [
                     { 
                         description : 'https://www.facebook.com/reel/645724447883746', 
-                        url: 'https://www.facebook.com/reel/645724447883746' 
+                        url: 'https://www.facebook.com/reel/645724447883746',
+                        type: 'facebook' 
                     }
                 ]
             }
@@ -642,7 +649,8 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 references: [
                     { 
                         description : 'A Better 1 Cup V60 Technique - James Hoffmann', 
-                        url: 'https://www.youtube.com/watch?v=1oB1oDrDkHM' 
+                        url: 'https://www.youtube.com/watch?v=1oB1oDrDkHM',
+                        type: 'youtube'
                     }
                 ]
             }
@@ -702,15 +710,18 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 references: [
                     { 
                         description : '[HARIO] V60 Five-Pour Recipe - Matt Winton (World Brewers Cup Champion)', 
-                        url: 'https://www.youtube.com/watch?v=YIC-2nFQ7vM' 
+                        url: 'https://www.youtube.com/watch?v=YIC-2nFQ7vM',
+                        type: 'youtube' 
                     },
                     {
                         description : '[HARIO] V60 Five-Pour Recipe (Advanced Tips) - Matt Winton (World Brewers Cup Champion)',
-                        url: 'https://www.youtube.com/watch?v=Xm2aAuhuLks0'
+                        url: 'https://www.youtube.com/watch?v=Xm2aAuhuLks0',
+                        type: 'youtube'
                     },
                     {
                         description : 'Detailed Hario V60 Five Pour Coffee – Matt Winton’s Award-Winning Recipe',
-                        url: 'https://bigcupofcoffee.com/v60-five-pour-recipe-matt-winton/'
+                        url: 'https://bigcupofcoffee.com/v60-five-pour-recipe-matt-winton/',
+                        type: 'webpage'
                     }
                 ]
             }
@@ -837,7 +848,8 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 references: [
                     { 
                         description : 'How to Make Coffee Using the 4:6 Brewing Method', 
-                        url: 'https://en.philocoffea.com/blogs/blog/coffee-brewing-method' 
+                        url: 'https://en.philocoffea.com/blogs/blog/coffee-brewing-method',
+                        type: 'webpage'
                     }
                 ]
             }
@@ -892,7 +904,8 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 references: [
                     { 
                         description : '【日本咖啡職人】手沖一杯好咖啡教學分享用kalita wave dripper', 
-                        url: 'https://www.youtube.com/watch?v=IymOKUmp2vQ' 
+                        url: 'https://www.youtube.com/watch?v=IymOKUmp2vQ',
+                        type: 'youtube'
                     }
                 ]
             }
