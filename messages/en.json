@@ -3,6 +3,7 @@
 
     "label_locale_en" : "English",
     "label_locale_zh_hk" : "Chinese",
+    "label_locale_ja_JP" : "Japanese",
 
     "label_receipe_parameters" : "Parameters",
     "label_coffee_bean" : "Beans",

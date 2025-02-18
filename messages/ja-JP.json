@@ -1,0 +1,130 @@
+{
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+
+    "label_locale_en": "英語",
+    "label_locale_zh_hk": "中国語",
+    "label_locale_ja_JP": "日本語",
+
+    "label_receipe_parameters": "パラメーター",
+    "label_coffee_bean": "コーヒー豆",
+    "label_coffee_to_water_ratio": "比率",
+    "label_water": "お湯",
+    "label_recipe": "レシピ",
+    "label_steps": "手順",
+    "label_get_recipe": "レシピを取得",
+    "label_references": "参考文献",
+
+    "label_switchState_open": "開",
+    "label_switchState_closed": "閉",
+
+    "label_start_recipe": "開始",
+    "label_reset": "リセット",
+    "label_stop": "停止",
+
+    "label_edit": "時間",
+    "label_finish_edit": "完了",
+    "label_default": "デフォルト",
+
+    "label_46_method_adjust": "4:6 メソッド",
+    "label_46_method_adjust_title": "4:6 メソッドの調整",
+    "label_46_method_40": "40%（風味）",
+    "label_46_method_40_choices_standard": "スタンダード",
+    "label_46_method_40_choices_sweeter": "より甘く",
+    "label_46_method_40_choices_brighter": "より明るく",
+    "label_46_method_60": "60%（濃度）",
+    "label_46_method_60_choices_lighter": "軽め",
+    "label_46_method_60_choices_stronger": "強め",
+    "label_46_method_60_choices_evenstronger": "さらに強く",
+
+    "label_edit_stepAdjustments": "ステップ",
+    "label_edit_stepAdjustments_modal_title": "ステップの調整",
+
+    "label_twoStepsRatios_title": "甘味と酸味",
+    "label_twoStepsRatios_method46_title": "40%（甘味と酸味）",
+
+    "label_twoStepsRatios_sweeter": "より甘く",
+    "label_twoStepsRatios_standard": "バランス",
+    "label_twoStepsRatios_brighter": "より明るく",
+
+    "label_twoStepsRatios_method46Sweeter": "より甘く",
+    "label_twoStepsRatios_method46Standard": "バランス",
+    "label_twoStepsRatios_method46Brighter": "より明るく",
+
+    "label_twoStepsRatios_newHybridSweeter": "より甘く",
+    "label_twoStepsRatios_newHybridBalanced": "バランス",
+    "label_twoStepsRatios_newHybridBrighter": "より明るく",
+
+    "label_pourDivisions_title": "注ぎ回数",
+    "label_pourDivisions_method46_title": "60%（強さ）",
+    "label_pourDivisions_coffeechronicler_title": "風味",
+
+    "label_pourDivisions_lighter": "1",
+    "label_pourDivisions_stronger": "2",
+    "label_pourDivisions_evenStronger": "3",
+
+    "label_pourDivisions_method46Lighter": "軽め",
+    "label_pourDivisions_method46Stronger": "強め",
+    "label_pourDivisions_method46EvenStronger": "さらに強く",
+
+    "label_pourDivisions_newHybridTwoPours": "2",
+
+    "label_pourDivisions_coffeeChroniclerStandardVersion": "スタンダード",
+    "label_pourDivisions_coffeeChroniclerSweetVersion": "甘い",
+
+    "label_stages_blooming": "蒸らし段階",
+    "label_stages_pouring": "注ぎ段階",
+    "label_stages_first_pour": "1回目の注ぎ",
+    "label_stages_second_pour": "2回目の注ぎ",
+    "label_stages_third_pour": "3回目の注ぎ",
+    "label_stages_fourth_pour": "4回目の注ぎ",
+    "label_stages_fifth_pour": "5回目の注ぎ",
+    "label_stages_sixth_pour": "6回目の注ぎ",
+    "label_stages_final": "",
+    "label_stages_unknown": "",
+
+    "label_pouring_technique_center": "<b>中心注ぎ</b>",
+    "label_pouring_technique_circular": "<b>円を描くように注ぐ</b>",
+    "label_pouring_technique_unknown": "",
+
+    "label_step_msg_water_volume": "お湯を<b>{waterInGrams}g</b>注ぐ",
+    "label_step_msg_water_volume_with_total": "お湯を<b>{waterInGrams}g</b>注ぐ（合計：<b>{totalWaterInGrams}g</b>）",
+    "label_step_msg_water_temperature": "温度{waterTemperature}°C",
+    "label_step_msg_let_water_flow": "お湯を流す",
+    "label_step_msg_let_water_flow_until": "{time}までお湯を流す",
+    "label_step_pause": "一時停止",
+    "label_step_swirl": "優しくかき混ぜる",
+    "label_step_stir": "スプーンでかき混ぜる",
+
+    "label_brand_hario": "Hario",
+    "label_brand_kalita": "Kalita",
+    "label_brand_unknwon": "不明なブランド",
+
+    "label_dripper_switch": "Switch",
+    "label_dripper_v60": "V60",
+    "label_dripper_wave155": "Wave 155",
+    "label_dripper_unknown": "不明なドリッパー",
+
+    "label_hario_switch_tetsukasuyanewhybrid": "Hario Switch New Hybrid（粕谷 哲）",
+    "label_hario_switch_tetsukasuya": "Hario Switch （粕谷 哲）",
+    "label_hario_switch_emifukahori": "Hario Switch （Emi Fukahori）",
+    "label_hario_switch_olekristianboen": "Hario Switch （Ole Kristian Bøen）",
+    "label_hario_switch_coffeechronicler": "Hario Switch （Coffee Chronicler）",
+    "label_hario_switch_cafetaster": "Hario Switch （Cafetaster）",
+    "label_hario_v60_46method": "Hario V60 4:6 メソッド（粕谷 哲）",
+    "label_hario_v60_jameshoffmann": "Hario V60（James Hoffmann）",
+    "label_hario_v60_mattwinton": "Hario V60（Matt Winton）",
+    "label_kalita_wave155_itoatsuomi": "Kalita Wave 155（伊藤篤臣 Goodman Roaster ）",
+    "label_unknown_recipe": "不明なレシピ",
+
+    "label_nav_item_hario_switch_tetsukasuyanewhybrid": "New Hybrid（粕谷 哲）",
+    "label_nav_item_hario_switch_tetsukasuya": "粕谷 哲",
+    "label_nav_item_hario_switch_emifukahori": "Emi Fukahori",
+    "label_nav_item_hario_switch_olekristianboen": "Ole Kristian Bøen",
+    "label_nav_item_hario_switch_coffeechronicler": "Coffee Chronicler",
+    "label_nav_item_hario_switch_cafetaster": "Cafetaster",
+    "label_nav_item_hario_v60_46method": "4:6 メソッド（粕谷 哲）",
+    "label_nav_item_hario_v60_jameshoffmann": "James Hoffmann",
+    "label_nav_item_hario_v60_mattwinton": "Matt Winton",
+    "label_nav_item_kalita_wave155_itoatsuomi": "伊藤篤臣 Goodman Roaster",
+    "label_nav_item_unknown_recipe": "不明なレシピ"
+}
