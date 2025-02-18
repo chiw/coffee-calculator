@@ -561,9 +561,9 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                 ],
                 references: [
                     { 
-                        description : 'https://www.facebook.com/reel/645724447883746', 
-                        url: 'https://www.facebook.com/reel/645724447883746',
-                        type: 'facebook' 
+                        description : '零失敗沖煮法1', 
+                        url: 'https://www.instagram.com/reel/DEpPEHjzzcU/?igsh=MWRhbXQyY3RkM3B1bQ==',
+                        type: 'instagram' 
                     }
                 ]
             }
