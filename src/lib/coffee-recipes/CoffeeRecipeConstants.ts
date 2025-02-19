@@ -495,7 +495,7 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         type: 'webpage'
                     },
                     { 
-                        description : '(YouTube) The ultimate Hario Switch RECIPE: A consistent cup that will blow your mind', 
+                        description : 'The ultimate Hario Switch RECIPE: A consistent cup that will blow your mind', 
                         url: 'https://www.youtube.com/watch?v=68ZOXrXbVHc',
                         type: 'youtube' 
                     }
