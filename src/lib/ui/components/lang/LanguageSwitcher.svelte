@@ -35,7 +35,8 @@
      */
     const locale_labels = {
         "en": m.label_locale_en,
-        "zh-hk": m.label_locale_zh_hk
+        "zh-hk": m.label_locale_zh_hk,
+        "ja-JP": m.label_locale_ja_JP
     }
 
     function onWindowClick(e) {
