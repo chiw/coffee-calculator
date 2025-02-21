@@ -70,9 +70,12 @@
         const key = getToggleBrandDripperKey(brandName, dripperName);
         expandedDrippers[key] = !expandedDrippers[key];
 
-        // Close all other expanded drippers
+        closeOtherDrippersMenu(brandName, dripperName);
+    }
+
+    const closeOtherDrippersMenu = (brandName: string, dripperName: string) => {
         Object.keys(expandedDrippers).forEach((keyToCompare) => {
-            if (keyToCompare !== key) {
+            if (keyToCompare !== getToggleBrandDripperKey(brandName, dripperName)) {
                 expandedDrippers[keyToCompare] = false;
             }
         });
@@ -99,6 +102,7 @@
             const key = getToggleBrandDripperKey(menuToExpand.brandName, menuToExpand.dripperName);
             expandedDrippers[key] = true;
         }
+        closeOtherDrippersMenu(menuToExpand.brandName, menuToExpand.dripperName);
     }
 
     const closeDropdown = () => {

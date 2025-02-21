@@ -37,7 +37,7 @@ export function createCoffeeRecipeRunes(defaultCoffeeRecipeId: CoffeeRecipeId) {
 const COFFEE_RECIPE_RUNES_CONTEXT_KEY = Symbol('COFFEE_RECIPE_RUNES_CONTEXT_KEY');
 
 export const setCoffeeRecipeRunes = () => {    
-    return setContext(COFFEE_RECIPE_RUNES_CONTEXT_KEY, createCoffeeRecipeRunes(CoffeeRecipeId.hario_switch_tetsukasuya));
+    return setContext(COFFEE_RECIPE_RUNES_CONTEXT_KEY, createCoffeeRecipeRunes(CoffeeRecipeId.hario_switch_tetsukasuyanewhybrid));
 }
 
 export const getCoffeeRecipeRunes = () => {
