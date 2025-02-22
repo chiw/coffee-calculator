@@ -170,6 +170,13 @@ export type RecipeChangeStatus = {
     updatedStepControls: boolean
 }
 
+export type RecipeSEOData = {
+    recipeName: string,
+    author: string,
+    dripperBrand: string,
+    dripperType: string  
+}
+
 export type CoffeeRecipeConfig = {
     isTimerRecipe: boolean,
     isImmersionDripperRecipe: boolean,
@@ -180,7 +187,8 @@ export type CoffeeRecipeConfig = {
     stepAdjustments? : StepAdjustmentsConfig,
     steps: StepConfig[],
     references: Reference[],
-    showTimeframeEndTime?: boolean
+    showTimeframeEndTime?: boolean,
+    seoData?: RecipeSEOData
 }
 
 export type Timeframe = {
@@ -227,6 +235,7 @@ export type CoffeeRecipe = {
     references: Reference[],
     is46Method?: boolean,
     enableStepsAdjustments?: boolean,
-    defaultRecipeChangeFactors: RecipeChangeFactors
+    defaultRecipeChangeFactors: RecipeChangeFactors,
+    seoData?: RecipeSEOData
 }
 

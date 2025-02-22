@@ -45,7 +45,8 @@ export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
         references: recipeDefaultConfig.references,
         is46Method: recipeDefaultConfig.is46Method,
         enableStepsAdjustments: recipeDefaultConfig.enableStepsAdjustments ? recipeDefaultConfig.enableStepsAdjustments : false,
-        defaultRecipeChangeFactors: defaultRecipeChangeFactors
+        defaultRecipeChangeFactors: defaultRecipeChangeFactors,
+        seoData: recipeDefaultConfig.seoData ? recipeDefaultConfig.seoData : undefined
     }
 
     console.log('createCoffeeRecipe coffeeRecipe: ', coffeeRecipe);

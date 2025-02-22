@@ -239,7 +239,13 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         url: 'https://www.youtube.com/watch?v=4FeUp_zNiiY',
                         type: 'youtube'
                     }
-                ]
+                ],
+                seoData: {
+                    recipeName: 'New Hybrid Recipe',
+                    author: 'Tetsu Kasuya (粕谷哲)',
+                    dripperBrand: 'Hario',
+                    dripperType: 'Switch'
+                }
             }
         };
         case CoffeeRecipeId.hario_switch_tetsukasuya : {
@@ -290,7 +296,13 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         url: 'https://www.youtube.com/watch?v=gC8K40kZ_6E',
                         type: 'youtube'
                     }
-                ]
+                ],
+                seoData: {
+                    recipeName: 'Ultimate Switch Recipe (God Recipe, or the Devil Recipe)',
+                    author: 'Tetsu Kasuya (粕谷哲)',
+                    dripperBrand: 'Hario',
+                    dripperType: 'Switch'
+                }
             }
         };
         case CoffeeRecipeId.hario_switch_emifukahori : {
@@ -332,7 +344,13 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         url: 'https://europeancoffeetrip.com/easy-hario-switch-recipe-emi-fukahor/',
                         type: 'webpage'
                     }
-                ]
+                ],
+                seoData: {
+                    recipeName: 'Easy Hario Switch Recipe',
+                    author: 'Emi Fukahori',
+                    dripperBrand: 'Hario',
+                    dripperType: 'Switch'
+                }
             }
         };
         case CoffeeRecipeId.hario_switch_olekristianboen : {
@@ -383,7 +401,13 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         url: 'https://www.hario-europe.com/blogs/hario-community/ole-kristian-boens-switch-recipe',
                         type: 'webpage'
                     }
-                ]
+                ],
+                seoData: {
+                    recipeName: 'Hario Switch Recipe',
+                    author: 'Ole Kristian Bøen',
+                    dripperBrand: 'Hario',
+                    dripperType: 'Switch'
+                }
             }
         };
         case CoffeeRecipeId.hario_switch_coffeechronicler : {
@@ -499,7 +523,13 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         url: 'https://www.youtube.com/watch?v=68ZOXrXbVHc',
                         type: 'youtube' 
                     }
-                ]
+                ],
+                seoData: {
+                    recipeName: 'The ultimate Hario Switch RECIPE',
+                    author: 'Coffee Chronicler',
+                    dripperBrand: 'Hario',
+                    dripperType: 'Switch'
+                }
             }
         };
         case CoffeeRecipeId.hario_switch_cafetaster : {
@@ -565,7 +595,13 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         url: 'https://www.instagram.com/reel/DEpPEHjzzcU/?igsh=MWRhbXQyY3RkM3B1bQ==',
                         type: 'instagram' 
                     }
-                ]
+                ],
+                seoData: {
+                    recipeName: '零失敗沖煮法1',
+                    author: 'Cafetaster 咖啡嗜者',
+                    dripperBrand: 'Hario',
+                    dripperType: 'Switch'
+                }
             }
         };
         case CoffeeRecipeId.hario_v60_jameshoffmann : {
@@ -652,7 +688,13 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         url: 'https://www.youtube.com/watch?v=1oB1oDrDkHM',
                         type: 'youtube'
                     }
-                ]
+                ],
+                seoData: {
+                    recipeName: 'A Better 1 Cup V60 Technique',
+                    author: 'James Hoffmann',
+                    dripperBrand: 'Hario',
+                    dripperType: 'V60'
+                }
             }
         };
         case CoffeeRecipeId.hario_v60_mattwinton : {
@@ -723,7 +765,13 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         url: 'https://bigcupofcoffee.com/v60-five-pour-recipe-matt-winton/',
                         type: 'webpage'
                     }
-                ]
+                ],
+                seoData: {
+                    recipeName: 'Hario V60 Five-Pour Recipe',
+                    author: 'Matt Winton',
+                    dripperBrand: 'Hario',
+                    dripperType: 'V60'
+                }
             }
         };
         case CoffeeRecipeId.hario_v60_46method : {
@@ -851,7 +899,13 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         url: 'https://en.philocoffea.com/blogs/blog/coffee-brewing-method',
                         type: 'webpage'
                     }
-                ]
+                ],
+                seoData: {
+                    recipeName: 'Hario V60 4:6 Brewing Method 四六法',
+                    author: 'Tetsu Kasuya (粕谷哲)',
+                    dripperBrand: 'Hario',
+                    dripperType: 'V60'
+                }
             }
         };
         case CoffeeRecipeId.kalita_wave155_itoatsuomi : {
@@ -907,7 +961,13 @@ export const getCoffeeRecipeDefaultConfig = (coffeeRecipId: string) : CoffeeReci
                         url: 'https://www.youtube.com/watch?v=IymOKUmp2vQ',
                         type: 'youtube'
                     }
-                ]
+                ],
+                seoData: {
+                    recipeName: 'kalita wave 155 Recipe',
+                    author: 'Ito Atsuomi (伊藤篤臣) @ Goodman Roaster',
+                    dripperBrand: 'Hario',
+                    dripperType: 'V60'
+                }
             }
         };
         default: {
