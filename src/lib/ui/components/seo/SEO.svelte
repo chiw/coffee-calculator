@@ -4,6 +4,9 @@
     import { i18n } from '$lib/i18n.js';
     import { getFullUrl } from '$lib/utils/url';
 
+    const path = $page.url.pathname;
+    console.log('SEO page.url.pathname', path);
+
     const seoRunes = getSeoRunes();
     const canonicalUrl = $derived(getFullUrl($page.url.pathname));
     const structuredData = $derived(seoRunes.getStructuredData());

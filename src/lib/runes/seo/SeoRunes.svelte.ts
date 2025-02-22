@@ -23,10 +23,12 @@ export function createSeoRunes() {
     });
 
     function updateSeo(recipeSeoData: RecipeSEOData) {
+        const path = window.location.pathname;
+        console.log('updateSeo path', path);
         let seoState = <SeoState> {
             title: 'Coffee Calculator Recipes - ' + recipeSeoData.recipeName + ' by ' + recipeSeoData.author,
             description: 'A timer app helps you brew pour-over coffee with recipe create by ' + recipeSeoData.author + ' using ' + recipeSeoData.dripperBrand + ' ' + recipeSeoData.dripperType,
-            canonicalUrl: getFullUrl(window.location.pathname),
+            canonicalUrl: getFullUrl(path),
             seoData: recipeSeoData,
             keywords: [recipeSeoData.author, recipeSeoData.recipeName, recipeSeoData.dripperBrand, recipeSeoData.dripperType].join(', ')
         }
