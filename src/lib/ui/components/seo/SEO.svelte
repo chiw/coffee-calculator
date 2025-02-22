@@ -3,17 +3,16 @@
     import { getSeoRunes } from '$lib/runes/seo/SeoRunes.svelte';
     import { i18n } from '$lib/i18n.js';
     import { base } from '$app/paths';
-    import { dirtyFixFullUrlPath, getFullUrl } from '$lib/utils/url';
+    import { getFullUrl } from '$lib/utils/url';
 
     const path = page.url.pathname;
     console.log('SEO page.url.pathname', path);
     
     // Remove the base path from pathname if it exists
     const pathWithoutBase = path.startsWith(base) ? path.slice(base.length) : path;
-    let dirtyFixPath = dirtyFixFullUrlPath(pathWithoutBase);
 
     const seoRunes = getSeoRunes();
-    const canonicalUrl = $derived(getFullUrl(dirtyFixPath));
+    const canonicalUrl = $derived(getFullUrl(pathWithoutBase));
     const structuredData = $derived(seoRunes.getStructuredData());
     
     // Create a safe JSON string for the structured data
@@ -33,7 +32,7 @@
         <link 
             rel="alternate" 
             hreflang={locale} 
-            href={getFullUrl(`/${locale}${dirtyFixPath}`)} 
+            href={getFullUrl(`${locale}/${pathWithoutBase}`)} 
         />
     {/each}
 
