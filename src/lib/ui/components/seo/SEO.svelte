@@ -1,10 +1,10 @@
 <script lang="ts">
-    import { page } from '$app/stores';
+    import { page } from '$app/state';
     import { getSeoRunes } from '$lib/runes/seo/SeoRunes.svelte';
     import { i18n } from '$lib/i18n.js';
     import { dirtyFixFullUrlPath, getFullUrl } from '$lib/utils/url';
 
-    const path = $page.url.pathname;
+    const path = page.url.pathname;
     console.log('SEO page.url.pathname', path);
     let dirtyFixPath = dirtyFixFullUrlPath(path);
 
