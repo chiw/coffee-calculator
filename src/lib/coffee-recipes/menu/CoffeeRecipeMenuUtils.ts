@@ -31,7 +31,7 @@ export const getCoffeeRecipeMenu = (dripperBrands: DripperBrand[]): CoffeeRecipe
         brandMenus: createBrandMenus(dripperBrands)
     };
 
-    console.log('coffeeRecipeMenu', coffeeRecipeMenu);
+    // console.log('coffeeRecipeMenu', coffeeRecipeMenu);
     return coffeeRecipeMenu;
 }
 
@@ -98,7 +98,7 @@ export const getMenuMetaInfos = (coffeeRecipeMenu: CoffeeRecipeMenu): MetaInfos[
     let metaInfosArr: MetaInfos[] = [];
 
     metaInfosArr = metaInfosArr.concat(getBrandMenusMetaInfoArr(coffeeRecipeMenu.brandMenus));
-    console.log('getMenuMetaInfos', metaInfosArr);
+    // console.log('getMenuMetaInfos', metaInfosArr);
 
     return metaInfosArr;
 }

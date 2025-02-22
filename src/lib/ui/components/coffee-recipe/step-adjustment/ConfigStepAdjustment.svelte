@@ -33,7 +33,7 @@
     // }
 
     const handleOnClick = (option: string) => {
-        console.log('handleOnClick stepAdjustmentName=' + stepAdjustmentAvailableOptions.stepAdjustmentName + ' option=' + option);
+        // console.log('handleOnClick stepAdjustmentName=' + stepAdjustmentAvailableOptions.stepAdjustmentName + ' option=' + option);
         handleSelect(stepAdjustmentAvailableOptions.stepAdjustmentName, option);
     }
     // console.log('stepAdjustmentAvailableOptions', stepAdjustmentAvailableOptions, 'stepAdjustmentSelectedOption', stepAdjustmentSelectedOption);
