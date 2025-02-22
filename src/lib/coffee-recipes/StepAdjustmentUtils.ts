@@ -71,12 +71,12 @@ export const createStepsFromStepAdjustments = (stepsAdjustments: StepAdjustments
         }
     });
 
-    console.log('createStepsFromStepAdjustments steps', steps);
+    // console.log('createStepsFromStepAdjustments steps', steps);
     return steps;
 }
 
 const createStepsFromTwoStepsRatios = (twoStepsRatios: TwoStepsRatiosConfig, selectedOption?: string): StepConfig[] => {
-    console.log('createStepsFromTwoStepsRatios twoStepsRatios', twoStepsRatios, selectedOption);
+    // console.log('createStepsFromTwoStepsRatios twoStepsRatios', twoStepsRatios, selectedOption);
     let steps: StepConfig[] = twoStepsRatios.defaultSteps;
 
     if(selectedOption) {
@@ -99,7 +99,7 @@ const createStepsFromTwoStepsRatios = (twoStepsRatios: TwoStepsRatiosConfig, sel
 }
 
 const createStepsFromPourDivisions = (pourDivisionsConfig: PourDivisionsConfig, selectedOption?: string): StepConfig[] => {
-    console.log('createStepsFromPourDivisions pourDivisionsConfig', pourDivisionsConfig, selectedOption);
+    // console.log('createStepsFromPourDivisions pourDivisionsConfig', pourDivisionsConfig, selectedOption);
     let defaultSteps: StepConfig[] = pourDivisionsConfig.defaultSteps;
     let steps: StepConfig[] = [];
 
@@ -139,6 +139,6 @@ export const recreateStepsWithStepControl = (recipeId: CoffeeRecipeId, stepContr
         }
     });
 
-    console.log('recreateStepsWithStepControl steps', steps);
+    // console.log('recreateStepsWithStepControl steps', steps);
     return steps;
 }

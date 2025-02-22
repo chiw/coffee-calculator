@@ -26,7 +26,7 @@ export const compareRecipeChangeFactors = (recipeChangeFactors: RecipeChangeFact
 }
 
 const coffeeParametersHasUpdated = (coffeeParameters: CoffeeParametersConfig, defaultCoffeeParameters: CoffeeParametersConfig): boolean => {
-    console.log('coffeeParametersHasUpdated coffeeParameters1:', coffeeParameters, ' defaultCoffeeParameters:', defaultCoffeeParameters);
+    // console.log('coffeeParametersHasUpdated coffeeParameters1:', coffeeParameters, ' defaultCoffeeParameters:', defaultCoffeeParameters);
 
     if(coffeeParameters === undefined && defaultCoffeeParameters === undefined) return false;
 
@@ -36,7 +36,7 @@ const coffeeParametersHasUpdated = (coffeeParameters: CoffeeParametersConfig, de
 }
 
 const stepsDurationInSecondsHasChanged = (stepsDurationInSeconds: number[], defaultStepsDurationInSeconds: number[]): boolean => {
-    console.log('stepsDurationInSecondsHasChanged stepsDurationInSeconds:', stepsDurationInSeconds, ' defaultStepsDurationInSeconds:', defaultStepsDurationInSeconds);
+    // console.log('stepsDurationInSecondsHasChanged stepsDurationInSeconds:', stepsDurationInSeconds, ' defaultStepsDurationInSeconds:', defaultStepsDurationInSeconds);
 
     if(stepsDurationInSeconds === undefined && defaultStepsDurationInSeconds === undefined) return false;
 
@@ -46,7 +46,7 @@ const stepsDurationInSecondsHasChanged = (stepsDurationInSeconds: number[], defa
 }
 
 const stepControlsHasChanged = (stepControls1: StepControls, defaultStepControls: StepControls): boolean => {
-    console.log('stepControlsHasChanged stepControls1:', stepControls1, ' stepControls2:', defaultStepControls);
+    // console.log('stepControlsHasChanged stepControls1:', stepControls1, ' stepControls2:', defaultStepControls);
 
     if(stepControls1 === undefined && defaultStepControls === undefined) return false;
 

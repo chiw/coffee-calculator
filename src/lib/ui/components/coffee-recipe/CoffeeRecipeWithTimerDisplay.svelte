@@ -35,7 +35,7 @@
     }
     let { coffeeRecipeSteps } : CoffeeRecipeWithTimerDisplayProps = $props();
 
-    console.log('CoffeeRecipeWithTimerDisplayProps coffeeRecipeSteps', coffeeRecipeSteps);
+    // console.log('CoffeeRecipeWithTimerDisplayProps coffeeRecipeSteps', coffeeRecipeSteps);
 
     const stopwatch: StopWatchRunes = getStopWatchRunes();
 
@@ -65,10 +65,10 @@
     }
 
     const updateRunesStepsConfig = (index: number, newVal: number) => {
-        console.log('updateRunesStepsConfig', 'index', index, 'newVal', newVal);
+        // console.log('updateRunesStepsConfig', 'index', index, 'newVal', newVal);
         
         let clonedRecipeChangeFactors: RecipeChangeFactors = getClonedRecipeChangeFacotrs();
-        console.log('updateRunesStepsConfig clonedRecipeChangeFactors', clonedRecipeChangeFactors);
+        // console.log('updateRunesStepsConfig clonedRecipeChangeFactors', clonedRecipeChangeFactors);
         clonedRecipeChangeFactors.stepsDurationInSeconds[index] = newVal;
         clonedRecipeChangeFactors.factorsToUpdate = ['stepsDurationInSeconds'];
         
@@ -88,7 +88,7 @@
 
     const resetAllRecipeChangeFactorsToDefault = () => {
         let defaultRecipeChangeFactors: RecipeChangeFactors = coffeeRecipeRunes.coffeeRecipe.defaultRecipeChangeFactors;
-        console.log('resetAllRecipeChangeFactorsToDefault defaultRecipeChangeFactors', defaultRecipeChangeFactors);
+        // console.log('resetAllRecipeChangeFactorsToDefault defaultRecipeChangeFactors', defaultRecipeChangeFactors);
 
         updateRunesRecipeChangeFactors(defaultRecipeChangeFactors);
     }
@@ -112,9 +112,9 @@
 
 
     const updateCoffeeParamsBeanInGrams = (value: number) => {
-        console.log('updateCoffeeParamsBeanInGrams value, beanInGrams, newValue', value, 
-            coffeeRecipeRunes.recipeChangeFactors.coffeeParameters.beanInGrams, 
-            coffeeRecipeRunes.recipeChangeFactors.coffeeParameters.beanInGrams + value);
+        // console.log('updateCoffeeParamsBeanInGrams value, beanInGrams, newValue', value, 
+            // coffeeRecipeRunes.recipeChangeFactors.coffeeParameters.beanInGrams, 
+            // coffeeRecipeRunes.recipeChangeFactors.coffeeParameters.beanInGrams + value);
         let newBeanInGrams: number = displayNumber(coffeeRecipeRunes.recipeChangeFactors.coffeeParameters.beanInGrams + value) * 1;
         updateCoffeeParams(newBeanInGrams);
     }
@@ -122,7 +122,7 @@
     const handleCoffeeParamsBeanInGramsInputChange = (event: InputEvent) => {
         // console.log('handleCoffeeParamsBeanInGramsInputChange', event);
         const { value } = event.target as HTMLInputElement;
-        console.log('handleCoffeeParamsBeanInGramsInputChange value', value);
+        // console.log('handleCoffeeParamsBeanInGramsInputChange value', value);
         updateCoffeeParams(value * 1);
     }
 
@@ -134,7 +134,7 @@
             waterInGrams: coffeeRecipeRunes.recipeChangeFactors.coffeeParameters.waterInGrams
         }
         newCoffeeParams = caculateCoffeeParameters(newCoffeeParams);
-        console.log('updateCoffeeParams newCoffeeParams', newCoffeeParams);
+        // console.log('updateCoffeeParams newCoffeeParams', newCoffeeParams);
 
         let clonedRecipeChangeFactors = getClonedRecipeChangeFacotrs();
         clonedRecipeChangeFactors.coffeeParameters = newCoffeeParams
@@ -144,12 +144,12 @@
     }
 
     const handleStepAdjustmentSelectedOption = (stepAdjustment: string, selectedOption: string) => {
-        console.log('handleStepAdjustmentSelectedOption ', stepAdjustment, selectedOption);
+        // console.log('handleStepAdjustmentSelectedOption ', stepAdjustment, selectedOption);
         let newSelectedOption: StepAdjustmentSelectedOptionConfig = <StepAdjustmentSelectedOptionConfig>{ stepAdjustmentName: stepAdjustment, option: selectedOption};
         
         let clonedStepControls: StepControls = <StepControls> JSON.parse(JSON.stringify(coffeeRecipeSteps.recipeChangeFactors.stepControls));
-        console.log('handleStepAdjustmentSelectedOption clonedStepControls=', clonedStepControls);
-        console.log('handleStepAdjustmentSelectedOption newSelectedOption=', newSelectedOption);
+        // console.log('handleStepAdjustmentSelectedOption clonedStepControls=', clonedStepControls);
+        // console.log('handleStepAdjustmentSelectedOption newSelectedOption=', newSelectedOption);
 
         clonedStepControls.selectedOptions.forEach(selectedOption => {
             if(selectedOption.stepAdjustmentName === newSelectedOption.stepAdjustmentName) {
@@ -157,7 +157,7 @@
             }
         });
 
-        console.log('handleStepAdjustmentSelectedOption updated clonedStepControls=', clonedStepControls);
+        // console.log('handleStepAdjustmentSelectedOption updated clonedStepControls=', clonedStepControls);
         
         let clonedRecipeChangeFactors = getClonedRecipeChangeFacotrs();
         clonedRecipeChangeFactors.stepControls = clonedStepControls;
@@ -167,7 +167,7 @@
     }
 
     const updateRunesRecipeChangeFactors = (recipeChangeFactors: RecipeChangeFactors) => {
-        console.log('updateRecipeChangeFactors recipeChangeFactors', recipeChangeFactors);
+        // console.log('updateRecipeChangeFactors recipeChangeFactors', recipeChangeFactors);
         coffeeRecipeRunes.recipeChangeFactors = recipeChangeFactors;
     }
 

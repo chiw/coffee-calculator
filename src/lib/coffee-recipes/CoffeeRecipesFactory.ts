@@ -49,7 +49,7 @@ export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
         seoData: recipeDefaultConfig.seoData ? recipeDefaultConfig.seoData : undefined
     }
 
-    console.log('createCoffeeRecipe coffeeRecipe: ', coffeeRecipe);
+    // console.log('createCoffeeRecipe coffeeRecipe: ', coffeeRecipe);
     return coffeeRecipe;
 }
 
@@ -76,7 +76,7 @@ export const createCoffeeRecipeStepsWithChangeFactors = (
     recipeId: CoffeeRecipeId, recipeChangeFactors: RecipeChangeFactors, 
     coffeeRecipe: CoffeeRecipe): CoffeeRecipeSteps => {
 
-    console.log('createCoffeeRecipeStepsWithChangeFactors recipeId: ', recipeId, ' recipeChangeFactors: ', recipeChangeFactors, 'coffeeRecipe', coffeeRecipe);
+    // console.log('createCoffeeRecipeStepsWithChangeFactors recipeId: ', recipeId, ' recipeChangeFactors: ', recipeChangeFactors, 'coffeeRecipe', coffeeRecipe);
 
     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
     
@@ -84,7 +84,7 @@ export const createCoffeeRecipeStepsWithChangeFactors = (
         recreateStepsWithStepControl(recipeId, recipeChangeFactors.stepControls):
         recipeDefaultConfig.steps;
 
-    console.log('steps', steps);
+    // console.log('steps', steps);
 
     // let stepsDurationInSeconds: number[] = (steps.length == recipeChangeFactors.stepsDurationInSeconds.length) ?
     let stepsDurationInSeconds: number[] = (
@@ -94,7 +94,7 @@ export const createCoffeeRecipeStepsWithChangeFactors = (
     
     let clonedRecipeChangeFactors: RecipeChangeFactors = <RecipeChangeFactors> JSON.parse(JSON.stringify(recipeChangeFactors));
     clonedRecipeChangeFactors.stepsDurationInSeconds = stepsDurationInSeconds;
-    console.log('stepsDurationInSeconds', stepsDurationInSeconds);
+    // console.log('stepsDurationInSeconds', stepsDurationInSeconds);
 
     
 
@@ -128,7 +128,7 @@ export const createCoffeeRecipeStepsWithChangeFactors = (
         recipeChangeStatus: recipeChangeStatus
     }
 
-    console.log('createCoffeeRecipeStepsWithChangeFactors result:', result);
+    // console.log('createCoffeeRecipeStepsWithChangeFactors result:', result);
     return result;
 }
 
@@ -149,7 +149,7 @@ const updateSteps = (originalStepConfigs: StepConfig[], stepsDurationInSeconds: 
 }
 
 export const updateStepDurationInSeconds = (originalStepConfigs: StepConfig[], index: number, newDurationInSeconds: number): StepConfig[] => {
-    console.log('updateStepDurationInSeconds originalStepConfigs: ', originalStepConfigs, 'index', index, 'newDurationInSeconds', newDurationInSeconds);
+    // console.log('updateStepDurationInSeconds originalStepConfigs: ', originalStepConfigs, 'index', index, 'newDurationInSeconds', newDurationInSeconds);
 
     let newStepConfigs: StepConfig[] = <StepConfig[]> JSON.parse(JSON.stringify(originalStepConfigs));
     let clonedStepsDurationInSeconds: number[] = getStepsDurationInSeconds(newStepConfigs);
