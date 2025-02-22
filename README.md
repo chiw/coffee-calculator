@@ -14,6 +14,9 @@
 - James Hoffmann https://chiw.github.io/coffee-calculator/recipe/hario/v60/jameshoffmann
 - Matt Winton https://chiw.github.io/coffee-calculator/recipe/hario/v60/mattwinton
 
+### Kalita Wave 155
+- Ito Atsuomi https://chiw.github.io/coffee-calculator/recipe/kalita/wave155/itoatsuomi
+
 
 # create-svelte
 
