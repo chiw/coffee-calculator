@@ -7,6 +7,11 @@
     const seoRunes = getSeoRunes();
     const canonicalUrl = $derived(getFullUrl($page.url.pathname));
     const structuredData = $derived(seoRunes.getStructuredData());
+    
+    // Create a safe JSON string for the structured data
+    function getStructuredDataString() {
+        return JSON.stringify(structuredData, null, 2);
+    }
 </script>
 
 <svelte:head>
@@ -37,7 +42,5 @@
     <meta name="twitter:description" content={seoRunes.state.description} />
 
     <!-- Structured Data -->
-    <script type="application/ld+json">
-        {structuredData}
-    </script>
+    {@html `<script type="application/ld+json">${getStructuredDataString()}</script>`}
 </svelte:head>
