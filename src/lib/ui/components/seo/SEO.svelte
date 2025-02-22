@@ -2,11 +2,11 @@
     import { page } from '$app/stores';
     import { getSeoRunes } from '$lib/runes/seo/SeoRunes.svelte';
     import { i18n } from '$lib/i18n.js';
+    import { getFullUrl } from '$lib/utils/url';
 
     const seoRunes = getSeoRunes();
-    const canonicalUrl = $derived(`https://your-domain.com${$page.url.pathname}`);
-    // const structuredData = $derived(JSON.stringify(seoRunes.getStructuredData()));
-    const structuredData = $derived(seoRunes.getStructuredData);
+    const canonicalUrl = $derived(getFullUrl($page.url.pathname));
+    const structuredData = $derived(seoRunes.getStructuredData());
 </script>
 
 <svelte:head>
@@ -20,7 +20,7 @@
         <link 
             rel="alternate" 
             hreflang={locale} 
-            href={`https://your-domain.com/${locale}${$page.url.pathname}`} 
+            href={getFullUrl(`/${locale}${$page.url.pathname}`)} 
         />
     {/each}
 
