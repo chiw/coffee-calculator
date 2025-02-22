@@ -24,7 +24,7 @@ export class StopWatchRunes {
     formattedElaspedTime = $derived(this.minutes + ":" + this.seconds);
 
     start(stopUntil: number) {
-        console.log('started stopwatch, set stopUntil to ', stopUntil);
+        // console.log('started stopwatch, set stopUntil to ', stopUntil);
         this.stopUntil = stopUntil;
         this.startTime = Date.now();
         this.stopwatchState = StopWatchState.RUNNING;
@@ -34,7 +34,7 @@ export class StopWatchRunes {
                 this.elaspedTime = currTime - this.startTime;                    
 
                 if(this.elaspedTime >= (this.stopUntil * 1000)) {
-                    console.log('count finished, clear interval');
+                    // console.log('count finished, clear interval');
                     this.reset();
                 }
             }
@@ -42,7 +42,7 @@ export class StopWatchRunes {
     }
 
     reset() {
-        console.log('reset stopwatch');
+        // console.log('reset stopwatch');
         this.elaspedTime = 0;
         this.stopwatchState = StopWatchState.NEW;
         clearInterval(this.interval);

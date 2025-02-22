@@ -10,14 +10,14 @@
     // console.log('showModal', showModal);
 
     $effect(() => {
-        console.log('inside Modal.svelte effect');
-        console.log('in effect:', $effect.tracking(), ' showModal ', showModal , 'dialog', dialog);
+        // console.log('inside Modal.svelte effect');
+        // console.log('in effect:', $effect.tracking(), ' showModal ', showModal , 'dialog', dialog);
         if (dialog && showModal) {
-            console.log('trigger dialog showModal');
+            // console.log('trigger dialog showModal');
             dialog.showModal();
         }
         if(!showModal) {
-            console.log('trigger closeDialog');
+            // console.log('trigger closeDialog');
             closeDialog();
         }
     })
@@ -38,9 +38,9 @@
     }
 
     function closeDialog() {
-        console.log('closeDialog')
+        // console.log('closeDialog')
         if(dialog) {
-            console.log('closeDialog dialog is not null, trigger dialog.close()');
+            // console.log('closeDialog dialog is not null, trigger dialog.close()');
             dialog.close();
         }
     }

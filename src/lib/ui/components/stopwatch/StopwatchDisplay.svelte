@@ -10,13 +10,13 @@
     const stopwatch: StopWatchRunes = getStopWatchRunes();
 
     function startTimer() {
-        console.log('clicked start button');
+        // console.log('clicked start button');
         startBtnClicked = true;
         stopwatch.start(timerInSeconds);
     }
 
     function resetTimer() {
-        console.log('reset button clicked');
+        // console.log('reset button clicked');
         startBtnClicked = false;
         stopwatch.reset();
     }

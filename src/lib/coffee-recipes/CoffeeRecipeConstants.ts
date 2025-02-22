@@ -75,16 +75,16 @@ export const searchRecipeIdByParams = (inParams: string[]) :CoffeeRecipeSearchRe
 
     let resultArr = filterMetaInfosBySearchParams(filteredMetaInfosArr, searchParams);
 
-    console.log('searchRecipeIdByParams', resultArr);
+    // console.log('searchRecipeIdByParams', resultArr);
 
     if(resultArr && resultArr.length > 0) {
-        console.log('searchRecipeIdByParams found result/results');
+        // console.log('searchRecipeIdByParams found result/results');
         return <CoffeeRecipeSearchResult> {
             metaInfos: resultArr[0],
             requiresRedirect: resultArr.length != 1
         }
     } else {
-        console.log('searchRecipeIdByParams cannot find recipe, redirect to first recipe');
+        // console.log('searchRecipeIdByParams cannot find recipe, redirect to first recipe');
         return <CoffeeRecipeSearchResult> {
             metaInfos: allRecipeMetaInfos[0],
             requiresRedirect: true
