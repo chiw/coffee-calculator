@@ -26,8 +26,11 @@
     <div class="flex flex-col items-center">
         <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
         <button onclick={startTimer}>
-            <iconify-icon icon="material-symbols-light:play-circle-outline-rounded"
-                class="text-[40px] hover:text-slate-600">
+            <iconify-icon 
+                icon="material-symbols-light:play-circle-outline-rounded"
+                class="text-[40px] hover:text-slate-600"
+                aria-label="Play"
+            >
             </iconify-icon>
         </button>
     </div>
@@ -35,8 +38,11 @@
     <div class="flex flex-col items-center">
         <div class="font-semibold text-3xl italic">{stopwatch.formattedElaspedTime}</div>
         <button onclick={resetTimer}>
-            <iconify-icon icon="material-symbols-light:stop-circle-outline-rounded"
-                class="text-[40px] hover:text-slate-600">
+            <iconify-icon 
+                icon="material-symbols-light:stop-circle-outline-rounded"
+                class="text-[40px] hover:text-slate-600"
+                aria-label="Stop"
+            >
             </iconify-icon>
         </button>
     </div>
