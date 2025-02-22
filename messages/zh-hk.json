@@ -20,9 +20,10 @@
     "label_reset" : "重設計時",
     "label_stop" : "停止計時",
 
-    "label_edit": "調整時間",
+    "label_edit_time": "調整時間",
     "label_finish_edit": "完成",
     "label_default": "預設值",
+    "label_default_time" : "預設時間值",
 
     "label_46_method_adjust" : "調整 4:6 法",
     "label_46_method_adjust_title" : "調整 4:6 法",

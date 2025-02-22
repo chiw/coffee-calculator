@@ -160,7 +160,14 @@ export type RecipeChangeFactors = {
     coffeeParameters: CoffeeParametersConfig,
     stepsDurationInSeconds: number[],
     stepControls?: StepControls,
-    factorsToUpdate? : string[]
+    factorsToUpdate? : string[],
+    recipeChangeStatus?: RecipeChangeStatus
+}
+
+export type RecipeChangeStatus = {
+    updatedCoffeeParameters: boolean,
+    updatedStepsDurationInSeconds: boolean,
+    updatedStepControls: boolean
 }
 
 export type CoffeeRecipeConfig = {
@@ -204,7 +211,8 @@ export type CoffeeRecipeSteps = {
     isImmersionDripperRecipe: boolean,
     timerInSeconds: number,
     showTimeframeEndTime?: boolean,
-    recipeChangeFactors: RecipeChangeFactors
+    recipeChangeFactors: RecipeChangeFactors,
+    recipeChangeStatus?: RecipeChangeStatus
 }
 
 export type Reference = {

@@ -20,9 +20,10 @@
     "label_reset" : "Reset",
     "label_stop" : "Stop",
 
-    "label_edit" : "Time",
+    "label_edit_time" : "Time",
     "label_finish_edit" : "Done",
     "label_default" : "Defaults",
+    "label_default_time" : "Default Time",
 
     "label_46_method_adjust" : "4:6 method",
     "label_46_method_adjust_title" : "Adjust 4:6 method",

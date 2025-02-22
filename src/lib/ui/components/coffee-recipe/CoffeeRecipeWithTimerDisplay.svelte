@@ -71,7 +71,8 @@
         console.log('updateRunesStepsConfig clonedRecipeChangeFactors', clonedRecipeChangeFactors);
         clonedRecipeChangeFactors.stepsDurationInSeconds[index] = newVal;
         clonedRecipeChangeFactors.factorsToUpdate = ['stepsDurationInSeconds'];
-        coffeeRecipeRunes.recipeChangeFactors = clonedRecipeChangeFactors;
+        
+        updateRunesRecipeChangeFactors(clonedRecipeChangeFactors);
     }
 
     const recalculateStepsDurationAndTimeframe = (e, index) => {
@@ -83,6 +84,13 @@
         let newVal = parseInt(e.currentTarget.value);
         
         updateRunesStepsConfig(index, newVal);
+    }
+
+    const resetAllRecipeChangeFactorsToDefault = () => {
+        let defaultRecipeChangeFactors: RecipeChangeFactors = coffeeRecipeRunes.coffeeRecipe.defaultRecipeChangeFactors;
+        console.log('resetAllRecipeChangeFactorsToDefault defaultRecipeChangeFactors', defaultRecipeChangeFactors);
+
+        updateRunesRecipeChangeFactors(defaultRecipeChangeFactors);
     }
 
     const resetStepsDurationToDefault = () => {
@@ -98,7 +106,8 @@
         let clonedRecipeChangeFactors: RecipeChangeFactors = getClonedRecipeChangeFacotrs();
         clonedRecipeChangeFactors.stepsDurationInSeconds = stepsDurationInSeconds;
         clonedRecipeChangeFactors.factorsToUpdate = ['stepsDurationInSeconds'];
-        coffeeRecipeRunes.recipeChangeFactors = clonedRecipeChangeFactors;
+        
+        updateRunesRecipeChangeFactors(clonedRecipeChangeFactors);
     }
 
 
@@ -130,7 +139,8 @@
         let clonedRecipeChangeFactors = getClonedRecipeChangeFacotrs();
         clonedRecipeChangeFactors.coffeeParameters = newCoffeeParams
         clonedRecipeChangeFactors.factorsToUpdate = ['coffeeParameters'];
-        coffeeRecipeRunes.recipeChangeFactors = clonedRecipeChangeFactors;
+        
+        updateRunesRecipeChangeFactors(clonedRecipeChangeFactors);
     }
 
     const handleStepAdjustmentSelectedOption = (stepAdjustment: string, selectedOption: string) => {
@@ -152,7 +162,13 @@
         let clonedRecipeChangeFactors = getClonedRecipeChangeFacotrs();
         clonedRecipeChangeFactors.stepControls = clonedStepControls;
         clonedRecipeChangeFactors.factorsToUpdate = ['stepControls'];
-        coffeeRecipeRunes.recipeChangeFactors = clonedRecipeChangeFactors;
+        
+        updateRunesRecipeChangeFactors(clonedRecipeChangeFactors);
+    }
+
+    const updateRunesRecipeChangeFactors = (recipeChangeFactors: RecipeChangeFactors) => {
+        console.log('updateRecipeChangeFactors recipeChangeFactors', recipeChangeFactors);
+        coffeeRecipeRunes.recipeChangeFactors = recipeChangeFactors;
     }
 
 </script>
@@ -186,19 +202,21 @@
                     <span class="font-bold text-xs text-white">{m.label_finish_edit()}</span>
                 </button>
 
-                <button class="flex flex-row border border-solid border-black rounded border-1 items-center w-18 px-1 mr-1" onclick={resetStepsDurationToDefault}>
-                    <iconify-icon icon="material-symbols-light:refresh-rounded"
-                        class="text-[22px] hover:text-slate-600">
-                    </iconify-icon>
-                    <span class="font-bold text-xs">{m.label_default()}</span>
-                </button>
+                {#if coffeeRecipeSteps.recipeChangeStatus && coffeeRecipeSteps.recipeChangeStatus.updatedStepsDurationInSeconds}
+                    <button class="flex flex-row border border-solid border-black rounded border-1 items-center w-18 px-1 mr-1" onclick={resetStepsDurationToDefault}>
+                        <iconify-icon icon="material-symbols-light:refresh-rounded"
+                            class="text-[22px] hover:text-slate-600">
+                        </iconify-icon>
+                        <span class="font-bold text-xs">{m.label_default_time()}</span>
+                    </button>
+                {/if}
             {:else}
                 <button class="flex flex-row border border-solid border-black rounded border-1 items-center w-18 px-1" onclick={() => { inEditMode = !inEditMode }}>
                     
                     <iconify-icon icon="material-symbols-light:timer-outline"
                         class="text-[22px] hover:text-slate-600">
                     </iconify-icon>
-                    <span class="font-bold text-xs">{m.label_edit()}</span>
+                    <span class="font-bold text-xs">{m.label_edit_time()}</span>
                 </button>
             {/if}
 
@@ -208,6 +226,22 @@
                         class="text-[22px] hover:text-slate-600">
                     </iconify-icon>
                     <span class="font-bold text-xs">{m.label_edit_stepAdjustments()}</span>
+                </button>
+            {/if}
+
+            {#if !inEditMode 
+                && coffeeRecipeSteps.recipeChangeStatus 
+                && (
+                    coffeeRecipeSteps.recipeChangeStatus.updatedStepsDurationInSeconds 
+                    || coffeeRecipeSteps.recipeChangeStatus.updatedCoffeeParameters 
+                    || coffeeRecipeSteps.recipeChangeStatus.updatedStepControls
+                )
+            }
+                <button class="flex flex-row border border-solid border-black rounded border-1 items-center w-18 px-1 mr-1" onclick={resetAllRecipeChangeFactorsToDefault}>
+                    <iconify-icon icon="material-symbols-light:refresh-rounded"
+                        class="text-[22px] hover:text-slate-600">
+                    </iconify-icon>
+                    <span class="font-bold text-xs">{m.label_default()}</span>
                 </button>
             {/if}
         {/if}
