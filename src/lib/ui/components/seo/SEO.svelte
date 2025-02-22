@@ -2,11 +2,15 @@
     import { page } from '$app/state';
     import { getSeoRunes } from '$lib/runes/seo/SeoRunes.svelte';
     import { i18n } from '$lib/i18n.js';
+    import { base } from '$app/paths';
     import { dirtyFixFullUrlPath, getFullUrl } from '$lib/utils/url';
 
     const path = page.url.pathname;
     console.log('SEO page.url.pathname', path);
-    let dirtyFixPath = dirtyFixFullUrlPath(path);
+    
+    // Remove the base path from pathname if it exists
+    const pathWithoutBase = path.startsWith(base) ? path.slice(base.length) : path;
+    let dirtyFixPath = dirtyFixFullUrlPath(pathWithoutBase);
 
     const seoRunes = getSeoRunes();
     const canonicalUrl = $derived(getFullUrl(dirtyFixPath));
