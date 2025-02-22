@@ -12,7 +12,9 @@ export function getFullUrl(path: string): string {
     const dirtyFixedCleanPath = dirtyFixForGithubPages(cleanPath, base);
     const basePath = base || '';
     // const fullUrl = `${hostname}${basePath}${cleanPath}`;
-    const fullUrl = `${hostname}${basePath}${dirtyFixedCleanPath}`;
+    // const fullUrl = `${hostname}${basePath}${dirtyFixedCleanPath}`;
+    const basePathWithCleanPath = dirtyFixFullUrlPath(basePath + cleanPath);
+    const fullUrl = hostname + basePathWithCleanPath;
     console.log('hostname', hostname, 'dirtyFixedCleanPath', dirtyFixedCleanPath, 'basePath', basePath);
     console.log('fullUrl', fullUrl);
     return fullUrl;
