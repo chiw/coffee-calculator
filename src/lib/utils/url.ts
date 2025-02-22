@@ -19,13 +19,16 @@ export function getFullUrl(path: string): string {
 }
 
 const dirtyFixFullUrlPath = (path: string): string => {
+    let result = path;
     if(path.startsWith(githubPageRepoName)) {
         const count = (path.match(new RegExp(githubPageRepoName, "g")) || []).length;
         if(count > 1) {
-            return remove_first_occurrence(path, githubPageRepoName);
+            console.log('dirtyFixFullUrlPath [' + path + '] contains [' + githubPageRepoName +'] ' + count + ' times, remove the first occurance');
+            result = remove_first_occurrence(path, githubPageRepoName);
         }
     }
-    return path;
+    console.log('dirtyFixFullUrlPath path: [' + result + ']');
+    return result;
 }
 
 const remove_first_occurrence = (str: string, searchstr: string): string => {
