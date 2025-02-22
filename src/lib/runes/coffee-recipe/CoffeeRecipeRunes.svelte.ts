@@ -18,7 +18,7 @@ export function createCoffeeRecipeRunes(defaultCoffeeRecipeId: CoffeeRecipeId) {
         _recipeChangeFactors = _coffeeRecipe.defaultRecipeChangeFactors;
     });
 
-    let _coffeeRecipeSteps: CoffeeRecipeSteps = $derived(createCoffeeRecipeStepsWithChangeFactors(_recipeId, _recipeChangeFactors));
+    let _coffeeRecipeSteps: CoffeeRecipeSteps = $derived(createCoffeeRecipeStepsWithChangeFactors(_recipeId, _recipeChangeFactors, _coffeeRecipe));
 
     $inspect(_recipeId, _coffeeRecipe, _recipeChangeFactors).with(console.trace);
 

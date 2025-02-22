@@ -2,11 +2,14 @@ import { CoffeeRecipeId, getCoffeeRecipeDefaultConfig } from "./CoffeeRecipeCons
 import { 
     type CoffeeParametersConfig, type CoffeeRecipeConfig, type CoffeeRecipe, type CoffeeRecipeSteps, 
     type StepConfig, type PourParametersConfig, type Timeframe, type StepWaterInfo, type StepAdjustmentAvailableOptions, 
-    type RecipeChangeFactors } from "./CoffeeRecipeTypes.d";
+    type RecipeChangeFactors, 
+    type RecipeChangeStatus} from "./CoffeeRecipeTypes.d";
 import { caculateCoffeeParameters } from "./CoffeeParametersUtils";
 import { calculateStepWaterInfos, sumOfDurations } from "./CoffeeRecipeStepsUtils";
 import { calculateStepsTimeframe } from "./StepsTimeframeUtils";
 import { createEmptyStepControls, createStepControls, createStepsFromStepAdjustments, recreateStepsWithStepControl } from "./StepAdjustmentUtils";
+import { updated } from "$app/state";
+import { compareRecipeChangeFactors } from "./RecipeChangeFactorsUtils";
 
 
 export const getStepsDurationInSeconds = (stepConfigs: StepConfig[]): number[] => {
@@ -68,9 +71,11 @@ export const createCoffeeParams = (recipeId: CoffeeRecipeId, inCoffeeParams: Cof
     return result;
 }
 
-export const createCoffeeRecipeStepsWithChangeFactors = (recipeId: CoffeeRecipeId, recipeChangeFactors: RecipeChangeFactors): CoffeeRecipeSteps => {
+export const createCoffeeRecipeStepsWithChangeFactors = (
+    recipeId: CoffeeRecipeId, recipeChangeFactors: RecipeChangeFactors, 
+    coffeeRecipe: CoffeeRecipe): CoffeeRecipeSteps => {
 
-    console.log('createCoffeeRecipeStepsWithChangeFactors recipeId: ', recipeId, ' recipeChangeFactors: ', recipeChangeFactors);
+    console.log('createCoffeeRecipeStepsWithChangeFactors recipeId: ', recipeId, ' recipeChangeFactors: ', recipeChangeFactors, 'coffeeRecipe', coffeeRecipe);
 
     let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
     
@@ -81,9 +86,10 @@ export const createCoffeeRecipeStepsWithChangeFactors = (recipeId: CoffeeRecipeI
     console.log('steps', steps);
 
     // let stepsDurationInSeconds: number[] = (steps.length == recipeChangeFactors.stepsDurationInSeconds.length) ?
-    let stepsDurationInSeconds: number[] = recipeChangeFactors.factorsToUpdate?.includes('stepsDurationInSeconds') ?
-        recipeChangeFactors.stepsDurationInSeconds
-        : getStepsDurationInSeconds(steps);
+    let stepsDurationInSeconds: number[] = (
+        recipeChangeFactors.factorsToUpdate?.includes('stepsDurationInSeconds') 
+        || recipeChangeFactors.recipeChangeStatus && recipeChangeFactors.recipeChangeStatus.updatedStepsDurationInSeconds
+    ) ? recipeChangeFactors.stepsDurationInSeconds : getStepsDurationInSeconds(steps);
     
     let clonedRecipeChangeFactors: RecipeChangeFactors = <RecipeChangeFactors> JSON.parse(JSON.stringify(recipeChangeFactors));
     clonedRecipeChangeFactors.stepsDurationInSeconds = stepsDurationInSeconds;
@@ -103,7 +109,11 @@ export const createCoffeeRecipeStepsWithChangeFactors = (recipeId: CoffeeRecipeI
         showTimeframeEndTime = false;
     }
 
-    let stepAdjustmentAvailableOptions: StepAdjustmentAvailableOptions[] = clonedRecipeChangeFactors.stepControls.availableOptions;
+    // to find out which factors have been updated, so the structure can tell the UI to update the corresponding fields
+    const recipeChangeStatus: RecipeChangeStatus = compareRecipeChangeFactors(recipeChangeFactors, coffeeRecipe ? coffeeRecipe.defaultRecipeChangeFactors : undefined);
+    
+    // update the recipeChangeFactors with the latest status
+    clonedRecipeChangeFactors.recipeChangeStatus = recipeChangeStatus;
 
     let result: CoffeeRecipeSteps = <CoffeeRecipeSteps> {
         isTimerRecipe : recipeDefaultConfig.isTimerRecipe,
@@ -113,7 +123,8 @@ export const createCoffeeRecipeStepsWithChangeFactors = (recipeId: CoffeeRecipeI
         steps: stepsWithTimeframeAndWaterInfo,
         timerInSeconds : timerInSeconds,
         showTimeframeEndTime: showTimeframeEndTime,
-        recipeChangeFactors: clonedRecipeChangeFactors
+        recipeChangeFactors: clonedRecipeChangeFactors,
+        recipeChangeStatus: recipeChangeStatus
     }
 
     console.log('createCoffeeRecipeStepsWithChangeFactors result:', result);
