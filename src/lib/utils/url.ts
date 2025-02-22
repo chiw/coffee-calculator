@@ -18,7 +18,7 @@ export function getFullUrl(path: string): string {
     return fullUrl;
 }
 
-const dirtyFixFullUrlPath = (path: string): string => {
+export const dirtyFixFullUrlPath = (path: string): string => {
     let result = path;
     // if(path.startsWith(githubPageRepoName)) {
         const count = (path.match(new RegExp(githubPageRepoName, "g")) || []).length;

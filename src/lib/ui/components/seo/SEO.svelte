@@ -2,13 +2,14 @@
     import { page } from '$app/stores';
     import { getSeoRunes } from '$lib/runes/seo/SeoRunes.svelte';
     import { i18n } from '$lib/i18n.js';
-    import { getFullUrl } from '$lib/utils/url';
+    import { dirtyFixFullUrlPath, getFullUrl } from '$lib/utils/url';
 
     const path = $page.url.pathname;
     console.log('SEO page.url.pathname', path);
+    let dirtyFixPath = dirtyFixFullUrlPath(path);
 
     const seoRunes = getSeoRunes();
-    const canonicalUrl = $derived(getFullUrl($page.url.pathname));
+    const canonicalUrl = $derived(getFullUrl(dirtyFixPath));
     const structuredData = $derived(seoRunes.getStructuredData());
     
     // Create a safe JSON string for the structured data
@@ -28,7 +29,7 @@
         <link 
             rel="alternate" 
             hreflang={locale} 
-            href={getFullUrl(`/${locale}${$page.url.pathname}`)} 
+            href={getFullUrl(`/${locale}${dirtyFixPath}`)} 
         />
     {/each}
 
