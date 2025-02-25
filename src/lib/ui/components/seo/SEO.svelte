@@ -49,5 +49,9 @@
 	<meta name="twitter:description" content={seoRunes.state.description} />
 
 	<!-- Structured Data -->
-	{@html `<script type="application/ld+json">${getStructuredDataString()}</script>`}
+	{@html `
+        <script type="application/ld+json">
+            ${getStructuredDataString()}
+        </script>
+    `}
 </svelte:head>

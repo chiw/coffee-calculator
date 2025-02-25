@@ -17,7 +17,7 @@
 	const stopwatch: StopWatchRunes = getStopWatchRunes();
 	const coffeeRecipeRunes = getCoffeeRecipeRunes();
 
-	let { selectedOption } = $props();
+	// let { selectedOption } = $props();
 
 	const getMenu = () => {
 		return Menu;

@@ -10,7 +10,7 @@
 	import { setSeoRunes } from '$lib/runes/seo/SeoRunes.svelte';
 	import { setStopWatchRunes } from '$lib/runes/stopwatch';
 	import { setCoffeeRecipeRunes } from '$lib/runes/coffee-recipe';
-	import LanguageSwitcher from '$lib/ui/components/lang/LanguageSwitcher.svelte';
+	// import LanguageSwitcher from '$lib/ui/components/lang/LanguageSwitcher.svelte';
 
 	setSeoRunes();
 	setStopWatchRunes();
