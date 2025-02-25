@@ -228,7 +228,7 @@
 
 				{#if coffeeRecipeSteps.recipeChangeStatus && coffeeRecipeSteps.recipeChangeStatus.updatedStepsDurationInSeconds}
 					<button
-						class="flex flex-row border border-solid border-black rounded border-1 items-center w-18 px-1"
+						class="flex flex-row border border-solid border-black rounded border-1 items-center w-18 px-1 mr-1"
 						onclick={resetStepsDurationToDefault}
 						aria-label="Reset to default time"
 					>
