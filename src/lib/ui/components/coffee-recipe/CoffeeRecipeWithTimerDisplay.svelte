@@ -217,7 +217,7 @@
 					onclick={() => {
 						inEditMode = !inEditMode;
 					}}
-					aria-label={inEditMode ? "Finish editing" : "Edit time"}
+					aria-label={inEditMode ? 'Finish editing' : 'Edit time'}
 				>
 					<iconify-icon
 						icon="material-symbols-light:check-circle-outline-rounded"
@@ -245,7 +245,7 @@
 					onclick={() => {
 						inEditMode = !inEditMode;
 					}}
-					aria-label={inEditMode ? "Finish editing" : "Edit time"}
+					aria-label={inEditMode ? 'Finish editing' : 'Edit time'}
 				>
 					<iconify-icon
 						icon="material-symbols-light:timer-outline"
@@ -326,34 +326,30 @@
 	{@render stepRowTimeFrameAndSwitchStateDisplay(step, highlightStep)}
 
 	{#if inEditMode}
-			<button 
-				aria-label="Decrease duration by 1 second"
-				onclick={() => updateRunesStepsConfig(index, (step.durationInSeconds -= 1))}
-			>
-				<iconify-icon 
-					icon="mdi-light:minus-circle" 
-					class="text-[30px] hover:text-slate-600"
-				></iconify-icon>
-			</button>
+		<button
+			aria-label="Decrease duration by 1 second"
+			onclick={() => updateRunesStepsConfig(index, (step.durationInSeconds -= 1))}
+		>
+			<iconify-icon icon="mdi-light:minus-circle" class="text-[30px] hover:text-slate-600"
+			></iconify-icon>
+		</button>
 
-			<input
-				type="number"
-				class="border border-solid text-center w-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-				bind:value={step.durationInSeconds}
-				oninput={(e) => recalculateStepsDurationAndTimeframe(e, index)}
-				aria-label="Step duration in seconds"
-			/>
-			<span class="font-normal text-s">s</span>
+		<input
+			type="number"
+			class="border border-solid text-center w-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+			bind:value={step.durationInSeconds}
+			oninput={(e) => recalculateStepsDurationAndTimeframe(e, index)}
+			aria-label="Step duration in seconds"
+		/>
+		<span class="font-normal text-s">s</span>
 
-			<button 
-				aria-label="Increase duration by 1 second"
-				onclick={() => updateRunesStepsConfig(index, (step.durationInSeconds += 1))}
-			>
-				<iconify-icon 
-					icon="mdi-light:plus-circle" 
-					class="text-[30px] hover:text-slate-600"
-				></iconify-icon>
-			</button>
+		<button
+			aria-label="Increase duration by 1 second"
+			onclick={() => updateRunesStepsConfig(index, (step.durationInSeconds += 1))}
+		>
+			<iconify-icon icon="mdi-light:plus-circle" class="text-[30px] hover:text-slate-600"
+			></iconify-icon>
+		</button>
 	{/if}
 {/snippet}
 

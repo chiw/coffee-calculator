@@ -130,7 +130,9 @@ export const createCoffeeRecipeStepsWithChangeFactors = (
 	// console.log('stepsDurationInSeconds', stepsDurationInSeconds);
 
 	const stepsWithTimeframe: StepConfig[] = updateSteps(steps, stepsDurationInSeconds);
-	const timerInSeconds: number = stepsDurationInSeconds ? sumOfDurations(stepsDurationInSeconds) : 0;
+	const timerInSeconds: number = stepsDurationInSeconds
+		? sumOfDurations(stepsDurationInSeconds)
+		: 0;
 	const pourParameters: PourParametersConfig[] = steps.map((step) => step.pourParameters);
 	const stepWaterInfos: StepWaterInfo[] = calculateStepWaterInfos(
 		clonedRecipeChangeFactors.coffeeParameters,
@@ -200,7 +202,9 @@ export const updateStepDurationInSeconds = (
 ): StepConfig[] => {
 	// console.log('updateStepDurationInSeconds originalStepConfigs: ', originalStepConfigs, 'index', index, 'newDurationInSeconds', newDurationInSeconds);
 
-	const newStepConfigs: StepConfig[] = <StepConfig[]>JSON.parse(JSON.stringify(originalStepConfigs));
+	const newStepConfigs: StepConfig[] = <StepConfig[]>(
+		JSON.parse(JSON.stringify(originalStepConfigs))
+	);
 	const clonedStepsDurationInSeconds: number[] = getStepsDurationInSeconds(newStepConfigs);
 
 	clonedStepsDurationInSeconds[index] = newDurationInSeconds;

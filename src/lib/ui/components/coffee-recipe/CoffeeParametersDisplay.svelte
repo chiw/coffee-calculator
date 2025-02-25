@@ -26,9 +26,7 @@
 						class="flex items-center justify-center p-0"
 						onclick={() => handleBtnClick(-beanInGramsOffset)}
 					>
-						<iconify-icon
-							icon="mdi-light:minus-circle"
-							class="text-[30px] hover:text-slate-600"
+						<iconify-icon icon="mdi-light:minus-circle" class="text-[30px] hover:text-slate-600"
 						></iconify-icon>
 					</button>
 					<label for="beanInput" class="sr-only">{m.label_coffee_bean()}</label>
@@ -46,9 +44,7 @@
 						class="flex items-center justify-center p-0"
 						onclick={() => handleBtnClick(beanInGramsOffset)}
 					>
-						<iconify-icon
-							icon="mdi-light:plus-circle"
-							class="text-[30px] hover:text-slate-600"
+						<iconify-icon icon="mdi-light:plus-circle" class="text-[30px] hover:text-slate-600"
 						></iconify-icon>
 					</button>
 				{:else}
