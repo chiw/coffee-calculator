@@ -1,5 +1,5 @@
 export enum StopWatchState {
-    NEW,
-    RUNNING,
-    STOP
+	NEW,
+	RUNNING,
+	STOP
 }

@@ -21,16 +21,16 @@ const config = {
 		},
 		prerender: {
 			handleHttpError: ({ path, referrer, message }) => {
-			  // Ignore 404 errors on /coffee-calculator/coffee-calculator/recipes
-			  if (path === '/coffee-calculator/coffee-calculator/recipes') {
-				return; // do nothing
-			  }
-	  
-			  // Log or handle other errors as needed
-			  console.error('Error prerendering', { path, referrer, message });
+				// Ignore 404 errors on /coffee-calculator/coffee-calculator/recipes
+				if (path === '/coffee-calculator/coffee-calculator/recipes') {
+					return; // do nothing
+				}
+
+				// Log or handle other errors as needed
+				console.error('Error prerendering', { path, referrer, message });
 			}
-		  }
-	},
+		}
+	}
 };
 
 export default config;

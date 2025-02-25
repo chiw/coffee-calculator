@@ -1,7 +1,9 @@
 # coffee-calculator
 
 ## Recipes:
+
 ### Hario Switch
+
 - New hybrid (by Tetsu Kasuya) https://chiw.github.io/coffee-calculator/recipe/hario/switch/tetsukasuyanewhybrid
 - Tetsu Kasuya https://chiw.github.io/coffee-calculator/recipe/hario/switch/tetsukasuya
 - Emi Fukahori https://chiw.github.io/coffee-calculator/recipe/hario/switch/emifukahori
@@ -10,13 +12,14 @@
 - Cafetaster https://chiw.github.io/coffee-calculator/recipe/hario/switch/cafetaster
 
 ### Hario V60
+
 - 4:6 method (by Tetsu Kasuya) https://chiw.github.io/coffee-calculator/recipe/hario/v60/46method
 - James Hoffmann https://chiw.github.io/coffee-calculator/recipe/hario/v60/jameshoffmann
 - Matt Winton https://chiw.github.io/coffee-calculator/recipe/hario/v60/mattwinton
 
 ### Kalita Wave 155
-- Ito Atsuomi https://chiw.github.io/coffee-calculator/recipe/kalita/wave155/itoatsuomi
 
+- Ito Atsuomi https://chiw.github.io/coffee-calculator/recipe/kalita/wave155/itoatsuomi
 
 # create-svelte
 
