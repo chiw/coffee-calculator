@@ -9,10 +9,13 @@
 	} from '../CoffeeReceipeMessageKeys';
 	// import { onMount } from 'svelte';
 
+	type StepAdjustmentHandler = (stepAdjustmentName: string, option: string) => void;
+
+
 	interface ConfigStepAdjustmentProps {
 		stepAdjustmentSelectedOption: StepAdjustmentSelectedOptionConfig;
 		stepAdjustmentAvailableOptions: StepAdjustmentAvailableOptions;
-		handleSelect: any;
+		handleSelect: StepAdjustmentHandler;
 		recipeId: string;
 	}
 
