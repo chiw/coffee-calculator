@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { i18n } from '$lib/i18n.js';
+	// import { i18n } from '$lib/i18n.js';
 	import { base } from '$app/paths';
 	import { getPathFromMetaInfo, Menu } from '$lib/coffee-recipes';
 
@@ -11,7 +11,7 @@
 		coffeeRecipeIdSelectNavItemMessageKey,
 		dripperMessageKey
 	} from './CoffeeReceipeMessageKeys';
-	import { goto } from '$app/navigation';
+	// import { goto } from '$app/navigation';
 	import type { DripperMenu } from '$lib/coffee-recipes/menu/CoffeeRecipeMenuUtils';
 
 	const stopwatch: StopWatchRunes = getStopWatchRunes();
@@ -44,29 +44,29 @@
 		return null;
 	};
 
-	const getCoffeeRecipePath = (pathParams) => {
-		// return '/recipe' + '/' + pathParams[0] + '/' + pathParams[1] + '/' + pathParams[2];
-		let path = base + '/recipe' + '/' + pathParams[0] + '/' + pathParams[1] + '/' + pathParams[2];
-		console.log('getCoffeeRecipePath', pathParams, path);
+	// const getCoffeeRecipePath = (pathParams) => {
+	// 	// return '/recipe' + '/' + pathParams[0] + '/' + pathParams[1] + '/' + pathParams[2];
+	// 	let path = base + '/recipe' + '/' + pathParams[0] + '/' + pathParams[1] + '/' + pathParams[2];
+	// 	console.log('getCoffeeRecipePath', pathParams, path);
 
-		return path;
-	};
+	// 	return path;
+	// };
 
-	const onChangeRecipe = (e) => {
-		const pathParams = selectedOption.split('_');
-		const path = getCoffeeRecipePath(pathParams);
+	// const onChangeRecipe = (e) => {
+	// 	const pathParams = selectedOption.split('_');
+	// 	const path = getCoffeeRecipePath(pathParams);
 
-		console.log('onChangeRecipe', path);
-		goto(i18n.resolveRoute(path));
-	};
+	// 	console.log('onChangeRecipe', path);
+	// 	goto(i18n.resolveRoute(path));
+	// };
 
 	// State for expanded menu items
 	let expandedDrippers: Record<string, boolean> = $state({});
 
-	const toggleDripper = (brandIndex: number, dripperIndex: number) => {
-		const key = `${brandIndex}-${dripperIndex}`;
-		expandedDrippers[key] = !expandedDrippers[key];
-	};
+	// const toggleDripper = (brandIndex: number, dripperIndex: number) => {
+	// 	const key = `${brandIndex}-${dripperIndex}`;
+	// 	expandedDrippers[key] = !expandedDrippers[key];
+	// };
 
 	const toggleBrandDripper = (brandName: string, dripperName: string) => {
 		// console.log('toggleBrandDripper', brandName, dripperName, expandedDrippers);
@@ -170,9 +170,9 @@
 				>
 					<!-- role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1"> -->
 					<div class="px-6 pt-4 pb-6 text-gray-700 space-y-2 md:px-12">
-						{#each getMenu().brandMenus as brandMenu, brandIndex}
+						{#each getMenu().brandMenus as brandMenu}
 							<ul class="pl-4">
-								{#each brandMenu.dripperMenus as dripperMenu, dripperIndex}
+								{#each brandMenu.dripperMenus as dripperMenu}
 									<li class="my-2">
 										<button
 											onclick={() =>

@@ -20,14 +20,17 @@
 			<div class="font-normal text-xs">{m.label_coffee_bean()}</div>
 			<div class="flex flex-row items-center justify-center m-1 w-40">
 				{#if editEnabled}
-					<!---<button class="w-7 h-7 rounded-full border border-slate-400 text-black hover:bg-black hover:text-white font-bold" onclick={() => coffeeRecipeRunes.beanInGrams-=1}>&minus;</button>-->
-					<iconify-icon
-						icon="mdi-light:minus-circle"
-						class="text-[30px] hover:text-slate-600"
+					<button
+						type="button"
+						aria-label="Decrease coffee beans"
+						class="flex items-center justify-center p-0"
 						onclick={() => handleBtnClick(-beanInGramsOffset)}
 					>
-					</iconify-icon>
-					<!-- <input class="ml-2 mr-1 border border-slate-200 text-center text-xl font-bold italic max-w-16" bind:value={coffeeRecipeRunes.coffeeParams.beanInGrams} />  -->
+						<iconify-icon
+							icon="mdi-light:minus-circle"
+							class="text-[30px] hover:text-slate-600"
+						></iconify-icon>
+					</button>
 					<label for="beanInput" class="sr-only">{m.label_coffee_bean()}</label>
 					<input
 						type="number"
@@ -37,13 +40,17 @@
 						oninput={handleInputChange}
 					/>
 					<div class="mr-2">(g)</div>
-					<!--<button class="w-7 h-7 rounded-full border border-slate-400 text-black hover:bg-black hover:text-white font-bold" onclick={() => coffeeRecipeRunes.beanInGrams+=1}>&plus;</button>-->
-					<iconify-icon
-						icon="mdi-light:plus-circle"
-						class="text-[30px] hover:text-slate-600"
+					<button
+						type="button"
+						aria-label="Increase coffee beans"
+						class="flex items-center justify-center p-0"
 						onclick={() => handleBtnClick(beanInGramsOffset)}
 					>
-					</iconify-icon>
+						<iconify-icon
+							icon="mdi-light:plus-circle"
+							class="text-[30px] hover:text-slate-600"
+						></iconify-icon>
+					</button>
 				{:else}
 					<input
 						class="ml-2 mr-1 border border-slate-200 text-center text-xl font-bold italic max-w-16 disabled:opacity-100 disabled:bg-transparent"

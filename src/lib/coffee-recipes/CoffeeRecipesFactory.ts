@@ -8,7 +8,6 @@ import {
 	type PourParametersConfig,
 	type Timeframe,
 	type StepWaterInfo,
-	type StepAdjustmentAvailableOptions,
 	type RecipeChangeFactors,
 	type RecipeChangeStatus
 } from './CoffeeRecipeTypes.d';
@@ -21,7 +20,6 @@ import {
 	createStepsFromStepAdjustments,
 	recreateStepsWithStepControl
 } from './StepAdjustmentUtils';
-import { updated } from '$app/state';
 import { compareRecipeChangeFactors } from './RecipeChangeFactorsUtils';
 
 export const getStepsDurationInSeconds = (stepConfigs: StepConfig[]): number[] => {

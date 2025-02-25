@@ -8,7 +8,7 @@
 		getStepAdjustmentOptionMessageKey,
 		getStepAdjustmentTitleMessageKey
 	} from '../CoffeeReceipeMessageKeys';
-	import { onMount } from 'svelte';
+	// import { onMount } from 'svelte';
 
 	interface ConfigStepAdjustmentProps {
 		stepAdjustmentSelectedOption: StepAdjustmentSelectedOptionConfig;
@@ -67,7 +67,7 @@
 </div>
 
 <fieldset class="flex flex-wrap gap-2">
-	{#each stepAdjustmentAvailableOptions.options as availableOption, i}
+	{#each stepAdjustmentAvailableOptions.options as availableOption}
 		<div>
 			<!-- <div>availableOption={availableOption} selectedOption={selectedOption}</div> -->
 			<!-- <label class="flex cursor-pointer items-center justify-center rounded 

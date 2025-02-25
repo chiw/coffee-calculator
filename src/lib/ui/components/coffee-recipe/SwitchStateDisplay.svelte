@@ -13,7 +13,7 @@
 
 	let {
 		switchState,
-		highlightState = false,
+		// highlightState = false,
 		isImmersionDripperRecipe = false,
 		showTimeframeEndTime = true,
 		durationInSeconds

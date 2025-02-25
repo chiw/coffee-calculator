@@ -1,7 +1,6 @@
 import { getContext, setContext } from 'svelte';
 import type { CoffeeRecipe } from '$lib/coffee-recipes';
 import type { RecipeSEOData } from '$lib/coffee-recipes/CoffeeRecipeTypes';
-import { stopImmediatePropagation } from 'svelte/legacy';
 import { getFullUrl } from '$lib/utils/url';
 
 export interface SeoState {

@@ -201,11 +201,11 @@ export const getStepAdjustmentOptionMessageKey = (stepAdjustment: string, option
 export const getStepAdjustmentTwoStepsRatiosOptionMessageKey = (option: string) => {
 	switch (option) {
 		case 'sweeter':
-			m.label_twoStepsRatios_sweeter();
+			return m.label_twoStepsRatios_sweeter();
 		case 'standard':
-			m.label_twoStepsRatios_standard();
+			return m.label_twoStepsRatios_standard();
 		case 'brighter':
-			m.label_twoStepsRatios_brighter();
+			return m.label_twoStepsRatios_brighter();
 
 		case 'method46Sweeter':
 			return m.label_twoStepsRatios_method46Sweeter();

@@ -23,7 +23,7 @@
 <div class="text-xl font-bold italic mt-5">{m.label_references()}</div>
 <div class="flex flex-col">
 	{#if coffeeRecipeRunes.coffeeRecipe}
-		{#each coffeeRecipeRunes.coffeeRecipe.references as reference, i}
+		{#each coffeeRecipeRunes.coffeeRecipe.references as reference}
 			<div>
 				<a href={reference.url}>
 					{#if reference.type}
