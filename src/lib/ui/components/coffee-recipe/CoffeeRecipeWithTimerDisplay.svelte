@@ -217,12 +217,12 @@
 					onclick={() => {
 						inEditMode = !inEditMode;
 					}}
+					aria-label={inEditMode ? "Finish editing" : "Edit time"}
 				>
 					<iconify-icon
 						icon="material-symbols-light:check-circle-outline-rounded"
 						class="text-[22px] hover:text-white text-white"
-					>
-					</iconify-icon>
+					></iconify-icon>
 					<span class="font-bold text-xs text-white">{m.label_finish_edit()}</span>
 				</button>
 
@@ -230,12 +230,12 @@
 					<button
 						class="flex flex-row border border-solid border-black rounded border-1 items-center w-18 px-1 mr-1"
 						onclick={resetStepsDurationToDefault}
+						aria-label="Reset to default time"
 					>
 						<iconify-icon
 							icon="material-symbols-light:refresh-rounded"
 							class="text-[22px] hover:text-slate-600"
-						>
-						</iconify-icon>
+						></iconify-icon>
 						<span class="font-bold text-xs">{m.label_default_time()}</span>
 					</button>
 				{/if}
@@ -245,12 +245,12 @@
 					onclick={() => {
 						inEditMode = !inEditMode;
 					}}
+					aria-label={inEditMode ? "Finish editing" : "Edit time"}
 				>
 					<iconify-icon
 						icon="material-symbols-light:timer-outline"
 						class="text-[22px] hover:text-slate-600"
-					>
-					</iconify-icon>
+					></iconify-icon>
 					<span class="font-bold text-xs">{m.label_edit_time()}</span>
 				</button>
 			{/if}
@@ -261,12 +261,12 @@
 					onclick={() => {
 						showStepAdjustmentModal = !showStepAdjustmentModal;
 					}}
+					aria-label="Edit step adjustments"
 				>
 					<iconify-icon
 						icon="material-symbols-light:discover-tune-rounded"
 						class="text-[22px] hover:text-slate-600"
-					>
-					</iconify-icon>
+					></iconify-icon>
 					<span class="font-bold text-xs">{m.label_edit_stepAdjustments()}</span>
 				</button>
 			{/if}
@@ -279,8 +279,7 @@
 					<iconify-icon
 						icon="material-symbols-light:refresh-rounded"
 						class="text-[22px] hover:text-slate-600"
-					>
-					</iconify-icon>
+					></iconify-icon>
 					<span class="font-bold text-xs">{m.label_default()}</span>
 				</button>
 			{/if}
@@ -327,23 +326,34 @@
 	{@render stepRowTimeFrameAndSwitchStateDisplay(step, highlightStep)}
 
 	{#if inEditMode}
-		<button onclick={() => updateRunesStepsConfig(index, (step.durationInSeconds -= 1))}>
-			<iconify-icon icon="mdi-light:minus-circle" class="text-[30px] hover:text-slate-600">
-			</iconify-icon>
-		</button>
+			<button 
+				aria-label="Decrease duration by 1 second"
+				onclick={() => updateRunesStepsConfig(index, (step.durationInSeconds -= 1))}
+			>
+				<iconify-icon 
+					icon="mdi-light:minus-circle" 
+					class="text-[30px] hover:text-slate-600"
+				></iconify-icon>
+			</button>
 
-		<input
-			type="number"
-			class="border border-solid text-center w-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-			bind:value={step.durationInSeconds}
-			oninput={(e) => recalculateStepsDurationAndTimeframe(e, index)}
-		/>
-		<span class="font-normal text-s">s</span>
+			<input
+				type="number"
+				class="border border-solid text-center w-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+				bind:value={step.durationInSeconds}
+				oninput={(e) => recalculateStepsDurationAndTimeframe(e, index)}
+				aria-label="Step duration in seconds"
+			/>
+			<span class="font-normal text-s">s</span>
 
-		<button onclick={() => updateRunesStepsConfig(index, (step.durationInSeconds += 1))}>
-			<iconify-icon icon="mdi-light:plus-circle" class="text-[30px] hover:text-slate-600">
-			</iconify-icon>
-		</button>
+			<button 
+				aria-label="Increase duration by 1 second"
+				onclick={() => updateRunesStepsConfig(index, (step.durationInSeconds += 1))}
+			>
+				<iconify-icon 
+					icon="mdi-light:plus-circle" 
+					class="text-[30px] hover:text-slate-600"
+				></iconify-icon>
+			</button>
 	{/if}
 {/snippet}
 

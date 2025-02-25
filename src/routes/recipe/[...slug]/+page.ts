@@ -4,7 +4,7 @@ export const trailingSlash = 'never';
 
 import { i18n } from '$lib/i18n.js';
 import { base } from '$app/paths';
-import { error, redirect } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 
 import {
 	AllRecipePaths,
