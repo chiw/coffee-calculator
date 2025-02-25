@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import SEO from '$lib/ui/components/seo/SEO.svelte';
 
 	export let data: PageData;
 
@@ -28,6 +29,8 @@
 </script>
 
 <!-- <h1>Use the {@html data.recipeId}</h1> -->
+
+<SEO />
 
 <div class="m-2">
 	<div class="flex flex-row items-stretch">

@@ -9,7 +9,11 @@
 	const coffeeRecipeRunes = getCoffeeRecipeRunes();
 
 	import LanguageSwitcher from '$lib/ui/components/lang/LanguageSwitcher.svelte';
+
+	import SEO from '$lib/ui/components/seo/SEO.svelte';
 </script>
+
+<SEO />
 
 <div class="m-3">
 	<div class="flex flex-row items-stretch">

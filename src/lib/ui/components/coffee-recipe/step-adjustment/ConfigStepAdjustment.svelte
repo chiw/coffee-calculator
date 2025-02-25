@@ -11,7 +11,6 @@
 
 	type StepAdjustmentHandler = (stepAdjustmentName: string, option: string) => void;
 
-
 	interface ConfigStepAdjustmentProps {
 		stepAdjustmentSelectedOption: StepAdjustmentSelectedOptionConfig;
 		stepAdjustmentAvailableOptions: StepAdjustmentAvailableOptions;

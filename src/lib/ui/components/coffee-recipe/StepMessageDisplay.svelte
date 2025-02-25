@@ -35,16 +35,16 @@
 				<span class="text-sm">
 					{@html sanitizeHtml(
 						pourOverStageMessageKey(step.stage)() +
-						' ' +
-						(step.swirl ? '<b>(' + swirlMessageKey() + ')</b>' : '')
+							' ' +
+							(step.swirl ? '<b>(' + swirlMessageKey() + ')</b>' : '')
 					)}
 				</span>
 			{:else if step.stir}
 				<span class="text-sm">
 					{@html sanitizeHtml(
 						pourOverStageMessageKey(step.stage)() +
-						' ' +
-						(step.stir ? '<b>(' + stirMessageKey() + ')</b>' : '')
+							' ' +
+							(step.stir ? '<b>(' + stirMessageKey() + ')</b>' : '')
 					)}
 				</span>
 			{:else}
@@ -67,11 +67,17 @@
 		<span class="mr-0 text-sm">{@html sanitizeHtml(step.msgKey(step.msgParams))}</span>
 	{:else if isPouringStage(step.stage)}
 		<span>{@html '<br/>'}</span>
-		<span class="mr-0 text-sm">{@html sanitizeHtml(stepWaterInfoMessageKey(step.stepWaterInfo))}</span>
+		<span class="mr-0 text-sm"
+			>{@html sanitizeHtml(stepWaterInfoMessageKey(step.stepWaterInfo))}</span
+		>
 	{:else if isFinalStage(step.stage)}
-		<span class="mr-0 text-sm">{@html sanitizeHtml(finalStepMessageKey(step.timeFrame.toDisplay))}</span>
+		<span class="mr-0 text-sm"
+			>{@html sanitizeHtml(finalStepMessageKey(step.timeFrame.toDisplay))}</span
+		>
 	{:else if isWaterFlowStage(step.stage)}
-		<span class="mr-0 text-sm">{@html sanitizeHtml(waterFlowMessageKey(step.timeFrame.toDisplay))}</span>
+		<span class="mr-0 text-sm"
+			>{@html sanitizeHtml(waterFlowMessageKey(step.timeFrame.toDisplay))}</span
+		>
 	{/if}
 
 	{#if step.showWaterTemperature}

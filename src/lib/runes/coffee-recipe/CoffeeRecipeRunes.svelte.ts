@@ -11,8 +11,6 @@ import type {
 
 import { getContext, setContext } from 'svelte';
 
-import { getSeoRunes } from '../seo/SeoRunes.svelte';
-
 export function createCoffeeRecipeRunes(defaultCoffeeRecipeId: CoffeeRecipeId) {
 	let _recipeId: CoffeeRecipeId = $state(defaultCoffeeRecipeId);
 
@@ -24,9 +22,6 @@ export function createCoffeeRecipeRunes(defaultCoffeeRecipeId: CoffeeRecipeId) {
 		// console.log('in $effect');
 		$inspect.trace();
 		_recipeChangeFactors = _coffeeRecipe.defaultRecipeChangeFactors;
-		if (_coffeeRecipe) {
-			getSeoRunes().updateSeo(_coffeeRecipe.seoData);
-		}
 	});
 
 	const _coffeeRecipeSteps: CoffeeRecipeSteps = $derived(

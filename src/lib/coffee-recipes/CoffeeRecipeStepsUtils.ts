@@ -26,7 +26,8 @@ export const calculateStepWaterInfos = (
 			coffeeParameters.waterInGrams,
 			pourParam.waterPercentage
 		);
-		const stepTotalWaterInGrams = totalWaterInGrams === 0 ? 0 : stepWaterInGrams + totalWaterInGrams;
+		const stepTotalWaterInGrams =
+			totalWaterInGrams === 0 ? 0 : stepWaterInGrams + totalWaterInGrams;
 
 		const stepWaterInfo = createStepWaterInfo(
 			stepWaterInGrams,

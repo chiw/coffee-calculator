@@ -1,57 +1,45 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { getSeoRunes } from '$lib/runes/seo/SeoRunes.svelte';
-	import { i18n } from '$lib/i18n.js';
-	import { base } from '$app/paths';
-	import { getFullUrl } from '$lib/utils/url';
 
-	const path = page.url.pathname;
-	console.log('SEO page.url.pathname', path);
-
-	// Remove the base path from pathname if it exists
-	const pathWithoutBase = path.startsWith(base) ? path.slice(base.length) : path;
-
-	const seoRunes = getSeoRunes();
-	const canonicalUrl = $derived(getFullUrl(pathWithoutBase));
-	const structuredData = $derived(seoRunes.getStructuredData());
-
-	// Create a safe JSON string for the structured data
-	function getStructuredDataString() {
-		return JSON.stringify(structuredData, null, 2);
+	interface SEOProps {
+		title?: string;
+		description?: string;
+		image?: string;
+		type?: string;
 	}
+
+	let {
+		title = 'Coffee Recipe Calculator',
+		description = 'Brew your perfect cup of coffee with great recipes with precise measurements and ratios and timer',
+		image,
+		type = 'website'
+	}: SEOProps = $props();
+
+	$effect(() => {
+		// Update meta tags reactively
+		document.title = title;
+	});
 </script>
 
 <svelte:head>
-	<title>{seoRunes.state.title}</title>
-	<meta name="description" content={seoRunes.state.description} />
-	<meta
-		name="keywords"
-		content="coffee calculator, coffee recipes, coffee brewing, pour over coffee, drip coffee, brewing timer, {seoRunes
-			.state.keywords || ''}"
-	/>
-	<link rel="canonical" href={canonicalUrl} />
+	<title>{title}</title>
+	<meta name="description" content={description} />
 
-	<!-- Language alternate links -->
-	{#each i18n.locales as locale}
-		<link rel="alternate" hreflang={locale} href={getFullUrl(`${locale}/${pathWithoutBase}`)} />
-	{/each}
-
-	<!-- Open Graph / Social Media -->
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content={seoRunes.state.title} />
-	<meta property="og:description" content={seoRunes.state.description} />
-	<meta property="og:url" content={canonicalUrl} />
-	<meta property="og:site_name" content="Coffee Calculator Recipes" />
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content={type} />
+	<meta property="og:url" content={page.url.href} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	{#if image}
+		<meta property="og:image" content={image} />
+	{/if}
 
 	<!-- Twitter -->
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content={seoRunes.state.title} />
-	<meta name="twitter:description" content={seoRunes.state.description} />
-
-	<!-- Structured Data -->
-	{@html `
-        <script type="application/ld+json">
-            ${getStructuredDataString()}
-        </script>
-    `}
+	<meta property="twitter:card" content="summary_large_image" />
+	<meta property="twitter:url" content={page.url.href} />
+	<meta property="twitter:title" content={title} />
+	<meta property="twitter:description" content={description} />
+	{#if image}
+		<meta property="twitter:image" content={image} />
+	{/if}
 </svelte:head>
