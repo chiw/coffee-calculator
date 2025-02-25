@@ -2,7 +2,7 @@
 	import "../app.css";
     import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 	import { i18n } from '$lib/i18n.js';
-	import SEO from '$lib/ui/components/seo/SEO.svelte';
+	// import SEO from '$lib/ui/components/seo/SEO.svelte';
 	import { page } from '$app/state';
 
 
@@ -19,7 +19,7 @@
 	
 </script>
 
-<SEO />
+<!-- <SEO /> -->
 
 <ParaglideJS {i18n}>
 	<div lang={page.data.lang || 'en'}>
