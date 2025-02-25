@@ -9,21 +9,23 @@
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
-<dialog class="w-4/5"
+<dialog
+	class="w-4/5"
 	bind:this={dialog}
 	onclose={() => (showModal = false)}
-	onclick={(e) => { if (e.target === dialog) dialog.close(); }}
+	onclick={(e) => {
+		if (e.target === dialog) dialog.close();
+	}}
 >
 	<div>
-        <div class="flex flex-row-reverse items-center mt-0">
-            <button autofocus class="focus:outline-none" onclick={() => dialog.close()}>&times</button>
-        </div>
+		<div class="flex flex-row-reverse items-center mt-0">
+			<button autofocus class="focus:outline-none" onclick={() => dialog.close()}>&times</button>
+		</div>
 		{@render header?.()}
 		<hr />
 		{@render children?.()}
 		<!-- <hr /> -->
 		<!-- svelte-ignore a11y_autofocus -->
-		
 	</div>
 </dialog>
 

@@ -1,1 +1,5 @@
-export { createCoffeeRecipeRunes, setCoffeeRecipeRunes, getCoffeeRecipeRunes } from './CoffeeRecipeRunes.svelte';
+export {
+	createCoffeeRecipeRunes,
+	setCoffeeRecipeRunes,
+	getCoffeeRecipeRunes
+} from './CoffeeRecipeRunes.svelte';
