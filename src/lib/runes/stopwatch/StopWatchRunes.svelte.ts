@@ -5,7 +5,7 @@ export class StopWatchRunes {
 	pad2 = (number: number) => `00${number}`.slice(-2);
 	pad3 = (number: number) => `000${number}`.slice(-3);
 
-	interval: any;
+	interval: NodeJS.Timeout | undefined;
 
 	startTime = $state<number>(0);
 	elaspedTime = $state<number>(0);

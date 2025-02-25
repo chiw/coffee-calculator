@@ -12,7 +12,7 @@
 		LanguageSwitcher
 	} from '$lib/ui/components/coffee-recipe';
 
-	import { getSeoRunes } from '$lib/runes/seo/SeoRunes.svelte';
+	// import { getSeoRunes } from '$lib/runes/seo/SeoRunes.svelte';
 	import { getCoffeeRecipeRunes } from '$lib/runes/coffee-recipe';
 
 	import { getKeyByValue } from '$lib/utils/ObjectUtils';
