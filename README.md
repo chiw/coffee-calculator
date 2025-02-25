@@ -19,7 +19,7 @@
 
 ### Kalita Wave 155
 
-- Ito Atsuomi https://chiw.github.io/coffee-calculator/recipe/kalita/wave155/itoatsuomi
+- Ito Atsuomi (伊藤篤臣) https://chiw.github.io/coffee-calculator/recipe/kalita/wave155/itoatsuomi
 
 # create-svelte
 
