@@ -29,13 +29,13 @@ export const getStepsDurationInSeconds = (stepConfigs: StepConfig[]): number[] =
 };
 
 export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
-	let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
+	const recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
 
 	// console.log('createCoffeeRecipe recipeId:', recipeId, 'recipeDefaultConfig:', recipeDefaultConfig);
 
-	let defaultCoffeeParams = createCoffeeParams(recipeId, recipeDefaultConfig.coffeeParameters);
+	const defaultCoffeeParams = createCoffeeParams(recipeId, recipeDefaultConfig.coffeeParameters);
 
-	let defaultSteps =
+	const defaultSteps =
 		recipeDefaultConfig.enableStepsAdjustments == true
 			? createStepsFromStepAdjustments(
 					recipeDefaultConfig.stepAdjustments,
@@ -43,22 +43,22 @@ export const createCoffeeRecipe = (recipeId: CoffeeRecipeId): CoffeeRecipe => {
 				)
 			: recipeDefaultConfig.steps;
 
-	let defaultStepsDurationInSeconds = getStepsDurationInSeconds(defaultSteps);
+	const defaultStepsDurationInSeconds = getStepsDurationInSeconds(defaultSteps);
 
-	let defaultStepControls = recipeDefaultConfig.enableStepsAdjustments
+	const defaultStepControls = recipeDefaultConfig.enableStepsAdjustments
 		? createStepControls(
 				recipeDefaultConfig.stepAdjustments,
 				recipeDefaultConfig.stepAdjustments?.selectedOptions
 			)
 		: createEmptyStepControls();
 
-	let defaultRecipeChangeFactors = <RecipeChangeFactors>{
+	const defaultRecipeChangeFactors = <RecipeChangeFactors>{
 		coffeeParameters: defaultCoffeeParams,
 		stepsDurationInSeconds: defaultStepsDurationInSeconds,
 		stepControls: defaultStepControls
 	};
 
-	let coffeeRecipe: CoffeeRecipe = <CoffeeRecipe>{
+	const coffeeRecipe: CoffeeRecipe = <CoffeeRecipe>{
 		recipeId: recipeId,
 		defaultSteps: defaultSteps,
 		references: recipeDefaultConfig.references,
@@ -80,11 +80,11 @@ export const createCoffeeParams = (
 ): CoffeeParametersConfig => {
 	// console.log('createCoffeeParams recipeId: ', recipeId, ' beanInGrams: ', inCoffeeParams.beanInGrams, ' coffeeToWaterRatio: ', inCoffeeParams.coffeeToWaterRatio, ' waterInGrams: ', inCoffeeParams.waterInGrams);
 
-	let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
+	const recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
 
 	// console.log('createCoffeeParams recipeDefaultConfig:', recipeDefaultConfig);
 
-	let coffeeParams = <CoffeeParametersConfig>{
+	const coffeeParams = <CoffeeParametersConfig>{
 		beanInGrams: inCoffeeParams.beanInGrams
 			? inCoffeeParams.beanInGrams
 			: recipeDefaultConfig.coffeeParameters.beanInGrams,
@@ -97,7 +97,7 @@ export const createCoffeeParams = (
 	};
 
 	// calculate the coffeeToWaterRatio and waterInGrams based on input, so water
-	let result = caculateCoffeeParameters(coffeeParams);
+	const result = caculateCoffeeParameters(coffeeParams);
 	// console.log('createCoffeeParams result', result);
 	return result;
 };
@@ -109,37 +109,37 @@ export const createCoffeeRecipeStepsWithChangeFactors = (
 ): CoffeeRecipeSteps => {
 	// console.log('createCoffeeRecipeStepsWithChangeFactors recipeId: ', recipeId, ' recipeChangeFactors: ', recipeChangeFactors, 'coffeeRecipe', coffeeRecipe);
 
-	let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
+	const recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
 
-	let steps: StepConfig[] = recipeDefaultConfig.enableStepsAdjustments
+	const steps: StepConfig[] = recipeDefaultConfig.enableStepsAdjustments
 		? recreateStepsWithStepControl(recipeId, recipeChangeFactors.stepControls)
 		: recipeDefaultConfig.steps;
 
 	// console.log('steps', steps);
 
 	// let stepsDurationInSeconds: number[] = (steps.length == recipeChangeFactors.stepsDurationInSeconds.length) ?
-	let stepsDurationInSeconds: number[] =
+	const stepsDurationInSeconds: number[] =
 		recipeChangeFactors.factorsToUpdate?.includes('stepsDurationInSeconds') ||
 		(recipeChangeFactors.recipeChangeStatus &&
 			recipeChangeFactors.recipeChangeStatus.updatedStepsDurationInSeconds)
 			? recipeChangeFactors.stepsDurationInSeconds
 			: getStepsDurationInSeconds(steps);
 
-	let clonedRecipeChangeFactors: RecipeChangeFactors = <RecipeChangeFactors>(
+	const clonedRecipeChangeFactors: RecipeChangeFactors = <RecipeChangeFactors>(
 		JSON.parse(JSON.stringify(recipeChangeFactors))
 	);
 	clonedRecipeChangeFactors.stepsDurationInSeconds = stepsDurationInSeconds;
 	// console.log('stepsDurationInSeconds', stepsDurationInSeconds);
 
-	let stepsWithTimeframe: StepConfig[] = updateSteps(steps, stepsDurationInSeconds);
-	let timerInSeconds: number = stepsDurationInSeconds ? sumOfDurations(stepsDurationInSeconds) : 0;
-	let pourParameters: PourParametersConfig[] = steps.map((step) => step.pourParameters);
-	let stepWaterInfos: StepWaterInfo[] = calculateStepWaterInfos(
+	const stepsWithTimeframe: StepConfig[] = updateSteps(steps, stepsDurationInSeconds);
+	const timerInSeconds: number = stepsDurationInSeconds ? sumOfDurations(stepsDurationInSeconds) : 0;
+	const pourParameters: PourParametersConfig[] = steps.map((step) => step.pourParameters);
+	const stepWaterInfos: StepWaterInfo[] = calculateStepWaterInfos(
 		clonedRecipeChangeFactors.coffeeParameters,
 		pourParameters
 	);
 
-	let stepsWithTimeframeAndWaterInfo: StepConfig[] = stepsWithTimeframe.map((step, index) => {
+	const stepsWithTimeframeAndWaterInfo: StepConfig[] = stepsWithTimeframe.map((step, index) => {
 		step.stepWaterInfo = stepWaterInfos[index];
 		return step;
 	});
@@ -158,7 +158,7 @@ export const createCoffeeRecipeStepsWithChangeFactors = (
 	// update the recipeChangeFactors with the latest status
 	clonedRecipeChangeFactors.recipeChangeStatus = recipeChangeStatus;
 
-	let result: CoffeeRecipeSteps = <CoffeeRecipeSteps>{
+	const result: CoffeeRecipeSteps = <CoffeeRecipeSteps>{
 		isTimerRecipe: recipeDefaultConfig.isTimerRecipe,
 		isImmersionDripperRecipe: recipeDefaultConfig.isImmersionDripperRecipe,
 		enableStepsAdjustments: recipeDefaultConfig.enableStepsAdjustments
@@ -182,11 +182,11 @@ const updateSteps = (
 ): StepConfig[] => {
 	// console.log('updateSteps originalCoffeeRecipeSteps: ', originalStepConfigs, 'stepsDurationInSeconds', stepsDurationInSeconds);
 
-	let result: StepConfig[] = [];
-	let stepsTimeframe: Timeframe[] = calculateStepsTimeframe(stepsDurationInSeconds);
+	const result: StepConfig[] = [];
+	const stepsTimeframe: Timeframe[] = calculateStepsTimeframe(stepsDurationInSeconds);
 
 	originalStepConfigs.forEach((origStepConfig, index) => {
-		let newStepConfig: StepConfig = <StepConfig>JSON.parse(JSON.stringify(origStepConfig));
+		const newStepConfig: StepConfig = <StepConfig>JSON.parse(JSON.stringify(origStepConfig));
 		newStepConfig.durationInSeconds = stepsDurationInSeconds[index];
 		newStepConfig.timeFrame = stepsTimeframe[index];
 		result.push(newStepConfig);
@@ -202,8 +202,8 @@ export const updateStepDurationInSeconds = (
 ): StepConfig[] => {
 	// console.log('updateStepDurationInSeconds originalStepConfigs: ', originalStepConfigs, 'index', index, 'newDurationInSeconds', newDurationInSeconds);
 
-	let newStepConfigs: StepConfig[] = <StepConfig[]>JSON.parse(JSON.stringify(originalStepConfigs));
-	let clonedStepsDurationInSeconds: number[] = getStepsDurationInSeconds(newStepConfigs);
+	const newStepConfigs: StepConfig[] = <StepConfig[]>JSON.parse(JSON.stringify(originalStepConfigs));
+	const clonedStepsDurationInSeconds: number[] = getStepsDurationInSeconds(newStepConfigs);
 
 	clonedStepsDurationInSeconds[index] = newDurationInSeconds;
 

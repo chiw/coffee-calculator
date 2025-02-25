@@ -27,7 +27,7 @@ export type RecipeMenu = {
 };
 
 export const getCoffeeRecipeMenu = (dripperBrands: DripperBrand[]): CoffeeRecipeMenu => {
-	let coffeeRecipeMenu = <CoffeeRecipeMenu>{
+	const coffeeRecipeMenu = <CoffeeRecipeMenu>{
 		brandMenus: createBrandMenus(dripperBrands)
 	};
 
@@ -36,7 +36,7 @@ export const getCoffeeRecipeMenu = (dripperBrands: DripperBrand[]): CoffeeRecipe
 };
 
 const createBrandMenus = (dripperBrands: DripperBrand[]): BrandMenu[] => {
-	let brandMenus: BrandMenu[] = [];
+	const brandMenus: BrandMenu[] = [];
 
 	dripperBrands.forEach((brand) => {
 		brandMenus.push(createBrandMenu(brand));
@@ -46,7 +46,7 @@ const createBrandMenus = (dripperBrands: DripperBrand[]): BrandMenu[] => {
 };
 
 const createBrandMenu = (dripperBrand: DripperBrand): BrandMenu => {
-	let dripperMenus: DripperMenu[] = createDripperMenus(dripperBrand.name, dripperBrand.drippers);
+	const dripperMenus: DripperMenu[] = createDripperMenus(dripperBrand.name, dripperBrand.drippers);
 	return <BrandMenu>{
 		brandName: dripperBrand.name,
 		metaInfos: createBrandMetaInfo(dripperBrand.name),
@@ -55,7 +55,7 @@ const createBrandMenu = (dripperBrand: DripperBrand): BrandMenu => {
 };
 
 const createDripperMenus = (brandName: string, drippers: DripperType[]): DripperMenu[] => {
-	let dripperMenus: DripperMenu[] = [];
+	const dripperMenus: DripperMenu[] = [];
 	drippers.forEach((dripper) => {
 		dripperMenus.push(createDripperMenu(brandName, dripper));
 	});
@@ -64,7 +64,7 @@ const createDripperMenus = (brandName: string, drippers: DripperType[]): Dripper
 };
 
 const createDripperMenu = (brandName: string, dripper: DripperType): DripperMenu => {
-	let recipeMenus: RecipeMenu[] = createRecipeMenus(brandName, dripper.name, dripper.recipes);
+	const recipeMenus: RecipeMenu[] = createRecipeMenus(brandName, dripper.name, dripper.recipes);
 	return <DripperMenu>{
 		brandName: brandName,
 		dripperName: dripper.name,
@@ -79,10 +79,10 @@ const createRecipeMenus = (
 	dripperName: string,
 	dripperRecipes?: DripperRecipe[]
 ): RecipeMenu[] => {
-	let menuItems: RecipeMenu[] = [];
+	const menuItems: RecipeMenu[] = [];
 	if (dripperRecipes) {
 		dripperRecipes.forEach((recipe) => {
-			let isDefaultRecipe = menuItems.length == 0;
+			const isDefaultRecipe = menuItems.length == 0;
 			menuItems.push(createRecipeMenu(brandName, dripperName, recipe, isDefaultRecipe));
 		});
 	}
@@ -143,7 +143,7 @@ const getDripperMenuMetaInfoArr = (dripperMenus: DripperMenu[]): MetaInfos[] => 
 };
 
 const getRecipeMenuMetaInfoArr = (recipeMenus: RecipeMenu[]): MetaInfos[] => {
-	let metaInfosArr: MetaInfos[] = [];
+	const metaInfosArr: MetaInfos[] = [];
 
 	recipeMenus.forEach((recipeMenu) => {
 		metaInfosArr.push(recipeMenu.metaInfos);

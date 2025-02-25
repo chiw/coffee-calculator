@@ -20,15 +20,15 @@ export const calculateStepWaterInfos = (
 ): StepWaterInfo[] => {
 	let totalWaterInGrams = 0;
 
-	let stepWaterInfos: StepWaterInfo[] = [];
+	const stepWaterInfos: StepWaterInfo[] = [];
 	pourParameters.map((pourParam) => {
-		let stepWaterInGrams = calculatePourWaterInGrams(
+		const stepWaterInGrams = calculatePourWaterInGrams(
 			coffeeParameters.waterInGrams,
 			pourParam.waterPercentage
 		);
-		let stepTotalWaterInGrams = totalWaterInGrams === 0 ? 0 : stepWaterInGrams + totalWaterInGrams;
+		const stepTotalWaterInGrams = totalWaterInGrams === 0 ? 0 : stepWaterInGrams + totalWaterInGrams;
 
-		let stepWaterInfo = createStepWaterInfo(
+		const stepWaterInfo = createStepWaterInfo(
 			stepWaterInGrams,
 			stepTotalWaterInGrams,
 			pourParam.waterTemp,

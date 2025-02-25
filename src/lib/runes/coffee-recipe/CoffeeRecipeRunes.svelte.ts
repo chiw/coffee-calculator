@@ -16,7 +16,7 @@ import { getSeoRunes } from '../seo/SeoRunes.svelte';
 export function createCoffeeRecipeRunes(defaultCoffeeRecipeId: CoffeeRecipeId) {
 	let _recipeId: CoffeeRecipeId = $state(defaultCoffeeRecipeId);
 
-	let _coffeeRecipe: CoffeeRecipe = $derived(createCoffeeRecipe(_recipeId));
+	const _coffeeRecipe: CoffeeRecipe = $derived(createCoffeeRecipe(_recipeId));
 
 	let _recipeChangeFactors: RecipeChangeFactors = $state(_coffeeRecipe.defaultRecipeChangeFactors);
 
@@ -29,7 +29,7 @@ export function createCoffeeRecipeRunes(defaultCoffeeRecipeId: CoffeeRecipeId) {
 		}
 	});
 
-	let _coffeeRecipeSteps: CoffeeRecipeSteps = $derived(
+	const _coffeeRecipeSteps: CoffeeRecipeSteps = $derived(
 		createCoffeeRecipeStepsWithChangeFactors(_recipeId, _recipeChangeFactors, _coffeeRecipe)
 	);
 

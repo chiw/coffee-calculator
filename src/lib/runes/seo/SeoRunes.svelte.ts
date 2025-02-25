@@ -26,7 +26,7 @@ export function createSeoRunes() {
 	function updateSeo(recipeSeoData: RecipeSEOData) {
 		const path = window.location.pathname;
 		console.log('updateSeo path', path);
-		let seoState = <SeoState>{
+		const seoState = <SeoState>{
 			title:
 				'Coffee Calculator Recipes - ' + recipeSeoData.recipeName + ' by ' + recipeSeoData.author,
 			description:

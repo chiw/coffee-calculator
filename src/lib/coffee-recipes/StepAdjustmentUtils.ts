@@ -52,10 +52,10 @@ export const stepOptionsAreSelectable = (
 	stepAdjustmentName: string
 ) => {
 	// console.log('stepOptionsAreSelectable stepAdjustmentName =' + stepAdjustmentName);
-	let selectableFlag = isSelectableFlags.find(
+	const selectableFlag = isSelectableFlags.find(
 		(selectableFlag) => selectableFlag.stepAdjustmentName === stepAdjustmentName
 	);
-	let result = selectableFlag ? selectableFlag.isSelectable : false;
+	const result = selectableFlag ? selectableFlag.isSelectable : false;
 	// console.log('stepOptionsAreSelectable stepAdjustmentName =' + stepAdjustmentName + ' isSelectable=' + result);
 	return result;
 };
@@ -63,7 +63,7 @@ export const stepOptionsAreSelectable = (
 const getStepAdjustmentAvailableOptions = (
 	stepsAdjustments: StepAdjustmentsConfig
 ): StepAdjustmentAvailableOptions[] => {
-	let stepAdjustmentAvailableOptions: StepAdjustmentAvailableOptions[] = [];
+	const stepAdjustmentAvailableOptions: StepAdjustmentAvailableOptions[] = [];
 
 	stepsAdjustments.order.forEach((adjustment) => {
 		if (adjustment === StepAdjustment.TWO_STEPS_RATIOS) {
@@ -90,7 +90,7 @@ export const createStepsFromStepAdjustments = (
 ) => {
 	let steps: StepConfig[] = [];
 	stepsAdjustments.order.forEach((adjustment) => {
-		let options = stepAdjustmentSelectedOptions.filter(
+		const options = stepAdjustmentSelectedOptions.filter(
 			(option) => option.stepAdjustmentName === adjustment
 		);
 
@@ -122,10 +122,10 @@ const createStepsFromTwoStepsRatios = (
 	selectedOption?: string
 ): StepConfig[] => {
 	// console.log('createStepsFromTwoStepsRatios twoStepsRatios', twoStepsRatios, selectedOption);
-	let steps: StepConfig[] = twoStepsRatios.defaultSteps;
+	const steps: StepConfig[] = twoStepsRatios.defaultSteps;
 
 	if (selectedOption) {
-		let selectedOptionConfig = twoStepsRatios.options.filter(
+		const selectedOptionConfig = twoStepsRatios.options.filter(
 			(option) => option.name === selectedOption
 		);
 		// console.log('createStepsFromTwoStepsRatios selectedOptionConfig', selectedOptionConfig);
@@ -150,11 +150,11 @@ const createStepsFromPourDivisions = (
 	selectedOption?: string
 ): StepConfig[] => {
 	// console.log('createStepsFromPourDivisions pourDivisionsConfig', pourDivisionsConfig, selectedOption);
-	let defaultSteps: StepConfig[] = pourDivisionsConfig.defaultSteps;
+	const defaultSteps: StepConfig[] = pourDivisionsConfig.defaultSteps;
 	let steps: StepConfig[] = [];
 
 	if (selectedOption) {
-		let selectedOptionConfig = pourDivisionsConfig.options.filter(
+		const selectedOptionConfig = pourDivisionsConfig.options.filter(
 			(option) => option.name === selectedOption
 		);
 		// console.log('createStepsFromPourDivisions selectedOptionConfig', selectedOptionConfig);
@@ -178,12 +178,12 @@ export const recreateStepsWithStepControl = (
 	stepControls: StepControls
 ): StepConfig[] => {
 	let steps: StepConfig[] = [];
-	let recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
+	const recipeDefaultConfig: CoffeeRecipeConfig = getCoffeeRecipeDefaultConfig(recipeId);
 
-	let stepAdjustments: StepAdjustmentsConfig = recipeDefaultConfig.stepAdjustments;
+	const stepAdjustments: StepAdjustmentsConfig = recipeDefaultConfig.stepAdjustments;
 
 	stepAdjustments.order.forEach((adjustmentName) => {
-		let selectedOption = stepControls.selectedOptions.find(
+		const selectedOption = stepControls.selectedOptions.find(
 			(selectedOption) => selectedOption.stepAdjustmentName === adjustmentName
 		);
 

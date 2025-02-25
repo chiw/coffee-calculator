@@ -128,11 +128,11 @@ export type CoffeeRecipeSearchResult = {
 };
 
 export const searchRecipeIdByParams = (inParams: string[]): CoffeeRecipeSearchResult => {
-	let allRecipeMetaInfos = MenuMetaInfos.filter(isRecipeMetaInfo);
-	let filteredMetaInfosArr = allRecipeMetaInfos;
-	let searchParams = createSearchParams(inParams);
+	const allRecipeMetaInfos = MenuMetaInfos.filter(isRecipeMetaInfo);
+	const filteredMetaInfosArr = allRecipeMetaInfos;
+	const searchParams = createSearchParams(inParams);
 
-	let resultArr = filterMetaInfosBySearchParams(filteredMetaInfosArr, searchParams);
+	const resultArr = filterMetaInfosBySearchParams(filteredMetaInfosArr, searchParams);
 
 	// console.log('searchRecipeIdByParams', resultArr);
 

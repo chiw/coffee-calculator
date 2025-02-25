@@ -10,7 +10,7 @@ function calculateRecipeCoffeeToWaterRatio(waterInGrams: number, beanInGrams: nu
 
 function caculateCoffeeParameters(inCoffeeParams: CoffeeParametersConfig): CoffeeParametersConfig {
 	/* beanInGrams x coffeeToWaterRatio = waterInGrams */
-	let beanInGrams = inCoffeeParams.beanInGrams ? inCoffeeParams.beanInGrams : 0;
+	const beanInGrams = inCoffeeParams.beanInGrams ? inCoffeeParams.beanInGrams : 0;
 	let coffeeToWaterRatio = inCoffeeParams.coffeeToWaterRatio
 		? inCoffeeParams.coffeeToWaterRatio
 		: -1;

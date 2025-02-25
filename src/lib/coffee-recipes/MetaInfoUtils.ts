@@ -152,12 +152,12 @@ export const metaInfoIsMatched = (
 	metaInfos: MetaInfos,
 	metaInfoSearchParam: MetaInfosSearchParam
 ) => {
-	let inSearchStr = metaInfoSearchParam.searchStr;
-	let metaInfoNameArr = [metaInfoSearchParam.metaInfoKey];
-	let exactWording = metaInfoSearchParam.exactWording;
+	const inSearchStr = metaInfoSearchParam.searchStr;
+	const metaInfoNameArr = [metaInfoSearchParam.metaInfoKey];
+	const exactWording = metaInfoSearchParam.exactWording;
 
 	if (metaInfos && inSearchStr) {
-		let match =
+		const match =
 			metaInfos.values
 				.filter((metaInfo) => metaInfoNameArr.includes(metaInfo.name))
 				.filter((metaInfo) =>
@@ -171,9 +171,9 @@ export const metaInfoIsMatched = (
 };
 
 export const createSearchParams = (inParams: string[]): MetaInfosSearchParam[] => {
-	let searchParams: MetaInfosSearchParam[] = [];
+	const searchParams: MetaInfosSearchParam[] = [];
 
-	let metaInfoSearchKeys = [MetaInfoKey.brand, MetaInfoKey.dripper, MetaInfoKey.name];
+	const metaInfoSearchKeys = [MetaInfoKey.brand, MetaInfoKey.dripper, MetaInfoKey.name];
 
 	inParams.forEach((searchStr, index) => {
 		searchParams.push(<MetaInfosSearchParam>{
@@ -191,7 +191,7 @@ const filterMetaInfosBySearchParam = (
 	inMetaInfosArr: MetaInfos[],
 	searchParam: MetaInfosSearchParam
 ): MetaInfos[] => {
-	let filteredMetaInfosArr = inMetaInfosArr.filter((metaInfos) =>
+	const filteredMetaInfosArr = inMetaInfosArr.filter((metaInfos) =>
 		metaInfoIsMatched(metaInfos, searchParam)
 	);
 
