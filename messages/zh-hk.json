@@ -4,6 +4,10 @@
 	"label_locale_en": "英文",
 	"label_locale_zh_hk": "中文",
 
+	"label_calculator_title" : "粉水比計算機",
+	"label_calculator_calculateRatio" : "計算比例",
+	"label_calculator_calculateWater" : "計算水量 (g)",
+
 	"label_receipe_parameters": "沖煮參數",
 	"label_coffee_bean": "咖啡豆",
 	"label_coffee_to_water_ratio": "粉水比",

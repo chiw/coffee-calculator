@@ -12,6 +12,7 @@ import {
 	SwitchState
 } from './CoffeeRecipeTypes.d';
 import {
+	getAllRecipePaths,
 	getCoffeeRecipeMenu,
 	getMenuMetaInfos,
 	type CoffeeRecipeMenu
@@ -120,7 +121,8 @@ export const Menu: CoffeeRecipeMenu = getCoffeeRecipeMenu(dripperBrands);
 
 export const MenuMetaInfos: MetaInfos[] = getMenuMetaInfos(Menu);
 
-export const AllRecipePaths = MenuMetaInfos.map((metaInfo) => getPathFromMetaInfo(metaInfo));
+// export const AllRecipePaths: string[] = MenuMetaInfos.map((metaInfo) => getPathFromMetaInfo(metaInfo));
+export const AllRecipePaths: string[] = getAllRecipePaths(MenuMetaInfos);
 
 export type CoffeeRecipeSearchResult = {
 	metaInfos: MetaInfos;

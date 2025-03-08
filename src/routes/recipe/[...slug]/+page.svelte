@@ -34,7 +34,7 @@
 
 <div class="m-2">
 	<div class="flex flex-row items-stretch">
-		<div class="grow"><RecipeSelectMenu selectedOption={coffeeRecipeRunes.recipeId} /></div>
+		<div class="grow"><RecipeSelectMenu /></div>
 		<div class="grow-0"><LanguageSwitcher /></div>
 	</div>
 

@@ -24,6 +24,7 @@
 <svelte:head>
 	<title>{title}</title>
 	<meta name="description" content={description} />
+	<link rel="canonical" href={page.url.href} />
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content={type} />

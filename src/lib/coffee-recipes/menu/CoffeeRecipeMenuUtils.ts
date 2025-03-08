@@ -1,6 +1,6 @@
 import { type CoffeeRecipeId } from '../CoffeeRecipeConstants';
 import type { DripperBrand, DripperRecipe, DripperType, MetaInfos } from '../CoffeeRecipeTypes';
-import { createBrandMetaInfo, createDripperMetaInfo, createRecipeMetaInfo } from '../MetaInfoUtils';
+import { createBrandMetaInfo, createDripperMetaInfo, createRecipeMetaInfo, getPathFromMetaInfo } from '../MetaInfoUtils';
 
 export type CoffeeRecipeMenu = {
 	brandMenus: BrandMenu[];
@@ -113,7 +113,7 @@ export const getMenuMetaInfos = (coffeeRecipeMenu: CoffeeRecipeMenu): MetaInfos[
 	let metaInfosArr: MetaInfos[] = [];
 
 	metaInfosArr = metaInfosArr.concat(getBrandMenusMetaInfoArr(coffeeRecipeMenu.brandMenus));
-	// console.log('getMenuMetaInfos', metaInfosArr);
+	console.log('getMenuMetaInfos', metaInfosArr);
 
 	return metaInfosArr;
 };
@@ -152,3 +152,11 @@ const getRecipeMenuMetaInfoArr = (recipeMenus: RecipeMenu[]): MetaInfos[] => {
 
 	return metaInfosArr;
 };
+
+export const getAllRecipePaths = (metaInfos: MetaInfos[]): string[] => {
+	const allRecipePaths: string[] = metaInfos.map((metaInfo) => getPathFromMetaInfo(metaInfo));
+
+	console.log('allRecipePaths', allRecipePaths);
+
+	return allRecipePaths;
+}
