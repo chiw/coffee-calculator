@@ -63,6 +63,12 @@ export type CoffeeParametersConfig = {
 	waterInGrams: number;
 };
 
+export type CoffeeParametersConfigDisplay = {
+	beanInGrams: string;
+	coffeeToWaterRatio: string;
+	waterInGrams: string;
+}
+
 export type PourParametersConfig = {
 	waterPercentage: number;
 	waterTemp: string;

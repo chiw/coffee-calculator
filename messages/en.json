@@ -4,6 +4,10 @@
 	"label_locale_en": "English",
 	"label_locale_zh_hk": "Chinese",
 
+	"label_calculator_title" : "Coffee water ratio calculator",
+	"label_calculator_calculateRatio" : "Calculate Ratio",
+	"label_calculator_calculateWater" : "Calculate Water (g)",
+
 	"label_receipe_parameters": "Parameters",
 	"label_coffee_bean": "Beans",
 	"label_coffee_to_water_ratio": "Ratio",

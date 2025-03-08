@@ -4,6 +4,8 @@
 import adapterVercel from '@sveltejs/adapter-vercel';
 import adapterStatic from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import fs from 'fs';
+import { generateSitemap } from './src/lib/utils/sitemap.js';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -19,16 +21,26 @@ const config = {
 		paths: {
 			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
 		},
-		prerender: {
-			handleHttpError: ({ path, referrer, message }) => {
-				// Ignore 404 errors on /coffee-calculator/coffee-calculator/recipes
-				if (path === '/coffee-calculator/coffee-calculator/recipes') {
-					return; // do nothing
-				}
+		// prerender: {
+		// 	handleHttpError: ({ path, referrer, message }) => {
+		// 		// Ignore 404 errors on /coffee-calculator/coffee-calculator/recipes
+		// 		if (path === '/coffee-calculator/coffee-calculator/recipes') {
+		// 			return; // do nothing
+		// 		}
 
-				// Log or handle other errors as needed
-				console.error('Error prerendering', { path, referrer, message });
-			}
+		// 		// Log or handle other errors as needed
+		// 		console.error('Error prerendering', { path, referrer, message });
+		// 	}
+		// }
+	}, 
+
+	vite: {
+		// Add this to generate sitemap.xml during build
+		buildEnd() {
+			console.log('Generating sitemap.xml');
+			const sitemap = generateSitemap();
+			console.log('sitemap', sitemap);
+			fs.writeFileSync('static/sitemap.xml', sitemap);
 		}
 	}
 };
